@@ -1,0 +1,25 @@
+{
+  "name": "fun-with-friends",
+  "version": "1.0.0",
+  "description": "Fun with Friends Artefact Registry",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "setup": "npm install && cd client && npm install && cd .. && cd server && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvoli/fun-with-friends.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kvoli/fun-with-friends/issues"
+  },
+  "homepage": "https://github.com/kvoli/fun-with-friends#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  }
+}

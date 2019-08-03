@@ -7,16 +7,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>React Client</p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="localhost:5000"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Express Server
         </a>
       </header>
     </div>
