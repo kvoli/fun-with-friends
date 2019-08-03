@@ -6,6 +6,7 @@ Execute `npm run setup` to install packages for both the client and server.
 
 ### Start
 Execute `npm start` to start the react client and express server.
+By default the react client listens on port 3000 while the express backend listens on port 5000.
 
 ### Contributors
 - [Alan Lewis](https://github.com/alanlewis764)
