@@ -16,3 +16,8 @@ script:
 
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
+
+branches: 
+        only:
+                - staging
+                - production
