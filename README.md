@@ -1,14 +1,19 @@
 # Fun With Friends
 An artifact registry for IT Project (COMP30022).
 
-### Setup
-Execute `npm run setup` to install packages for both the client and server.
+### 1. Update Client and Server Packages
+Update the react client's packages by navigating to the client directory with `cd client` and executing `npm install`.
+Update the express server's packages by navigating to the server directory with `cd server` and executing `npm install`.
 
-### Start
-Execute `npm start` to start the react client and express server. <br>
-By default the react client listens on port 3000 while the express backend listens on port 5000.
+### 2. Build the Client
+Build the react client by navigating to the client directory with `cd client` and executing `npm run build`.
+
+### 3. Start the Server
+Start the express server by navigating to the server directory with `cd server` and executing `npm start`.
+By default the server listens on [port 8080](http://localhost:8080).
 
 ### Contributors
 - [Alan Lewis](https://github.com/alanlewis764)
 - [Austen McClernon](https://github.com/kvoli)
 - [Ben Mitchell](https://github.com/Dezyh)
+
