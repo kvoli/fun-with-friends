@@ -12,6 +12,9 @@ Build the react client by navigating to the client directory with `cd client` an
 Start the express server by navigating to the server directory with `cd server` and executing `npm start`.<br>
 By default the server listens on [port 8080](http://localhost:8080).
 
+# Dockerfile
+From the root directory, run `docker image build -t fun-with-friends:server .` to build the container and `docker run -p 8080:8080 fun-with-friends:server` to run the container.
+
 ### Contributors
 - [Alan Lewis](https://github.com/alanlewis764)
 - [Austen McClernon](https://github.com/kvoli)
