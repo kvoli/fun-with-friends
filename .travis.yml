@@ -14,3 +14,5 @@ script:
         - npm test
         - npm run build
 
+notifications:
+  slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
