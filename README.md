@@ -1,4 +1,4 @@
-# Fun With Friends
+# Fun With Friends [![Build Status](https://travis-ci.com/kvoli/fun-with-friends.svg?branch=staging)](https://travis-ci.com/kvoli/fun-with-friends)
 An artifact registry for IT Project (COMP30022).
 
 ### 1. Update Packages
