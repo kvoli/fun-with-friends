@@ -1,15 +1,15 @@
 sudo: required
 language: node_js
 node_js:
-  - stable
+- stable
 services:
-  - docker
+- docker
 cache:
   directories:
   - node_modules
 script:
-  - docker build -t kvoli/fun-with-friends .
-  - docker run -p 80:8080 kvoli/fun-with-friends
+- docker build -t kvoli/fun-with-friends .
+- docker run -p 80:8080 kvoli/fun-with-friends
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
@@ -17,8 +17,8 @@ branches:
   - staging
   - production
 after_success:
-  - docker login -u="$USER_NAME" -p="$PASS"
-  - docker build -t kvoli/fun-with-friends .
-  - docker push kvoli/fun-with-friends
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- docker build -t kvoli/fun-with-friends .
+- docker push kvoli/fun-with-friends
 env:
-  secure: IcnxO1jE0gUjoEjt65sWGIluFvPOnCVC1I5+U0XVEMeyOJgmH5uHsJpP1/0V0aCxVIAUxwsFDutf+ft6Z5QBpWrXZicDY2X1Xv4C9nURB/C1ISqxDP2GNHCjF9gPuuveIntkewTBoczF/zimlMJNanPQ9x8A9bMlCXUs40La1z3+1x6e2qHRSs4V5Dm5iTCJNfpG6EgckB+7ykzuxyMl+h6sQeJVV9o9ncHuKbNsuElgasairiNBVXkjAD4rhLyDVxAL7z1OZHFrvDeqCQOr90UALxJmV3Qb3JColFo2iTY1eAcmGsXHZl86HwfVmMDkOiOt1mKUPMvLktpkm1dvUhc30742RvNn41MiZF+S6UucZsff8c9wja9QyviAwf7XzYWBtiBAN4e5YmUXNG3wxw0Pg+7E7q9Ac62u8ErxjKPEP+DSMZQmjlm683GuJlBq6qFvvzaF9Tkzie+ugfTWlS/SG4jdQp/KSDB1+mDbwSgp8H3ZWOp1z/Ho+XA++AaZGmNsjTAOk6Y59kQjOtbsseYuohB1ub9s9ddpkntr1m0jAP/NUTNOKnbFW1+357msr2IXAknZNS5QNRHfsJgVuYZa6wiwQuGX4nVCHi0HrnExb7qwNz6v/evvjjVM8KisZswLu5og2Cfat4eP/RUIUZx1D+fPIaBqypB1SMHlpCQ=
+  secure: rQbB3jASwPR8CaPmyx1dXchT0kn2N+RC4tkwiCVkGliquq1kvODN4kspeXfP6k5zbjPyRkQqXSGIrdx20TEtqybe+jvqUmi2bpbIdtTv/PblE49zRgusv6/lGUlFcG4tSYCjDBotPAnvYGACxAuGMb/AkL6qedMue1iQuMKMzKIoz+Fb7IVr3r+5tdN4XYDifV84EeIQd0fMiHkM2VyKlc5QySXksE5lTarhRDsrM6HDjtsb8MrFOpctGJMhGpCkBq2Ods44kRMG8+jokayRWHyORm06kzyVNuGE64/RfkG8J5QYBhvjyDskXC/bNOw7yqDSASrQK7m8hZI8pvATmtAEDOoHxZz4yXdoMS7VZ3M63l1/DNuTWkJXg1yLAelc40ytc2yUn0YTFD1Q3X8R0VRknaVwgIw16uE9q3P8MUG9MdDvyKWAXZKGkgA0sucJ9648u6QiKru7XUYtVhUzv6Hhzv8jaAWCk0PcJHUSoYOs2OaHem6U5aO2bIPJGpsUc0FDMkBGKuD/h6w/f8baVEE36vn7Gck/KKugU+s40by8QQXm6/JsY9MplcouavRmR1cGpErGTcZDsHV0Knvq3h4OkmzszZU5hiGaTtjAbdyJmB+POewCj6ZdL0LTtYR1iD1/IHhhSwnMSa5FH7chSsnFyn23nU/hi4p6GntvYlU=
