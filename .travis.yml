@@ -16,6 +16,7 @@ script:
   - docker image build -t kvoli/fun-with-friends:traivs-test
   - docker run -p 8080:8080 kvoli/fun-with-frinds:travis-test
 
+
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 
