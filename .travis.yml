@@ -12,6 +12,7 @@ script:
 - cd ../client && npm install
 - npm test
 - npm run build
+- cd ..
 - docker build -t kvoli/fun-with-friends .
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
