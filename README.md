@@ -1,4 +1,13 @@
-# Fun With Friends [![Build Status](https://travis-ci.com/kvoli/fun-with-friends.svg?branch=staging)](https://travis-ci.com/kvoli/fun-with-friends)
+# Fun With Friends
+
+[![Build Status](https://travis-ci.com/kvoli/fun-with-friends.svg?branch=staging)](https://travis-ci.com/kvoli/fun-with-friends)
+
+[![License](https://img.shields.io/github/license/kvoli/fun-with-friends)](https://github.com/kvoli/fun-with-friends/blob/staging/LICENSE)
+
+[![GitHub issues](https://img.shields.io/github/issues-pr/kvoli/fun-with-friends)](https://github.com/kvoli/fun-with-friends/pulls)
+
+[![Activity](https://img.shields.io/github/commit-activity/m/kvoli/fun-with-friends)](https://github.com/kvoli/fun-with-friends/commits/staging)
+
 An artifact registry for IT Project (COMP30022).
 
 ### 1. Update Packages
