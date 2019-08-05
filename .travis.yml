@@ -12,6 +12,9 @@ script:
 - docker run -p 80:8080 kvoli/fun-with-friends
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
+cache:
+  directories:
+  - node_modules
 branches:
   only:
   - staging
