@@ -27,8 +27,8 @@ The Express server listens on [port 8080](http://localhost:8080) and serves the 
 
 # Docker
 1. To build the docker container locally, use `docker image build -t <name>:<tag> .`
-2a. To run the docker container locally, use `docker run -p 80:8080 -e NODE_ENV=production <name>:<tag>` after building locally
-2b. To run the docker container on the server, use `docker run -p 80:8080 -e NODE_ENV=production kvoli/fun-with-friends:latest`
+2. To run the docker container locally, use `docker run -p 80:8080 -e NODE_ENV=production <name>:<tag>` after building locally
+3. To run the docker container on the server, use `docker run -p 80:8080 -e NODE_ENV=production kvoli/fun-with-friends:latest`
 
 ### Contributors
 - [Alan Lewis](https://github.com/alanlewis764)
