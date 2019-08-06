@@ -20,4 +20,5 @@ From the root directory, run `docker image build -t fun-with-friends:server .` t
 - [Alan Lewis](https://github.com/alanlewis764)
 - [Austen McClernon](https://github.com/kvoli)
 - [Ben Mitchell](https://github.com/Dezyh)
+- [Kevin Lim](https://github.com/Ambient004)
 
