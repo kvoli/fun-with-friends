@@ -7,8 +7,14 @@
   <a href="https://travis-ci.com/kvoli/fun-with-friends">
     <img alt="TravisCI" src="https://img.shields.io/travis/com/kvoli/fun-with-friends" />
   </a>
+  <a href="https://microbadger.com/images/kvoli/fun-with-friends">
+    <img alt="Docker-Image" src="https://images.microbadger.com/badges/version/kvoli/fun-with-friends.svg">
+  </a>
   <a href="https://github.com/kvoli/fun-with-friends/blob/staging/LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/kvoli/fun-with-friends" />
+  </a>
+  <a href="https://microbadger.com/images/kvoli/fun-with-friends">
+    <img alt="Docker-Layers" src="https://images.microbadger.com/badges/image/kvoli/fun-with-friends.svg">
   </a>
   <a href="https://github.com/kvoli/fun-with-friends/pulls">
     <img alt="GitHub Issues" src="https://img.shields.io/github/issues-pr/kvoli/fun-with-friends" />
@@ -20,6 +26,7 @@
     <img alt="Codacy" src="https://api.codacy.com/project/badge/Grade/2c082bb69c6a4c6381168b46aa44b6d7" />
   </a>
 </p>
+
 
 ## Stack
 Fun With Friends is built using the MERN stack, consisting of a React frontend served by a NodeJS backend running Express and connected to a MongoDB database.
