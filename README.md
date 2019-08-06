@@ -1,22 +1,38 @@
-# Fun With Friends [![Build Status](https://travis-ci.com/kvoli/fun-with-friends.svg?branch=staging)](https://travis-ci.com/kvoli/fun-with-friends) [![License](https://img.shields.io/github/license/kvoli/fun-with-friends)](https://github.com/kvoli/fun-with-friends/blob/staging/LICENSE) [![GitHub issues](https://img.shields.io/github/issues-pr/kvoli/fun-with-friends)](https://github.com/kvoli/fun-with-friends/pulls) [![Activity](https://img.shields.io/github/commit-activity/m/kvoli/fun-with-friends)](https://github.com/kvoli/fun-with-friends/commits/staging)
+<p align="center">
+	<img src="https://github.com/kvoli/fun-with-friends/blob/staging/github-banner.png" width="250">
+</p>
+<p align="center">An artifact registry for IT Project (COMP30022).</p>
 
-An artifact registry for IT Project (COMP30022).
+<p align="center">
+  <a href="https://travis-ci.com/kvoli/fun-with-friends">
+    <img alt="TravisCI" src="https://img.shields.io/travis/com/kvoli/fun-with-friends" />
+  </a>
+  <a href="https://github.com/kvoli/fun-with-friends/blob/staging/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/kvoli/fun-with-friends" />
+  </a>
+  <a href="https://github.com/kvoli/fun-with-friends/pulls">
+    <img alt="GitHub Issues" src="https://img.shields.io/github/issues-pr/kvoli/fun-with-friends" />
+  </a>
+  <a href="https://github.com/kvoli/fun-with-friends/commits/staging">
+    <img alt="Activity" src="https://img.shields.io/github/commit-activity/m/kvoli/fun-with-friends" />
+  </a>
+</p>
 
-# Stack
+## Stack
 Fun With Friends is built using the MERN stack, consisting of a React frontend served by a NodeJS backend running Express and connected to a MongoDB database.
 
-# Build Pipeline
+## Build Pipeline
 1. New pull requests trigger TravisCI to deploy a new worker
 2. The worker pulls the repo, installs package dependencies, runs unit and integration tests and builds the React client 
 3. On success, the worker then builds a Docker container of the React client and Express server and pushes it to DockerHub
 4. On the production server running Ubuntu, Watchtower receives a notification that there is a new latest container. It then fetches the new latest container and gracefully runs the new container while stopping the old container.
 
-# Development
+## Development
 1. Navigate to the server directory with `cd server`
 2. Execute `npm start develop` to start both the React client and Express server in development mode allowing instant refreshes.
 The React client listens on [port 3000](http://localhost:3000) and the Express server listens on [port 8080](http://localhost:8080). Any changes in the code will be displayed after a page refresh. 
 
-# Production
+## Production
 1. From the root directory, navigate to the React client's directory with `cd client`
 2. Update the React client's packages with `npm install`
 3. Build the React client with `npm run build`
@@ -25,12 +41,11 @@ The React client listens on [port 3000](http://localhost:3000) and the Express s
 6. Start the express server with `npm start`.
 The Express server listens on [port 8080](http://localhost:8080) and serves the static React client content that was built.
 
-# Docker
-1. To build the docker container locally, use `docker image build -t <name>:<tag> .`
-2. To run the docker container locally, use `docker run -p 80:8080 -e NODE_ENV=production <name>:<tag>` after building locally
-3. To run the docker container on the server, use `docker run -p 80:8080 -e NODE_ENV=production kvoli/fun-with-friends:latest`
+## Docker 
+1. To build the docker container of the server, use `docker image build -t <name>:<tag> .` while in the root directory
+2. To run the docker container, use `docker run -p 80:8080 -e NODE_ENV=production <name>:<tag>` after building
 
-### Contributors
+## Contributors
 - [Alan Lewis](https://github.com/alanlewis764)
 - [Austen McClernon](https://github.com/kvoli)
 - [Ben Mitchell](https://github.com/Dezyh)
