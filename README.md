@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://github.com/kvoli/fun-with-friends/blob/staging/github-banner.png" width="250">
+	<img src="https://raw.githubusercontent.com/kvoli/fun-with-friends/staging/github-banner.png" width="250">
 </p>
 <p align="center">An artifact registry for IT Project (COMP30022).</p>
 
@@ -15,6 +15,9 @@
   </a>
   <a href="https://github.com/kvoli/fun-with-friends/commits/staging">
     <img alt="Activity" src="https://img.shields.io/github/commit-activity/m/kvoli/fun-with-friends" />
+  </a>
+  <a href="https://www.codacy.com/app/kvoli/fun-with-friends?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kvoli/fun-with-friends&amp;utm_campaign=Badge_Grade">
+    <img alt="Codacy" src="https://api.codacy.com/project/badge/Grade/2c082bb69c6a4c6381168b46aa44b6d7" />
   </a>
 </p>
 
