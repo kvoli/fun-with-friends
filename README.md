@@ -26,8 +26,9 @@ The React client listens on [port 3000](http://localhost:3000) and the Express s
 The Express server listens on [port 8080](http://localhost:8080) and serves the static React client content that was built.
 
 # Docker
-1. From the root directory, run `docker image build -t fun-with-friends:server .` to build the container
-2. From the root directory, run `docker run -p 8080:8080 fun-with-friends:server` to run the container
+1. To build the docker container locally, use `docker image build -t <name>:<tag> .`
+2a. To run the docker container locally, use `docker run -p 80:8080 -e NODE_ENV=production <name>:<tag>` after building locally
+2b. To run the docker container on the server, use `docker run -p 80:8080 -e NODE_ENV=production kvoli/fun-with-friends:latest`
 
 ### Contributors
 - [Alan Lewis](https://github.com/alanlewis764)
