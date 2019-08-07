@@ -6,16 +6,14 @@ services:
 - docker
 cache: 
   directories: 
-  - $HOME/client/.npm
-  - $HOME/server/.npm
+  - $HOME/.npm
 install:
-- cd $HOME/server && npm ci
-- cd $HOME/client && npm ci
+- cd ./server && npm ci
+- cd ../client && npm ci
 script:
-- cd $HOME/client
 - npm test
 - npm run build
-- cd $HOME
+- cd ../
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
