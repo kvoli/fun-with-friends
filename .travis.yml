@@ -4,16 +4,16 @@ node_js:
 - stable
 services:
 - docker
-cache:
-  directories:
-  - node_modules
+cache: 
+  directories: 
+  - $HOME/.npm
+install:
+- cd ./server && npm install --only=production
+- cd ../client && npm install --only=production
 script:
-- cd server && npm install
-- cd ../client && npm install
 - npm test
 - npm run build
-- cd ..
-- docker build -t kvoli/fun-with-friends .
+- cd ../
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
@@ -22,8 +22,10 @@ branches:
   - production
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-- docker build -t kvoli/fun-with-friends .
-- docker push kvoli/fun-with-friends
+- export REPO=kvoli/fun-with-friends
+- export TAG=`if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "latest"; else echo "pull-request-$TRAVIS_PULL_REQUEST_BRANCH" ; fi`
+- docker build -t $REPO:$TAG .
+- docker push $REPO
 env:
   global: 
   - secure: RInP8UvMnZ+4uM7qWtTclYam6q24ohzcO4uTw5mh7wrEykeOGujKsfuvgMorlxhPAKHTlH7zpKlS+8LL5kX2Ny245F/C0bZxYReJ90ssFWbyNmY+wRNNyi7Hzq1IBHu5688L/rzP1+MgcXS2K93ysKgfMBv3LLf9tHuu+voeDCxOfAkBA/ymcftseykN4y4bQrKLrjEn+MlMIKcBpsWKTwX3DiM8DZYOE3X4jYoy4pmYcD3DKRrGODVvMQhrWkHq04G6n+Xzn/1wlJGiirUYK5gCXX0EeXBT/JHq7txYpste2iP3aPNIczSJF6NcxWaKzxMC1irv4/f4i9lyQY8+oPuAGtleQ8PsYqIQ4uXloakAGumXVovnn/BQwz/5bOVZ8lU/JwA6wZfTPi/Dg3MhCXDZrbylgNaQxUSyG/WU3S+z0RkZRBKS4/hQLu6vUUn9VLZPxAxRUoIUkHKlHlceRbSvIrXJGfTVNDShdm0OXIFO5Jvd/AD1G1d1hpkjOpRvQXPLq//A7rvbjomx8Y4LgHCRBJ9u/V5Vlr5hInLqPxExq+PRupMA81KDwyN7PiQsgWd55l1EDcos8GZCRdczZZVk15NVKhX7YCpWgLqX61wYjWf0R3kwU/3h9onZEZ2/g0PZE1iCVK09uvWW0JDyPeBxj0jJyYweSYxW0Zz2vac=
