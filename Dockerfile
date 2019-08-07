@@ -1,15 +1,16 @@
-FROM mhart/alpine-node:latest
+FROM mhart/alpine-node:12
 
-COPY ./client/ ./client/
-WORKDIR ./client
-RUN npm install
-RUN npm run build
+COPY ./client/build/ ./client/build/
+# COPY ./client/ ./client/
+# WORKDIR ./client
+# RUN npm install
+# RUN npm run build
 
-WORKDIR ../
+# WORKDIR ../
 
 COPY ./server/ ./server/
-WORKDIR ./server
-RUN npm install
+WORKDIR /server
+# RUN npm install
 
 EXPOSE 8080
 CMD ["npm", "start"]
