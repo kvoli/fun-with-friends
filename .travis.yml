@@ -8,8 +8,8 @@ cache:
   directories: 
   - $HOME/.npm
 install:
-- cd ./server && npm ci
-- cd ../client && npm ci
+- cd ./server && npm ci --only=production
+- cd ../client && npm ci --only=production
 script:
 - npm test
 - npm run build
