@@ -12,6 +12,7 @@ script:
 - cd ../client && npm install
 - npm test
 - npm run build
+- cd ..
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
@@ -22,9 +23,7 @@ after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - export REPO=kvoli/fun-with-friends
 - export TAG=`if [ "$TRAVIS_BRANCH" == "staging" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-- docker build -f Dockerfile -t $REPO:$TRAVIS_COMMIT .
-- docker tag $REPO:$TRAVIS_COMMIT $REPO:$TAG
-- docker tag $REPO:$TRAVIS_COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker build -t $REPO:$TAG .
 - docker push $REPO
 env:
   global: 
