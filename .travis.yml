@@ -4,15 +4,18 @@ node_js:
 - stable
 services:
 - docker
-cache:
-  directories:
-  - node_modules
+cache: 
+  directories: 
+  - $HOME/client/.npm
+  - $HOME/server/.npm
+install:
+- cd $HOME/server && npm ci
+- cd $HOME/client && npm ci
 script:
-- cd server && npm install
-- cd ../client && npm install
+- cd $HOME/client
 - npm test
 - npm run build
-- cd ..
+- cd $HOME
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
@@ -22,7 +25,7 @@ branches:
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - export REPO=kvoli/fun-with-friends
-- export TAG=`if [ "$TRAVIS_BRANCH" == "staging" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+- export TAG=`if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "latest"; else echo "pull-request-" + "$TRAVIS_PULL_REQUEST_BRANCH" ; fi`
 - docker build -t $REPO:$TAG .
 - docker push $REPO
 env:
