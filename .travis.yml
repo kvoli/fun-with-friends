@@ -23,7 +23,7 @@ branches:
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - export REPO=kvoli/fun-with-friends
-- export TAG=`if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "latest"; else echo "pull-request-" + "$TRAVIS_PULL_REQUEST_BRANCH" ; fi`
+- export TAG=`if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "latest"; else echo "pull-request-$TRAVIS_PULL_REQUEST_BRANCH" ; fi`
 - docker build -t $REPO:$TAG .
 - docker push $REPO
 env:
