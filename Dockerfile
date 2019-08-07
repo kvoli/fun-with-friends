@@ -9,7 +9,7 @@ COPY ./client/build/ ./client/build/
 # WORKDIR ../
 
 COPY ./server/ ./server/
-WORKDIR ./server
+WORKDIR /server
 # RUN npm install
 
 EXPOSE 8080
