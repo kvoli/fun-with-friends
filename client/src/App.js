@@ -1,16 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import MainPage from './main/MainPage'
+import NavBar from './NavBar'
 
-function App() {
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>React Client with Express Server</p>
-      </header>
+    <div className="container">
+      <NavBar />
+      <MainPage />
     </div>
-  );
+  )
 }
+
 
 export default App;
