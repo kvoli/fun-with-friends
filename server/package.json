@@ -4,7 +4,8 @@
   "description": "Fun with Friends Artifact Register",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "concurrently --kill-others \"nodemon server.js\" \" cd ../client && npm start\""
   },
   "repository": {
     "type": "git",
