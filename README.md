@@ -39,7 +39,7 @@ Fun With Friends is built using the MERN stack, consisting of a React frontend s
 
 ## Development
 1. Navigate to the server directory with `cd server`
-2. Execute `npm start develop` to start both the React client and Express server in development mode allowing instant refreshes.
+2. Execute `npm run dev` to start both the React client and Express server in development mode allowing instant refreshes.
 The React client listens on [port 3000](http://localhost:3000) and the Express server listens on [port 8080](http://localhost:8080). Any changes in the code will be displayed after a page refresh. 
 
 ## Production
