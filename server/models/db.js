@@ -16,5 +16,5 @@ mongoose.connect(DbConnection, Options).then(
 );
 
 // Load schemas and map to Mongoose models
-require('./account')
+require('./user')
 require('./artifact')
