@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/kvoli/fun-with-friends#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.6.9"
   },
   "devDependencies": {
-    "concurrently": "^4.1.1",
+    "concurrently": "^4.1.2",
+    "dotenv": "^8.1.0",
     "nodemon": "^1.19.1"
   }
 }
