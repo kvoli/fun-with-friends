@@ -1,9 +1,9 @@
-import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import TypoGraphy from '@material-ui/core/Typography'
-import { Home, Book, AccountBox } from '@material-ui/icons'
+import React from "react";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import TypoGraphy from "@material-ui/core/Typography";
+import { Home, Book, AccountBox } from "@material-ui/icons";
 
 const NavBar = () => {
 
@@ -32,8 +32,7 @@ const NavBar = () => {
             </ListItem >
 
         </List>
-    )
-}
-
+    );
+};
 
 export default NavBar;

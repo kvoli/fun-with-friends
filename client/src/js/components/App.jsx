@@ -1,6 +1,6 @@
-import React from 'react'
-import MainPage from './main/MainPage'
-import NavBar from './NavBar'
+import React from "react";
+import MainPage from "./MainPage";
+import NavBar from "./NavBar";
 
 const App = () => {
 
@@ -11,6 +11,5 @@ const App = () => {
     </div>
   )
 }
-
 
 export default App;
