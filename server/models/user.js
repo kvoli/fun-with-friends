@@ -35,11 +35,11 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.pre('save', async function (next) {
-  const user = this
+  const user = this;
   if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8)
+    user.password = await bcrypt.hash(user.password, 8);
   }
-  next()
+  next();
 });
 
 userSchema.methods.generateAuthToken = async function() {
@@ -57,10 +57,10 @@ userSchema.statics.findByCredentials = async (username, password) => {
   }
   const passwordMatch = await bcrypt.compare(password, user.password)
   if (!passwordMatch) {
-    throw new Error({ error: 'Invalid login credentials' })
+    throw new Error({ error: 'Invalid login credentials' });
   }
-  return user
-}
+  return user;
+};
 
 // Bind the user schema to a Mongoose model
 const User = mongoose.model('User', userSchema);

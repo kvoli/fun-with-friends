@@ -1,5 +1,5 @@
 const express = require('express');
-//const auth = require('../middleware/auth');
+const auth = require('../middleware/auth');
 const userRouter = express.Router();
 const userController = require('../controllers/user');
 
@@ -10,12 +10,12 @@ userRouter.post('/', userController.createUser);
 userRouter.post('/login', userController.loginUser);
 
 // Get the current user
-userRouter.get('/me', userController.getCurrentUser);
+userRouter.get('/me', auth, userController.getCurrentUser);
 
 // Logout the current user on the current device
-userRouter.post('/logout', userController.logoutUser);
+userRouter.post('/logout', auth, userController.logoutUser);
 
 // Logout the current user on all devices
-userRouter.post('/logout/all', userController.logoutUserAll);
+userRouter.post('/logout/all', auth, userController.logoutUserAll);
 
 module.exports = userRouter
