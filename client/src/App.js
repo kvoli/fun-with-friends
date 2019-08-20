@@ -1,9 +1,8 @@
-import React from 'react'
-import MainPage from './main/MainPage'
-import NavBar from './NavBar'
+import React from 'react';
+import MainPage from './main/MainPage';
+import NavBar from './NavBar';
 
 const App = () => {
-
   return (
     <div className="container">
       <NavBar />
@@ -11,6 +10,5 @@ const App = () => {
     </div>
   )
 }
-
 
 export default App;
