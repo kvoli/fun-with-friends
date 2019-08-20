@@ -9,28 +9,28 @@ import Button from "@material-ui/core/Button";
 
 const ArtifactItem = props => {
     return (
-        <Grid item key={props.artifact.id}>
-        <Card>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt={props.artifact.title}
-                    image={props.artifact.src}
-                    title={props.artifact.title}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {props.artifact.title}
-                    </Typography>
-                    <Typography component="p">{props.artifact.desc}</Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">Edit</Button>
-                <Button size="small" color="secondary">Delete</Button>
-            </CardActions>
-        </Card>
-    </Grid>
+        <Grid item key={artifact.id}>
+            <Card>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        alt={props.artifact.title}
+                        image={props.artifact.src}
+                        title={props.artifact.title}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {props.artifact.title}
+                        </Typography>
+                        <Typography component="p">{props.artifact.desc}</Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size="small" color="primary">Edit</Button>
+                    <Button size="small" color="secondary">Delete</Button>
+                </CardActions>
+            </Card>
+        </Grid>
     );
 };
 
