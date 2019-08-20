@@ -17,13 +17,12 @@ const NavBar = () => {
                     </TypoGraphy>
                 </ListItemText>
 
-
                 <ListItemText inset>
                     <TypoGraphy color="inherit" variant="title">
                         Create <Book />
                     </TypoGraphy>
                 </ListItemText>
-
+                
                 <ListItemText inset>
                     <TypoGraphy color="inherit" variant="title">
                         Account <AccountBox />
