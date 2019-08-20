@@ -27,7 +27,7 @@
   </a>
 </p>
 
-
+ 
 ## Stack
 Fun With Friends is built using the MERN stack, consisting of a React frontend served by a NodeJS backend running Express and connected to a MongoDB database.
 
