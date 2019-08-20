@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 
 const ArtifactItem = props => {
     return (
-        <Grid item key={artifact.id}>
+        <Grid item key={props.artifact.id}>
             <Card>
                 <CardActionArea>
                     <CardMedia
