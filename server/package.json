@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kvoli/fun-with-friends#readme",
   "dependencies": {
+    "cloudinary": "^1.14.0",
     "express": "^4.17.1",
     "mongoose": "^5.6.9"
   },
