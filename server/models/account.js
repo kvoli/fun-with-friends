@@ -9,7 +9,7 @@ const accountSchema = mongoose.Schema({
   'lastname': String,
   'session': String,
   'salt': String
-})
+});
 
 // Bind the account schema to a Mongoose model
 mongoose.model('account', accountSchema);
