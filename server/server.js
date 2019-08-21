@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
-
+const cloudinary = require('cloudinary');
+const formData = require('express-form-data');
+const cors = require('cors');
+const { CLIENT_ORIGIN } = require('./config');
 const router = require('./routes/routes');
 
 // Start the express server
@@ -21,8 +24,19 @@ if (process.env.NODE_ENV === 'production') {
 
   // Load environment variables from the .env file
   require('dotenv').config();
-  console.log(process.env.SECRET_KEY);
 }
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  cloud_key: process.env.CLOUDINARY_KEY,
+  cloud_secret: process.env.CLOUDINARY_SECRET
+});
+
+server.use(cors({
+  origin: CLIENT_ORIGIN
+}));
+
+server.use(formData.parse());
 
 // Connect to the database
 require('./models/db');
