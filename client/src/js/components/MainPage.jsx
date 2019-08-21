@@ -1,6 +1,6 @@
 import React from "react";
 import ArtifactGrid from "./ArtifactGrid";
-import LoginPage from "./LoginPage";
+// import LoginPage from "./LoginPage";
 
 const MainPage = () => {
 
