@@ -9,7 +9,8 @@
     "react-dom": "^16.9.0",
     "react-flexbox-grid": "^2.1.2",
     "react-redux": "^7.1.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,6 +35,5 @@
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
-    "redux": "^4.0.4"
   }
 }
