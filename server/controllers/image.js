@@ -6,4 +6,6 @@ var uploadImage = async (req, res) => {
     .then(results => res.send(json(results)))
 }
 
-module.exports = uploadImage;
+module.exports = {
+  uploadImage
+};
