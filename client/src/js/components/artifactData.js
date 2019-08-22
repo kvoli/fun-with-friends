@@ -4,7 +4,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -14,17 +14,17 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
   },
-  {
+  { 
     id: 3,
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -34,7 +34,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -44,7 +44,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -54,7 +54,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -64,7 +64,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -74,7 +74,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -84,7 +84,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -94,7 +94,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -104,7 +104,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -114,7 +114,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -124,7 +124,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -134,7 +134,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -144,7 +144,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -154,7 +154,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -164,7 +164,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -174,7 +174,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]
@@ -184,7 +184,7 @@ const artifactData = [
     title: "Title",
     date: 1984,
     origin: "UK",
-    src: "https://www.usanimedirect.com/wp-content/uploads/2017/02/kanna-kamui.jpg",
+    src: "https://i.imgur.com/cnbyR1Q.jpg",
     desc: "short description",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
     tags: [{ label: "family" }, { label: "friends" }, { label: "rare" }]

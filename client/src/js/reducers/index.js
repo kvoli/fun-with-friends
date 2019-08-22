@@ -1,10 +1,12 @@
-import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT } from "../constants/action-types.js";
+import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT, ARTIFACT_SWITCH } from "../constants/action-types.js";
 import artifactData from "../components/artifactData";
 
 // define our initial state for the program - this needs to eventually be replaced
 // with a call to DB or cached DB .... get request with redux-thunk
 const initialState = {
-	artifacts: artifactData
+	artifacts: artifactData,
+	modalView: false,
+	viewArtifact: {},
 };
 
 // reducer for the root, takes the payload consisting of {type , payload}
@@ -27,6 +29,14 @@ function rootReducer(state = initialState, action) {
 		return Object.assign({}, state, {
 			artifacts: state.artifacts.concat(action.payload)
 		});
+	}
+
+	if (action.type === ARTIFACT_SWITCH) {
+		return Object.assign({}, state, {
+			artifacts: state.artifacs,
+			modalView: !state.modalView,
+			viewArtifact: action.payload
+		})
 	}
 	return state;
 }

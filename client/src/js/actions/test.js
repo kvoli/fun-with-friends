@@ -1,0 +1,2 @@
+import { addArtifact } from "./index"
+

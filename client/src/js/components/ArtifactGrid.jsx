@@ -13,6 +13,7 @@ import Chip from '@material-ui/core/Chip';
 import { Divider } from "@material-ui/core";
 import UtilityBar from "./UtilityBar";
 import { connect } from "react-redux"
+// import { artifactSwitch } from "../actions/index.js";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -41,16 +42,20 @@ const useStyles = makeStyles(theme => ({
 const AGrid =  ({ artifacts }) => {
   const classes = useStyles();
 
+//   function handleSwitch(artifact) {
+// 	  this.props.artifactSwitch({ artifact });
+//   }
+
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
 	  <Grid container spacing={6}>
 	  {console.log(artifacts)}
-        {artifacts.artifactData.map(artifact => (
+        {artifacts.map(artifact => (
           <Grid item key={artifact.id} xs={14} sm={7} md={4}>
             <Zoom in={true} style={{ transitionDelay: '500ms' }}>
               <Card className={classes.card} >
-                <CardActionArea  >
+                <CardActionArea onClick={console.log("clicked")} >
                   <CardMedia
                     component='img'
                     className={classes.cardMedia}
@@ -68,12 +73,12 @@ const AGrid =  ({ artifacts }) => {
                         <Grid item>
                           <Typography gutterBottom variant='body2'>
                             Sep 2, 1922
-      </Typography>
+      				</Typography>
                         </Grid>
                       </Grid>
                       <Typography color="textSecondary" variant='body2'>
                         {artifact.desc} that shouldn't be too long hopefully, but you never know.
-      </Typography>
+      				</Typography>
                     </div>
                     <Divider variant='middle' />
                     <div className={classes.cardTags} >
@@ -100,6 +105,12 @@ const AGrid =  ({ artifacts }) => {
 const mapStateToProps = state => {
 	return { artifacts: state.artifacts };
 };
+
+// function mapDispatchToProps(dispatch) {
+// 	return {
+// 		artifactSwitch : artifact => dispatch(artifactSwitch(artifact))
+// 	};
+// }
 
 const ArtifactGrid = connect(mapStateToProps)(AGrid)
 
