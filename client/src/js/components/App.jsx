@@ -1,14 +1,19 @@
-import React from "react";
-import MainPage from "./MainPage";
-import NavBar from "./NavBar";
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+import MainPage from './MainPage';
+import MenuAppBar from './NavBar';
+import Footer from './Footer';
 
 const App = () => {
   return (
-    <div className="container">
-      <NavBar />
+    <React.Fragment>
+      <CssBaseline />
+      <MenuAppBar />
       <MainPage />
-    </div>
-  )
+      <Footer />
+    </React.Fragment>
+  );
 }
 
 export default App;
