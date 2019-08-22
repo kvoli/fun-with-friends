@@ -1,4 +1,5 @@
-import React from "react";
+// Import Packages
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -9,9 +10,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Zoom from '@material-ui/core/Zoom';
 import Chip from '@material-ui/core/Chip';
-import { Divider } from "@material-ui/core";
-import UtilityBar from "./UtilityBar";
-import ArtifactModal from "./ArtifactModal";
+import { Divider } from '@material-ui/core';
+// Import Components
+import UtilityBar from './UtilityBar';
+import ArtifactModal from './ArtifactModal';
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -42,7 +44,7 @@ const ArtifactGrid = props => {
   const classes = useStyles();
 
   return (
-    <Container className={classes.cardGrid} maxWidth="lg">
+    <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
       <Grid container spacing={6}>
         {props.artifacts.map(artifact => (
@@ -51,32 +53,32 @@ const ArtifactGrid = props => {
               <Card className={classes.card} >
                 <CardActionArea  >
                   <CardMedia
-                    component="img"
+                    component='img'
                     className={classes.cardMedia}
                     image={artifact.src}
                     title={artifact.title}
                   />
                   <CardContent className={classes.cardContent}>
                     <div className={classes.cardText}>
-                      <Grid container alignItems="center">
+                      <Grid container alignItems='center'>
                         <Grid item xs>
-                          <Typography gutterBottom variant="h6">
+                          <Typography gutterBottom variant='h6'>
                             {artifact.title}
                           </Typography>
                         </Grid>
                         <Grid item>
-                          <Typography gutterBottom variant="body2">
+                          <Typography gutterBottom variant='body2'>
                             Sep 2, 1922
       </Typography>
                         </Grid>
                       </Grid>
-                      <Typography color="textSecondary" variant="body2">
+                      <Typography color="textSecondary" variant='body2'>
                         {artifact.desc} that shouldn't be too long hopefully, but you never know.
       </Typography>
                     </div>
-                    <Divider variant="middle" />
+                    <Divider variant='middle' />
                     <div className={classes.cardTags} >
-                      <Grid container allignItems="center">
+                      <Grid container allignItems='center'>
                         {artifact.tags.map(tag => (
                           <Grid item>
                             <Chip className={classes.chip} label={tag.label} />
@@ -92,9 +94,7 @@ const ArtifactGrid = props => {
         ))}
       </Grid>
     </Container>
-  )
-};
-
-
+  );
+}
 
 export default ArtifactGrid;
