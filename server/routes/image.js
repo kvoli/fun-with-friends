@@ -3,6 +3,6 @@ const auth = require('../middleware/auth');
 const imageRouter = express.Router();
 const imageController = require('../controllers/image');
 
-imageRouter.post('/upload', imageController.uploadImage);
+//imageRouter.post('/upload', imageController.uploadImage);
 
-module.exports = userRouter
+module.exports = imageRouter
