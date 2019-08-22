@@ -11,7 +11,6 @@ import Zoom from '@material-ui/core/Zoom';
 import Chip from '@material-ui/core/Chip';
 import { Divider } from "@material-ui/core";
 import UtilityBar from "./UtilityBar";
-import ArtifactModal from "./ArtifactModal";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -36,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0, 0.25)
   }
 }));
-
 
 const ArtifactGrid = props => {
   const classes = useStyles();

@@ -29,14 +29,14 @@ const ArtifactModal = props => {
     <div>
       <Button onClick={handleClickOpen('paper')}>scroll=paper</Button>
       <Dialog
-        open={props.open}
+        open={open}
         onClose={handleClose}
-        scroll={props.scroll}
+        scroll={scroll}
         aria-labelledby="scroll-dialog-title"
       >
         <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
-          <img src={props.artifact.src} />
+          <img src={props.artifact.src} alt=""/>
           <div className>
             <Grid container alignItems="center">
               <Grid item xs>
