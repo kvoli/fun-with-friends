@@ -12,6 +12,7 @@ import Zoom from '@material-ui/core/Zoom';
 import Chip from '@material-ui/core/Chip';
 import { Divider } from "@material-ui/core";
 import UtilityBar from "./UtilityBar";
+import { connect } from "react-redux"
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -37,14 +38,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ArtifactGrid = props => {
+const AGrid =  ({ artifacts }) => {
   const classes = useStyles();
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
-      <Grid container spacing={6}>
-        {props.artifacts.map(artifact => (
+	  <Grid container spacing={6}>
+	  {console.log(artifacts)}
+        {artifacts.artifactData.map(artifact => (
           <Grid item key={artifact.id} xs={14} sm={7} md={4}>
             <Zoom in={true} style={{ transitionDelay: '500ms' }}>
               <Card className={classes.card} >
@@ -93,5 +95,12 @@ const ArtifactGrid = props => {
     </Container>
   );
 }
+
+
+const mapStateToProps = state => {
+	return { artifacts: state.artifacts };
+};
+
+const ArtifactGrid = connect(mapStateToProps)(AGrid)
 
 export default ArtifactGrid;

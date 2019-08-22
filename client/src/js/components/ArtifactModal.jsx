@@ -57,7 +57,7 @@ const ArtifactModal = props => {
           <Divider variant="middle" />
           <div  >
             <Grid container allignItems="center">
-              {props.artifact.tags.map(tag => (
+              {props.artifact.tags.map(tag => (// Import Packages
                 <Grid item>
                   <Chip label={tag.label} />
                 </Grid>
