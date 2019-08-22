@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography';
 import { teal } from '@material-ui/core/colors';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   navBar: {
@@ -72,8 +73,8 @@ export default function MenuAppBar() {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}><Link href='/login'>Login</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link href='signup'>Signup</Link></MenuItem>
             </Menu>
           </div>
         </Toolbar>

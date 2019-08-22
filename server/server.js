@@ -9,13 +9,15 @@ const router = require('./routes/routes');
 // Start the express server
 const server = express();
 
+server.use(router);
+
 if (process.env.NODE_ENV === 'production') {
   console.log('Running in production mode');
 
   // Serve built static react files
   const client_directory = path.join(__dirname, '../client/build/');
   server.use(express.static(client_directory));
-  server.get('/', (req, res) => {
+  server.get('*', (req, res) => {
     res.sendFile(path.join(client_directory, 'index.html'));
   });
 
@@ -42,7 +44,6 @@ server.use(formData.parse());
 require('./models/db');
 
 server.use(express.json());
-server.use(router);
 
 const port = process.env.PORT || 8080;
 server.listen(port, () => {
