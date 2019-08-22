@@ -13,7 +13,7 @@ import { teal } from '@material-ui/core/colors';
 const useStyles = makeStyles(theme => ({
   navBar: {
     flexGrow: 1,
-    backgroundColor: teal[500],
+    backgroundColor: teal[600],
   },
   menuButton: {
     marginRight: theme.spacing(2),
