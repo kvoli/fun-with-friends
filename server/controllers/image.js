@@ -3,7 +3,7 @@ var uploadImage = async (req, res) => {
   const promises = values.map(image => cloudinary.uploader.upload(image.path))
   Promise
     .all(promises)
-    .then(results => res.status(200).send(json(results)))
+    .then(results => res.send(json(results)))
 }
 
 module.exports = uploadImage;
