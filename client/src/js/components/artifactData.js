@@ -192,3 +192,4 @@ const artifactData = [
 ];
 
 export default artifactData;
+

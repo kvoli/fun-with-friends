@@ -1,77 +1,24 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
-import { Divider } from "@material-ui/core";
+import { artifactSwitch } from "../actions/index.js";
+import { useSelector, useDispatch } from 'react-redux';
+import ArtifactDetailed from "./ArtifactDetailed";
 
 
-const ArtifactModal = props => {
+const ArtifactModal = () => {
 
-  const [open, setOpen] = React.useState(true);
- 
-  const [scroll, setScroll] = React.useState('paper');
-
-  const handleClickOpen = scrollType => () => {
-    setOpen(true);
-    setScroll(scrollType);
-  };
-
-  function handleClose() {
-    setOpen(false);
-  }
+  const dispatch = useDispatch();
+  const { open, artifact } = useSelector(store => store.focusView)
 
   return (
-    <div>
-      <Button onClick={handleClickOpen('paper')}>scroll=paper</Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        scroll={scroll}
-        aria-labelledby="scroll-dialog-title"
-      >
-        <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
-        <DialogContent dividers={scroll === 'paper'}>
-          <img src={props.artifact.src} alt=""/>
-          <div className>
-            <Grid container alignItems="center">
-              <Grid item xs>
-                <Typography gutterBottom variant="h6">
-                  {props.artifact.title}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography gutterBottom variant="body2">
-                  Sep 2, 1922
-                </Typography>
-              </Grid>
-            </Grid>
-            <Typography color="textSecondary" variant="body2">
-              {props.artifact.text} that shouldn't be too long hopefully, but you never know.
-            </Typography>
-          </div>
-          <Divider variant="middle" />
-          <div  >
-            <Grid container allignItems="center">
-              {props.artifact.tags.map(tag => (// Import Packages
-                <Grid item>
-                  <Chip label={tag.label} />
-                </Grid>
-              ))}
-            </Grid>
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog
+      open={open}
+      onClose={() => dispatch(artifactSwitch({ open: !open, artifact: artifact }))}
+      aria-labelledby="scroll-dialog-title"
+    >
+      <ArtifactDetailed props={artifact} />
+    </Dialog>
   );
 }
 
