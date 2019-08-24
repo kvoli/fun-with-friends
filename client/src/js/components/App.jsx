@@ -1,7 +1,7 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import MainPage from './MainPage';
+import Main from './Main';
 import MenuAppBar from './NavBar';
 import Footer from './Footer';
 
@@ -10,7 +10,7 @@ const App = () => {
     <React.Fragment>
       <CssBaseline />
       <MenuAppBar />
-      <MainPage />
+      <Main />
       <Footer />
     </React.Fragment>
   );
