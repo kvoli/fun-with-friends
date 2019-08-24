@@ -54,7 +54,7 @@ function generate(element) {
 const ArtifactDetailed = () => {
 
   const classes = useStyles();
-  const { open, artifact } = useSelector(store => store.focusView)
+  const artifact = useSelector(store => store.focusView.artifact)
 
   return (
     <Grid container justify="center" className={classes.contained}>

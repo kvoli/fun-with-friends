@@ -15,6 +15,7 @@ const ArtifactModal = () => {
       open={open}
       onClose={() => dispatch(artifactSwitch({ open: !open, artifact: artifact }))}
       aria-labelledby="scroll-dialog-title"
+      transitionDuration= {250}
     >
       <ArtifactDetailed props={artifact} />
     </Dialog>
