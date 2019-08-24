@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography';
 import { teal } from '@material-ui/core/colors';
 import Link from '@material-ui/core/Link';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
   navBar: {
@@ -39,7 +40,7 @@ export default function MenuAppBar() {
   }
 
   return (
-    <div className>
+    <Container>
       <AppBar position="static" className={classes.navBar} >
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -79,7 +80,7 @@ export default function MenuAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-    </div>
+    </Container>
   );
 }
 

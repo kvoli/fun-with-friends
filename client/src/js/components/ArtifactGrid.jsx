@@ -12,6 +12,9 @@ import Zoom from '@material-ui/core/Zoom';
 import Chip from '@material-ui/core/Chip';
 import { Divider } from "@material-ui/core";
 import UtilityBar from "./UtilityBar";
+import { artifactSwitch } from "../actions/index.js";
+import ArtifactModal from "./ArtifactModal";
+import { useSelector, useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -25,6 +28,12 @@ const useStyles = makeStyles(theme => ({
   },
   cardContent: {
     flexGrow: 1,
+    marginBottom: 0,
+    paddingBottom: 0,
+    padding: theme.spacing(0.75, 2.5, 0),
+    "&:last-child": {
+      paddingBottom: 2
+    }
   },
   cardText: {
     margin: theme.spacing(1, 0),
@@ -36,60 +45,69 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0, 0.25)
   }
 }));
+const ArtifactGrid = () => {
 
-const ArtifactGrid = props => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const artifacts = useSelector(store => store.artifacts)
+  const { open } = useSelector(store => store.focusView.open)
+
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
       <Grid container spacing={6}>
-        {props.artifacts.map(artifact => (
-          <Grid item key={artifact.id} xs={14} sm={7} md={4}>
-            <Zoom in={true} style={{ transitionDelay: '500ms' }}>
+        {console.log(artifacts)}
+        {artifacts.map(artifact => (
+          <Grid item key={artifact.id} xs={12} sm={7} md={4}>
+            <Zoom in={true} style={{ transitionDelay: '250ms' }}>
               <Card className={classes.card} >
-                <CardActionArea  >
+                <CardActionArea onClick={() => dispatch(artifactSwitch({ open: !open, artifact: artifact }))} >
                   <CardMedia
                     component='img'
                     className={classes.cardMedia}
                     image={artifact.src}
                     title={artifact.title}
                   />
-                  <CardContent className={classes.cardContent}>
-                    <div className={classes.cardText}>
-                      <Grid container alignItems='center'>
-                        <Grid item xs>
-                          <Typography gutterBottom variant='h6'>
-                            {artifact.title}
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography gutterBottom variant='body2'>
-                            Sep 2, 1922
-      </Typography>
-                        </Grid>
-                      </Grid>
-                      <Typography color="textSecondary" variant='body2'>
-                        {artifact.desc} that shouldn't be too long hopefully, but you never know.
-      </Typography>
-                    </div>
-                    <Divider variant='middle' />
-                    <div className={classes.cardTags} >
-                      <Grid container allignItems='center'>
-                        {artifact.tags.map(tag => (
-                          <Grid item>
-                            <Chip className={classes.chip} label={tag.label} />
-                          </Grid>
-                        ))}
-                      </Grid>
-                    </div>
-                  </CardContent>
                 </CardActionArea>
+                <CardContent className={classes.cardContent}>
+                  <div className={classes.cardText}>
+                    <Grid container alignItems="center">
+                      <Grid item xs>
+                        <Typography gutterBottom variant='h6'>
+                          {artifact.title}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography gutterBottom variant='body2'>
+                          Sep 2, 1922
+      				        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Typography variant='body2'>
+                      Origin: {artifact.origin}
+                    </Typography>
+                    <Typography color="textSecondary" variant='body2'>
+                      {artifact.desc} that shouldn't be too long hopefully, but you never know.
+                    </Typography>
+                  </div>
+                  <Divider variant='middle' />
+                  <div className={classes.cardTags} >
+                    <Grid container >
+                      {artifact.tags.map(tag => (
+                        <Grid item key={tag.label}>
+                          <Chip className={classes.chip} label={tag.label} />
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </div>
+                </CardContent>
               </Card>
             </Zoom>
           </Grid>
         ))}
       </Grid>
+      <ArtifactModal />
     </Container>
   );
 }
