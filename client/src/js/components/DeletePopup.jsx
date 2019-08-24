@@ -23,7 +23,6 @@ const AlertDialog = () => {
     setOuterOpen(false);
   }
 
-
   return (
     <div>
       <IconButton onClick={handleClickOpen}  >
@@ -49,12 +48,12 @@ const AlertDialog = () => {
               dispatch(removeArtifact(artifact));
               dispatch(artifactSwitch({ open: !open, artifact: false }))
             }}
-            color="primary"
+            color="secondary"
             autoFocus
           >
             DELETE
           </Button>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
         </DialogActions>
