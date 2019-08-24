@@ -10,12 +10,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Zoom from '@material-ui/core/Zoom';
 import Chip from '@material-ui/core/Chip';
-import { Divider, CardActions } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 import UtilityBar from "./UtilityBar";
-// import { connect } from "react-redux"
 import { artifactSwitch } from "../actions/index.js";
 import ArtifactModal from "./ArtifactModal";
-import Button from '@material-ui/core/Button';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
@@ -52,7 +50,7 @@ const ArtifactGrid = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const artifacts = useSelector(store => store.artifacts)
-  const { open, arts } = useSelector(store => store.focusView)
+  const { open } = useSelector(store => store.focusView.open)
 
 
   return (

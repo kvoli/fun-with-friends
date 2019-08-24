@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteConfirmation from "./DeleteConfirmation";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles(theme => ({
@@ -56,7 +56,6 @@ const ArtifactDetailed = () => {
   const classes = useStyles();
   const { open, artifact } = useSelector(store => store.focusView)
 
-
   return (
     <Grid container justify="center" className={classes.contained}>
       <Card>
@@ -69,14 +68,14 @@ const ArtifactDetailed = () => {
         />
         <CardContent className={classes.cardContent}>
           <div className={classes.cardText}>
-            <Grid container alignContent="center" justify="space-between">
+            <Grid container justify="space-between">
               <Grid item >
                 <Typography gutterBottom variant='h4'>
                   {artifact.title}
                 </Typography>
               </Grid>
               <Grid item>
-              <Grid container direction="row-reverse" allignItems="flex-start" justify="flex-end">
+              <Grid container direction="row-reverse" justify="flex-end">
                 <Grid item>
                   <IconButton onClick={console.log("clicked_edit_button")}>
                     <EditIcon color="primary" fontSize="default" />

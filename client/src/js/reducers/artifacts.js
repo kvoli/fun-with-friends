@@ -1,7 +1,5 @@
 import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT } from "../constants/action-types.js";
 import artifactData from "../components/artifactData";
-import { OutlinedInput } from "@material-ui/core";
-
 const initialState = artifactData
 
 

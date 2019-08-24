@@ -1,5 +1,5 @@
 import React from "react";
-import { removeArtifact, artifactSwitch } from "../actions/index";
+import { removeArtifact } from "../actions/index";
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 const DeleteConfirmation = () => {
 
   const dispatch = useDispatch();
-  const { open, artifact } = useSelector(store => store.focusView)
+  const { artifact } = useSelector(store => store.focusView.artifact)
 
   return (
     <IconButton onClick={() =>
