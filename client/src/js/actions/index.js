@@ -1,5 +1,4 @@
-import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT, ARTIFACT_SWITCH } from "../constants/action-types.js";
-
+import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT, ARTIFACT_SWITCH, FILTER_ARTIFACTS } from "../constants/action-types.js";
 
 export const addArtifact = (artifact) => ({
 	 type: ADD_ARTIFACT,
@@ -19,4 +18,9 @@ export const editArtifact = (artifact) => ({
 export const artifactSwitch = (payload) => ({
 		type: ARTIFACT_SWITCH,
 		payload: payload
+});
+
+export const filterArtifacts = (payload) => ({
+	type: FILTER_ARTIFACTS,
+	payload: payload
 });

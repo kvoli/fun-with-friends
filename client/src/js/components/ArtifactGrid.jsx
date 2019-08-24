@@ -15,6 +15,7 @@ import UtilityBar from "./UtilityBar";
 import { artifactSwitch } from "../actions/index.js";
 import ArtifactModal from "./ArtifactModal";
 import { useSelector, useDispatch } from 'react-redux';
+import { getVisibleArtifacts } from "../selectors/index";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -49,9 +50,9 @@ const ArtifactGrid = () => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  const artifacts = useSelector(store => store.artifacts)
+  const state = useSelector(store => store)
+  const artifacts = getVisibleArtifacts(state)
   const { open } = useSelector(store => store.focusView.open)
-
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
@@ -60,7 +61,7 @@ const ArtifactGrid = () => {
         {console.log(artifacts)}
         {artifacts.map(artifact => (
           <Grid item key={artifact.id} xs={12} sm={7} md={4}>
-            <Zoom in={true} style={{ transitionDelay: '250ms' }}>
+            <Zoom in={true} style={{ transitionDelay: '50ms' }}>
               <Card className={classes.card} >
                 <CardActionArea onClick={() => dispatch(artifactSwitch({ open: !open, artifact: artifact }))} >
                   <CardMedia
