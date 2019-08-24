@@ -10,8 +10,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteConfirmation from "./DeleteConfirmation";
+import DeletePopup from "./DeletePopup";
 import { useSelector } from 'react-redux';
+import LoadingCircle from "./LoadingCircle";
 
 
 const useStyles = makeStyles(theme => ({
@@ -58,6 +59,7 @@ const ArtifactDetailed = () => {
 
   return (
     <Grid container justify="center" className={classes.contained}>
+    {artifact ? (
       <Card>
         <CardMedia
           component='img'
@@ -77,12 +79,12 @@ const ArtifactDetailed = () => {
               <Grid item>
               <Grid container direction="row-reverse" justify="flex-end">
                 <Grid item>
-                  <IconButton onClick={console.log("clicked_edit_button")}>
+                  <IconButton >
                     <EditIcon color="primary" fontSize="default" />
                   </IconButton>
                 </Grid>
                 <Grid item>
-                  <DeleteConfirmation />
+                  <DeletePopup />
                 </Grid>
               </Grid>
               </Grid>
@@ -120,6 +122,8 @@ const ArtifactDetailed = () => {
           </div>
         </CardContent>
       </Card>
+    ) : (<LoadingCircle />)
+    }
     </Grid>
   );
 }

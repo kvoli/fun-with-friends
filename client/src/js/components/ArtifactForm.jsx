@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import uuidv1 from "uuid";
 import { addArticle } from "../actions/index";
-function mapDispatchToProps(dispatch) {
-  return {
-    addArticle: article => dispatch(addArticle(article))
-  };
-}
-class ConnectedForm extends Component {
+import { useSelector, useDispatch } from 'react-redux';
+
+
+class ArtifactForm extends Component {
   constructor() {
     super();
     this.state = {
-      title: ""
+      title: "",
+      desc: "",
+      date: "",
+      tags: [],
+      text: "",
+      src: ""
     };
+
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -27,7 +31,7 @@ class ConnectedForm extends Component {
     this.setState({ title: "" });
   }
   render() {
-    const { title } = this.state;
+    const { title, desc, date, tags, text, src } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -47,6 +51,5 @@ class ConnectedForm extends Component {
     );
   }
 }
-const Form = connect(null, mapDispatchToProps)(ConnectedForm);
 
-export default Form;
+export default ArtifactForm;
