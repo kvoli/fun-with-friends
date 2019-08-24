@@ -13,7 +13,7 @@ const artifacts = (state = initialState, action) => {
     
     case RM_ARTIFACT:
       console.log(action);
-      return state.filter(element => element !== action.payload )
+      return state.filter((element) => element !== action.payload )
     
     case EDIT_ARTIFACT:
       return [
