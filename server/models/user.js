@@ -4,7 +4,12 @@ const jwt = require('jsonwebtoken');
 
 // Define the acount schema
 const userSchema = mongoose.Schema({
-  name: {
+  firstname: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  lastname: {
     type: String,
     required: true,
     trim: true
@@ -50,14 +55,23 @@ userSchema.methods.generateAuthToken = async function() {
   return token;
 };
 
+userSchema.methods.generateResponseJson = async function() {
+  return {
+    firstname: this.firstname,
+    lastname: this.lastname,
+    username: this.username,
+    email: this.email,
+  };
+}
+
 userSchema.statics.findByCredentials = async (username, password) => {
   const user = await User.findOne({ username });
   if (!user) {
-    throw new Error({ error: 'Invalid login credentials' })
+    return null;
   }
   const passwordMatch = await bcrypt.compare(password, user.password)
   if (!passwordMatch) {
-    throw new Error({ error: 'Invalid login credentials' });
+    return null;
   }
   return user;
 };

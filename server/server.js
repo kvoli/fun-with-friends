@@ -6,10 +6,15 @@ const cors = require('cors');
 const { CLIENT_ORIGIN } = require('./config');
 const router = require('./routes/routes');
 
+
+// Load environment variables from the .env file
+require('dotenv').config();
+
 // Start the express server
 const server = express();
 
-server.use(router);
+server.use(express.json());
+server.use('/api', router);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('Running in production mode');
@@ -23,9 +28,6 @@ if (process.env.NODE_ENV === 'production') {
 
 } else {
   console.log('Running in development mode');
-
-  // Load environment variables from the .env file
-  require('dotenv').config();
 }
 
 cloudinary.config({
@@ -42,8 +44,6 @@ server.use(formData.parse());
 
 // Connect to the database
 require('./models/db');
-
-server.use(express.json());
 
 const port = process.env.PORT || 8080;
 server.listen(port, () => {
