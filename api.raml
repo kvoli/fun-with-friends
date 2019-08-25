@@ -1,0 +1,170 @@
+#%RAML 1.0
+
+title: Fun With Friends
+baseUri: http://funwithfriends.net/api
+
+types: 
+  UserSignup:
+    type: object
+    properties: 
+      firstname: string
+      lastname: string
+      email: string
+      username: string
+      password: string
+  UserLogin:
+    type: object
+    properties:
+      username: string
+      password: string 
+
+securitySchemes: 
+  JWT:
+    describedBy:
+      headers: 
+        Authentication:  
+          description: The current user's JWT.
+          type: String
+          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+/user: 
+  description: User authentication and information.
+  /me:
+    get: 
+      securedBy: [JWT]
+      description: Get information about the currently logged in user. 
+      responses:
+        200: 
+          body: 
+            application/json:
+              example: |
+                {
+                  "user": {
+                    "firstname": "John",
+                    "lastname": "Smith",
+                    "username": "johnsmith",
+                    "email": "johnsmith@funwithfriends.net"
+                  }
+                }
+        401:
+          body: 
+            application/json: 
+              example: |
+                { "error": "Not authorized to access this resource." }
+  
+  /signup:
+    post:
+      description: Sign up a new user. 
+      body: 
+        application/json:
+          type: UserSignup
+          example: |
+            {
+              "firstname": "John",
+              "lastname": "Smith",
+              "email": "johnsmith@funwithfriends.net",
+              "username": "johnsmith",
+              "password": "originality"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "user": {
+                    "firstname": "John",
+                    "lastname": "Smith", 
+                    "username": "johnsmith",
+                    "email": "johnsmith@funwithfriends.net"
+                  },
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                }
+        409:
+          body:
+            application/json:
+              example: |
+                { 
+                  "error": "Username or email already exists." 
+                }
+        400: 
+          body:
+            application/json:
+              example: |
+                {
+                  "error": "An unknown error has occurred."
+                }
+          
+  /login: 
+    post: 
+      description: Login to an existing user.
+      body: 
+        application/json:
+          type: UserLogin
+          example: | 
+            {
+              "username": "johnsmith",
+              "password": "originality"
+            }
+      responses:
+        200: 
+          body: 
+            application/json:
+              example: |
+                {
+                  "user": {
+                    "firstname": "John",
+                    "lastname": "Smith", 
+                    "username": "johnsmith",
+                    "email": "johnsmith@funwithfriends.net"
+                  },
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                }
+        401: 
+          body: 
+            application/json:
+              example: |
+                {
+                  "error": "Incorrect username or password."
+                }
+        400: 
+          body:
+            application/json:
+              example: |
+                {
+                  "error": "An unknown error has occurred."
+                }
+  
+  /logout:
+    post:
+      securedBy: [JWT]
+      description: Log out of the current user.
+      responses: 
+        200: 
+        400: 
+          body:
+            application/json:
+              example: |
+                {
+                  "error": "An unknown error has occurred."
+                }
+  /logout/all:
+    post:
+      securedBy: [JWT]
+      description: Log out of the current user on all devices.
+      responses: 
+        200: 
+        400: 
+          body:
+            application/json:
+              example: |
+                {
+                  "error": "An unknown error has occurred."
+                }
+
+/artifact:
+  description: Upload, edit and retrieve artifacts.
+  /get:
+    description: Get all artifacts. 
+  /post:
+    description: Create a new artifact.
