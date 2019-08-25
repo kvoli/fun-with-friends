@@ -10,9 +10,9 @@ const Options = {
 // Connect to the database with the connection url and options
 mongoose.connect(DbConnection, Options).then(
   () => {
-    console.log('Connected to Database'); 
+    console.log('Database: Connected'); 
   }, (err) => {
-    console.log('Failed to connected to Database');
+    console.log('Database: Failed to Connect');
   }
 );
 
