@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography';
 import { teal } from '@material-ui/core/colors';
-import Link from '@material-ui/core/Link';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   navBar: {
@@ -73,8 +73,8 @@ export default function MenuAppBar() {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}><Link href='/login'>Login</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link href='signup'>Signup</Link></MenuItem>
+              <MenuItem onClick={handleClose}><NavLink to='/login'>Login</NavLink></MenuItem>
+              <MenuItem onClick={handleClose}><NavLink to='/signup'>Signup</NavLink></MenuItem>
             </Menu>
           </div>
         </Toolbar>
