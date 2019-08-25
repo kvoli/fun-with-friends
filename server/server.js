@@ -3,49 +3,40 @@ const path = require('path');
 const cloudinary = require('cloudinary');
 const formData = require('express-form-data');
 const cors = require('cors');
-const { CLIENT_ORIGIN } = require('./config');
 const router = require('./routes/routes');
+
+// Always try and load environment variables from a .env file
+require('dotenv').config();
 
 // Start the express server
 const server = express();
 
-server.use(router);
+// Connect to the database
+require('./models/db');
 
-if (process.env.NODE_ENV === 'production') {
-  console.log('Running in production mode');
-
-  // Serve built static react files
-  const client_directory = path.join(__dirname, '../client/build/');
-  server.use(express.static(client_directory));
-  server.get('*', (req, res) => {
-    res.sendFile(path.join(client_directory, 'index.html'));
-  });
-
-} else {
-  console.log('Running in development mode');
-
-  // Load environment variables from the .env file
-  require('dotenv').config();
-}
-
+// Setup middlewares 
+server.use(express.json());
+server.use(formData.parse());
+server.use(cors({origin: process.env.CLIENT_ORIGIN}));
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   cloud_key: process.env.CLOUDINARY_KEY,
   cloud_secret: process.env.CLOUDINARY_SECRET
 });
 
-server.use(cors({
-  origin: CLIENT_ORIGIN
-}));
+// Setup routes
+server.use('/api', router);
 
-server.use(formData.parse());
+// Setup client
+const build = path.join(__dirname, '../client/build/');
+server.use(express.static(build));
+server.get('*', (req, res) => {
+  res.sendFile(path.join(build, 'index.html'));
+});
 
-// Connect to the database
-require('./models/db');
-
-server.use(express.json());
-
+// Setup listener
 const port = process.env.PORT || 8080;
 server.listen(port, () => {
-  console.log(`Server Started on Port ${port}`);
+  console.log(`Server Build: ${process.env.NODE_ENV}`);
+  console.log(`Server Port: ${port}`);
 });
