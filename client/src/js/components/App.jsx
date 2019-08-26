@@ -1,15 +1,16 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import Main from './Main';
-import MenuAppBar from './NavBar';
+import NavBar from './NavBar';
 import Footer from './Footer';
 
 const App = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <MenuAppBar />
+      <NavBar />
       <Main />
       <Footer />
     </React.Fragment>
