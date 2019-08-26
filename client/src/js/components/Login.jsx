@@ -11,6 +11,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { login } from '../actions/auth';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -38,6 +41,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LogIn = () => {
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="xs">
@@ -51,6 +58,7 @@ const LogIn = () => {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
+            onChange={(e)=>{setUsername(e.target.value)}}
             variant="outlined"
             margin="normal"
             required
@@ -62,6 +70,7 @@ const LogIn = () => {
             autoFocus
           />
           <TextField
+            onChange={(e)=>{setPassword(e.target.value)}}
             variant="outlined"
             margin="normal"
             required
@@ -77,7 +86,7 @@ const LogIn = () => {
             label="Remember me"
           />
           <Button
-            type="submit"
+            onClick={(e)=>{dispatch(login(username,password))}}
             fullWidth
             variant="contained"
             color="primary"

@@ -3,13 +3,14 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import store from "./js/store/index";
 import App from "./js/components/App.jsx";
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import history from './history';
 
 render (
 	<Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
 	</Provider>,
 	document.getElementById("root")
 );
