@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.2",
     "@material-ui/icons": "^4.2.1",
+    "history": "^4.9.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-flexbox-grid": "^2.1.2",
@@ -12,6 +13,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"
   },
   "scripts": {
