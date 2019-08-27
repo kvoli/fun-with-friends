@@ -17,6 +17,7 @@ import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
 import DeletePopup from "./DeletePopup";
 import LoadingCircle from "./LoadingCircle";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -35,6 +36,10 @@ const useStyles = makeStyles(theme => ({
     "&:last-child": {
       paddingBottom: 6
     }
+  },
+  cardMedia: {
+    height: '100%',
+    width: '100%'
   },
   cardText: {
     margin: theme.spacing(1, 0),
@@ -61,6 +66,7 @@ const ArtifactForm = () => {
   const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
   const dispatch = useDispatch();
 
+
   const fillArtifact = artifact ? artifact : {
     title: "",
     desc: "",
@@ -75,70 +81,124 @@ const ArtifactForm = () => {
     defaultValues: fillArtifact
   });
 
+  const stockImage = "https://www.logolynx.com/images/logolynx/2a/2a71ec307740510ce1e7300904131154.png"
+
   const onSubmit = (data, e) => { dispatch(addArtifact(data)) }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-
-      <div className="imageUpload">
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="contained-button-file"
-        type="file"
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" component="span" className={classes.button}>
-          Upload
-        </Button>
-      </label>
-      </div>
-      <TextField
-        name="title"
-        label="title"
-        ref={register({ required: true })}
-        placeholder="Grandma's Teeth"
-      />
-      <TextField
-        name="desc"
-        label="desc"
-        ref={register({ required: true })}
-        placeholder="A long description"
-      />
-      <TextField
-        name="text"
-        label="text"
-        ref={register({ required: true })}
-        placeholder="lots of stuff"
-      />
-      <TextField
-        name="date"
-        label="date"
-        ref={register({ required: true })}
-        placeholder="3/9/1997"
-      />
-      <TextField
-        name="origin"
-        label="origin"
-        ref={register({ required: true })}
-        placeholder="USA"
-      />
-      <TextField
-        name="tags"
-        label="tags"
-        ref={register}
-        placeholder="USA"
-      />
-      <TextField
-        name="src"
-        label="src"
-        ref={register({ required: true })}
-        placeholder="USA"
-      />
-      <input type="submit" />
-    </form>
+    <Grid container justify="center" className={classes.contained}>
+      <Card>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            accept="image/*"
+            className={classes.input}
+            id="contained-button-file"
+            type="file"
+          />
+          <CardMedia
+            component='img'
+            className={classes.cardMedia}
+            image={artifact ? artifact.src : stockImage}
+            alt={artifact ? artifact.src : stockImage}
+          />
+          <CardContent className={classes.cardContent}>
+            <div className={classes.cardText}>
+              <Grid container justify="space-between">
+                <Grid item >
+                  <TextField
+                    name="title"
+                    label="title"
+                    ref={register({ required: true })}
+                    placeholder="Grandma's Teeth"
+                  />
+                </Grid>
+                <Grid item>
+                  <Grid container direction="row-reverse" justify="flex-end">
+                    <Grid item>
+                      <input
+                        accept="image/*"
+                        className={classes.input}
+                        id="contained-button-file"
+                        type="file"
+                      />
+                      <label htmlFor="contained-button-file">
+                        <Button variant="contained" component="span" className={classes.button}>
+                          Upload
+                        </Button>
+                      </label>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Grid container direction="row" justify="space-between" >
+                  <Grid item>
+                    <TextField
+                      name="date"
+                      label="date"
+                      ref={register({ required: true })}
+                      placeholder="3/9/1997"
+                    />
+                  </Grid>
+                  <Grid item>
+                    <TextField
+                      name="origin"
+                      label="origin"
+                      ref={register({ required: true })}
+                      placeholder="e.g. United Kingdom"
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Grid direction="row" justify="right container"></Grid>
+                <Grid item>
+                  <TextField
+                    name="tags"
+                    label="tags"
+                    ref={register}
+                    placeholder="Antique, Family, Old ..."
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
+              <Grid item>
+                <TextField
+                  name="desc"
+                  label="summary"
+                  ref={register({ required: true })}
+                  placeholder="A short summary"
+                  rows="2"
+                  margin="normal"
+                  variant="outlined"
+                  multiline
+                  fullWidth
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  rows="6"
+                  variant="outlined"
+                  margin="normal"
+                  multiline
+                  fullWidth
+                  name="text"
+                  label="text"
+                  ref={register({ required: true })}
+                  palceholder="A detailed description "
+                />
+              </Grid>
+              <Grid>
+                <input type="submit" className={classes.input} />
+              </Grid>
+            </div>
+          </CardContent>
+        </form>
+      </Card>
+    </Grid>
   )
 }
+
 
 
 export default ArtifactForm;
