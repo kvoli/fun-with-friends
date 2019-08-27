@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants/auth';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS, LOGOUT_SUCCESS, LOGOUT_REQUEST } from '../constants/auth';
 
 let user = JSON.parse(localStorage.getItem('user'));
 let token = JSON.parse(localStorage.getItem('token'));
@@ -37,7 +37,49 @@ const auth = (state = initialState, action) => {
         user: {},
         token: ''
       };
-    default:
+    
+    case SIGNUP_REQUEST:
+      return {
+        pending: true,
+        success: false,
+        user: {},
+        token: ''
+      }
+
+    case SIGNUP_SUCCESS:
+      return {
+        pending: false,
+        success: true,
+        user: action.user,
+        token: action.token
+      }
+
+    case SIGNUP_FAILURE:
+      return {
+        pending: false,
+        success: false,
+        user: {},
+        token: ''
+      }
+
+    case LOGOUT_SUCCESS:
+      return {
+        pending: false,
+        success: false,
+        user: {},
+        token: ''
+      }
+    
+      case LOGOUT_REQUEST:
+        return {
+          pending: true,
+          success: true,
+          user: action.user,
+          token: action.token
+        }
+
+    
+      default:
       return state;
   };
 };
