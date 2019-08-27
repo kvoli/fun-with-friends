@@ -2,20 +2,15 @@ var Artifact = require('../models/artifact');
 
 var createArtifact = async (req, res) => {
   try {
-    // Get the artifact details from the request body
-    var details = req.body;
-    // Parse the tags if they were supplied
-    if (req.body.tags) details.tags = JSON.parse(req.body.tags);
-    // Parse the relations if they were supplied
-    if (req.body.relations) details.relations = JSON.parse(req.body.relations);
     // Create an artifact from the details in the request
-    const artifact = new Artifact(details);
+    const artifact = new Artifact(req.body);
     // Wait for the artifact to be saved in the database
     await artifact.save();
     // Return the artifact back to the client
     res.status(201).send(artifact.toObject());
   } catch (error) {
     // Return an error message as the artfact was not able to be created
+    console.log(error);
     res.status(400).send({error:'Unable to create artifact.'});
   };
 };
