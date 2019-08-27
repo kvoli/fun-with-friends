@@ -52,7 +52,7 @@ const ArtifactGrid = () => {
   const dispatch = useDispatch();
   const state = useSelector(store => store)
   const artifacts = getVisibleArtifacts(state)
-  const { open } = useSelector(store => store.focusView.open)
+  const { open } = useSelector(store => store.focusView.artifactDetailView.open)
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>

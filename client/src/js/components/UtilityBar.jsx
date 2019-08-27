@@ -5,6 +5,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
+import { openArtifactForm } from "../actions/index";
+import { useSelector, useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -16,7 +18,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UtilityBar = () => {
+  
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Grid container alignItems="center" justify="space-between">
@@ -25,7 +29,7 @@ const UtilityBar = () => {
       </Grid>
       <Grid item>
         <div>
-          <IconButton className={classes.button} aria-label="add">
+          <IconButton onClick={() => dispatch(openArtifactForm(false))} className={classes.button} aria-label="add">
             <AddIcon />
           </IconButton>
           <IconButton className={classes.button} aria-label="delete">

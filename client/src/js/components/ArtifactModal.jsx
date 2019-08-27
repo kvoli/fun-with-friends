@@ -8,7 +8,7 @@ import ArtifactDetailed from "./ArtifactDetailed";
 const ArtifactModal = () => {
 
   const dispatch = useDispatch();
-  const { open, artifact } = useSelector(store => store.focusView)
+  const { open, artifact } = useSelector(store => store.focusView.artifactDetailView)
 
   return (
     <Dialog
