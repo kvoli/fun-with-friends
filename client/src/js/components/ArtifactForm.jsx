@@ -1,23 +1,18 @@
 import React from "react";
-import uuidv1 from "uuid";
 import useForm from "react-hook-form";
 import { addArtifact } from "../actions/index";
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, FormGroup, FormLabel, Input, Button } from "@material-ui/core";
+import { TextField, Button, CardActionArea, CardActions } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
-import { CardMedia, Card, CardContent, Divider, IconButton } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import EditIcon from '@material-ui/icons/Edit';
-import DeletePopup from "./DeletePopup";
-import LoadingCircle from "./LoadingCircle";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { CardMedia, Card, CardContent } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
+import CancelIcon from '@material-ui/icons/Cancel';
+import { openArtifactForm } from "../actions/index";
+import { uploadImage } from "../actions/artifactRequests";
+
+
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -65,7 +60,8 @@ const ArtifactForm = () => {
 
   const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
   const dispatch = useDispatch();
-
+  
+  const [pictureSrc, setPictureSrc] = React.useState(artifact ? artifact.src : "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png")  
 
   const fillArtifact = artifact ? artifact : {
     title: "",
@@ -81,7 +77,6 @@ const ArtifactForm = () => {
     defaultValues: fillArtifact
   });
 
-  const stockImage = "https://www.logolynx.com/images/logolynx/2a/2a71ec307740510ce1e7300904131154.png"
 
   const onSubmit = (data, e) => { dispatch(addArtifact(data)) }
 
@@ -89,18 +84,15 @@ const ArtifactForm = () => {
     <Grid container justify="center" className={classes.contained}>
       <Card>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            accept="image/*"
-            className={classes.input}
-            id="contained-button-file"
-            type="file"
-          />
-          <CardMedia
-            component='img'
-            className={classes.cardMedia}
-            image={artifact ? artifact.src : stockImage}
-            alt={artifact ? artifact.src : stockImage}
-          />
+          <CardActionArea>
+            <CardMedia
+              component='img'
+              className={classes.cardMedia}
+              image={pictureSrc}
+              alt={pictureSrc}
+              src={pictureSrc}
+            />
+          </CardActionArea>
           <CardContent className={classes.cardContent}>
             <div className={classes.cardText}>
               <Grid container justify="space-between">
@@ -122,9 +114,9 @@ const ArtifactForm = () => {
                         type="file"
                       />
                       <label htmlFor="contained-button-file">
-                        <Button variant="contained" component="span" className={classes.button}>
+                        <Button variant="contained" component="span" className={classes.button} onChange={(e) => dispatch(uploadImage(e.target.files))}>
                           Upload
-                        </Button>
+            </Button>
                       </label>
                     </Grid>
                   </Grid>
@@ -193,6 +185,23 @@ const ArtifactForm = () => {
               </Grid>
             </div>
           </CardContent>
+          <CardActions >
+            <Grid container direction="row-reverse">
+              <Grid item>
+                <Button variant="contained" color="primary" size="small" className={classes.button} >
+                  <input type="submit" className={classes.input} />
+                  <SaveIcon />
+                  Save
+          </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="contained" color="secondary" size="small" className={classes.button} onClick={() => dispatch(openArtifactForm(false))}>
+                  <CancelIcon />
+                  Cancel
+          </Button>
+              </Grid>
+            </Grid>
+          </CardActions>
         </form>
       </Card>
     </Grid>

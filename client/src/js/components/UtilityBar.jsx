@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { openArtifactForm } from "../actions/index";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   button: {

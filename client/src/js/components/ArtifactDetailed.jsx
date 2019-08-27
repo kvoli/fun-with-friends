@@ -11,8 +11,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
 import DeletePopup from "./DeletePopup";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LoadingCircle from "./LoadingCircle";
+import { openArtifactForm, artifactSwitch } from "../actions/index";
 
 
 const useStyles = makeStyles(theme => ({
@@ -55,6 +56,7 @@ function generate(element) {
 const ArtifactDetailed = () => {
 
   const classes = useStyles();
+  const dispatch = useDispatch();
   const artifact = useSelector(store => store.focusView.artifactDetailView.artifact)
 
   return (
@@ -79,7 +81,9 @@ const ArtifactDetailed = () => {
               <Grid item>
               <Grid container direction="row-reverse" justify="flex-end">
                 <Grid item>
-                  <IconButton >
+                  <IconButton onClick={() => {
+                    dispatch(openArtifactForm(artifact));
+                    dispatch(artifactSwitch(artifact))}} >
                     <EditIcon color="primary" fontSize="default" />
                   </IconButton>
                 </Grid>

@@ -52,7 +52,6 @@ const ArtifactGrid = () => {
   const dispatch = useDispatch();
   const state = useSelector(store => store)
   const artifacts = getVisibleArtifacts(state)
-  const { open } = useSelector(store => store.focusView.artifactDetailView.open)
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
@@ -63,7 +62,7 @@ const ArtifactGrid = () => {
           <Grid item key={artifact.id} xs={12} sm={7} md={4}>
             <Zoom in={true} style={{ transitionDelay: '50ms' }}>
               <Card className={classes.card} >
-                <CardActionArea onClick={() => dispatch(artifactSwitch({ open: !open, artifact: artifact }))} >
+                <CardActionArea onClick={() => dispatch(artifactSwitch(artifact))} >
                   <CardMedia
                     component='img'
                     className={classes.cardMedia}
