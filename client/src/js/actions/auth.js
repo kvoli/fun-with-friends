@@ -29,10 +29,11 @@ export const login = (username, password) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch(logoutRequest());
+    fetch('/api/user/logout', {method: 'POST'});
     dispatch(logoutSuccess());
     history.push('/login');
-  }
-}
+  };
+};
 
 export const signup = (firstname, lastname, email, username, password) => {
   return (dispatch) => {
@@ -56,7 +57,7 @@ export const signup = (firstname, lastname, email, username, password) => {
         history.push('/');
       } else {
         dispatch(signupFailure());
-      }
+      };
     }));
   };
 };
