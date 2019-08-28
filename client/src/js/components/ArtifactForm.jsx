@@ -60,7 +60,7 @@ const ArtifactForm = () => {
 
   const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
   const dispatch = useDispatch();
-  
+
   const [pictureSrc, setPictureSrc] = React.useState(artifact ? artifact.src : "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png")  
 
   const fillArtifact = artifact ? artifact : {
@@ -107,16 +107,17 @@ const ArtifactForm = () => {
                 <Grid item>
                   <Grid container direction="row-reverse" justify="flex-end">
                     <Grid item>
+                      <label htmlFor="contained-button-file">
                       <input
                         accept="image/*"
+                        name="imageUpload"
                         className={classes.input}
                         id="contained-button-file"
                         type="file"
-                      />
-                      <label htmlFor="contained-button-file">
-                        <Button variant="contained" component="span" className={classes.button} onChange={(e) => dispatch(uploadImage(e.target.files))}>
+                        onChange={(e) => dispatch(uploadImage(e))}/>
+                        <Button variant="contained" component="span" className={classes.button}>
                           Upload
-            </Button>
+                        </Button>
                       </label>
                     </Grid>
                   </Grid>
@@ -189,13 +190,13 @@ const ArtifactForm = () => {
             <Grid container direction="row-reverse">
               <Grid item>
                 <Button variant="contained" color="primary" size="small" className={classes.button} >
-                  <input type="submit" className={classes.input} />
+                  <input type="submit" className={classes.input} name="submitButton"/>
                   <SaveIcon />
                   Save
           </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" color="secondary" size="small" className={classes.button} onClick={() => dispatch(openArtifactForm(false))}>
+                <Button variant="contained" color="secondary" size="small" name="cancel" className={classes.button} onClick={() => dispatch(openArtifactForm(false))}>
                   <CancelIcon />
                   Cancel
           </Button>
