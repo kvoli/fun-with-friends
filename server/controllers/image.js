@@ -6,7 +6,6 @@ var uploadImage = async (req, res) => {
       throw Error();
     }
   } catch (error) {
-    console.log(error);
     res.status(400).send({error:'Unable to upload image.'})
   }
 };
