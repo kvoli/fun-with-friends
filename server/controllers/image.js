@@ -1,7 +1,7 @@
 var uploadImage = async (req, res) => {
   try {
     if (req.file) {
-      res.status(201).send(req.file.url);
+      res.status(201).send({'src':req.file.url});
     } else {
       throw Error();
     }
