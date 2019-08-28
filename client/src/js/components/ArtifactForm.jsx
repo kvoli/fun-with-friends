@@ -52,20 +52,20 @@ const useStyles = makeStyles(theme => ({
 
 const ArtifactForm = () => {
   const classes = useStyles();
-  const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
+  const artifact = useSelector(store => store.focusView.artifactFormView.artifact);
   const dispatch = useDispatch();
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload)
   const editMode = artifact ? true : false;
 
   const fillArtifact = {
-    title:   artifact.title  ? artifact.title  : "",
-    desc:    artifact.desc   ? artifact.desc   : "",
-    text:    artifact.text   ? artifact.text   : "",
-    date:    artifact.date   ? artifact.date   : "",
-    origin:  artifact.origin ? artifact.origin : "",
-    tags:    artifact.tags   ? artifact.tags   : "",
-    src:     pictureSrc,
-    id:      artifact.id     ? artifact.id     : uuid.v4(),
+    title: artifact.title ? artifact.title : "",
+    desc: artifact.desc ? artifact.desc : "",
+    text: artifact.text ? artifact.text : "",
+    date: artifact.date ? artifact.date : "",
+    origin: artifact.origin ? artifact.origin : "",
+    tags: artifact.tags ? artifact.tags : "",
+    src: pictureSrc,
+    id: artifact.id ? artifact.id : uuid.v4(),
   }
 
   const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
@@ -85,20 +85,20 @@ const ArtifactForm = () => {
     <Grid container justify="center" className={classes.contained}>
       <Card>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <input 
-          readOnly 
-          className={classes.input} 
-          ref={register({ required: true })} 
-          name="src" 
-          value={pictureSrc ? pictureSrc : defaultImage} 
-        />
-        <input 
-          readOnly 
-          className={classes.input} 
-          ref={register({ required: true })} 
-          name="id" 
-          value={artifact.id ? artifact.id : uuid.v4()}
-        />
+          <input
+            readOnly
+            className={classes.input}
+            ref={register({ required: true })}
+            name="src"
+            value={pictureSrc ? pictureSrc : defaultImage}
+          />
+          <input
+            readOnly
+            className={classes.input}
+            ref={register({ required: true })}
+            name="id"
+            value={artifact.id ? artifact.id : uuid.v4()}
+          />
           <CardActionArea>
             <CardMedia
               component='img'
@@ -178,6 +178,7 @@ const ArtifactForm = () => {
                   variant="outlined"
                   multiline
                   fullWidth
+                  defaultValue={fillArtifact.desc}
                 />
               </Grid>
               <Grid item>
@@ -191,6 +192,7 @@ const ArtifactForm = () => {
                   label="text"
                   inputRef={register}
                   palceholder="A detailed description "
+                  defaultValue={fillArtifact.text}
                 />
               </Grid>
               <Grid>
@@ -200,7 +202,7 @@ const ArtifactForm = () => {
           <CardActions >
             <Grid container direction="row-reverse">
               <Grid item>
-              <input name="submit" type="submit" className={classes.input}  />
+                <input name="submit" type="submit" className={classes.input} />
                 <Button variant="contained" color="primary" size="small" className={classes.button} type="submit" >
                   <SaveIcon />
                   Save
