@@ -56,8 +56,7 @@ const ArtifactForm = () => {
   const classes = useStyles();
   const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
   const dispatch = useDispatch();
-
-  const [pictureSrc] = (artifact ? artifact.src : "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png")
+  const pictureSrc = useSelector(store => store.focusView.artifactImageUpload)
 
   const fillArtifact = artifact ? artifact : {
     title: "",
@@ -95,7 +94,7 @@ const ArtifactForm = () => {
                   <TextField
                     name="title"
                     label="title"
-                    ref={register({ required: true })}
+                    inputRef={register({ required: true })}
                     placeholder="Grandma's Teeth"
                   />
                 </Grid>
@@ -112,7 +111,7 @@ const ArtifactForm = () => {
                           onChange={(e) => dispatch(uploadImage(e))} />
                         <Button variant="contained" component="span" className={classes.button}>
                           Upload
-            </Button>
+      </Button>
                       </label>
                     </Grid>
                   </Grid>
@@ -124,7 +123,7 @@ const ArtifactForm = () => {
                     <TextField
                       name="date"
                       label="date"
-                      ref={register({ required: true })}
+                      inputRef={register({ required: true })}
                       placeholder="3/9/1997"
                     />
                   </Grid>
@@ -132,19 +131,19 @@ const ArtifactForm = () => {
                     <TextField
                       name="origin"
                       label="origin"
-                      ref={register({ required: true })}
+                      inputRef={register({ required: true })}
                       placeholder="e.g. United Kingdom"
                     />
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item>
-                <Grid direction="row" justify="right container"></Grid>
+                <Grid direction="row" justify="right-flex" container></Grid>
                 <Grid item>
                   <TextField
                     name="tags"
                     label="tags"
-                    ref={register}
+                    inputRef={register({ required: true })}
                     placeholder="Antique, Family, Old ..."
                     fullWidth
                   />
@@ -154,7 +153,7 @@ const ArtifactForm = () => {
                 <TextField
                   name="desc"
                   label="summary"
-                  ref={register({ required: true })}
+                  inputRef={register({ required: true })}
                   placeholder="A short summary"
                   rows="2"
                   margin="normal"
@@ -172,12 +171,12 @@ const ArtifactForm = () => {
                   fullWidth
                   name="text"
                   label="text"
-                  ref={register({ required: true })}
+                  inputRef={register({ required: true })}
                   palceholder="A detailed description "
                 />
               </Grid>
               <Grid>
-                <input type="submit" className={classes.input} />
+                <input type="submit" className={classes.input} inputRef={register()} />
               </Grid>
             </div>
           </CardContent>
@@ -188,13 +187,13 @@ const ArtifactForm = () => {
                   <input type="submit" className={classes.input} name="submitButton" />
                   <SaveIcon />
                   Save
-      </Button>
+    </Button>
               </Grid>
               <Grid item>
                 <Button variant="contained" color="secondary" size="small" name="cancel" className={classes.button} onClick={() => dispatch(openArtifactForm(false))}>
                   <CancelIcon />
                   Cancel
-      </Button>
+    </Button>
               </Grid>
             </Grid>
           </CardActions>

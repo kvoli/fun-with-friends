@@ -1,6 +1,8 @@
 import { ARTIFACT_SWITCH, OPEN_ARTIFACT_FORM, UPLOAD_IMAGE } from "../constants/action-types.js";
 import artifactData from "../components/artifactData";
 
+const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
+
 const initialState = { 
   artifactDetailView: {open : false , artifact : artifactData[0]} ,
   artifactFormView: {open: false, artifact: false},
@@ -21,7 +23,7 @@ const focusView = (state = initialState, action) => {
         artifactDetailView: state.artifactDetailView,
         artifactFormView: { open: !state.artifactFormView.open,
                               artifact: action.payload },
-        artifactImageUpload: state.artifactImageUpload
+        artifactImageUpload: action.payload ? action.payload.src : defaultImage
       }
     case UPLOAD_IMAGE:
       return {

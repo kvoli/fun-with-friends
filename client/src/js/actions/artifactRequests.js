@@ -4,13 +4,16 @@ import { removeArtifact, addArtifact } from "./index"
 
 export const uploadImage = (e) => {
 
+
+  
   const files = Array.from(e.target.files)
   const formData = new FormData()
 
   files.forEach((file, i) => {
+    console.log(file, i)
     formData.append(i, file)
   })
-
+  console.log(formData)
   return (formData) => {
     fetch('/api/image/upload', {
       method: 'POST',
