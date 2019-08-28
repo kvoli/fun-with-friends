@@ -113,7 +113,7 @@ const ArtifactDetailed = () => {
                       primary={relative.name}
                       secondary={relative.about}
                     />
-                  </ListItem>,
+                  </ListItem>
               </List>
             ))}
             </div>
