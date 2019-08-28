@@ -1,6 +1,4 @@
 import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT, INITIALIZE_ARTIFACTS } from "../constants/action-types.js";
-// import artifactData from "../components/artifactData";
-import { getAllArtifacts } from "../actions/artifactRequests";
 
 const initialState = []
 

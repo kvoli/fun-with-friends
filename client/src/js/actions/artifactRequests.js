@@ -1,49 +1,40 @@
 import { UPLOAD_IMAGE } from "../constants/action-types";
 import { removeArtifact, addArtifact, getArtifacts } from "./index"
 
-
 export const uploadImage = (e) => {
-
-
-
-  const files = Array.from(e.target.files)
-  const formData = new FormData()
-
-  files.forEach((file, i) => {
-    console.log(file, i)
-    formData.append(i, file)
-  })
-  console.log(formData)
-  return (formData) => {
-    fetch('/api/image/upload', {
+  return (dispatch) => {
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+    console.log(e.target.files[0])
+    const options = {
       method: 'POST',
       body: formData
-    })
+    };
+    fetch('/api/image/upload', options)
       .then(response => response.json()
         .then(json => {
+          console.log(json);
           if (response.status === 201) {
-            return {
-              type: UPLOAD_IMAGE,
-              payload: json.src
-            };
-          } else {
-            return {
-              type: UPLOAD_IMAGE,
-              payload: false
-            }
+            dispatch(updateImage(json.src))
           };
-        }));
-  }
+        })
+      );
+  };
 };
 
-export const submitArtifactForm = (artifact) => {
+export const updateImage = (src) => ({
+  type: UPLOAD_IMAGE,
+  payload: src
+})
 
+export const submitArtifactForm = (artifact) => {
+  console.log(artifact)
   return (dispatch) => {
     dispatch(addArtifact(artifact))
 
     const request = {
       method: 'POST',
-      body: JSON.stringify(artifact)
+      body: artifact
     };
     fetch('/api/artifact', request)
       .then(response => response.json()

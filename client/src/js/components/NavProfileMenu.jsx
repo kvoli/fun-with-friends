@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../actions/auth';
 
 
-export const NavProfileMenu = ({handleClose}) => {
+export const NavProfileMenu = ({ handleClose }) => {
   const store = useSelector(store => store);
   const dispatch = useDispatch();
   if (store.auth.success) {

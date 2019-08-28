@@ -1,6 +1,5 @@
 import React from "react";
 import useForm from "react-hook-form";
-import { addArtifact } from "../actions/index";
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button, CardActionArea, CardActions } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +8,7 @@ import { CardMedia, Card, CardContent } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { openArtifactForm } from "../actions/index";
-import { uploadImage } from "../actions/artifactRequests";
+import { uploadImage, submitArtifactForm } from "../actions/artifactRequests";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -50,7 +49,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 const ArtifactForm = () => {
 
   const classes = useStyles();
@@ -58,33 +56,42 @@ const ArtifactForm = () => {
   const dispatch = useDispatch();
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload)
 
-  const fillArtifact = artifact ? artifact : {
-    title: "",
-    desc: "",
-    text: "",
-    date: "",
-    origin: "",
-    tags: "",
-    src: "",
+  const fillArtifact = {
+    title:   artifact.title  ? artifact.title  : "",
+    desc:    artifact.desc   ? artifact.desc   : "",
+    text:    artifact.text   ? artifact.text   : "",
+    date:    artifact.date   ? artifact.date   : "",
+    origin:  artifact.origin ? artifact.origin : "",
+    tags:    artifact.tags   ? artifact.tags   : "",
+    src:     pictureSrc,
   }
+
+  const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
 
   const { register, handleSubmit } = useForm({
     defaultValues: fillArtifact
   });
 
-  const onSubmit = (data, e) => { dispatch(addArtifact(data)) }
+  const onSubmit = (data, e) =>  {dispatch(submitArtifactForm(data))}
 
   return (
     <Grid container justify="center" className={classes.contained}>
       <Card>
         <form onSubmit={handleSubmit(onSubmit)}>
+        <input 
+          readOnly 
+          className={classes.input} 
+          ref={register({ required: true })} 
+          name="src" 
+          value={pictureSrc ? pictureSrc : defaultImage} 
+        />
           <CardActionArea>
             <CardMedia
               component='img'
               className={classes.cardMedia}
-              image={pictureSrc}
-              alt={pictureSrc}
-              src={pictureSrc}
+              image={pictureSrc ? pictureSrc : defaultImage}
+              alt={pictureSrc ? pictureSrc : defaultImage}
+              src={pictureSrc ? pictureSrc : defaultImage}
             />
           </CardActionArea>
           <CardContent className={classes.cardContent}>
@@ -111,7 +118,7 @@ const ArtifactForm = () => {
                           onChange={(e) => dispatch(uploadImage(e))} />
                         <Button variant="contained" component="span" className={classes.button}>
                           Upload
-      </Button>
+                          </Button>
                       </label>
                     </Grid>
                   </Grid>
@@ -138,16 +145,13 @@ const ArtifactForm = () => {
                 </Grid>
               </Grid>
               <Grid item>
-                <Grid direction="row" justify="right-flex" container></Grid>
-                <Grid item>
                   <TextField
                     name="tags"
                     label="tags"
-                    inputRef={register({ required: true })}
+                    inputRef={register}
                     placeholder="Antique, Family, Old ..."
                     fullWidth
                   />
-                </Grid>
               </Grid>
               <Grid item>
                 <TextField
@@ -171,23 +175,22 @@ const ArtifactForm = () => {
                   fullWidth
                   name="text"
                   label="text"
-                  inputRef={register({ required: true })}
+                  inputRef={register}
                   palceholder="A detailed description "
                 />
               </Grid>
               <Grid>
-                <input type="submit" className={classes.input} inputRef={register()} />
               </Grid>
             </div>
           </CardContent>
           <CardActions >
             <Grid container direction="row-reverse">
               <Grid item>
-                <Button variant="contained" color="primary" size="small" className={classes.button} >
-                  <input type="submit" className={classes.input} name="submitButton" />
+              <input name="submit" type="submit" className={classes.input}  />
+                <Button variant="contained" color="primary" size="small" className={classes.button} type="submit" >
                   <SaveIcon />
                   Save
-    </Button>
+                  </Button>
               </Grid>
               <Grid item>
                 <Button variant="contained" color="secondary" size="small" name="cancel" className={classes.button} onClick={() => dispatch(openArtifactForm(false))}>

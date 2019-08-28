@@ -45,19 +45,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
 
 const ArtifactDetailed = () => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
   const artifact = useSelector(store => store.focusView.artifactDetailView.artifact)
+  const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
+
 
   return (
     <Grid container justify="center" className={classes.contained}>
@@ -66,9 +61,9 @@ const ArtifactDetailed = () => {
           <CardMedia
             component='img'
             className={classes.cardMedia}
-            image={artifact.src}
+            image={artifact.src ? artifact.src : defaultImage}
             title={artifact.title}
-            src={artifact.src}
+            src={artifact.src ? artifact.src : defaultImage}
           />
           <CardContent className={classes.cardContent}>
             <div className={classes.cardText}>
@@ -102,17 +97,15 @@ const ArtifactDetailed = () => {
                 Relations
             </Typography>
               <List dense={true}>
-                {generate(
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                      <Avatar alt="John Smith" src="https://material-ui.com/static/images/avatar/1.jpg" />
+                      <Avatar alt="John Smith" />
                     </ListItemAvatar>
                     <ListItemText
                       primary="John Smith"
-                      secondary="1913 - 1949 | United Kingdom | Soldier"
+                      secondary="placeholder info"
                     />
                   </ListItem>,
-                )}
               </List>
             </div>
             <Divider variant='middle' />

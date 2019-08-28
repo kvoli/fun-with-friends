@@ -29,7 +29,7 @@ const focusView = (state = initialState, action) => {
       return {
         artifactDetailView: state.artifactDetailView,
         artifactFormView: state.artifactFormView,
-        artifactImageUpload: action.payload
+        artifactImageUpload: action.payload ? action.payload : defaultImage
       }
     default:
       return state
