@@ -101,6 +101,11 @@ const ArtifactGrid = () => {
                   <Divider variant='middle' />
                   <div className={classes.cardTags} >
                     <Grid container >
+                      {artifact.tags ? artifact.tags.split(',').map(tag => (
+                        <Grid item key={tag}>
+                          <Chip className={classes.chip} label={tag} />
+                        </Grid>
+                      )) : "no tags :("}
                     </Grid>
                   </div>
                 </CardContent>

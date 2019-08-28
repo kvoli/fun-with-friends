@@ -7,8 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CardMedia, Card, CardContent } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { openArtifactForm } from "../actions/index";
+import { openArtifactForm, artifactSwitch } from "../actions/index";
 import { uploadImage, submitArtifactForm } from "../actions/artifactRequests";
+import uuid from "uuid";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -64,6 +65,7 @@ const ArtifactForm = () => {
     origin:  artifact.origin ? artifact.origin : "",
     tags:    artifact.tags   ? artifact.tags   : "",
     src:     pictureSrc,
+    id:      artifact.id     ? artifact.id     : uuid.v4(),
   }
 
   const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
@@ -72,7 +74,12 @@ const ArtifactForm = () => {
     defaultValues: fillArtifact
   });
 
-  const onSubmit = (data, e) =>  {dispatch(submitArtifactForm(data))}
+  const onSubmit = (data, e) =>  {
+    dispatch(submitArtifactForm(data));
+    e.target.reset();
+    dispatch(openArtifactForm(false))
+    dispatch(artifactSwitch(data))
+    }
 
   return (
     <Grid container justify="center" className={classes.contained}>
@@ -84,6 +91,13 @@ const ArtifactForm = () => {
           ref={register({ required: true })} 
           name="src" 
           value={pictureSrc ? pictureSrc : defaultImage} 
+        />
+        <input 
+          readOnly 
+          className={classes.input} 
+          ref={register({ required: true })} 
+          name="id" 
+          value={artifact.id ? artifact.id : uuid.v4()}
         />
           <CardActionArea>
             <CardMedia
