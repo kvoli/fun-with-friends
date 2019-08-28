@@ -66,7 +66,7 @@ const ArtifactGrid = () => {
       <Grid container spacing={6}>
         {console.log(artifacts)}
         {artifacts.map(artifact => (
-          <Grid item key={artifact._id} xs={12} sm={7} md={4}>
+          <Grid item key={artifact.id} xs={12} sm={7} md={4}>
             <Zoom in={true} style={{ transitionDelay: '50ms' }}>
               <Card className={classes.card} >
                 <CardActionArea onClick={() => dispatch(artifactSwitch(artifact))} >
