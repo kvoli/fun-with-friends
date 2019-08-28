@@ -9,8 +9,7 @@ var createUser = async (req, res) => {
     // Generate a new JWT token for the user and save it in the database
     const token = await user.generateAuthToken();
     // Respond with the token and user data
-    const data = await user.generateResponseJson();
-    res.status(201).send({user:data, token});
+    res.status(201).send({user:user.toObject(), token});
   } catch (error) {
     // Handle different types of errors
     if (error.code === 11000) {
@@ -34,8 +33,7 @@ var loginUser = async (req, res) => {
     }
     // Generate a new token and respond with the token and user data
     const token = await user.generateAuthToken();
-    const data = await user.generateResponseJson();
-    res.send({ user:data, token });
+    res.send({ user:user.toObject(), token });
   } catch (error) {
     // Purposefully send an unknown error message
     res.status(400).send({error:'An unknown error as occured.'});
@@ -44,7 +42,7 @@ var loginUser = async (req, res) => {
 
 // Get the current user
 var getCurrentUser = async (req, res) => {
-  res.status(200).send({user: await req.user.generateResponseJson()});
+  res.status(200).send({user: await req.user.toObject()});
 };
 
 // Logout the current user on the current device
