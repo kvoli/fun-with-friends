@@ -3,6 +3,7 @@ import { EDIT_ARTIFACT_REQUEST, EDIT_ARTIFACT_SUCCESS, EDIT_ARTIFACT_FAILURE } f
 import { CREATE_ARTIFACT_REQUEST, CREATE_ARTIFACT_SUCCESS, CREATE_ARTIFACT_FAILURE } from '../constants/artifact';
 import { GET_ARTIFACTS_REQUEST, GET_ARTIFACTS_SUCCESS, GET_ARTIFACTS_FAILURE } from '../constants/artifact';
 import { DELETE_ARTIFACT_SUCCESS, DELETE_ARTIFACT_REQUEST, DELETE_ARTIFACT_FAILURE } from '../constants/artifact';
+import { CLEAR_ARTIFACTS } from '../constants/artifact';
 
 const initialState = []
 
@@ -17,6 +18,10 @@ const artifacts = (state = initialState, action) => {
     case RM_ARTIFACT:
       // Get all artifacts in the state that weren't the deleted artifact
       return state.filter((artifact) => artifact.id !== action.payload.id)
+
+    case CLEAR_ARTIFACTS: 
+      // Remove all artifacts from the state
+      return [];
 
     case DELETE_ARTIFACT_SUCCESS:
       // Get all artifacts in the state that weren't the deleted artifact

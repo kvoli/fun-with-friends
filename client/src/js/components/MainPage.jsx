@@ -1,6 +1,7 @@
 import React from "react";
 import ArtifactGrid from "./ArtifactGrid";
 import ArtifactFormModal from "./ArtifactFormModal";
+import Footer from './Footer';
 
 const MainPage = () => {
 
@@ -8,6 +9,7 @@ const MainPage = () => {
     <div className="MainPage-Container">
       <ArtifactGrid  />
       <ArtifactFormModal />
+      <Footer />
     </div>
   )
 }

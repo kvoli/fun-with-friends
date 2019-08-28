@@ -16,7 +16,6 @@ import { artifactSwitch } from "../actions/index.js";
 import ArtifactModal from "./ArtifactModal";
 import { useSelector, useDispatch } from 'react-redux';
 import { getVisibleArtifacts } from "../selectors/index";
-import { getArtifacts } from "../actions/artifact";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -54,17 +53,11 @@ const ArtifactGrid = () => {
   const state = useSelector(store => store)
   const artifacts = getVisibleArtifacts(state)
   const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
-
-
-  React.useEffect(() => {
-    dispatch(getArtifacts());
-  }, [dispatch]);
   
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
       <Grid container spacing={6}>
-        {console.log(artifacts)}
         {artifacts.map(artifact => (
           <Grid item key={artifact.id} xs={12} sm={7} md={4}>
             <Zoom in={true} style={{ transitionDelay: '50ms' }}>

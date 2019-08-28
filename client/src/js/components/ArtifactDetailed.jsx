@@ -119,13 +119,13 @@ const ArtifactDetailed = () => {
             </div>
             <Divider variant='middle' />
             <div className={classes.cardTags} >
-              {/* <Grid container >
+              <Grid container >
                 {artifact.tags ? artifact.tags.split(",").map(tag => (
                   <Grid item key={tag}>
                     <Chip className={classes.chip} label={tag} />
                   </Grid>
                 )) : "no tags :("}
-              </Grid> */}
+              </Grid>
             </div>
           </CardContent>
         </Card>

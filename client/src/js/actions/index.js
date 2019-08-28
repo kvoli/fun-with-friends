@@ -1,19 +1,4 @@
-import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT, ARTIFACT_SWITCH, FILTER_ARTIFACTS, OPEN_ARTIFACT_FORM, INITIALIZE_ARTIFACTS } from "../constants/action-types.js";
-
-// export const addArtifact = (artifact) => ({
-// 	type: ADD_ARTIFACT,
-// 	payload: artifact
-// });
-
-// export const removeArtifact = (artifact) => ({
-// 	type: RM_ARTIFACT,
-// 	payload: artifact
-// });
-
-// export const editArtifact = (artifact) => ({
-// 	type: EDIT_ARTIFACT,
-// 	payload: artifact
-// });
+import { ARTIFACT_SWITCH, FILTER_ARTIFACTS, OPEN_ARTIFACT_FORM } from "../constants/action-types.js";
 
 export const artifactSwitch = (payload) => ({
 	type: ARTIFACT_SWITCH,
@@ -29,9 +14,3 @@ export const openArtifactForm = (payload) => ({
 	type: OPEN_ARTIFACT_FORM,
 	payload: payload
 })
-
-// export const getArtifacts = (payload) => ({
-// 	type: INITIALIZE_ARTIFACTS,
-// 	payload: payload
-// })
-

@@ -1,7 +1,6 @@
 var Artifact = require('../models/artifact');
 
 var createArtifact = async (req, res) => {
-  console.log(req.body);
   try {
     req.body._id = req.body.id;
     delete req.body.id;
@@ -13,7 +12,6 @@ var createArtifact = async (req, res) => {
     res.status(201).send(artifact.toObject());
   } catch (error) {
     // Return an error message as the artfact was not able to be created
-    console.log(error);
     res.status(400).send({error:'Unable to create artifact.'});
   };
 };

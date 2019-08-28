@@ -1,6 +1,7 @@
 import history from '../../history';
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST } from "../constants/auth.js";
 import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "../constants/auth.js";
+import { clearArtifacts } from './artifact';
 
 export const login = (username, password) => {
   return (dispatch) => {
@@ -22,15 +23,17 @@ export const login = (username, password) => {
           } else {
             dispatch(loginFailure());
           }
-        }));
+        })
+      );
   };
 };
 
-export const logout = () => {
+export const logout = (token) => {
   return (dispatch) => {
     dispatch(logoutRequest());
-    fetch('/api/user/logout', {method: 'POST'});
+    fetch('/api/user/logout', {method: 'POST', headers: {'Authorization':'Bearer '+token}});
     dispatch(logoutSuccess());
+    dispatch(clearArtifacts());
     history.push('/login');
   };
 };
@@ -50,15 +53,16 @@ export const signup = (firstname, lastname, email, username, password) => {
       })
     };
     fetch('/api/user/signup', request)
-    .then (response => response.json()
-    .then(json => {
-      if (response.status === 201) {  
-        dispatch(signupSuccess(json.user, json.token));
-        history.push('/');
-      } else {
-        dispatch(signupFailure());
-      };
-    }));
+    .then(response => response.json()
+      .then(json => {
+        if (response.status === 201) {  
+          dispatch(signupSuccess(json.user, json.token));
+          history.push('/');
+        } else {
+          dispatch(signupFailure());
+        };
+      })
+    );
   };
 };
 

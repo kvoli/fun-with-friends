@@ -3,9 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -29,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    
+    background: '#3e4360'
   },
   form: {
     width: '100%',
@@ -82,10 +80,6 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             onClick={(e)=>{dispatch(login(username,password))}}
             fullWidth
@@ -95,10 +89,10 @@ const Login = () => {
           >
             Login
           </Button>
-          <Grid container>
+          <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Sign Up"}
+              <Link to="/signup" variant="body2">
+                {"Don't have an account? Sign up"}
               </Link>
             </Grid>
           </Grid>

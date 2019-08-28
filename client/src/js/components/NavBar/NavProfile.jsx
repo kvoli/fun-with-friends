@@ -5,7 +5,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
-import { NavLink } from 'react-router-dom';
 import { logout } from '../../actions/auth';
 
 export const NavProfile = () => {
@@ -53,8 +52,11 @@ export const NavProfile = () => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => dispatch(logout())}>
-          <NavLink to='/login'>Logout</NavLink>
+        <MenuItem onClick={(e) => {
+          dispatch(logout(auth.token));
+          handleClose();
+        }}>
+          Logout
         </MenuItem>
       </Menu>
     </div>

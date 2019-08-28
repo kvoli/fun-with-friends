@@ -3,6 +3,12 @@ import { GET_ARTIFACTS_REQUEST, GET_ARTIFACTS_SUCCESS, GET_ARTIFACTS_FAILURE } f
 import { EDIT_ARTIFACT_REQUEST, EDIT_ARTIFACT_SUCCESS, EDIT_ARTIFACT_FAILURE } from '../constants/artifact';
 import { CREATE_ARTIFACT_REQUEST, CREATE_ARTIFACT_SUCCESS, CREATE_ARTIFACT_FAILURE } from '../constants/artifact';
 import { DELETE_ARTIFACT_SUCCESS, DELETE_ARTIFACT_REQUEST, DELETE_ARTIFACT_FAILURE } from '../constants/artifact';
+import { CLEAR_ARTIFACTS } from '../constants/artifact';
+
+
+export const clearArtifacts = () => ({
+  type: CLEAR_ARTIFACTS
+})
 
 export const updateImage = (src) => ({
   type: UPLOAD_IMAGE,
@@ -77,7 +83,6 @@ export const deleteArtifact = (artifact) => {
     const parameters = { method:'DELETE' };
     fetch(endpoint, parameters)
       .then(response => {
-        console.log("Hi");
         if (response.status === 200) {
           dispatch(deleteArtifactSuccess(artifact));
         } else {
@@ -103,11 +108,11 @@ export const getArtifactsFailure = () => ({
 export const getArtifacts = () => {
   return (dispatch) => {
     const endpoint = '/api/artifact';
-    const parameters = { method: 'GET' };
+    const parameters = { method:'GET' };
     fetch(endpoint, parameters)
       .then(response => response.json()
         .then(json => {
-          if (response.state === 200) {
+          if (response.status === 200 || response.status === 304) {
             dispatch(getArtifactsSuccess(json));
           } else {
             dispatch(getArtifactsFailure());
