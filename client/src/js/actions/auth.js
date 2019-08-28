@@ -6,27 +6,27 @@ export const login = (username, password) => {
     dispatch(loginRequest());
     const request = {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: username, 
+        username: username,
         password: password
       })
     };
     fetch('/api/user/login', request)
       .then(response => response.json()
-      .then(json => {
-        if (response.status === 200) {
-          dispatch(loginSuccess(json.user, json.token));
-          history.push('/');
-        } else {
-          dispatch(loginFailure());
-        }
-      }));
+        .then(json => {
+          if (response.status === 200) {
+            dispatch(loginSuccess(json.user, json.token));
+            history.push('/');
+          } else {
+            dispatch(loginFailure());
+          }
+        }));
   };
 };
 
 export const loginRequest = () => ({
-   type: LOGIN_REQUEST
+  type: LOGIN_REQUEST
 });
 
 export const loginSuccess = (user, token) => ({

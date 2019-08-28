@@ -61,73 +61,74 @@ const ArtifactDetailed = () => {
 
   return (
     <Grid container justify="center" className={classes.contained}>
-    {artifact ? (
-      <Card>
-        <CardMedia
-          component='img'
-          className={classes.cardMedia}
-          image={artifact.src}
-          title={artifact.title}
-          src={artifact.src}
-        />
-        <CardContent className={classes.cardContent}>
-          <div className={classes.cardText}>
-            <Grid container justify="space-between">
-              <Grid item >
-                <Typography gutterBottom variant='h4'>
-                  {artifact.title}
-                </Typography>
-              </Grid>
-              <Grid item>
-              <Grid container direction="row-reverse" justify="flex-end">
-                <Grid item>
-                  <IconButton onClick={() => {
-                    dispatch(openArtifactForm(artifact));
-                    dispatch(artifactSwitch(artifact))}} >
-                    <EditIcon color="primary" fontSize="default" />
-                  </IconButton>
+      {artifact ? (
+        <Card>
+          <CardMedia
+            component='img'
+            className={classes.cardMedia}
+            image={artifact.src}
+            title={artifact.title}
+            src={artifact.src}
+          />
+          <CardContent className={classes.cardContent}>
+            <div className={classes.cardText}>
+              <Grid container justify="space-between">
+                <Grid item >
+                  <Typography gutterBottom variant='h4'>
+                    {artifact.title}
+                  </Typography>
                 </Grid>
                 <Grid item>
-                  <DeletePopup />
+                  <Grid container direction="row-reverse" justify="flex-end">
+                    <Grid item>
+                      <IconButton onClick={() => {
+                        dispatch(openArtifactForm(artifact));
+                        dispatch(artifactSwitch(artifact))
+                      }} >
+                        <EditIcon color="primary" fontSize="default" />
+                      </IconButton>
+                    </Grid>
+                    <Grid item>
+                      <DeletePopup />
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
-              </Grid>
-            </Grid>
-            <Typography gutterBottom color="textSecondary" variant='body2' paragraph >
-              {artifact.text}
+              <Typography gutterBottom color="textSecondary" variant='body2' paragraph >
+                {artifact.text}
+              </Typography>
+              <Divider variant='middle' />
+              <Typography variant="h6">
+                Relations
             </Typography>
+              <List dense={true}>
+                {generate(
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar alt="John Smith" src="https://material-ui.com/static/images/avatar/1.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="John Smith"
+                      secondary="1913 - 1949 | United Kingdom | Soldier"
+                    />
+                  </ListItem>,
+                )}
+              </List>
+            </div>
             <Divider variant='middle' />
-            <Typography variant="h6">
-              Relations
-            </Typography>
-            <List dense={true}>
-              {generate(
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar alt="John Smith" src="https://material-ui.com/static/images/avatar/1.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="John Smith"
-                    secondary="1913 - 1949 | United Kingdom | Soldier"
-                  />
-                </ListItem>,
-              )}
-            </List>
-          </div>
-          <Divider variant='middle' />
-          <div className={classes.cardTags} >
-            <Grid container >
-              {artifact.tags.map(tag => (
-                <Grid item key={tag.label}>
-                  <Chip className={classes.chip} label={tag.label} />
-                </Grid>
-              ))}
-            </Grid>
-          </div>
-        </CardContent>
-      </Card>
-    ) : (<LoadingCircle />)
-    }
+            <div className={classes.cardTags} >
+              <Grid container >
+                {artifact.tags.map(tag => (
+                  <Grid item key={tag.label}>
+                    <Chip className={classes.chip} label={tag.label} />
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+          </CardContent>
+        </Card>
+      ) : (<LoadingCircle />)
+      }
     </Grid>
   );
 }

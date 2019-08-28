@@ -11,9 +11,6 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { openArtifactForm } from "../actions/index";
 import { uploadImage } from "../actions/artifactRequests";
 
-
-
-
 const useStyles = makeStyles(theme => ({
   card: {
     height: '100%',
@@ -57,11 +54,10 @@ const useStyles = makeStyles(theme => ({
 const ArtifactForm = () => {
 
   const classes = useStyles();
-
   const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
   const dispatch = useDispatch();
 
-  const [pictureSrc, setPictureSrc] = React.useState(artifact ? artifact.src : "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png")  
+  const [pictureSrc] = (artifact ? artifact.src : "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png")
 
   const fillArtifact = artifact ? artifact : {
     title: "",
@@ -76,7 +72,6 @@ const ArtifactForm = () => {
   const { register, handleSubmit } = useForm({
     defaultValues: fillArtifact
   });
-
 
   const onSubmit = (data, e) => { dispatch(addArtifact(data)) }
 
@@ -108,16 +103,16 @@ const ArtifactForm = () => {
                   <Grid container direction="row-reverse" justify="flex-end">
                     <Grid item>
                       <label htmlFor="contained-button-file">
-                      <input
-                        accept="image/*"
-                        name="imageUpload"
-                        className={classes.input}
-                        id="contained-button-file"
-                        type="file"
-                        onChange={(e) => dispatch(uploadImage(e))}/>
+                        <input
+                          accept="image/*"
+                          name="imageUpload"
+                          className={classes.input}
+                          id="contained-button-file"
+                          type="file"
+                          onChange={(e) => dispatch(uploadImage(e))} />
                         <Button variant="contained" component="span" className={classes.button}>
                           Upload
-                        </Button>
+            </Button>
                       </label>
                     </Grid>
                   </Grid>
@@ -190,16 +185,16 @@ const ArtifactForm = () => {
             <Grid container direction="row-reverse">
               <Grid item>
                 <Button variant="contained" color="primary" size="small" className={classes.button} >
-                  <input type="submit" className={classes.input} name="submitButton"/>
+                  <input type="submit" className={classes.input} name="submitButton" />
                   <SaveIcon />
                   Save
-          </Button>
+      </Button>
               </Grid>
               <Grid item>
                 <Button variant="contained" color="secondary" size="small" name="cancel" className={classes.button} onClick={() => dispatch(openArtifactForm(false))}>
                   <CancelIcon />
                   Cancel
-          </Button>
+      </Button>
               </Grid>
             </Grid>
           </CardActions>
