@@ -28,7 +28,7 @@ export const login = (username, password) => {
 
 export const logout = () => {
   return (dispatch) => {
-    dispatch(logoutFailure());
+    dispatch(logoutRequest());
     dispatch(logoutSuccess());
     history.push('/login');
   }
@@ -93,6 +93,6 @@ export const logoutSuccess = () => ({
   type: LOGOUT_SUCCESS
 });
 
-export const logoutFailure = () => ({
+export const logoutRequest = () => ({
   type: LOGOUT_REQUEST
 })
