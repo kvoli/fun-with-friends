@@ -34,3 +34,4 @@ export const getArtifacts = (payload) => ({
 	type: INITIALIZE_ARTIFACTS,
 	payload: payload
 })
+

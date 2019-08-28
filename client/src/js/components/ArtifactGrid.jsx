@@ -58,7 +58,7 @@ const ArtifactGrid = () => {
 
   React.useEffect(() => {
     dispatch(getAllArtifacts());
-  }, []);
+  }, [dispatch]);
   
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
@@ -101,11 +101,12 @@ const ArtifactGrid = () => {
                   <Divider variant='middle' />
                   <div className={classes.cardTags} >
                     <Grid container >
-                      {artifacts[0].tags.map(tag => (
-                        <Grid item key={tag.label}>
-                          <Chip className={classes.chip} label={tag.label} />
+                    {console.log(artifact.tags)}
+                      {artifact.tags ? artifact.tags.spit(",").map(tag => (
+                        <Grid item key={tag}>
+                          <Chip className={classes.chip} label={tag} />
                         </Grid>
-                      ))}
+                      )) : "no tags :("}
                     </Grid>
                   </div>
                 </CardContent>

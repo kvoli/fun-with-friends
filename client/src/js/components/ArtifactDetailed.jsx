@@ -45,6 +45,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const relatives = [
+                  { name: "Harry McClernon", about: "Soldier | Infantry | 1894-1931"},
+                  { name: "Mary McClernon", about: "Homemaker | Daughter | 1915-1977"},
+                  { name: "Rose McClernon", about: "Teacher | Wife | 1896-1941"}
+]
+
+
 
 const ArtifactDetailed = () => {
 
@@ -96,26 +103,28 @@ const ArtifactDetailed = () => {
               <Typography variant="h6">
                 Relations
             </Typography>
+            {relatives.map((relative) => (
               <List dense={true}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                      <Avatar alt="John Smith" />
+                      <Avatar alt={relative.name} />
                     </ListItemAvatar>
                     <ListItemText
-                      primary="John Smith"
-                      secondary="placeholder info"
+                      primary={relative.name}
+                      secondary={relative.about}
                     />
                   </ListItem>,
               </List>
+            ))}
             </div>
             <Divider variant='middle' />
             <div className={classes.cardTags} >
               <Grid container >
-                {artifact.tags.map(tag => (
-                  <Grid item key={tag.label}>
-                    <Chip className={classes.chip} label={tag.label} />
+                {artifact.tags ? artifact.tags.split(",").map(tag => (
+                  <Grid item key={tag}>
+                    <Chip className={classes.chip} label={tag} />
                   </Grid>
-                ))}
+                )) : "no tags :("}
               </Grid>
             </div>
           </CardContent>
