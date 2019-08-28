@@ -5,14 +5,15 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { removeArtifact, artifactSwitch } from "../actions/index";
+import { artifactSwitch } from "../actions/index";
+import { deleteArtifact } from "../actions/artifact";
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
 
 const AlertDialog = () => {
   const dispatch = useDispatch();
-  const { open, artifact } = useSelector(store => store.focusView)
+  const artifact = useSelector(store => store.focusView.artifactDetailView.artifact)
   const [outerOpen, setOuterOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -45,8 +46,8 @@ const AlertDialog = () => {
             variant="contained"
             onClick={(event) => {
               handleClose();
-              dispatch(removeArtifact(artifact));
-              dispatch(artifactSwitch({ open: !open, artifact: false }))
+              dispatch(deleteArtifact(artifact));
+              dispatch(artifactSwitch(false))
             }}
             color="secondary"
             autoFocus
