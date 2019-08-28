@@ -1,11 +1,11 @@
 import { UPLOAD_IMAGE } from "../constants/action-types";
-import { removeArtifact, addArtifact } from "./index"
+import { removeArtifact, addArtifact, getArtifacts } from "./index"
 
 
 export const uploadImage = (e) => {
 
 
-  
+
   const files = Array.from(e.target.files)
   const formData = new FormData()
 
@@ -72,6 +72,28 @@ export const deleteArtifact = (artifact) => {
           if (response.status !== 200) {
             console.log("FAILURE!!!!!!!!!!!!!!!!");
             console.log(json);
+          }
+        }
+        )
+      );
+  };
+};
+
+export const getAllArtifacts = () => {
+
+  return (dispatch) => {
+
+    const request = {
+      method: 'GET'
+    };
+    fetch(`/api/artifact`, request)
+      .then(response => response.json()
+        .then(json => {
+          if (response.status !== 200) {
+            console.log("ERROR - NO ARTIFACTS RECEIVED GET REQUEST FAIL");
+            console.log(json);
+          } else {
+            dispatch(getArtifacts(json))
           }
         }
         )

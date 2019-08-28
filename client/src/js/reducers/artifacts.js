@@ -1,10 +1,15 @@
-import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT } from "../constants/action-types.js";
-import artifactData from "../components/artifactData";
+import { ADD_ARTIFACT, RM_ARTIFACT, EDIT_ARTIFACT, INITIALIZE_ARTIFACTS } from "../constants/action-types.js";
+// import artifactData from "../components/artifactData";
+import getAllArtifacts from "../actions/artifactRequests";
+import { useDispatch } from 'react-redux';
 
-const initialState = artifactData
+const dispatch = useDispatch()
+const initialState = dispatch(getAllArtifacts);
 
 const artifacts = (state = initialState, action) => {
   switch (action.type) {
+    case INITIALIZE_ARTIFACTS:
+      return action.payload
     case ADD_ARTIFACT:
       return [
         ...state, action.payload
