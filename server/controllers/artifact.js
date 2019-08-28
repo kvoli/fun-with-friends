@@ -2,6 +2,8 @@ var Artifact = require('../models/artifact');
 
 var createArtifact = async (req, res) => {
   try {
+    req.body._id = req.body.id;
+    delete req.body.id;
     // Create an artifact from the details in the request
     const artifact = new Artifact(req.body);
     // Wait for the artifact to be saved in the database
@@ -28,7 +30,7 @@ var updateArtifact = async (req, res) => {
 
 var getArtifact = async (req, res) => {
   try {
-    const artifact = await Artifact.findById(req.params.id);
+    const artifact = await Artifact.find({id:req.params.id});
     res.status(200).send(artifacts);
   } catch (error) {
     res.status(400).send({error:'Unable to get that artifact.'})
@@ -38,7 +40,7 @@ var getArtifact = async (req, res) => {
 var getArtifacts = async (req, res) => {
   try {
     const artifacts = await Artifact.find();
-    res.status(200).send(artifacts);
+    res.status(200).send(artifacts.map(artifact => artifact.toObject()));
   } catch (error) {
     res.status(400).send({error:'Unable to get artifacts.'});
   };

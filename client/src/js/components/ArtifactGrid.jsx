@@ -101,12 +101,6 @@ const ArtifactGrid = () => {
                   <Divider variant='middle' />
                   <div className={classes.cardTags} >
                     <Grid container >
-                    {console.log(artifact.tags)}
-                      {artifact.tags ? artifact.tags.spit(",").map(tag => (
-                        <Grid item key={tag}>
-                          <Chip className={classes.chip} label={tag} />
-                        </Grid>
-                      )) : "no tags :("}
                     </Grid>
                   </div>
                 </CardContent>
