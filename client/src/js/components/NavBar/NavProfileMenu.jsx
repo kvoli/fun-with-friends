@@ -3,7 +3,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../actions/auth';
+import { logout } from '../../actions/auth';
 
 
 export const NavProfileMenu = ({handleClose}) => {

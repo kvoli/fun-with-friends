@@ -7,11 +7,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import { teal } from '@material-ui/core/colors';
 import { NavProfile } from './NavProfile';
+import LoginButton from './LoginButton';
+import SignupButton from './SignupButton';
+import UserTitle from './UserTitle';
 
 const useStyles = makeStyles(theme => ({
   navBar: {
     flexGrow: 1,
-    backgroundColor: teal[600],
+    background: '#3e4360'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -33,6 +36,9 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title}>
             Artifact Register
           </Typography>
+          <SignupButton/>
+          <LoginButton/>
+          <UserTitle/>
           <NavProfile />
         </Toolbar>
       </AppBar>
