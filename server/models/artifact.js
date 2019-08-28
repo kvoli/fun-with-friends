@@ -23,6 +23,7 @@ const artifactSchema = mongoose.Schema({
   date: { type: Date },
   image: { type: String },
   uploaded: { type: Date, default: Date.now },
+  uploader: { type: String },
   tags: { type: [tagSchema], required: false },
   relations: { type: [relationSchema] }
 },{
