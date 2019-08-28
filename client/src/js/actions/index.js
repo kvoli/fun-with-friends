@@ -24,3 +24,4 @@ export const filterArtifacts = (payload) => ({
 	type: FILTER_ARTIFACTS,
 	payload: payload
 });
+

@@ -16,6 +16,7 @@ import { artifactSwitch } from "../actions/index.js";
 import ArtifactModal from "./ArtifactModal";
 import { useSelector, useDispatch } from 'react-redux';
 import { getVisibleArtifacts } from "../selectors/index";
+import { closeSnackbar } from '../actions/snackbar';
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -57,7 +58,8 @@ const ArtifactGrid = () => {
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
-      <Grid container spacing={6}>
+      <Grid container spacing={6}
+            onClick = {() => dispatch(closeSnackbar)}>
         {console.log(artifacts)}
         {artifacts.map(artifact => (
           <Grid item key={artifact.id} xs={12} sm={7} md={4}>
