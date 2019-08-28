@@ -13,7 +13,7 @@ export const uploadImage = (e) => {
     fetch('/api/image/upload', options)
       .then(response => response.json()
         .then(json => {
-          console.log(json);
+          console.log(json)
           if (response.status === 201) {
             dispatch(updateImage(json.src))
           };
