@@ -1,6 +1,7 @@
 var Artifact = require('../models/artifact');
 
 var createArtifact = async (req, res) => {
+  console.log(req.body);
   try {
     req.body._id = req.body.id;
     delete req.body.id;
@@ -22,7 +23,7 @@ var updateArtifact = async (req, res) => {
     const query = {_id: req.params.id};
     const updates = req.body;
     await Artifact.updateOne(query, updates);
-    res.status(200).send(await Artifact.findOne(query));
+    res.status(200).send();
   } catch (error) {
     res.status(400).send({error: 'Unable to update artifact.'});
   };

@@ -8,7 +8,7 @@ import { CardMedia, Card, CardContent } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { openArtifactForm, artifactSwitch } from "../actions/index";
-import { uploadImage, submitArtifactForm } from "../actions/artifactRequests";
+import { uploadImage, createArtifact, editArtifact } from "../actions/artifact";
 import uuid from "uuid";
 
 const useStyles = makeStyles(theme => ({
@@ -51,11 +51,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ArtifactForm = () => {
-
   const classes = useStyles();
   const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
   const dispatch = useDispatch();
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload)
+  const editMode = artifact ? true : false;
 
   const fillArtifact = {
     title:   artifact.title  ? artifact.title  : "",
@@ -75,11 +75,11 @@ const ArtifactForm = () => {
   });
 
   const onSubmit = (data, e) =>  {
-    dispatch(submitArtifactForm(data));
+    editMode ? dispatch(editArtifact(data)) : dispatch(createArtifact(data));
     e.target.reset();
     dispatch(openArtifactForm(false))
     dispatch(artifactSwitch(data))
-    }
+  }
 
   return (
     <Grid container justify="center" className={classes.contained}>
@@ -117,7 +117,6 @@ const ArtifactForm = () => {
                     label="title"
                     inputRef={register({ required: true })}
                     placeholder="Grandma's Teeth"
-                    value={fillArtifact.title}
                   />
                 </Grid>
                 <Grid item>
@@ -130,7 +129,7 @@ const ArtifactForm = () => {
                           className={classes.input}
                           id="contained-button-file"
                           type="file"
-                          onChange={(e) => dispatch(uploadImage(e))} />
+                          onChange={(e) => dispatch(uploadImage(e.target.files[0]))} />
                         <Button variant="contained" component="span" className={classes.button}>
                           Upload
                           </Button>
@@ -147,7 +146,6 @@ const ArtifactForm = () => {
                       label="date"
                       inputRef={register({ required: true })}
                       placeholder="3/9/1997"
-                      value={fillArtifact.date}
                     />
                   </Grid>
                   <Grid item>
@@ -156,7 +154,6 @@ const ArtifactForm = () => {
                       label="origin"
                       inputRef={register({ required: true })}
                       placeholder="e.g. United Kingdom"
-                      value={fillArtifact.origin}
                     />
                   </Grid>
                 </Grid>
@@ -167,7 +164,6 @@ const ArtifactForm = () => {
                     label="tags"
                     inputRef={register}
                     placeholder="Antique, Family, Old ..."
-                    value={fillArtifact.tags}
                     fullWidth
                   />
               </Grid>
@@ -180,7 +176,6 @@ const ArtifactForm = () => {
                   rows="2"
                   margin="normal"
                   variant="outlined"
-                  value={fillArtifact.desc}
                   multiline
                   fullWidth
                 />
@@ -195,7 +190,6 @@ const ArtifactForm = () => {
                   name="text"
                   label="text"
                   inputRef={register}
-                  value={fillArtifact.text}
                   palceholder="A detailed description "
                 />
               </Grid>

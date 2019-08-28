@@ -16,7 +16,7 @@ import { artifactSwitch } from "../actions/index.js";
 import ArtifactModal from "./ArtifactModal";
 import { useSelector, useDispatch } from 'react-redux';
 import { getVisibleArtifacts } from "../selectors/index";
-import { getAllArtifacts } from "../actions/artifactRequests";
+import { getArtifacts } from "../actions/artifact";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -57,7 +57,7 @@ const ArtifactGrid = () => {
 
 
   React.useEffect(() => {
-    dispatch(getAllArtifacts());
+    dispatch(getArtifacts());
   }, [dispatch]);
   
   return (

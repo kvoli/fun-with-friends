@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { artifactSwitch } from "../actions/index";
-import { deleteArtifact } from "../actions/artifactRequests";
+import { deleteArtifact } from "../actions/artifact";
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
