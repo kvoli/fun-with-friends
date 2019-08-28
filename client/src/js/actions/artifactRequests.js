@@ -92,11 +92,5 @@ export const getAllArtifacts = () => {
   };
 };
 
-export const editArtifact = (artifact) => {
-  return (dispatch) => {
-    dispatch(removeArtifact(artifact));
-    dispatch(submitArtifactForm(artifact));
-  }
-}
 
 

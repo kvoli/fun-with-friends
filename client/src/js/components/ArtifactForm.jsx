@@ -8,7 +8,7 @@ import { CardMedia, Card, CardContent } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { openArtifactForm, artifactSwitch } from "../actions/index";
-import { uploadImage, submitArtifactForm } from "../actions/artifactRequests";
+import { uploadImage, submitArtifactForm, editArtifact } from "../actions/artifactRequests";
 import uuid from "uuid";
 
 const useStyles = makeStyles(theme => ({
@@ -53,19 +53,19 @@ const useStyles = makeStyles(theme => ({
 const ArtifactForm = () => {
 
   const classes = useStyles();
-  const artifact = useSelector(store => store.focusView.artifactFormView.artifact)
+  const artifact = useSelector(store => store.focusView.artifactFormView.artifact);
   const dispatch = useDispatch();
-  const pictureSrc = useSelector(store => store.focusView.artifactImageUpload)
-
+  const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
+  const editMode = artifact ? true : false;
   const fillArtifact = {
-    title:   artifact.title  ? artifact.title  : "",
-    desc:    artifact.desc   ? artifact.desc   : "",
-    text:    artifact.text   ? artifact.text   : "",
-    date:    artifact.date   ? artifact.date   : "",
-    origin:  artifact.origin ? artifact.origin : "",
-    tags:    artifact.tags   ? artifact.tags   : "",
-    src:     pictureSrc,
-    id:      artifact.id     ? artifact.id     : uuid.v4(),
+    title: artifact.title ? artifact.title : "",
+    desc: artifact.desc ? artifact.desc : "",
+    text: artifact.text ? artifact.text : "",
+    date: artifact.date ? artifact.date : "",
+    origin: artifact.origin ? artifact.origin : "",
+    tags: artifact.tags ? artifact.tags : "",
+    src: pictureSrc,
+    id: artifact.id ? artifact.id : uuid.v4(),
   }
 
   const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
@@ -74,31 +74,31 @@ const ArtifactForm = () => {
     defaultValues: fillArtifact
   });
 
-  const onSubmit = (data, e) =>  {
-    dispatch(submitArtifactForm(data));
+  const onSubmit = (data, e) => {
+    editMode ? dispatch(editArtifact(data)) : dispatch(submitArtifactForm(data));
     e.target.reset();
     dispatch(openArtifactForm(false))
     dispatch(artifactSwitch(data))
-    }
+  }
 
   return (
     <Grid container justify="center" className={classes.contained}>
       <Card>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <input 
-          readOnly 
-          className={classes.input} 
-          ref={register({ required: true })} 
-          name="src" 
-          value={pictureSrc ? pictureSrc : defaultImage} 
-        />
-        <input 
-          readOnly 
-          className={classes.input} 
-          ref={register({ required: true })} 
-          name="id" 
-          value={artifact.id ? artifact.id : uuid.v4()}
-        />
+          <input
+            readOnly
+            className={classes.input}
+            ref={register({ required: true })}
+            name="src"
+            value={pictureSrc ? pictureSrc : defaultImage}
+          />
+          <input
+            readOnly
+            className={classes.input}
+            ref={register({ required: true })}
+            name="id"
+            value={artifact.id ? artifact.id : uuid.v4()}
+          />
           <CardActionArea>
             <CardMedia
               component='img'
@@ -117,7 +117,7 @@ const ArtifactForm = () => {
                     label="title"
                     inputRef={register({ required: true })}
                     placeholder="Grandma's Teeth"
-                    value={fillArtifact.title}
+                    defaultValue={fillArtifact.title}
                   />
                 </Grid>
                 <Grid item>
@@ -147,7 +147,7 @@ const ArtifactForm = () => {
                       label="date"
                       inputRef={register({ required: true })}
                       placeholder="3/9/1997"
-                      value={fillArtifact.date}
+                      defaultValue={fillArtifact.date}
                     />
                   </Grid>
                   <Grid item>
@@ -156,20 +156,20 @@ const ArtifactForm = () => {
                       label="origin"
                       inputRef={register({ required: true })}
                       placeholder="e.g. United Kingdom"
-                      value={fillArtifact.origin}
+                      defaultValue={fillArtifact.origin}
                     />
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item>
-                  <TextField
-                    name="tags"
-                    label="tags"
-                    inputRef={register}
-                    placeholder="Antique, Family, Old ..."
-                    value={fillArtifact.tags}
-                    fullWidth
-                  />
+                <TextField
+                  name="tags"
+                  label="tags"
+                  inputRef={register}
+                  placeholder="Antique, Family, Old ..."
+                  fullWidth
+                  defaultValue={fillArtifact.tags}
+                />
               </Grid>
               <Grid item>
                 <TextField
@@ -180,9 +180,9 @@ const ArtifactForm = () => {
                   rows="2"
                   margin="normal"
                   variant="outlined"
-                  value={fillArtifact.desc}
                   multiline
                   fullWidth
+                  defaultValue={fillArtifact.desc}
                 />
               </Grid>
               <Grid item>
@@ -195,8 +195,8 @@ const ArtifactForm = () => {
                   name="text"
                   label="text"
                   inputRef={register}
-                  value={fillArtifact.text}
                   palceholder="A detailed description "
+                  defaultValue={fillArtifact.text}
                 />
               </Grid>
               <Grid>
@@ -206,7 +206,7 @@ const ArtifactForm = () => {
           <CardActions >
             <Grid container direction="row-reverse">
               <Grid item>
-              <input name="submit" type="submit" className={classes.input}  />
+                <input name="submit" type="submit" className={classes.input} />
                 <Button variant="contained" color="primary" size="small" className={classes.button} type="submit" >
                   <SaveIcon />
                   Save
