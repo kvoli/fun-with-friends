@@ -10,6 +10,7 @@ import { deleteArtifact } from "../actions/artifact";
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
+import { launchDeleteSnackbar} from '../actions/snackbar';
 
 const AlertDialog = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const AlertDialog = () => {
             variant="contained"
             onClick={(event) => {
               handleClose();
+              dispatch(launchDeleteSnackbar());
               dispatch(deleteArtifact(artifact));
               dispatch(artifactSwitch(false))
             }}
