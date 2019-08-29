@@ -10,6 +10,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { openArtifactForm, artifactSwitch } from "../actions/index";
 import { uploadImage, createArtifact, editArtifact } from "../actions/artifact";
 import uuid from "uuid";
+import { launchAddSnackbar, launchEditSnackbar } from '../actions/snackbar';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -76,6 +77,7 @@ const ArtifactForm = () => {
 
   const onSubmit = (data, e) =>  {
     editMode ? dispatch(editArtifact(data)) : dispatch(createArtifact(data));
+    editMode ? dispatch(launchEditSnackbar()) : dispatch(launchAddSnackbar());
     e.target.reset();
     dispatch(openArtifactForm(false))
     dispatch(artifactSwitch(data))
@@ -209,7 +211,10 @@ const ArtifactForm = () => {
                   </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" color="secondary" size="small" name="cancel" className={classes.button} onClick={() => dispatch(openArtifactForm(false))}>
+                <Button variant="contained" color="secondary" size="small" name="cancel" className={classes.button} 
+                        onClick={(event) => {
+                          dispatch(openArtifactForm(false))
+                          }}>
                   <CancelIcon />
                   Cancel
     </Button>
