@@ -6,17 +6,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { removeArtifact, artifactSwitch } from "../actions/index";
-<<<<<<< Updated upstream
-=======
 import { launchDeleteSnackbar, launchEditSnackbar, launchAddSnackbar } from '../actions/snackbar'
->>>>>>> Stashed changes
+import { deleteArtifact } from "../actions/artifact";
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
 
 const AlertDialog = () => {
   const dispatch = useDispatch();
-  const { open, artifact } = useSelector(store => store.focusView)
+  const artifact = useSelector(store => store.focusView.artifactDetailView.artifact)
   const [outerOpen, setOuterOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -48,13 +46,12 @@ const AlertDialog = () => {
           <Button
             variant="contained"
             onClick={(event) => {
-              handleClose();
-<<<<<<< Updated upstream
-=======
+              handleClose()
               dispatch(launchDeleteSnackbar());
->>>>>>> Stashed changes
-              dispatch(removeArtifact(artifact));
+              dispatch(deleteArtifact(artifact));
               dispatch(artifactSwitch({ open: !open, artifact: false }))
+              dispatch(deleteArtifact(artifact));
+              dispatch(artifactSwitch(false))
             }}
             color="secondary"
             autoFocus

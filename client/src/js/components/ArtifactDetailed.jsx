@@ -11,8 +11,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
 import DeletePopup from "./DeletePopup";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LoadingCircle from "./LoadingCircle";
+import { openArtifactForm, artifactSwitch } from "../actions/index";
 
 
 const useStyles = makeStyles(theme => ({
@@ -44,86 +45,92 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
+const relatives = [
+                  { name: "Harry McClernon", about: "Soldier | Infantry | 1894-1931"},
+                  { name: "Mary McClernon", about: "Homemaker | Daughter | 1915-1977"},
+                  { name: "Rose McClernon", about: "Teacher | Wife | 1896-1941"}
+]
+
+
 
 const ArtifactDetailed = () => {
 
   const classes = useStyles();
-  const artifact = useSelector(store => store.focusView.artifact)
+  const dispatch = useDispatch();
+  const artifact = useSelector(store => store.focusView.artifactDetailView.artifact)
+  const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
+
 
   return (
     <Grid container justify="center" className={classes.contained}>
-    {artifact ? (
-      <Card>
-        <CardMedia
-          component='img'
-          className={classes.cardMedia}
-          image={artifact.src}
-          title={artifact.title}
-          src={artifact.src}
-        />
-        <CardContent className={classes.cardContent}>
-          <div className={classes.cardText}>
-            <Grid container justify="space-between">
-              <Grid item >
-                <Typography gutterBottom variant='h4'>
-                  {artifact.title}
-                </Typography>
-              </Grid>
-              <Grid item>
-              <Grid container direction="row-reverse" justify="flex-end">
-                <Grid item>
-                  <IconButton >
-                    <EditIcon color="primary" fontSize="default" />
-                  </IconButton>
+      {artifact ? (
+        <Card>
+          <CardMedia
+            component='img'
+            className={classes.cardMedia}
+            image={artifact.src ? artifact.src : defaultImage}
+            title={artifact.title}
+            src={artifact.src ? artifact.src : defaultImage}
+          />
+          <CardContent className={classes.cardContent}>
+            <div className={classes.cardText}>
+              <Grid container justify="space-between">
+                <Grid item >
+                  <Typography gutterBottom variant='h4'>
+                    {artifact.title}
+                  </Typography>
                 </Grid>
                 <Grid item>
-                  <DeletePopup />
+                  <Grid container direction="row-reverse" justify="flex-end">
+                    <Grid item>
+                      <IconButton onClick={() => {
+                        dispatch(openArtifactForm(artifact));
+                        dispatch(artifactSwitch(artifact))
+                      }} >
+                        <EditIcon color="primary" fontSize="default" />
+                      </IconButton>
+                    </Grid>
+                    <Grid item>
+                      <DeletePopup />
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
-              </Grid>
-            </Grid>
-            <Typography gutterBottom color="textSecondary" variant='body2' paragraph >
-              {artifact.text}
+              <Typography gutterBottom color="textSecondary" variant='body2' paragraph >
+                {artifact.text}
+              </Typography>
+              <Divider variant='middle' />
+              <Typography variant="h6">
+                Relations
             </Typography>
+            {relatives.map((relative) => (
+              <List dense={true}>
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar alt={relative.name} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={relative.name}
+                      secondary={relative.about}
+                    />
+                  </ListItem>
+              </List>
+            ))}
+            </div>
             <Divider variant='middle' />
-            <Typography variant="h6">
-              Relations
-            </Typography>
-            <List dense={true}>
-              {generate(
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar alt="John Smith" src="https://material-ui.com/static/images/avatar/1.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="John Smith"
-                    secondary="1913 - 1949 | United Kingdom | Soldier"
-                  />
-                </ListItem>,
-              )}
-            </List>
-          </div>
-          <Divider variant='middle' />
-          <div className={classes.cardTags} >
-            <Grid container >
-              {artifact.tags.map(tag => (
-                <Grid item key={tag.label}>
-                  <Chip className={classes.chip} label={tag.label} />
-                </Grid>
-              ))}
-            </Grid>
-          </div>
-        </CardContent>
-      </Card>
-    ) : (<LoadingCircle />)
-    }
+            <div className={classes.cardTags} >
+              <Grid container >
+                {artifact.tags ? artifact.tags.split(",").map(tag => (
+                  <Grid item key={tag}>
+                    <Chip className={classes.chip} label={tag} />
+                  </Grid>
+                )) : "no tags :("}
+              </Grid>
+            </div>
+          </CardContent>
+        </Card>
+      ) : (<LoadingCircle />)
+      }
     </Grid>
   );
 }
