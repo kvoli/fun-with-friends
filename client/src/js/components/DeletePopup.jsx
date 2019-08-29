@@ -5,8 +5,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { removeArtifact, artifactSwitch } from "../actions/index";
 import { launchDeleteSnackbar, launchEditSnackbar, launchAddSnackbar } from '../actions/snackbar'
+import { artifactSwitch } from "../actions/index";
 import { deleteArtifact } from "../actions/artifact";
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -46,7 +46,7 @@ const AlertDialog = () => {
           <Button
             variant="contained"
             onClick={(event) => {
-              handleClose()
+              handleClose();
               dispatch(launchDeleteSnackbar());
               dispatch(deleteArtifact(artifact));
               dispatch(artifactSwitch({ open: !open, artifact: false }))
