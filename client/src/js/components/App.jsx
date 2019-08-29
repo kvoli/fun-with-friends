@@ -2,8 +2,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Main from './Main';
-import NavBar from './NavBar';
-import Footer from './Footer';
+import NavBar from './NavBar/NavBar';
 
 const App = () => {
   return (
@@ -11,7 +10,6 @@ const App = () => {
       <CssBaseline />
       <NavBar />
       <Main />
-      <Footer />
     </React.Fragment>
   );
 }

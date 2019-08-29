@@ -2,10 +2,14 @@ import React from 'react';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
-import { NavProfileMenu } from './NavProfileMenu';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import MenuItem from '@material-ui/core/MenuItem';
+import { logout } from '../../actions/auth';
 
 export const NavProfile = () => {
+
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -18,6 +22,10 @@ export const NavProfile = () => {
     setAnchorEl(null);
   }
 
+  const auth = useSelector(store => store.auth);
+  // Do not render the LoginButton if the user is already authenticated
+  if (!auth.success) return null;
+  // Otherwise render the LoginButton
   return (
     <div>
       <IconButton
@@ -44,9 +52,12 @@ export const NavProfile = () => {
         open={open}
         onClose={handleClose}
       >
-        <NavProfileMenu 
-          handleClose={handleClose} 
-        />
+        <MenuItem onClick={(e) => {
+          dispatch(logout(auth.token));
+          handleClose();
+        }}>
+          Logout
+        </MenuItem>
       </Menu>
     </div>
   )

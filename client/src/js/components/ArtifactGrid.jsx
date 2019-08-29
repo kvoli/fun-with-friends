@@ -53,23 +53,21 @@ const ArtifactGrid = () => {
   const dispatch = useDispatch();
   const state = useSelector(store => store)
   const artifacts = getVisibleArtifacts(state)
-  const { open } = useSelector(store => store.focusView.open)
-
+  const defaultImage = "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png"
+  
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
-      <Grid container spacing={6}
-            onClick = {() => dispatch(closeSnackbar)}>
-        {console.log(artifacts)}
+      <Grid container spacing={6}>
         {artifacts.map(artifact => (
           <Grid item key={artifact.id} xs={12} sm={7} md={4}>
             <Zoom in={true} style={{ transitionDelay: '50ms' }}>
               <Card className={classes.card} >
-                <CardActionArea onClick={() => dispatch(artifactSwitch({ open: !open, artifact: artifact }))} >
+                <CardActionArea onClick={() => dispatch(artifactSwitch(artifact))} >
                   <CardMedia
                     component='img'
                     className={classes.cardMedia}
-                    image={artifact.src}
+                    image={artifact.src ? artifact.src : defaultImage}
                     title={artifact.title}
                   />
                 </CardActionArea>
@@ -83,7 +81,7 @@ const ArtifactGrid = () => {
                       </Grid>
                       <Grid item>
                         <Typography gutterBottom variant='body2'>
-                          Sep 2, 1922
+                          Date: {artifact.date}
       				        </Typography>
                       </Grid>
                     </Grid>
@@ -91,17 +89,17 @@ const ArtifactGrid = () => {
                       Origin: {artifact.origin}
                     </Typography>
                     <Typography color="textSecondary" variant='body2'>
-                      {artifact.desc} that shouldn't be too long hopefully, but you never know.
+                      {artifact.desc}
                     </Typography>
                   </div>
                   <Divider variant='middle' />
                   <div className={classes.cardTags} >
                     <Grid container >
-                      {artifact.tags.map(tag => (
-                        <Grid item key={tag.label}>
-                          <Chip className={classes.chip} label={tag.label} />
+                      {artifact.tags ? artifact.tags.split(',').map(tag => (
+                        <Grid item key={tag}>
+                          <Chip className={classes.chip} label={tag} />
                         </Grid>
-                      ))}
+                      )) : "no tags :("}
                     </Grid>
                   </div>
                 </CardContent>

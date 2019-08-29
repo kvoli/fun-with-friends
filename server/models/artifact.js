@@ -17,17 +17,20 @@ const relationSchema = mongoose.Schema({
 
 // Define the artifact schema
 const artifactSchema = mongoose.Schema({
+  _id: { type: String, required: true },
   title: { type: String, required: true }, 
-  description: { type: String },
-  location: { type: String },
-  date: { type: Date },
-  image: { type: String },
+  desc: { type: String, required: true },
+  text: { type: String },
+  date: { type: String },
+  origin: { type: String },
+  src: { type: String },
+  tags: { type: String },
   uploaded: { type: Date, default: Date.now },
   uploader: { type: String },
-  tags: { type: [tagSchema], required: false },
-  relations: { type: [relationSchema] }
+  //tags: { type: [tagSchema], required: false },
+  //relations: { type: [relationSchema] }
 },{
-  toObject: { versionKey: false, virtuals: true, transform: function (doc,ret) { delete ret._id } }
+  toObject: { versionKey: false, virtuals: true, transform: function(doc,ret) {delete ret._id} }
 });
 
 // Bind the artifact schema to a Mongoose model

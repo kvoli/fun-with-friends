@@ -8,12 +8,12 @@ import ArtifactDetailed from "./ArtifactDetailed";
 const ArtifactModal = () => {
 
   const dispatch = useDispatch();
-  const { open, artifact } = useSelector(store => store.focusView)
+  const { open, artifact } = useSelector(store => store.focusView.artifactDetailView)
 
   return (
     <Dialog
       open={open}
-      onClose={() => dispatch(artifactSwitch({ open: !open, artifact: false }))}
+      onClose={() => dispatch(artifactSwitch(false))}
       aria-labelledby="scroll-dialog-title"
       transitionDuration= {250}
     >
