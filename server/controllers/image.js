@@ -1,15 +1,10 @@
 var uploadImage = async (req, res) => {
-  try {
-    if (req.file) {
-      res.status(201).send(req.file.url);
-    } else {
-      throw Error();
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(400).send({error:'Unable to upload image.'})
-  }
-};
+  const values = Object.values(req.files)
+  const promises = values.map(image => cloudinary.uploader.upload(image.path))
+  Promise
+    .all(promises)
+    .then(results => res.send(json(results)))
+}
 
 module.exports = {
   uploadImage
