@@ -2,8 +2,7 @@ const express = require('express');
 const auth = require('../middleware/auth');
 const imageRouter = express.Router();
 const imageController = require('../controllers/image');
-const parse = require('../middleware/upload');
 
-imageRouter.post('/upload', parse.single('image'), imageController.uploadImage);
+imageRouter.post('/upload', imageController.uploadImage);
 
 module.exports = imageRouter
