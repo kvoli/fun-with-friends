@@ -10,7 +10,6 @@ import { deleteArtifact } from "../actions/artifact";
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
-import { launchAddSnackbar } from '../actions/snackbar';
 import { launchDeleteSnackbar} from '../actions/snackbar';
 
 const AlertDialog = () => {
