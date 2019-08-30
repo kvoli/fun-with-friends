@@ -29,7 +29,7 @@ var getAllCircles = async (req, res) => {
 var deleteCircle = async (req, res) => {
   try {
     //delete circle according to the id of the request
-    await Circle.deleteOne({_id:req.body.id});
+    await Circle.deleteOne({_id:req.params.id});
     res.status(200).send();
   } catch (error) {
     res.status(400).send({error: "Unable to delete circle"});
