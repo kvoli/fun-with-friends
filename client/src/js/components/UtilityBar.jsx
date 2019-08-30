@@ -1,11 +1,12 @@
 import React from "react";
 import { Grid, IconButton } from "@material-ui/core";
 import SearchBar from "./SearchBar";
-import DeleteIcon from '@material-ui/icons/Delete';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { openArtifactForm } from "../actions/index";
+import { getArtifacts } from "../actions/artifact";
 import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
@@ -32,8 +33,8 @@ const UtilityBar = () => {
           <IconButton onClick={() => dispatch(openArtifactForm(false))} className={classes.button} aria-label="add">
             <AddIcon />
           </IconButton>
-          <IconButton className={classes.button} aria-label="delete">
-            <DeleteIcon />
+          <IconButton onClick={() => dispatch(getArtifacts())} className={classes.button} aria-label="refresh">
+            <RefreshIcon />
           </IconButton>
           <IconButton className={classes.button} aria-label="menu">
             <MenuIcon />
