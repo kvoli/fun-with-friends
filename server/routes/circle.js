@@ -11,4 +11,6 @@ circleRouter.get('/', circleController.getAllCircles);
 // Delete an circle
 circleRouter.delete('/:id', circleController.deleteCircle);
 
+circleRouter.put('/:id', circleController.addMember);
+
 module.exports = circleRouter

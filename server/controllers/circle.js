@@ -35,4 +35,30 @@ var deleteCircle = async (req, res) => {
     res.status(400).send({error: "Unable to delete circle"});
   };
 };
-module.exports = {createCircle, getAllCircles, deleteCircle};
+
+//add a member to a circle
+//member details that should be included in payload: { memberId: string, admin: boolean }
+//only added members that are not already members and admins that are not already admins to avoid unnecessary data storage
+//This means that member IDs must be unique
+var addMember = async (req, res) => {  
+  try {
+    const addedMember = req.body.id;
+    const isAdmin = req.body.admin;
+    await Circle.findOneAndUpdate(
+      { _id: req.params.id }, 
+      { $addToSet: { members: addedMember } },
+      { useFindAndModify: false }
+    );
+    if(isAdmin){
+      await Circle.findOneAndUpdate(
+        { _id: req.params.id }, 
+        { $addToSet: { admins: addedMember } }, 
+        { useFindAndModify: false }
+      );
+    }
+    res.status(200).send();
+  } catch (error) {
+    res.status(400).send({error: "unable to update artifact"});
+  }
+}
+module.exports = {createCircle, getAllCircles, deleteCircle, addMember};
