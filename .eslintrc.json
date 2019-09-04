@@ -1,13 +1,7 @@
 {
-	"parserOptions": {
-		"ecmaVersion": 6,
-		"sourceType": "module",
-		"ecmaFeatures": {
-			"jsx": true
-		}
-	},
-	"rules": {
-		"quotes": ["error", "single"],
-		"arrow-parens": ["error", "as-needed"]
-	}
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"]
+  }
 }
