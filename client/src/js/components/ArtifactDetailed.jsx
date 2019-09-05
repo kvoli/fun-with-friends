@@ -103,9 +103,9 @@ const ArtifactDetailed = () => {
               <Typography variant="h6">
                 Relations
             </Typography>
+            <List dense={true}>
             {relatives.map((relative) => (
-              <List dense={true}>
-                  <ListItem alignItems="flex-start">
+                  <ListItem key={relative.name} alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar alt={relative.name} />
                     </ListItemAvatar>
@@ -114,8 +114,8 @@ const ArtifactDetailed = () => {
                       secondary={relative.about}
                     />
                   </ListItem>
-              </List>
             ))}
+            </List>
             </div>
             <Divider variant='middle' />
             <div className={classes.cardTags} >

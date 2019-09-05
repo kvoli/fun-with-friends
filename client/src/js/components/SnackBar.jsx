@@ -23,7 +23,7 @@ function MySnackbarContentWrapper(props) {
     message = {message}
     action={[
         <IconButton key="close" aria-label="close" onClick={onClose}>
-          <CloseIcon className={onClose} />
+          <CloseIcon />
         </IconButton>,
       ]}
     />
