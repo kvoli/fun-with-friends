@@ -2,6 +2,7 @@ const User = require('../models/user');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
 const should = require('chai').should;
+const server = require('../server');
 
 describe('Testing to see if required user properties are mandatory', function() {
   var user = new User({
