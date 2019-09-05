@@ -8,12 +8,11 @@ cache:
   directories: 
   - $HOME/.npm
 install:
-- cd ./server && npm ci --only=production
-- cd ../client && npm ci --only=production
+- cd ./server && npm ci && cd ../
+- cd ./client && npm ci && cd ../
 script:
-- npm run build
-- npm test
-- cd ../
+- cd ./server && npm test && cd ../
+- cd ./client && npm run build && npm test && cd ../
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
@@ -21,6 +20,8 @@ branches:
   - staging
   - production
 after_success:
+- cd ./server && npm ci --only=production && cd ../
+- cd ./client && npm ci --only=production && cd ../
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - export REPO=kvoli/fun-with-friends
 - export TAG=`if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "latest"; else echo "pull-request-$TRAVIS_PULL_REQUEST_BRANCH" ; fi`
