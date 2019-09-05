@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently --kill-others \"nodemon server.js\" \"cd ../client && npm start\""
+    "dev": "concurrently --kill-others \"nodemon server.js\" \"cd ../client && npm start\"",
+    "test": "jest ./test"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,9 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
+    "jest": "^24.9.0",
+    "mongodb-memory-server": "^5.2.1",
+    "node-mocks-http": "^1.7.6",
     "nodemon": "^1.19.2"
   }
 }
