@@ -23,10 +23,8 @@ afterAll(async () => {
 });
 
 describe('User Controller - Create User', () => {
-
-  it('Succeed with Status Code 201', async () => {
+  it('Should successfully create a new user', async () => {
     const req = httpMocks.createRequest({
-      url: '/api/user',
       method: 'POST',
       body: {
         firstname: 'John',
@@ -37,133 +35,91 @@ describe('User Controller - Create User', () => {
       }
     });
     const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      expect(res.statusCode).toBe(201);
-    });
+    await userController.createUser(req,res)
+      .then(async () => {
+        const body = await res._getData();
+        expect(res.statusCode).toBe(201);
+        expect(body).toHaveProperty('user');
+        expect(body).toHaveProperty('token');
+        expect(body.user).toHaveProperty('firstname');
+        expect(body.user).toHaveProperty('lastname');
+        expect(body.user).toHaveProperty('username');
+        expect(body.user).toHaveProperty('email');
+        expect(body.user).toHaveProperty('id');
+        expect(body.user).not.toHaveProperty('password');
+        expect(body.user).not.toHaveProperty('__v');
+        expect(body.user.firstname).toBe('John');
+        expect(body.user.lastname).toBe('Smith');
+        expect(body.user.username).toBe('johnsmith');
+        expect(body.user.email).toBe('john@smith.com');
+      });
   });
-
-  it('Body contains the user\'s details', async () => {
+  it('Should fail to create a new user with an existing username', async () => {
     const req = httpMocks.createRequest({
-      url: '/api/user',
       method: 'POST',
       body: {
-        firstname: 'Bob',
-        lastname: 'Johnson',
-        username: 'bobby',
-        email: 'bobby@johnson.com',
+        firstname: 'John',
+        lastname: 'Smith',
+        username: 'johnsmith',
+        email: 'john@smith.com',
         password: 'password',
       }
     });
     const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      const body = await res._getData();
-      expect(body.user).toHaveProperty('firstname', 'lastname', 'username', 'email');
-    });
+    await userController.createUser(req,res)
+      .then(async () => {
+        const body = await res._getData();
+        expect(res.statusCode).toBe(400);
+        expect(body).toHaveProperty('error');
+        expect(body.error).toBe('Username or email already exists.');
+      });
   });
+});
 
-  it('Body doesn\'t contain the user\'s password', async () => {
+describe('User Controller - Login User', () => {
+  it('Should successfully login to an existing user', async () => {
     const req = httpMocks.createRequest({
-      url: '/api/user',
       method: 'POST',
       body: {
-        firstname: 'Sarah',
-        lastname: 'Willis',
-        username: 'sarah',
-        email: 'sarah@willis.com',
+        username: 'johnsmith',
         password: 'password',
       }
     });
     const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      const body = await res._getData();
-      expect(body.user).not.toHaveProperty('password');
-    });
+    await userController.loginUser(req,res)
+      .then(async () => {
+        const body = await res._getData();
+        expect(res.statusCode).toBe(200);
+        expect(body).toHaveProperty('user');
+        expect(body).toHaveProperty('token');
+        expect(body.user).toHaveProperty('firstname');
+        expect(body.user).toHaveProperty('lastname');
+        expect(body.user).toHaveProperty('username');
+        expect(body.user).toHaveProperty('email');
+        expect(body.user).toHaveProperty('id');
+        expect(body.user).not.toHaveProperty('password');
+        expect(body.user).not.toHaveProperty('__v');
+        expect(body.user.firstname).toBe('John');
+        expect(body.user.lastname).toBe('Smith');
+        expect(body.user.username).toBe('johnsmith');
+        expect(body.user.email).toBe('john@smith.com');
+      });
   });
-
-  it('Body contains the user\'s ID', async () => {
+  it('Should fail to login to an unknown user', async () => {
     const req = httpMocks.createRequest({
-      url: '/api/user',
       method: 'POST',
       body: {
-        firstname: 'Mike',
-        lastname: 'Miller',
-        username: 'mike',
-        email: 'mike@miller.com',
-        password: 'password',
+        username: 'unknown',
+        password: 'invalid',
       }
     });
     const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      const body = await res._getData();
-      expect(body.user).toHaveProperty('id');
-    });
+    await userController.loginUser(req,res)
+      .then(async () => {
+        const body = await res._getData();
+        expect(res.statusCode).toBe(401);
+        expect(body).toHaveProperty('error');
+        expect(body.error).toBe('Incorrect username or password.');
+      });
   });
-
-  it('Body contains a JWT token', async () => {
-    const req = httpMocks.createRequest({
-      url: '/api/user',
-      method: 'POST',
-      body: {
-        firstname: 'Steve',
-        lastname: 'Jobs',
-        username: 'steve',
-        email: 'steve@jobs.com',
-        password: 'password',
-      }
-    });
-    const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      const body = await res._getData();
-      expect(body).toHaveProperty('token');
-    });
-  });
-  
-  
-  it('Fail with Status Code 400', async () => {
-    const req = httpMocks.createRequest({
-      url: '/api/user',
-      method: 'POST',
-    });
-    const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      expect(res.statusCode).toBe(400);
-    });
-  });
-
-  it('Fail with Status Code 400 when re-using an existing username', async () => {
-    const req = httpMocks.createRequest({
-      url: '/api/user',
-      method: 'POST',
-      body: {
-        firstname: 'Tyler',
-        lastname: 'One',
-        username: 'steve',
-        email: 'tyler@one.com',
-        password: 'password',
-      }
-    });
-    const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      expect(res.statusCode).toBe(400);
-    });
-  });
-
-  it('Succeed with Status Code 201 when re-using an existing email', async () => {
-    const req = httpMocks.createRequest({
-      url: '/api/user',
-      method: 'POST',
-      body: {
-        firstname: 'Adam',
-        lastname: 'Phillips',
-        username: 'adam',
-        email: 'tyler@one.com',
-        password: 'password',
-      }
-    });
-    const res = httpMocks.createResponse(req);
-    await userController.createUser(req,res).then(async () => {
-      expect(res.statusCode).toBe(201);
-    });
-  });
-
 });
