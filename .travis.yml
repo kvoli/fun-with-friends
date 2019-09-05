@@ -12,6 +12,7 @@ install:
 - cd ../client && npm ci --only=production
 script:
 - npm run build
+- npm test
 - cd ../
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
