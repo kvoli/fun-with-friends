@@ -1,8 +1,5 @@
 const User = require('../models/user');
-const assert = require('chai').assert;
 const expect = require('chai').expect;
-const mocha = require('mocha');
-const chain = require('chai');
 
 describe('Testing to see if required user properties are mandatory', function() {
   var user = new User({

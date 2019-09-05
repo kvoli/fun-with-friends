@@ -1,7 +1,5 @@
 const Artifact = require('../models/artifact');
-const mocha = require('mocha');
-const chain = require('chai');
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
 describe('Testing to see if required artifact properties are mandatory', function() {
   var artifact = new Artifact(
