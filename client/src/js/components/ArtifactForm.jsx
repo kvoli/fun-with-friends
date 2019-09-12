@@ -148,6 +148,7 @@ const ArtifactForm = () => {
                       label="date"
                       inputRef={register({ required: true })}
                       placeholder="3/9/1997"
+                      defaultValue={fillArtifact.date || ''}
                     />
                   </Grid>
                   <Grid item>
@@ -156,6 +157,7 @@ const ArtifactForm = () => {
                       label="origin"
                       inputRef={register({ required: true })}
                       placeholder="e.g. United Kingdom"
+                      defaultValue={fillArtifact.origin || ''}
                     />
                   </Grid>
                 </Grid>
@@ -167,6 +169,7 @@ const ArtifactForm = () => {
                     inputRef={register}
                     placeholder="Antique, Family, Old ..."
                     fullWidth
+                    defaultValue={fillArtifact.tags || ''}
                   />
               </Grid>
               <Grid item>
@@ -180,7 +183,7 @@ const ArtifactForm = () => {
                   variant="outlined"
                   multiline
                   fullWidth
-                  defaultValue={fillArtifact.desc}
+                  defaultValue={fillArtifact.desc || ''}
                 />
               </Grid>
               <Grid item>
@@ -194,7 +197,7 @@ const ArtifactForm = () => {
                   label="text"
                   inputRef={register}
                   palceholder="A detailed description "
-                  defaultValue={fillArtifact.text}
+                  defaultValue={fillArtifact.text || ''}
                 />
               </Grid>
               <Grid>

@@ -44,6 +44,9 @@ const useStyles = makeStyles(theme => ({
   },
   chip: {
     margin: theme.spacing(0, 0.25)
+  },
+  artifactGrid: {
+    marginTop: theme.spacing(1),
   }
 }));
 const ArtifactGrid = () => {
@@ -57,7 +60,7 @@ const ArtifactGrid = () => {
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
       <UtilityBar />
-      <Grid container spacing={6}>
+      <Grid container spacing={6} className={classes.artifactGrid}>
         {artifacts.map(artifact => (
           <Grid item key={artifact.id} xs={12} sm={7} md={4}>
             <Zoom in={true} style={{ transitionDelay: '50ms' }}>

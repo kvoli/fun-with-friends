@@ -4,11 +4,13 @@ import focusView from "./focusView";
 import filters from "./filters";
 import auth from './auth';
 import launchSnackbar from './snackbar'
+import circles from './circles';
 
 export default combineReducers({
 	artifacts,
 	focusView,
   filters,
   auth,
-  launchSnackbar
+  launchSnackbar,
+  circles,
 });
