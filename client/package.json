@@ -4,21 +4,19 @@
   "description": "Fun with Friends Artifact Register Client",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.4.0",
-    "@material-ui/icons": "^4.2.1",
-    "babel": "^6.23.0",
-    "babel-jest": "^24.9.0",
+    "@material-ui/core": "^4.4.2",
+    "@material-ui/icons": "^4.4.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "history": "^4.9.0",
+    "history": "^4.10.0",
     "jest-enzyme": "^7.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-flexbox-grid": "^2.1.2",
-    "react-hook-form": "^3.23.1",
+    "react-hook-form": "^3.23.7",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^3.1.1",
     "react-test-renderer": "^16.9.0",
     "redux": "^4.0.4",
     "redux-mock-store": "^1.5.3",
@@ -33,9 +31,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -48,6 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080",
-  "devDependencies": {}
+  "proxy": "http://localhost:8080"
 }
