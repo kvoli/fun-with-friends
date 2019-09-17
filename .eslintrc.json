@@ -1,7 +1,14 @@
 {
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb", "prettier", "plugin:jest/recommended"],
+  "parser": "babel-eslint",
+  "plugins": ["prettier", "jest"],
   "rules": {
     "prettier/prettier": ["error"]
+  },
+  "env": {
+    "jest/globals": true,
+    "browser": true,
+    "node": true,
+    "mongo": true
   }
 }
