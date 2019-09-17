@@ -7,7 +7,7 @@ var createArtifact = async (req, res) => {
     delete req.body.id;
     // Create an artifact from the details in the request
     const artifact = new Artifact(req.body);
-    // add the users id to the artifact uploader
+    // Add the user's ID to the artifact objects uploader property
     artifact.uploader = req.user.id;
     // Wait for the artifact to be saved in the database
     await artifact.save();
@@ -23,14 +23,14 @@ var updateArtifact = async (req, res) => {
   try {
     const query = {_id:req.params.artifactId};
     const updated = req.body;
-    // get the requested artifact
+    // Get the requested artifact from the database
     const artifact = await Artifact.findOne(query);
     if (artifact.uploader = req.user.id) {
-        // if the user is the uploader, update the artifact as requested
+        // If the user is the uploader, update the artifact as requested
         await Artifact.updateOne(query, updated);
         res.status(200).send();
     } else {
-        // otherwise don't
+        // Otherwise don't and return an error response
         res.status(400).send({error:`You don't have permissions to update this artifact.`});
     }
   } catch (error) {
@@ -38,7 +38,7 @@ var updateArtifact = async (req, res) => {
   };
 };
 
-// helper function to merge any number of arrays and remove duplicates
+// Helper function to merge any number of arrays and remove duplicates
 var mergeArrays = (...arrays) => {
   let jointArray = [];
   arrays.forEach(array => {
@@ -50,11 +50,11 @@ var mergeArrays = (...arrays) => {
 
 var getArtifacts = async (req, res) => {
   try {
-    // find all circles that the user is a member of
+    // Find all circles that the user is a member of
     const circles = await Circle.find({members:req.user.id});
-    // find all artifact ids from within those circles (removing duplicates)
+    // Find all artifact ids from within those circles (removing duplicates)
     const artifactIds = mergeArrays(circles.map(circle => circle.artifacts));
-    // get all artifacts with corresponding ids from the database
+    // Get all artifacts with corresponding ids from the database
     const artifacts = await Artifact.find({'_id':{$in:artifactIds}});
     res.status(200).send(artifacts.map(artifact => artifact.toObject()));
   } catch (error) {
@@ -64,14 +64,14 @@ var getArtifacts = async (req, res) => {
 
 var deleteArtifact = async (req, res) => {
   try {
-    // get the requested artifact
+    // Get the requested artifact
     const artifact = await Artifact.findOne({_id:req.parmas.artifactId});
     if (artifact.uploader === req.user.id) {
-        // if the user is the uploader then delete as requested
+        // If the user is the uploader then delete as requested
         await Artifact.deleteOne({_id:req.params.id});
         res.status(200).send();
     } else {
-        // otherwise don't delete
+        // Otherwise don't delete and return an error response
         res.status(400).send({error:`You don't have permissions to delete this artifact`});
     };
   } catch (error) {

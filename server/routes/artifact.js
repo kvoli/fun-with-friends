@@ -1,7 +1,7 @@
 const express = require('express');
 const auth = require('../middleware/auth');
 const artifactRouter = express.Router();
-const artifactController = require('../controllers/artifact').default;
+const artifactController = require('../controllers/artifact');
 
 // Create a new artifact
 artifactRouter.post('/', auth, artifactController.createArtifact);
