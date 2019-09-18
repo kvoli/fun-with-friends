@@ -15,6 +15,7 @@ import { launchDeleteSnackbar} from '../actions/snackbar';
 const AlertDialog = () => {
   const dispatch = useDispatch();
   const artifact = useSelector(store => store.focusView.artifactDetailView.artifact)
+  const auth = useSelector(store => store.auth);
   const [outerOpen, setOuterOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -48,7 +49,7 @@ const AlertDialog = () => {
             onClick={(event) => {
               handleClose();
               dispatch(launchDeleteSnackbar());
-              dispatch(deleteArtifact(artifact));
+              dispatch(deleteArtifact(artifact, auth.token));
               dispatch(artifactSwitch(false))
             }}
             color="secondary"
