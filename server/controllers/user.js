@@ -9,14 +9,21 @@ var createUser = async (req, res) => {
     // Generate a new JWT token for the user and save it in the database
     const token = await user.generateAuthToken();
     // Respond with the token and user data
-    res.status(201).send({user:user.toObject(), token});
+    res.status(201).send({
+      user: user.toObject(),
+      token
+    });
   } catch (error) {
     // Handle different types of errors
     if (error.code === 11000) {
-      res.status(400).send({error:'Username or email already exists.'});
+      res.status(400).send({
+        error: 'Username or email already exists.'
+      });
     } else {
       // Purposefully send an unknown error message
-      res.status(400).send({error:'An unknown error has occured.'});
+      res.status(400).send({
+        error: 'An unknown error has occured.'
+      });
     }
   };
 };
@@ -25,24 +32,36 @@ var createUser = async (req, res) => {
 var loginUser = async (req, res) => {
   try {
     // Get the username and password from the request body and find the user in the database
-    const { username, password } = req.body;
+    const {
+      username,
+      password
+    } = req.body;
     const user = await User.findByCredentials(username, password);
     // Return an error response if the user couldn't be found in the database
     if (!user) {
-      return res.status(401).send({error:'Incorrect username or password.'});
+      return res.status(401).send({
+        error: 'Incorrect username or password.'
+      });
     }
     // Generate a new token and respond with the token and user data
     const token = await user.generateAuthToken();
-    res.send({ user:user.toObject(), token });
+    res.send({
+      user: user.toObject(),
+      token
+    });
   } catch (error) {
     // Purposefully send an unknown error message
-    res.status(400).send({error:'An unknown error as occured.'});
+    res.status(400).send({
+      error: 'An unknown error as occured.'
+    });
   };
 };
 
 // Get the current user
 var getCurrentUser = async (req, res) => {
-  res.status(200).send({user: await req.user.toObject()});
+  res.status(200).send({
+    user: await req.user.toObject()
+  });
 };
 
 // Logout the current user on the current device
@@ -55,7 +74,9 @@ var logoutUser = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     // Purposefully send an unknown error message
-    res.status(400).send({error:'An unknown error as occured.'});
+    res.status(400).send({
+      error: 'An unknown error as occured.'
+    });
   }
 };
 
@@ -67,14 +88,30 @@ var logoutUserAll = async (req, res) => {
     res.send()
   } catch (error) {
     // Purposefully send an unknown error message
-    res.status(400).send({error:'An unknown error as occured.'});
+    res.status(400).send({
+      error: 'An unknown error as occured.'
+    });
   }
 };
 
+//get all users in the database
+var getAllUsers = async (req, res) => {
+  try {
+    //get all users
+    const allUsers = await User.find();
+    res.status(200).send(allUsers.map(user => user.toObject()));
+  } catch (error) {
+    req.status(400).send({
+      error: 'Error found'
+    });
+  }
+}
+
 module.exports = {
   createUser,
-  loginUser, 
+  loginUser,
   getCurrentUser,
   logoutUser,
-  logoutUserAll
+  logoutUserAll,
+  getAllUsers
 };
