@@ -1,9 +1,12 @@
 import React from 'react';
 import { Container, Grid, Typography, Avatar } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { openCircleForm } from "../actions/circles"
+import AddCircleModal from './AddCircleModal';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -21,23 +24,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GroupIndex = () => {
+  const dispatch = useDispatch();
   const circles = useSelector(store => store.circles.circles);
   const classes = useStyles();
   const circleKeys = Object.keys(circles);
   console.log(circles);
-  const publicKeys = circleKeys.filter(key => circles[key].public === true)
-  const privateKeys = circleKeys.filter(key => circles[key].public === false)
+  const publicKeys = circleKeys.filter(key => circles[key].public === true || circles[key].public === "true");
+  const privateKeys = circleKeys.filter(key => circles[key].public === false || circles[key].public === "false");
 
   return (
+    <React.Fragment>
     <Container maxWidth="lg" justify="space-between">
       <Grid container direction="column">
         <Grid item className={classes.container}>
-          <Typography gutterButtom variant="h3" component="h1" cent>
+          <Typography variant="h3" component="h1">
             Your Circles
           </Typography>
           <Grid container>
             {privateKeys.map(key => (
-              <Grid item>
+              <Grid item key={key}>
                 <IconButton component={Link} to={'/circle/' + key}>
                   <Avatar
                     alt={circles[key].title}
@@ -48,16 +53,24 @@ const GroupIndex = () => {
                 <Typography align="center">{circles[key].title}</Typography>
               </Grid>
             ))}
+            <Grid item>
+                <IconButton onClick={() => dispatch(openCircleForm({circle: false}))} >
+                  <AddCircleIcon
+                    className={classes.bigAvatar}
+                  />
+                </IconButton>
+                <Typography align="center">Create  New Circle</Typography>
+              </Grid>
           </Grid>
         </Grid>
 
         <Grid item className={classes.container}>
-          <Typography gutterButtom variant="h3" component="h2" cent>
+          <Typography  variant="h3" component="h2">
             Public Circles
           </Typography>
           <Grid container>
             {publicKeys.map(key => (
-              <Grid item>
+              <Grid item key={key}>
                 <IconButton component={Link} to={'/circle/' + key}>
                   <Avatar
                     alt={circles[key].title}
@@ -72,6 +85,8 @@ const GroupIndex = () => {
         </Grid>
       </Grid>
     </Container>
+    <AddCircleModal />
+    </React.Fragment>
   );
 };
 

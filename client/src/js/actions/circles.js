@@ -1,4 +1,4 @@
-import { ADD_CIRCLE, ADD_CIRCLE_USER, REMOVE_CIRCLE, REMOVE_CIRCLE_USER } from "../constants/action-types.js";
+import { ADD_CIRCLE, ADD_CIRCLE_USER, REMOVE_CIRCLE, REMOVE_CIRCLE_USER, OPEN_CIRCLE_FORM } from "../constants/action-types.js";
 
 export const addCircle = (payload) => ({
 	type: ADD_CIRCLE,
@@ -19,3 +19,8 @@ export const removeCircleUser = (payload) => ({
 	type: REMOVE_CIRCLE_USER,
 	payload: payload
 });
+
+export const openCircleForm = (payload) => ({
+	type: OPEN_CIRCLE_FORM,
+	payload: payload,
+})

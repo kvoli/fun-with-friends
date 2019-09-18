@@ -12,6 +12,7 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "history": "^4.9.0",
     "jest-enzyme": "^7.1.1",
+    "material-ui-chip-input": "^2.0.0-beta.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-flexbox-grid": "^2.1.2",
@@ -25,6 +26,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "socket.io-client": "^2.2.0",
     "uuid": "^3.3.3"
   },
   "scripts": {
