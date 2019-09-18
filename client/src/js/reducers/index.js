@@ -5,6 +5,7 @@ import filters from "./filters";
 import auth from './auth';
 import launchSnackbar from './snackbar'
 import circles from './circles';
+// import socket from "./socket";
 
 export default combineReducers({
 	artifacts,
@@ -12,5 +13,6 @@ export default combineReducers({
   filters,
   auth,
   launchSnackbar,
+  // socket,
   circles,
 });

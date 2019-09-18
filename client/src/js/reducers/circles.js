@@ -2,17 +2,30 @@ import {
   ADD_CIRCLE,
   REMOVE_CIRCLE,
   ADD_CIRCLE_USER,
-  REMOVE_CIRCLE_USER
+  REMOVE_CIRCLE_USER,
+  OPEN_CIRCLE_FORM
 } from '../constants/action-types.js';
 
-const circleImages = ["https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif"]
+const circleImages = [
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-3.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-2.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-1.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-6.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-7.gif',
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-11.gif'
+];
 
 const initialState = {
+  circleForm: {
+    open: false,
+    circle: false
+  },
   circles: {
     id1: {
       id: 'id1',
@@ -84,12 +97,12 @@ const initialState = {
       admins: ['userid', 'userid'],
       members: [
         'userid',
-        'userid',    
         'userid',
         'userid',
         'userid',
         'userid',
         'userid',
+        'userid'
       ],
       artifacts: ['artifactID', 'artifactID'],
       public: true
@@ -133,14 +146,24 @@ const initialState = {
       ],
       artifacts: ['artifactID', 'artifactID'],
       public: true
-    },
+    }
   }
 };
 
 const circles = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CIRCLE:
-      return { ...state };
+      return {
+        ...state,
+        circles: {
+          ...state.circles, [action.payload.id] : {
+            ...action.payload
+          }
+        },
+        circleForm: {
+          ...state.circleForm
+        }
+      };
     case ADD_CIRCLE_USER:
       return {
         ...state,
@@ -168,6 +191,15 @@ const circles = (state = initialState, action) => {
               uid => uid !== action.payload.memberid
             )
           }
+        }
+      };
+    case OPEN_CIRCLE_FORM:
+      console.log(state);
+      return {
+        ...state,
+        circleForm: {
+          open: !state.circleForm.open,
+          circle: action.payload.circle
         }
       };
     default:
