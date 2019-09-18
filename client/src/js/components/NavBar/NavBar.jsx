@@ -10,6 +10,8 @@ import { NavProfile } from './NavProfile';
 import LoginButton from './LoginButton';
 import SignupButton from './SignupButton';
 import UserTitle from './UserTitle';
+import GroupIcon from '@material-ui/icons/Group';
+
 
 const useStyles = makeStyles(theme => ({
   navBar: {
@@ -32,6 +34,9 @@ export default function NavBar() {
         <Toolbar>
           <IconButton component={Link} to='/' edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <HomeRounded />
+          </IconButton>
+          <IconButton component={Link} to='/circles' edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <GroupIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Artifact Register
