@@ -10,14 +10,14 @@ export const addCircleUser = (payload) => ({
 	payload: payload,
 });
 
-export const removeCircle = (payload) => ({
-	type: REMOVE_CIRCLE,
-	payload: payload
+export const removeCircle = payload => ({
+  type: REMOVE_CIRCLE,
+  payload: payload
 });
 
-export const removeCircleUser = (payload) => ({
-	type: REMOVE_CIRCLE_USER,
-	payload: payload
+export const removeCircleUser = payload => ({
+  type: REMOVE_CIRCLE_USER,
+  payload: payload
 });
 
 export const openCircleForm = (payload) => ({

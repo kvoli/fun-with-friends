@@ -18,4 +18,7 @@ userRouter.post('/logout', auth, userController.logoutUser);
 // Logout the current user on all devices
 userRouter.post('/logout/all', auth, userController.logoutUserAll);
 
+// Get all users
+userRouter.get('/', userController.getAllUsers);
+
 module.exports = userRouter

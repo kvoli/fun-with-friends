@@ -5,7 +5,6 @@ import { CREATE_ARTIFACT_REQUEST, CREATE_ARTIFACT_SUCCESS, CREATE_ARTIFACT_FAILU
 import { DELETE_ARTIFACT_SUCCESS, DELETE_ARTIFACT_REQUEST, DELETE_ARTIFACT_FAILURE } from '../constants/artifact';
 import { CLEAR_ARTIFACTS } from '../constants/artifact';
 
-
 export const clearArtifacts = () => ({
   type: CLEAR_ARTIFACTS
 })
@@ -45,11 +44,11 @@ export const createArtifactFailure = () => ({
   type: CREATE_ARTIFACT_FAILURE
 });
 
-export const createArtifact = (artifact) => {
+export const createArtifact = (artifact, token) => {
   return (dispatch) => {
     dispatch(createArtifactRequest());
     const endpoint = '/api/artifact';
-    const parameters = { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(artifact) };
+    const parameters = { method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}, body:JSON.stringify(artifact) };
     fetch(endpoint, parameters)
       .then(response => response.json()
         .then(json => {
@@ -76,11 +75,11 @@ export const deleteArtifactFailure = () => ({
   type: DELETE_ARTIFACT_FAILURE
 });
 
-export const deleteArtifact = (artifact) => {
+export const deleteArtifact = (artifact, token) => {
   return (dispatch) => {
     dispatch(deleteArtifactRequest());
     const endpoint = `/api/artifact/${artifact.id}`;
-    const parameters = { method:'DELETE' };
+    const parameters = { method:'DELETE', headers: {'Authorization': `Bearer ${token}`} };
     fetch(endpoint, parameters)
       .then(response => {
         if (response.status === 200) {
@@ -105,10 +104,10 @@ export const getArtifactsFailure = () => ({
   type: GET_ARTIFACTS_FAILURE
 });
 
-export const getArtifacts = () => {
+export const getArtifacts = (token) => {
   return (dispatch) => {
     const endpoint = '/api/artifact';
-    const parameters = { method:'GET' };
+    const parameters = { method:'GET', headers:{'Authorization': `Bearer ${token}`} };
     fetch(endpoint, parameters)
       .then(response => response.json()
         .then(json => {
@@ -135,11 +134,11 @@ export const editFailure = () => ({
   type: EDIT_ARTIFACT_FAILURE
 });
 
-export const editArtifact = (artifact) => {
+export const editArtifact = (artifact, token) => {
   return (dispatch) => {
     dispatch(editRequest());
     const endpoint = `/api/artifact/${artifact.id}`;
-    const parameters = { method:'PUT', body: JSON.stringify(artifact), headers:{'Content-Type':'application/json'} };
+    const parameters = { method:'PUT', body: JSON.stringify(artifact), headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`} };
     fetch(endpoint, parameters)
       .then(response => { 
         if (response.status === 200) {

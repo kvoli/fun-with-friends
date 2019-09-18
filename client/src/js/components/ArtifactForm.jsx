@@ -54,6 +54,7 @@ const useStyles = makeStyles(theme => ({
 const ArtifactForm = () => {
   const classes = useStyles();
   const artifact = useSelector(store => store.focusView.artifactFormView.artifact);
+  const auth = useSelector(store => store.auth);
   const dispatch = useDispatch();
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload)
   const editMode = artifact ? true : false;
@@ -76,7 +77,7 @@ const ArtifactForm = () => {
   });
 
   const onSubmit = (data, e) =>  {
-    editMode ? dispatch(editArtifact(data)) : dispatch(createArtifact(data));
+    editMode ? dispatch(editArtifact(data, auth.token)) : dispatch(createArtifact(data, auth.token));
     editMode ? dispatch(launchEditSnackbar()) : dispatch(launchAddSnackbar());
     e.target.reset();
     dispatch(openArtifactForm(false))

@@ -7,7 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { openArtifactForm } from "../actions/index";
 import { getArtifacts } from "../actions/artifact";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -22,6 +22,7 @@ const UtilityBar = () => {
   
   const classes = useStyles();
   const dispatch = useDispatch();
+  const auth = useSelector(store => store.auth);
 
   return (
     <Grid container alignItems="center" justify="space-between">
@@ -33,7 +34,7 @@ const UtilityBar = () => {
           <IconButton onClick={() => dispatch(openArtifactForm(false))} className={classes.button} aria-label="add">
             <AddIcon />
           </IconButton>
-          <IconButton onClick={() => dispatch(getArtifacts())} className={classes.button} aria-label="refresh">
+          <IconButton onClick={() => dispatch(getArtifacts(auth.token))} className={classes.button} aria-label="refresh">
             <RefreshIcon />
           </IconButton>
           <IconButton className={classes.button} aria-label="menu">
