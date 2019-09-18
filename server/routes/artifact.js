@@ -15,4 +15,4 @@ artifactRouter.get('/', auth, artifactController.getArtifacts);
 // Delete an artifact
 artifactRouter.delete('/:artifactId', auth, artifactController.deleteArtifact);
 
-module.exports = artifactRouter
+module.exports = artifactRouter;
