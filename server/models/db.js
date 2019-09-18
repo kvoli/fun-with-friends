@@ -5,7 +5,8 @@ const DbConnection = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS
 const Options = {
   useNewUrlParser: true,
   useCreateIndex: true,
-}
+  useUnifiedTopology: true,
+};
 
 // Connect to the database with the connection url and options
 mongoose.connect(DbConnection, Options).then(

@@ -1,52 +1,49 @@
-import React from 'react';
-import useForm from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import useForm from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import {
   TextField,
   Button,
   CardActionArea,
   Typography,
   Switch
-} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import { CardMedia, Card, CardContent } from '@material-ui/core';
-import SaveIcon from '@material-ui/icons/Save';
-import { addCircle, openCircleForm } from '../actions/circles';
-import { uploadImage } from '../actions/artifact';
-import uuid from 'uuid';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import ChipInput from 'material-ui-chip-input';
+} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import { CardMedia, Card, CardContent } from "@material-ui/core";
+import SaveIcon from "@material-ui/icons/Save";
+import { addCircle, openCircleForm } from "../actions/circles";
+import { uploadImage } from "../actions/artifact";
+import uuid from "uuid";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import ChipInput from "material-ui-chip-input";
 
 const circleImages = [
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-3.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-2.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-1.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-6.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-7.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-11.gif'
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-3.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-2.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-1.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-6.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-7.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-11.gif"
 ];
 
 const selectRandom = () => {
-  return (
-    circleImages[Math.floor(Math.random() * circleImages.length) - 1]
-  )
-  
-}
+  return circleImages[Math.floor(Math.random() * circleImages.length) - 1];
+};
 
 const useStyles = makeStyles(theme => ({
   card: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 'auto'
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto"
   },
   cardContent: {
     flexGrow: 1,
@@ -55,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 10,
     paddingRight: 28,
     paddingLeft: 28,
-    '&:last-child': {
+    "&:last-child": {
       paddingBottom: 6
     }
   },
@@ -76,25 +73,25 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   },
   input: {
-    display: 'none'
+    display: "none"
   },
   inputBox: {
     spacing: theme.spacing(2)
   },
   inputField: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(2)
   },
   switchSpacing: {
-    margin: theme.spacing(4),
+    margin: theme.spacing(4)
   }
 }));
 
 function getSteps() {
   return [
-    'Circle Information',
-    'Customise Your Circle',
-    'Circle Permissions',
-    'Privacy'
+    "Circle Information",
+    "Customise Your Circle",
+    "Circle Permissions",
+    "Privacy"
   ];
 }
 
@@ -109,16 +106,16 @@ const AddCircle = () => {
   const dispatch = useDispatch();
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
   const steps = getSteps();
-  const randomPreview = selectRandom()
+  const randomPreview = selectRandom();
 
   const fillcircle = {
-    title: circle ? circle.title : '',
-    description: circle ? circle.desc : '',
-    text: circle ? circle.text : '',
-    date: circle ? circle.date : '',
-    src: '',
+    title: circle ? circle.title : "",
+    description: circle ? circle.desc : "",
+    text: circle ? circle.text : "",
+    date: circle ? circle.date : "",
+    src: "",
     id: circle ? circle.id : uuid.v4(),
-    previewImage: circle ? circle.previewImage : '',
+    previewImage: circle ? circle.previewImage : "",
     members: circle ? circle.members : [],
     admins: circle ? circle.admins : [],
     artifacts: circle ? circle.artifacts : [],
@@ -126,14 +123,21 @@ const AddCircle = () => {
   };
 
   const defaultImage =
-    'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
+    "https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png";
 
   const { register, handleSubmit, getValues } = useForm({
     defaultValues: fillcircle
   });
 
   const onSubmit = (data, e) => {
-    dispatch(addCircle({ ...data, admins: currentAdmins, members: currentMembers, artifacts: []}));
+    dispatch(
+      addCircle({
+        ...data,
+        admins: currentAdmins,
+        members: currentMembers,
+        artifacts: []
+      })
+    );
     e.preventDefault();
     e.target.reset();
     dispatch(openCircleForm(false));
@@ -211,7 +215,7 @@ const AddCircle = () => {
                 variant="outlined"
                 multiline
                 fullWidth
-                defaultValue={fillcircle.description || ''}
+                defaultValue={fillcircle.description || ""}
               />
             </Grid>
           </Grid>
@@ -303,36 +307,35 @@ const AddCircle = () => {
                 Set Circle Privacy Restrictions.
               </Typography>
               <Typography color="textSecondary">
-                note that public groups are viewable by all current
-                fun with friends registered members
+                note that public groups are viewable by all current fun with
+                friends registered members
               </Typography>
             </Grid>
             <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
             >
-            <Grid item>
-              <Switch
-                checked={circlePublic}
-                onChange={() => setCirclePublic(!circlePublic)}
-                value={circlePublic}
-                className={classes.switchSpacing}
-              />
-            </Grid>
-            <Grid item>
-              {circlePublic ? (
-                <Typography color="error" variant="button">
-                  Public
-                </Typography>
-              ) : (
-                <Typography color="primary" variant="button">
-                  Private
-                </Typography>
-              )}
-            </Grid>
-
+              <Grid item>
+                <Switch
+                  checked={circlePublic}
+                  onChange={() => setCirclePublic(!circlePublic)}
+                  value={circlePublic}
+                  className={classes.switchSpacing}
+                />
+              </Grid>
+              <Grid item>
+                {circlePublic ? (
+                  <Typography color="error" variant="button">
+                    Public
+                  </Typography>
+                ) : (
+                  <Typography color="primary" variant="button">
+                    Private
+                  </Typography>
+                )}
+              </Grid>
             </Grid>
           </Grid>
           <Grid container direction="row-reverse">

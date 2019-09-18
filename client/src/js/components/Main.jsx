@@ -17,7 +17,7 @@ function Main() {
   return (
     <main>
       <Switch>
-        <Route exact path='/' component={MainPage} onEnterAction={(auth.token) ? dispatch(getArtifacts()) : null}/>
+        <Route exact path='/' component={MainPage} onEnterAction={(auth.token) ? dispatch(getArtifacts(auth.token)) : null}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/circle/:id' component={GroupPage}/>
