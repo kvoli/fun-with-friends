@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { addCircleUser } from '../actions/circles';
+import { addCircleUser } from '../actions/circle';
 import { useDispatch } from 'react-redux';
 
 const AddMember = ({ circle }) => {
@@ -18,7 +18,7 @@ const AddMember = ({ circle }) => {
 
   function handleSubmit() {
     setMemberForm('');
-    dispatch(addCircleUser({ memberid: memberForm, circleid: circle }));
+    dispatch(addCircleUser({ userID: memberForm, circleID: circle }));
   }
 
   function handleChange(event) {

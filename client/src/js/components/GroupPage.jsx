@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import { t, u, v, w, x, y, z } from '../../SVG/SVGImages';
+// import { t, u, v, w, x, y, z } from '../../SVG/SVGImages';
 import {
   Typography,
   ListItem,
@@ -22,7 +22,7 @@ import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
 // import Chat from "./Chat";
 
-const headerImages = [t, u, v, w, x, y, z];
+// const headerImages = [t, u, v, w, x, y, z];
 
 const useStyles = makeStyles(theme => ({
   container: {

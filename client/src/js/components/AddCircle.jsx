@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { CardMedia, Card, CardContent } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
-import { addCircle, openCircleForm } from "../actions/circles";
+import { createCircle, openCircleForm } from "../actions/circles";
 import { uploadImage } from "../actions/artifact";
 import uuid from "uuid";
 import Stepper from "@material-ui/core/Stepper";
@@ -131,7 +131,7 @@ const AddCircle = () => {
 
   const onSubmit = (data, e) => {
     dispatch(
-      addCircle({
+      createCircle({
         ...data,
         admins: currentAdmins,
         members: currentMembers,

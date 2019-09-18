@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {  useDispatch } from 'react-redux';
-import { removeCircleUser } from '../actions/circles';
+import { removeCircleUser } from '../actions/circle';
 import {
   ListItemAvatar,
   Avatar,
