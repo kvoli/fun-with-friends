@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 90,
     marginLeft: 5,
     marginRight: 5,
-  }
+  },
 }));
 
 const SignupButton = () => {
@@ -20,7 +20,7 @@ const SignupButton = () => {
   if (auth.success) return null;
   // Otherwise render the SignupButton
   return (
-    <Button component={Link} to='/signup' variant="outlined" color="inherit" className={classes.signupButton}>
+    <Button component={Link} to='/signup' variant='outlined' color='inherit' className={classes.signupButton}>
       Signup
     </Button>
   );

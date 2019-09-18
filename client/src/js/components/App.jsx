@@ -14,6 +14,6 @@ const App = () => {
       <Footer />
     </React.Fragment>
   );
-}
+};
 
 export default App;

@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    background: '#3e4360'
+    background: '#3e4360',
   },
   form: {
     width: '100%',
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    background: '#3e4360'
+    background: '#3e4360',
   },
 }));
 
@@ -46,95 +46,107 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Sign Up
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                onChange = {(e) => {setFirstname(e.target.value)}}
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
+                onChange={e => {
+                  setFirstname(e.target.value);
+                }}
+                autoComplete='fname'
+                name='firstName'
+                variant='outlined'
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id='firstName'
+                label='First Name'
                 autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                onChange = {(e) => {setLastname(e.target.value)}}
-                variant="outlined"
+                onChange={e => {
+                  setLastname(e.target.value);
+                }}
+                variant='outlined'
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
+                id='lastName'
+                label='Last Name'
+                name='lastName'
+                autoComplete='lname'
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange = {(e) => {setEmail(e.target.value)}}
-                variant="outlined"
+                onChange={e => {
+                  setEmail(e.target.value);
+                }}
+                variant='outlined'
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>  
-              <TextField 
-                onChange = {(e) => {setUsername(e.target.value)}}
-                variant="outlined"
-                required
-                fullWidth
-                id="username"
-                label="username"
-                name="username"
-                autoComplete="username"
+                id='email'
+                label='Email Address'
+                name='email'
+                autoComplete='email'
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange = {(e) => {setPassword(e.target.value)}}
-                variant="outlined"
+                onChange={e => {
+                  setUsername(e.target.value);
+                }}
+                variant='outlined'
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                id='username'
+                label='username'
+                name='username'
+                autoComplete='username'
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={e => {
+                  setPassword(e.target.value);
+                }}
+                variant='outlined'
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
               />
             </Grid>
           </Grid>
           <Button
-            onClick = {(e) => {dispatch(signup(firstname, lastname, email, username, password))}}
+            onClick={e => {
+              dispatch(signup(firstname, lastname, email, username, password));
+            }}
             fullWidth
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             className={classes.submit}
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justify='flex-end'>
             <Grid item>
-              <Link to="/login" variant="body2">
+              <Link to='/login' variant='body2'>
                 Have an account? Log in
               </Link>
             </Grid>
@@ -143,6 +155,6 @@ const SignUp = () => {
       </div>
     </Container>
   );
-}
+};
 
 export default SignUp;

@@ -91,7 +91,7 @@ const AddCircle = () => {
   const randomPreview = selectRandom();
 
   const user = useSelector(store => store.auth.user.username);
-  const token = useSelector(store => store.auth.token)
+  const token = useSelector(store => store.auth.token);
   const circle = useSelector(store => store.circle.circleForm.circle);
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
 
@@ -122,12 +122,15 @@ const AddCircle = () => {
 
   const onSubmit = (data, e) => {
     dispatch(
-      addCircle({
-        ...data,
-        admins: currentAdmins,
-        members: currentMembers,
-        artifacts: [],
-      }, token)
+      addCircle(
+        {
+          ...data,
+          admins: currentAdmins,
+          members: currentMembers,
+          artifacts: [],
+        },
+        token
+      )
     );
     e.preventDefault();
     e.target.reset();

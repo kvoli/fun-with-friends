@@ -17,7 +17,7 @@ export const getAllUsersFailure = () => ({
 export const getAllUsers = token => {
   return dispatch => {
     dispatch(getAllUsersRequest());
-    const endpoint = '/api/user'; 
+    const endpoint = '/api/user';
     const parameters = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },

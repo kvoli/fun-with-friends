@@ -1,4 +1,8 @@
-import { GET_ALL_USERS_SUCCESS, GET_ALL_USERS_FAILURE, GET_ALL_USERS_REQUEST } from '../constants/circle';
+import {
+  GET_ALL_USERS_SUCCESS,
+  // GET_ALL_USERS_FAILURE,
+  // GET_ALL_USERS_REQUEST
+} from '../constants/circle';
 
 const initialState = {};
 

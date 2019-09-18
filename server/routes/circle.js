@@ -18,4 +18,4 @@ circleRouter.post('/:id/member', auth, circleController.addMember);
 // delete a member to a circle
 circleRouter.delete('/:id/member', auth, circleController.deleteMember);
 
-module.exports = circleRouter
+module.exports = circleRouter;

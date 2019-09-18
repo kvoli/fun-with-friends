@@ -3,13 +3,7 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { useSelector } from 'react-redux';
 
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText
-} from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
 
 const Chat = () => {
   const [messages, setMessages] = React.useState([]);
@@ -43,13 +37,12 @@ const Chat = () => {
 
   socket.on('message', onReceivedMessage);
 
-
   function onSend(message) {
     socket.emit('message', message);
   }
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth='xl'>
       <List>
         {messages.map(msg => (
           <ListItem key={msg}>
@@ -60,17 +53,17 @@ const Chat = () => {
           </ListItem>
         ))}
       </List>
-      <ListItem key="textentry">
+      <ListItem key='textentry'>
         <ListItemAvatar>
           <Avatar>?</Avatar>
         </ListItemAvatar>
         <form onSubmit={handleSubmit}>
           <TextField
-            id="outlined-dense"
-            label="Circle Chat"
-            placeholder="type to chat"
-            margin="dense"
-            variant="outlined"
+            id='outlined-dense'
+            label='Circle Chat'
+            placeholder='type to chat'
+            margin='dense'
+            variant='outlined'
             onChange={handleChange}
             value={current}
             onKeyDown={onKeyDown}

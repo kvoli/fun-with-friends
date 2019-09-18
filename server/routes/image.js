@@ -6,4 +6,4 @@ const parse = require('../middleware/upload');
 
 imageRouter.post('/upload', parse.single('image'), imageController.uploadImage);
 
-module.exports = imageRouter
+module.exports = imageRouter;

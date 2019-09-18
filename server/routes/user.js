@@ -21,4 +21,4 @@ userRouter.post('/logout/all', auth, userController.logoutUserAll);
 // Get all users
 userRouter.get('/', userController.getAllUsers);
 
-module.exports = userRouter
+module.exports = userRouter;

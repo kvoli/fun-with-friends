@@ -8,7 +8,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { logout } from '../../actions/auth';
 
 export const NavProfile = () => {
-
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,17 +27,11 @@ export const NavProfile = () => {
   // Otherwise render the LoginButton
   return (
     <div>
-      <IconButton
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="inherit"
-      >
+      <IconButton aria-label='account of current user' aria-controls='menu-appbar' aria-haspopup='true' onClick={handleMenu} color='inherit'>
         <AccountCircle />
       </IconButton>
       <Menu
-        id="menu-appbar"
+        id='menu-appbar'
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'top',
@@ -52,13 +45,15 @@ export const NavProfile = () => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={(e) => {
-          dispatch(logout(auth.token));
-          handleClose();
-        }}>
+        <MenuItem
+          onClick={e => {
+            dispatch(logout(auth.token));
+            handleClose();
+          }}
+        >
           Logout
         </MenuItem>
       </Menu>
     </div>
-  )
-}
+  );
+};

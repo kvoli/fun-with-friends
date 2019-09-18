@@ -11,12 +11,13 @@ const Options = {
 // Connect to the database with the connection url and options
 mongoose.connect(DbConnection, Options).then(
   () => {
-    console.log('Database: Connected'); 
-  }, (err) => {
+    console.log('Database: Connected');
+  },
+  err => {
     console.log('Database: Failed to Connect');
   }
 );
 
 // Load schemas and map to Mongoose models
-require('./user')
-require('./artifact')
+require('./user');
+require('./artifact');

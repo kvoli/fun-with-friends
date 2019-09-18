@@ -123,7 +123,7 @@ const circle = (state = initialState, action) => {
       return {
         circles: action.payload,
         circleForm: {
-          ...state.circleForm
+          ...state.circleForm,
         },
       };
     case ADD_CIRCLE_SUCCESS:

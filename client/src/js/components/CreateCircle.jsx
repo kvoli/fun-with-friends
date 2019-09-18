@@ -36,7 +36,6 @@ function getStepContent(step) {
   }
 }
 
-
 const CreateCircle = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -92,7 +91,7 @@ const CreateCircle = () => {
           const stepProps = {};
           const labelProps = {};
           if (isStepOptional(index)) {
-            labelProps.optional = <Typography variant="caption">Optional</Typography>;
+            labelProps.optional = <Typography variant='caption'>Optional</Typography>;
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
@@ -107,9 +106,7 @@ const CreateCircle = () => {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
+            <Typography className={classes.instructions}>All steps completed - you&apos;re finished</Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
             </Button>
@@ -122,22 +119,12 @@ const CreateCircle = () => {
                 Back
               </Button>
               {isStepOptional(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                  className={classes.button}
-                >
+                <Button variant='contained' color='primary' onClick={handleSkip} className={classes.button}>
                   Skip
                 </Button>
               )}
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
+              <Button variant='contained' color='primary' onClick={handleNext} className={classes.button}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </div>
@@ -146,8 +133,6 @@ const CreateCircle = () => {
       </div>
     </div>
   );
-}
-
-
+};
 
 export default CreateCircle;

@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 function renderInput(inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps;
@@ -42,7 +42,7 @@ function renderSuggestion(suggestionProps) {
       {...itemProps}
       key={suggestion.label}
       selected={isHighlighted}
-      component="div"
+      component='div'
       style={{
         fontWeight: isSelected ? 500 : 400,
       }}
@@ -70,8 +70,7 @@ function getSuggestions(value, suggestions, { showEmpty = false } = {}) {
   return inputLength === 0 && !showEmpty
     ? []
     : suggestions.filter(suggestion => {
-        const keep =
-          count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+        const keep = count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
 
         if (keep) {
           count += 1;
@@ -83,7 +82,7 @@ function getSuggestions(value, suggestions, { showEmpty = false } = {}) {
 
 function DownshiftMultiple(props) {
   const { classes } = props;
-  const users = useSelector(store => store.user).map(user => Object.defineProperty(user, label, user.username))
+  const users = useSelector(store => store.user).map(user => Object.defineProperty(user, label, user.username));
   const [inputValue, setInputValue] = React.useState('');
   const [selectedItem, setSelectedItem] = React.useState([]);
 
@@ -113,21 +112,8 @@ function DownshiftMultiple(props) {
   };
 
   return (
-    <Downshift
-      id="downshift-multiple"
-      inputValue={inputValue}
-      onChange={handleChange}
-      selectedItem={selectedItem}
-    >
-      {({
-        getInputProps,
-        getItemProps,
-        getLabelProps,
-        isOpen,
-        inputValue: inputValue2,
-        selectedItem: selectedItem2,
-        highlightedIndex,
-      }) => {
+    <Downshift id='downshift-multiple' inputValue={inputValue} onChange={handleChange} selectedItem={selectedItem}>
+      {({ getInputProps, getItemProps, getLabelProps, isOpen, inputValue: inputValue2, selectedItem: selectedItem2, highlightedIndex }) => {
         const { onBlur, onChange, onFocus, ...inputProps } = getInputProps({
           onKeyDown: handleKeyDown,
           placeholder: 'Select multiple countries',
@@ -141,15 +127,7 @@ function DownshiftMultiple(props) {
               label: 'Countries',
               InputLabelProps: getLabelProps(),
               InputProps: {
-                startAdornment: selectedItem.map(item => (
-                  <Chip
-                    key={item}
-                    tabIndex={-1}
-                    label={item}
-                    className={classes.chip}
-                    onDelete={handleDelete(item)}
-                  />
-                )),
+                startAdornment: selectedItem.map(item => <Chip key={item} tabIndex={-1} label={item} className={classes.chip} onDelete={handleDelete(item)} />),
                 onBlur,
                 onChange: event => {
                   handleInputChange(event);
@@ -169,7 +147,7 @@ function DownshiftMultiple(props) {
                     itemProps: getItemProps({ item: suggestion.label }),
                     highlightedIndex,
                     selectedItem: selectedItem2,
-                  }),
+                  })
                 )}
               </Paper>
             ) : null}
@@ -218,7 +196,5 @@ const useStyles = makeStyles(theme => ({
 export default function IntegrationDownshift() {
   const classes = useStyles();
 
-  return (
-      <DownshiftMultiple classes={classes} />
-  );
+  return <DownshiftMultiple classes={classes} />;
 }

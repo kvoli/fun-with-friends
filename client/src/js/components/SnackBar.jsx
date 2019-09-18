@@ -10,19 +10,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
-    success: {
-      backgroundColor: green[600],
-    }
-  }))
+  success: {
+    backgroundColor: green[600],
+  },
+}));
 function MySnackbarContentWrapper(props) {
   const { message, onClose } = props;
   const style = useStyles();
   return (
     <SnackbarContent
-    className={clsx(style["success"], "success")}
-    message = {message}
-    action={[
-        <IconButton key="close" aria-label="close" onClick={onClose}>
+      className={clsx(style['success'], 'success')}
+      message={message}
+      action={[
+        <IconButton key='close' aria-label='close' onClick={onClose}>
           <CloseIcon />
         </IconButton>,
       ]}
@@ -53,10 +53,7 @@ export default function CustomizedSnackbars() {
         autoHideDuration={6000}
         onClose={handleClose}
       >
-        <MySnackbarContentWrapper
-          onClose={handleClose}
-          message= {message} 
-        />
+        <MySnackbarContentWrapper onClose={handleClose} message={message} />
       </Snackbar>
     </div>
   );

@@ -8,7 +8,7 @@ socketClient.emit('userJoined', userID);
 
 const initialState = {
   chatSocket: socketClient,
-  userID: x
+  userID: x,
 };
 
 const socket = (state = initialState, action) => {
