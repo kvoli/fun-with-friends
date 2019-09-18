@@ -14,7 +14,8 @@ import {
   ListItemSecondaryAction,
   Grid,
   Avatar,
-  IconButton
+  IconButton,
+  Box
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddMember from './AddMember';
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(4)
   },
   header: {
-    maxHeight: 450,
+    maxHeight: '50vh'
   }
 }));
 
@@ -52,8 +53,10 @@ const GroupPage = props => {
             {circle.description}
           </Typography>
         </Grid>
-        <Grid item >
-          <img src={headerImages[Math.round(Math.random() * 6)]} alt=""/>
+        <Grid item>
+          <Box>
+            <img src={y} alt="" />
+          </Box>
         </Grid>
         <Grid item className={classes.container}>
           <Grid container spacing={4}>
