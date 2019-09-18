@@ -41,7 +41,7 @@ var deleteCircle = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     res.status(400).send({
-      error: "Unable to delete circle"
+      error: 'Unable to delete circle'
     });
   };
 };
@@ -77,13 +77,12 @@ var addMember = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     res.status(400).send({
-      error: "unable to update circle"
+      error: 'unable to update circle'
     });
   }
 }
 
 var deleteMember = async (req, res) => {
-  console.log("triggered");
   try {
     const deletedMember = req.body.id;
     console.log(deletedMember);
@@ -108,7 +107,7 @@ var deleteMember = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     res.status(400).send({
-      error: "unable to update circle"
+      error: 'unable to update circle'
     });
   }
 }
