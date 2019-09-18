@@ -134,11 +134,11 @@ export const editFailure = () => ({
   type: EDIT_ARTIFACT_FAILURE
 });
 
-export const editArtifact = (artifact) => {
+export const editArtifact = (artifact, token) => {
   return (dispatch) => {
     dispatch(editRequest());
     const endpoint = `/api/artifact/${artifact.id}`;
-    const parameters = { method:'PUT', body: JSON.stringify(artifact), headers:{'Content-Type':'application/json'} };
+    const parameters = { method:'PUT', body: JSON.stringify(artifact), headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`} };
     fetch(endpoint, parameters)
       .then(response => { 
         if (response.status === 200) {
