@@ -6,14 +6,27 @@
   "dependencies": {
     "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.4.1",
+<<<<<<< HEAD
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "history": "^4.10.0",
+=======
+    "babel": "^6.23.0",
+    "babel-jest": "^24.9.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "history": "^4.10.1",
+>>>>>>> kvoli-grouppage
     "jest-enzyme": "^7.1.1",
+    "material-ui-chip-input": "^2.0.0-beta.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-flexbox-grid": "^2.1.2",
+<<<<<<< HEAD
     "react-hook-form": "^3.23.7",
+=======
+    "react-hook-form": "^3.23.8",
+>>>>>>> kvoli-grouppage
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.1.1",
@@ -23,6 +36,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "socket.io-client": "^2.2.0",
     "uuid": "^3.3.3"
   },
   "scripts": {
