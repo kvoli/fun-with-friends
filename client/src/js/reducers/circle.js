@@ -1,10 +1,25 @@
+import { OPEN_CIRCLE_FORM } from '../constants/action-types.js';
+
 import {
-  ADD_CIRCLE,
-  REMOVE_CIRCLE,
-  ADD_CIRCLE_USER,
-  REMOVE_CIRCLE_USER,
-  OPEN_CIRCLE_FORM
-} from '../constants/action-types.js';
+  // GET_ALL_USERS_SUCCESS,
+  // GET_ALL_USERS_FAILURE,
+  // GET_ALL_CIRCLES_FAILURE,
+  GET_ALL_CIRCLES_SUCCESS,
+  // ADD_CIRCLE_FAILURE,
+  ADD_CIRCLE_SUCCESS,
+  // DELETE_CIRCLE_FAILURE,
+  DELETE_CIRCLE_SUCCESS,
+  // DELETE_CIRCLE_USER_FAILURE,
+  DELETE_CIRCLE_USER_SUCCESS,
+  ADD_CIRCLE_USER_SUCCESS,
+  // ADD_CIRCLE_USER_FAILURE,
+  // GET_ALL_CIRCLES_REQUEST,
+  // GET_ALL_USERS_REQUEST,
+  // ADD_CIRCLE_REQUEST,
+  // DELETE_CIRCLE_REQUEST,
+  // ADD_CIRCLE_USER_REQUEST,
+  // DELETE_CIRCLE_USER_REQUEST,
+} from '../constants/circle';
 
 const circleImages = [
   'https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif',
@@ -18,13 +33,13 @@ const circleImages = [
   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-1.gif',
   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-6.gif',
   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-7.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-11.gif'
+  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-11.gif',
 ];
 
 const initialState = {
   circleForm: {
     open: false,
-    circle: false
+    circle: false,
   },
   circles: {
     id1: {
@@ -35,17 +50,9 @@ const initialState = {
       src: '...',
       previewImage: circleImages[0],
       admins: ['userid', 'userid'],
-      members: [
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid'
-      ],
+      members: ['userid', 'userid', 'userid', 'userid', 'userid', 'userid', 'userid'],
       artifacts: ['artifactID', 'artifactID'],
-      public: false
+      public: false,
     },
     id2: {
       id: 'id2',
@@ -55,17 +62,9 @@ const initialState = {
       src: '...',
       previewImage: circleImages[1],
       admins: ['userid', 'userid'],
-      members: [
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid'
-      ],
+      members: ['userid', 'userid', 'userid', 'userid', 'userid', 'userid', 'userid'],
       artifacts: ['artifactID', 'artifactID'],
-      public: false
+      public: false,
     },
     id3: {
       id: 'id3',
@@ -75,17 +74,9 @@ const initialState = {
       src: '...',
       previewImage: circleImages[2],
       admins: ['userid', 'userid'],
-      members: [
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid'
-      ],
+      members: ['userid', 'userid', 'userid', 'userid', 'userid', 'userid', 'userid'],
       artifacts: ['artifactID', 'artifactID'],
-      public: true
+      public: true,
     },
     id4: {
       id: 'id4',
@@ -95,17 +86,9 @@ const initialState = {
       src: '...',
       previewImage: circleImages[4],
       admins: ['userid', 'userid'],
-      members: [
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid'
-      ],
+      members: ['userid', 'userid', 'userid', 'userid', 'userid', 'userid', 'userid'],
       artifacts: ['artifactID', 'artifactID'],
-      public: true
+      public: true,
     },
     id5: {
       id: 'id5',
@@ -115,17 +98,9 @@ const initialState = {
       src: '...',
       previewImage: circleImages[3],
       admins: ['userid', 'userid'],
-      members: [
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid'
-      ],
+      members: ['userid', 'userid', 'userid', 'userid', 'userid', 'userid', 'userid'],
       artifacts: ['artifactID', 'artifactID'],
-      public: true
+      public: true,
     },
     id6: {
       id: 'id6',
@@ -135,76 +110,72 @@ const initialState = {
       src: '...',
       previewImage: circleImages[5],
       admins: ['userid', 'userid'],
-      members: [
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid',
-        'userid'
-      ],
+      members: ['userid', 'userid', 'userid', 'userid', 'userid', 'userid', 'userid'],
       artifacts: ['artifactID', 'artifactID'],
-      public: true
-    }
-  }
+      public: true,
+    },
+  },
 };
 
-const circles = (state = initialState, action) => {
+const circle = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CIRCLE:
+    case GET_ALL_CIRCLES_SUCCESS:
       return {
-        ...state,
-        circles: {
-          ...state.circles, [action.payload.id] : {
-            ...action.payload
-          }
-        },
+        circles: action.payload,
         circleForm: {
           ...state.circleForm
-        }
+        },
       };
-    case ADD_CIRCLE_USER:
+    case ADD_CIRCLE_SUCCESS:
+      return {
+        ...state,
+        circles: {
+          ...state.circles,
+          [action.payload.id]: {
+            ...action.payload,
+          },
+        },
+        circleForm: {
+          ...state.circleForm,
+        },
+      };
+    case ADD_CIRCLE_USER_SUCCESS:
       return {
         ...state,
         circles: {
           ...state.circles,
           [action.payload.circleid]: {
             ...state.circles[action.payload.circleid],
-            members: [
-              ...state.circles[action.payload.circleid].members,
-              action.payload.memberid
-            ]
-          }
-        }
+            members: [...state.circles[action.payload.circleid].members, action.payload.memberid],
+          },
+        },
       };
-    case REMOVE_CIRCLE:
-      return {};
-    case REMOVE_CIRCLE_USER:
+    case DELETE_CIRCLE_SUCCESS:
+      return {
+        ...state,
+      };
+    case DELETE_CIRCLE_USER_SUCCESS:
       return {
         ...state,
         circles: {
           ...state.circles,
           [action.payload.circleid]: {
             ...state.circles[action.payload.circleid],
-            members: [...state.circles[action.payload.circleid].members].filter(
-              uid => uid !== action.payload.memberid
-            )
-          }
-        }
+            members: [...state.circles[action.payload.circleid].members].filter(uid => uid !== action.payload.memberid),
+          },
+        },
       };
     case OPEN_CIRCLE_FORM:
-      console.log(state);
       return {
         ...state,
         circleForm: {
           open: !state.circleForm.open,
-          circle: action.payload.circle
-        }
+          circle: action.payload.circle,
+        },
       };
     default:
       return state;
   }
 };
 
-export default circles;
+export default circle;

@@ -4,8 +4,8 @@ import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import { IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {  useDispatch } from 'react-redux';
-import { removeCircleUser } from '../actions/circle';
+import {  useDispatch, useSelector } from 'react-redux';
+import { deleteCircleUser } from '../actions/circle';
 import {
   ListItemAvatar,
   Avatar,
@@ -14,6 +14,7 @@ import {
 
 const RemoveMember = ({props}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const token = useSelector(store => store.auth.token)
   const dispatch = useDispatch();
   const circle = props.circle;
   const member = props.member;
@@ -38,7 +39,7 @@ const RemoveMember = ({props}) => {
               <IconButton
                 onClick={() =>
                   dispatch(
-                    removeCircleUser({ circleid: circle, memberid: member })
+                    deleteCircleUser(member, circle, token )
                   )
                 }
               >

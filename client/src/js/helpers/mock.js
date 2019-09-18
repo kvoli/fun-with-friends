@@ -1,3 +1,4 @@
+
 export default function authenticate(username, password) {
   if (username == 'johnsmith' && password == 'originality') {
     return {
@@ -15,3 +16,4 @@ export default function authenticate(username, password) {
     };
   };
 };
+

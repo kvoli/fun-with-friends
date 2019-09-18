@@ -99,6 +99,7 @@ var getAllUsers = async (req, res) => {
   try {
     //get all users
     const allUsers = await User.find();
+    console.log(allUsers)
     res.status(200).send(allUsers.map(user => user.toObject()));
   } catch (error) {
     req.status(400).send({

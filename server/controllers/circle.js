@@ -21,13 +21,12 @@ var createCircle = async (req, res) => {
 var getAllCircles = async (req, res) => {
   try {
     //get all the circles in the database that contain the user as a member
-    const circles = await Circle.find({
-      members: req.body.id
-    });
+    const circles = await Circle.find({ members: req.user.id });
+    
     res.status(200).send(circles.map(circle => circle.toObject()));
   } catch (error) {
     res.status(400).send({
-      error: 'Unable to get circles.'
+      error: 'Unable to get circles.',
     });
   };
 };

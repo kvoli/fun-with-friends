@@ -1,11 +1,11 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { addCircleUser } from '../actions/circle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddMember = ({ circle }) => {
   const [memberForm, setMemberForm] = React.useState('');
-  console.log(circle);
+  const token = useSelector(store => store.auth.token);
   const dispatch = useDispatch();
 
   const onKeyDown = event => {
@@ -18,24 +18,23 @@ const AddMember = ({ circle }) => {
 
   function handleSubmit() {
     setMemberForm('');
-    dispatch(addCircleUser({ userID: memberForm, circleID: circle }));
+    dispatch(addCircleUser(memberForm, circle, token));
   }
 
   function handleChange(event) {
     event.preventDefault();
     event.stopPropagation();
     setMemberForm(event.target.value);
-    console.log(memberForm);
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        id="outlined-dense"
-        label="Add Member"
+        id='outlined-dense'
+        label='Add Member'
         placeholder="enter a user's name"
-        margin="dense"
-        variant="outlined"
+        margin='dense'
+        variant='outlined'
         onChange={handleChange}
         value={memberForm}
         onKeyDown={onKeyDown}
