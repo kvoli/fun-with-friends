@@ -19,7 +19,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
-import Chat from "./Chat";
+// import Chat from "./Chat";
 
 const headerImages = [t, u, v, w, x, y, z];
 
@@ -130,7 +130,7 @@ const GroupPage = props => {
           </Grid>
         </Grid>
       </Grid>
-      <Chat />
+      {/* <Chat /> */}
     </Container>
   );
 };
