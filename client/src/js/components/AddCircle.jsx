@@ -10,7 +10,7 @@ import uuid from 'uuid';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import ChipInput from 'material-ui-chip-input';
+import AddCircleMembers from './AddCircleMembers';
 import { uploadImage } from '../actions/artifact';
 import { addCircle, openCircleForm } from '../actions/circle';
 
@@ -78,7 +78,27 @@ const useStyles = makeStyles(theme => ({
   switchSpacing: {
     margin: theme.spacing(4),
   },
+  memberSelect: {
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(1.5),
+  },
+  bottom: {
+    flex: 1,
+    marginBottom: '36',
+  },
 }));
+
+const getID = user => {
+  return user[0].id;
+};
+
+const getUserID = (userlist, username) => {
+  return getID(userlist.filter(user => user.username === username));
+};
+
+const mapUserNameToID = (userlist, usernames) => {
+  return usernames.map(username => getUserID(userlist, username));
+};
 
 function getSteps() {
   return ['Circle Information', 'Customise Your Circle', 'Circle Permissions', 'Privacy'];
@@ -90,13 +110,14 @@ const AddCircle = () => {
   const steps = getSteps();
   const randomPreview = selectRandom();
 
-  const user = useSelector(store => store.auth.user.username);
+  const user = useSelector(store => store.auth.user);
   const token = useSelector(store => store.auth.token);
   const circle = useSelector(store => store.circle.circleForm.circle);
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
+  const allUsers = useSelector(store => store.user);
 
-  const [currentMembers, setCurrentMembers] = React.useState([user]);
-  const [currentAdmins, setCurrentAdmins] = React.useState([user]);
+  const [currentMembers, setCurrentMembers] = React.useState([user.username]);
+  const [currentAdmins, setCurrentAdmins] = React.useState([user.username]);
   const [circlePublic, setCirclePublic] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -125,8 +146,8 @@ const AddCircle = () => {
       addCircle(
         {
           ...data,
-          admins: currentAdmins,
-          members: currentMembers,
+          admins: mapUserNameToID(allUsers, currentAdmins),
+          members: mapUserNameToID(allUsers, currentMembers),
           artifacts: [],
         },
         token
@@ -160,7 +181,7 @@ const AddCircle = () => {
               <TextField name='title' label='Circle Name' inputRef={register({ required: true })} placeholder='Smith Inner Circle' variant='outlined' />
             </Grid>
             <Grid item>
-              <Typography variant='h6'>Enter a description for your Circle below</Typography>
+              <Typography variant='h6'>Enter a description for your Circle</Typography>
             </Grid>
             <Grid item>
               <TextField
@@ -203,33 +224,22 @@ const AddCircle = () => {
               </CardActionArea>
             </Grid>
           </Grid>
-          <Grid container direction='column' justify='flex-start' alignItems='stretch' className={activeStep === 2 ? classes.inputBox : classes.input}>
-            <Grid item>
-              <Typography variant='h5'>Search and select members to join your circle</Typography>
+          <Grid container direction='column' justify='center' alignItems='stretch' className={activeStep === 2 ? classes.inputBox : classes.input}>
+            <Grid container direction='column' justify='center' alignItems='stretch' className={classes.memberSelect}>
+              <Grid item>
+                <Typography variant='h6'>Select members to join your circle</Typography>
+              </Grid>
+              <Grid item>
+                <AddCircleMembers field={currentMembers} setField={setCurrentMembers} label='enter members username' name='members' />
+              </Grid>
             </Grid>
-            <Grid item>
-              <ChipInput
-                value={currentMembers}
-                onAdd={chip => setCurrentMembers([...currentMembers, chip])}
-                onDelete={chip => setCurrentMembers(currentMembers.filter(x => x !== chip))}
-                label='Select Members To Add'
-                inputRef={register({ required: true })}
-                name='members'
-                className={classes.inputField}
-                fullWidth
-              />
-            </Grid>
-            <Grid item>
-              <ChipInput
-                value={currentAdmins}
-                onAdd={chip => setCurrentAdmins([...currentAdmins, chip])}
-                onDelete={chip => setCurrentAdmins(currentAdmins.filter(x => x !== chip))}
-                label='Select Admins to Add)'
-                inputRef={register({ required: true })}
-                name='admins'
-                className={classes.inputField}
-                fullWidth
-              />
+            <Grid container direction='column' justify='center' alignItems='stretch' className={classes.memberSelect}>
+              <Grid item>
+                <Typography variant='h6'>Select admins to join your circle</Typography>
+              </Grid>
+              <Grid item>
+                <AddCircleMembers field={currentAdmins} setField={setCurrentAdmins} label='enter admins username' name='admins' />
+              </Grid>
             </Grid>
           </Grid>
           <Grid container direction='column' justify='flex-start' alignItems='stretch' className={activeStep === 3 ? classes.inputBox : classes.input}>
@@ -254,7 +264,7 @@ const AddCircle = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container direction='row-reverse'>
+          <Grid container direction='row-reverse' className={classes.bottom}>
             {activeStep === steps.length - 1 ? (
               <Grid item>
                 <input name='submit' type='submit' className={classes.input} />

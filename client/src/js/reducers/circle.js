@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { OPEN_CIRCLE_FORM } from '../constants/action-types';
 
 import {
@@ -19,6 +20,7 @@ import {
   // DELETE_CIRCLE_REQUEST,
   // ADD_CIRCLE_USER_REQUEST,
   // DELETE_CIRCLE_USER_REQUEST,
+  ATTATCH_ARTIFACT,
 } from '../constants/circle';
 
 const circleImages = [
@@ -117,11 +119,17 @@ const initialState = {
   },
 };
 
+const arrayToObject = array =>
+  array.reduce((obj, item) => {
+    obj[item.id] = item;
+    return obj;
+  }, {});
+
 const circle = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_CIRCLES_SUCCESS:
       return {
-        circles: action.payload,
+        circles: arrayToObject(action.payload),
         circleForm: {
           ...state.circleForm,
         },
@@ -153,6 +161,10 @@ const circle = (state = initialState, action) => {
     case DELETE_CIRCLE_SUCCESS:
       return {
         ...state,
+        circles: [delete state.circles[action.payload]],
+        circleForm: {
+          ...state.circleForm,
+        },
       };
     case DELETE_CIRCLE_USER_SUCCESS:
       return {
@@ -171,6 +183,17 @@ const circle = (state = initialState, action) => {
         circleForm: {
           open: !state.circleForm.open,
           circle: action.payload.circle,
+        },
+      };
+    case ATTATCH_ARTIFACT:
+      return {
+        ...state,
+        circles: {
+          ...state.circles,
+          [action.payload.circleid]: {
+            ...state.circles[action.payload.circleid],
+            artifacts: [...state.circles[action.payload.circleid].artifacts, action.payload.artifactid],
+          },
         },
       };
     default:

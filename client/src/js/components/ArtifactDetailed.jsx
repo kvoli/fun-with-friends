@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +12,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import DeletePopup from './DeletePopup';
 import LoadingCircle from './LoadingCircle';
 import { openArtifactForm, artifactSwitch } from '../actions/index';
@@ -51,14 +52,13 @@ const relatives = [
   { name: 'Rose McClernon', about: 'Teacher | Wife | 1896-1941' },
 ];
 
-const ArtifactDetailed = () => {
+const ArtifactDetailed = ({ artifact }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const artifact = useSelector(store => store.focusView.artifactDetailView.artifact);
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
 
   return (
-    <Grid container justify='center' className={classes.contained}>
+    <Grid container justify='center'>
       {artifact ? (
         <Card>
           <CardMedia

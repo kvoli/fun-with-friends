@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,7 +11,7 @@ const ArtifactModal = () => {
 
   return (
     <Dialog open={open} onClose={() => dispatch(artifactSwitch(false))} aria-labelledby='scroll-dialog-title' transitionDuration={250}>
-      <ArtifactDetailed props={artifact} />
+      <ArtifactDetailed artifact={artifact} />
     </Dialog>
   );
 };

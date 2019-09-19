@@ -15,12 +15,19 @@ import {
   DELETE_CIRCLE_REQUEST,
   ADD_CIRCLE_USER_REQUEST,
   DELETE_CIRCLE_USER_REQUEST,
+  ATTATCH_ARTIFACT,
 } from '../constants/circle';
+import toast from '../components/NodeSnack';
 
 // local changes
 
 export const openCircleForm = payload => ({
   type: OPEN_CIRCLE_FORM,
+  payload,
+});
+
+export const attatchArtifact = payload => ({
+  type: ATTATCH_ARTIFACT,
   payload,
 });
 
@@ -105,17 +112,17 @@ export const addCircleUser = (userID, circleID, token) => {
     const parameters = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ id: userID, admin: false }),
+      body: JSON.stringify({ id: userID }),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
-        if (response.status === 200) {
-          dispatch(addCircleSuccess({ userID, circleID }));
-        } else {
-          dispatch(addCircleUserFailure());
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 200) {
+        dispatch(addCircleUserSuccess({ memberid: userID, circleid: circleID }));
+        toast.success(`User with user id: ${userID} has been successfully added`);
+      } else {
+        dispatch(addCircleUserFailure());
+        toast.failure(`User with user id: ${userID} could not be added :()`);
+      }
+    });
   };
 };
 
@@ -129,15 +136,15 @@ export const deleteCircleUser = (userID, circleID, token) => {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ id: userID }),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
-        if (response.status === 200) {
-          dispatch(deleteCircleSuccess({ userID, circleID }));
-        } else {
-          dispatch(deleteCircleUserFailure());
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 200) {
+        dispatch(deleteCircleUserSuccess({ memberid: userID, circleid: circleID }));
+        toast.success(`User with user id: ${userID} has been successfully removed!`);
+      } else {
+        dispatch(deleteCircleUserFailure());
+        toast.failure(`User with user id: ${userID} could not be removed :()`);
+      }
+    });
   };
 };
 
@@ -151,15 +158,15 @@ export const addCircle = (circle, token) => {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify(circle),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
-        if (response.status === 201) {
-          dispatch(addCircleSuccess(circle));
-        } else {
-          dispatch(deleteCircleFailure());
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 201) {
+        dispatch(addCircleSuccess(circle));
+        toast.success(`Circle: ${circle.title} has been created!`);
+      } else {
+        dispatch(addCircleFailure());
+        toast.failure(`Circle: ${circle.title} could not be created :()`);
+      }
+    });
   };
 };
 
@@ -167,21 +174,20 @@ export const addCircle = (circle, token) => {
 export const deleteCircle = (circle, token) => {
   return dispatch => {
     dispatch(deleteCircleRequest());
-    const endpoint = '/api/circle';
+    const endpoint = `/api/circle/${circle.id}`;
     const parameters = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ id: circle.id }),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
-        if (response.status === 200) {
-          dispatch(deleteCircleSuccess(circle));
-        } else {
-          dispatch(deleteCircleFailure());
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 200) {
+        dispatch(deleteCircleSuccess(circle));
+        toast.success(`Circle: ${circle.title} has been deleted!`);
+      } else {
+        dispatch(deleteCircleFailure());
+        toast.failure(`Circle: ${circle.title} could not be deleted :()`);
+      }
+    });
   };
 };
 
@@ -199,7 +205,7 @@ export const getAllCircles = token => {
         if (response.status === 200) {
           dispatch(getAllCirclesSuccess(json));
         } else {
-          dispatch(getAllCirclesFailure());
+          dispatch(getAllCirclesFailure(json));
         }
       })
     );
