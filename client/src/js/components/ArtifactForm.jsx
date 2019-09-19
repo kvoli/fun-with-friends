@@ -12,7 +12,6 @@ import uuid from 'uuid';
 import { openArtifactForm, artifactSwitch } from '../actions/index';
 import { attatchArtifact } from '../actions/circle';
 import { uploadImage, createArtifact, editArtifact } from '../actions/artifact';
-import { launchAddSnackbar, launchEditSnackbar } from '../actions/snackbar';
 import SuggestInput from './SuggestInput';
 
 const useStyles = makeStyles(theme => ({
@@ -95,9 +94,7 @@ const ArtifactForm = () => {
 
   const onSubmit = (data, e) => {
     editMode ? dispatch(editArtifact(data, auth.token)) : dispatch(createArtifact(data, auth.token));
-    editMode ? dispatch(launchEditSnackbar()) : dispatch(launchAddSnackbar());
     for (let i = 0; i < circles.length; i += 1) {
-      console.log(circles[i], data.id);
       dispatch(attatchArtifact({ circleid: getCircleID(circles[i]), artifactid: data.id }));
     }
     e.target.reset();
