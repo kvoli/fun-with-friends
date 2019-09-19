@@ -107,15 +107,13 @@ export const addCircleUser = (userID, circleID, token) => {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ id: userID }),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
-        if (response.status === 200) {
-          dispatch(addCircleSuccess({ memberid: userID, circleid: circleID }));
-        } else {
-          dispatch(addCircleUserFailure(json));
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 200) {
+        dispatch(addCircleUserSuccess({ memberid: userID, circleid: circleID }));
+      } else {
+        dispatch(addCircleUserFailure());
+      }
+    });
   };
 };
 
@@ -129,15 +127,13 @@ export const deleteCircleUser = (userID, circleID, token) => {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ id: userID }),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
-        if (response.status === 200) {
-          dispatch(deleteCircleSuccess({ memberid: userID, circleid: circleID }));
-        } else {
-          dispatch(deleteCircleUserFailure(json));
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 200) {
+        dispatch(deleteCircleUserSuccess({ memberid: userID, circleid: circleID }));
+      } else {
+        dispatch(deleteCircleUserFailure());
+      }
+    });
   };
 };
 
@@ -151,15 +147,13 @@ export const addCircle = (circle, token) => {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify(circle),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
-        if (response.status === 201) {
-          dispatch(addCircleSuccess(circle));
-        } else {
-          dispatch(deleteCircleFailure(json));
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 201) {
+        dispatch(addCircleSuccess(circle));
+      } else {
+        dispatch(addCircleFailure());
+      }
+    });
   };
 };
 
@@ -173,15 +167,13 @@ export const deleteCircle = (circle, token) => {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ id: circle.id }),
     };
-    fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
-        if (response.status === 200) {
-          dispatch(deleteCircleSuccess(circle));
-        } else {
-          dispatch(deleteCircleFailure(json));
-        }
-      })
-    );
+    fetch(endpoint, parameters).then(response => {
+      if (response.status === 200) {
+        dispatch(deleteCircleSuccess(circle));
+      } else {
+        dispatch(deleteCircleFailure());
+      }
+    });
   };
 };
 
