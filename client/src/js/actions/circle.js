@@ -80,7 +80,7 @@ export const getAllCirclesSuccess = payload => ({
   payload,
 });
 
-// failure states
+// error states
 
 export const addCircleFailure = () => ({
   type: ADD_CIRCLE_FAILURE,
@@ -120,7 +120,7 @@ export const addCircleUser = (userID, circleID, token) => {
         toast.success(`User with user id: ${userID} has been successfully added`);
       } else {
         dispatch(addCircleUserFailure());
-        toast.failure(`User with user id: ${userID} could not be added :()`);
+        toast.error(`User with user id: ${userID} could not be added :()`);
       }
     });
   };
@@ -142,7 +142,7 @@ export const deleteCircleUser = (userID, circleID, token) => {
         toast.success(`User with user id: ${userID} has been successfully removed!`);
       } else {
         dispatch(deleteCircleUserFailure());
-        toast.failure(`User with user id: ${userID} could not be removed :()`);
+        toast.error(`User with user id: ${userID} could not be removed :()`);
       }
     });
   };
@@ -164,7 +164,7 @@ export const addCircle = (circle, token) => {
         toast.success(`Circle: ${circle.title} has been created!`);
       } else {
         dispatch(addCircleFailure());
-        toast.failure(`Circle: ${circle.title} could not be created :()`);
+        toast.error(`Circle: ${circle.title} could not be created :()`);
       }
     });
   };
@@ -185,7 +185,7 @@ export const deleteCircle = (circle, token) => {
         toast.success(`Circle: ${circle.title} has been deleted!`);
       } else {
         dispatch(deleteCircleFailure());
-        toast.failure(`Circle: ${circle.title} could not be deleted :()`);
+        toast.error(`Circle: ${circle.title} could not be deleted :()`);
       }
     });
   };

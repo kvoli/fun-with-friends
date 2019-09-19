@@ -57,7 +57,7 @@ export const login = (username, password) => {
           toast.success('login success!');
           history.push('/');
         } else {
-          toast.failure('incorrect username/password');
+          toast.error('incorrect username/password');
           dispatch(loginFailure());
         }
       })
@@ -98,7 +98,7 @@ export const signup = (firstname, lastname, email, username, password) => {
           history.push('/');
         } else {
           dispatch(signupFailure());
-          toast.failure('signup failure :(');
+          toast.error('signup error :(');
         }
       })
     );
