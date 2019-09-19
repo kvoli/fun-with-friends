@@ -13,6 +13,14 @@ import RemoveMember from './RemoveMember';
 
 // const headerImages = [t, u, v, w, x, y, z];
 
+const indexUser = userObject => {
+  return userObject[0];
+};
+
+const getUser = (userID, userList) => {
+  return indexUser(userList.filter(usr => usr.id === userID));
+};
+
 const useStyles = makeStyles(theme => ({
   container: {
     marginTop: theme.spacing(4),
@@ -26,6 +34,7 @@ const GroupPage = props => {
   const [addMode, setAddMode] = React.useState(false);
   // eslint-disable-next-line react/prop-types
   const circle = useSelector(store => store.circle.circles[props.match.params.id]);
+  const userList = useSelector(store => store.user);
 
   const classes = useStyles();
 
@@ -33,10 +42,10 @@ const GroupPage = props => {
     <Container maxWidth='lg' justify='space-between'>
       <Grid container direction='column'>
         <Grid item className={classes.container}>
-          <Typography gutterButtom variant='h3' component='h3' cent>
+          <Typography variant='h3' component='h3'>
             {circle.title}
           </Typography>
-          <Typography gutterBottom variant='h5' color='textSecondary'>
+          <Typography variant='h5' color='textSecondary'>
             {circle.description}
           </Typography>
         </Grid>
@@ -51,13 +60,13 @@ const GroupPage = props => {
               <Typography>Admins</Typography>
               <Grid container>
                 {circle.admins.map(admin => (
-                  <Grid item>
+                  <Grid item key={admin}>
                     <List>
-                      <ListItem>
+                      <ListItem key={admin}>
                         <ListItemAvatar>
-                          <Avatar>{admin.slice(0, 2)}</Avatar>
+                          <Avatar>{getUser(admin, userList).username.slice(0, 2)}</Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={admin} secondary='description' />
+                        <ListItemText primary={getUser(admin, userList).username} secondary={getUser(admin, userList).email} />
                       </ListItem>
                     </List>
                   </Grid>
@@ -68,11 +77,11 @@ const GroupPage = props => {
               <Typography>Members</Typography>
               <Grid container>
                 {circle.members.map(member => (
-                  <Grid item>
+                  <Grid item key={member}>
                     <List>
-                      <ListItem>
-                        <RemoveMember props={{ circle: circle.id, member }} />
-                        <ListItemText primary={member} secondary='description' />
+                      <ListItem key={member}>
+                        <RemoveMember props={{ circle: circle.id, member: getUser(member, userList) }} />
+                        <ListItemText primary={getUser(member, userList).username} secondary={getUser(member, userList).email} />
                       </ListItem>
                     </List>
                   </Grid>
@@ -80,7 +89,7 @@ const GroupPage = props => {
                 <Grid item>
                   {!addMode ? (
                     <List>
-                      <ListItem>
+                      <ListItem key='add'>
                         <ListItemAvatar>
                           <Avatar>
                             <Button onClick={() => setAddMode(true)}>
@@ -93,7 +102,7 @@ const GroupPage = props => {
                     </List>
                   ) : (
                     <List>
-                      <ListItem>
+                      <ListItem key='add-user'>
                         <ListItemAvatar>
                           <Avatar>?</Avatar>
                         </ListItemAvatar>
