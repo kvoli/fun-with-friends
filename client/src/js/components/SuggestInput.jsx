@@ -13,7 +13,6 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import ChipInput from 'material-ui-chip-input';
-import { useSelector } from 'react-redux';
 
 function renderInput(inputProps) {
   const { value, onChange, chips, ref, label, name, ...other } = inputProps;
@@ -22,8 +21,8 @@ function renderInput(inputProps) {
 }
 
 function renderSuggestion(suggestion, { query, isHighlighted }) {
-  const matches = match(suggestion.username, query);
-  const parts = parse(suggestion.username, matches);
+  const matches = match(suggestion, query);
+  const parts = parse(suggestion, matches);
 
   return (
     <MenuItem
@@ -57,7 +56,7 @@ function renderSuggestionsContainer(options) {
 }
 
 function getSuggestionValue(suggestion) {
-  return suggestion.username;
+  return suggestion;
 }
 
 function getSuggestions(value, suggestionList) {
@@ -68,7 +67,7 @@ function getSuggestions(value, suggestionList) {
   return inputLength === 0
     ? []
     : suggestionList.filter(suggestion => {
-        const keep = count < 5 && suggestion.username.toLowerCase().slice(0, inputLength) === inputValue;
+        const keep = count < 5 && suggestion.toLowerCase().slice(0, inputLength) === inputValue;
 
         if (keep) {
           count += 1;
@@ -104,9 +103,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AddCircleMembers = ({ field, setField, label, name }) => {
+const SuggestInput = ({ field, setField, label, name, suggestionList }) => {
   const classes = useStyles();
-  const suggestionList = useSelector(store => store.user);
   const [suggestions, setSuggestions] = React.useState([]);
   const [textFieldInput, setTextFieldInput] = React.useState('');
 
@@ -167,4 +165,4 @@ const AddCircleMembers = ({ field, setField, label, name }) => {
   );
 };
 
-export default AddCircleMembers;
+export default SuggestInput;

@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import UtilityBar from './UtilityBar';
 import { artifactSwitch } from '../actions/index';
 import ArtifactModal from './ArtifactModal';
-import { getVisibleArtifacts } from '../selectors/index';
+import { getVisibleArtifacts, getCircleArtifacts, getPersonalArtifacts } from '../selectors/index';
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -25,9 +25,10 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(4),
   },
   card: {
-    height: '100%',
+    height: '500px',
     display: 'flex',
     flexDirection: 'column',
+    position: 'relative',
   },
   cardContent: {
     flexGrow: 1,
@@ -50,6 +51,13 @@ const useStyles = makeStyles(theme => ({
   artifactGrid: {
     marginTop: theme.spacing(1),
   },
+  cardMedia: {
+    maxHeight: '275px',
+    maxWidth: 'initial',
+    overflow: 'hidden',
+    textIndent: '30%',
+    position: 'relative',
+  },
 }));
 const ArtifactGrid = () => {
   const classes = useStyles();
@@ -57,6 +65,8 @@ const ArtifactGrid = () => {
   const state = useSelector(store => store);
   const artifacts = getVisibleArtifacts(state);
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
+  console.log(getCircleArtifacts(state));
+  console.log(getPersonalArtifacts(state));
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>

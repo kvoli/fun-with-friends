@@ -10,11 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteCircleUser } from '../actions/circle';
 
 const RemoveMember = ({ props }) => {
+  const { member } = props;
+  const { circle } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const token = useSelector(store => store.auth.token);
   const dispatch = useDispatch();
-  const { circle } = props;
-  const { member } = props;
 
   function handleClick(event) {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -26,13 +26,13 @@ const RemoveMember = ({ props }) => {
   return (
     <div>
       <ListItemAvatar>
-        <Avatar onClick={handleClick}>{member.slice(0, 2)}</Avatar>
+        <Avatar onClick={handleClick}>{member.username.slice(0, 2)}</Avatar>
       </ListItemAvatar>
       <Popper id={id} open={open} anchorEl={anchorEl} transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper>
-              <IconButton onClick={() => dispatch(deleteCircleUser(member, circle, token))}>
+              <IconButton onClick={() => dispatch(deleteCircleUser(member.id, circle, token))}>
                 <DeleteIcon />
               </IconButton>
             </Paper>

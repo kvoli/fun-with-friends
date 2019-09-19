@@ -9,6 +9,8 @@ import Login from './Login';
 import SignUp from './SignUp';
 import GroupPage from './GroupPage';
 import GroupIndex from './GroupIndex';
+import AddCircleMembers from './AddCircleMembers';
+import Test from './Test';
 import LandingPage from './LandingPage';
 
 // import action methods [api calls]
@@ -27,6 +29,8 @@ function Main() {
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/circle/:id' component={GroupPage} onEnterAction={auth.token ? dispatch(getAllUsers(auth.token)) : null} />
         <Route exact path='/circles' component={GroupIndex} onEnterAction={auth.token ? dispatch(getAllCircles(auth.token), getAllUsers(auth.token)) : null} />
+        <Route exact path='/test' component={AddCircleMembers} onEnterAction={auth.token ? dispatch(getAllUsers(auth.token)) : null} />
+        <Route exact path='/tester' component={Test} onEnterAction={auth.token ? dispatch(getAllUsers(auth.token)) : null} />
       </Switch>
     </main>
   );

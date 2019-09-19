@@ -14,6 +14,7 @@ import {
   DELETE_ARTIFACT_FAILURE,
   CLEAR_ARTIFACTS,
 } from '../constants/artifact';
+import toast from '../components/NodeSnack';
 
 export const clearArtifacts = () => ({
   type: CLEAR_ARTIFACTS,
@@ -33,6 +34,7 @@ export const uploadImage = image => {
     fetch(endpoint, parameters).then(response =>
       response.json().then(json => {
         if (response.status === 201) {
+          toast.success('image uploaded');
           dispatch(updateImage(json.src));
         }
       })
@@ -62,8 +64,10 @@ export const createArtifact = (artifact, token) => {
       response.json().then(() => {
         if (response.status === 201) {
           dispatch(createArtifactSuccess(artifact));
+          toast.success(`Artifact ${artifact.title} has been created!`);
         } else {
           dispatch(createArtifactFailure());
+          toast.error(`Artifact ${artifact.title} could not be created!`);
         }
       })
     );
@@ -91,8 +95,10 @@ export const deleteArtifact = (artifact, token) => {
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(deleteArtifactSuccess(artifact));
+        toast.success(`Artifact ${artifact.title} has been deleted!`);
       } else {
         dispatch(deleteArtifactFailure());
+        toast.error(`Artifact ${artifact.title} could not be deleted :()`);
       }
     });
   };
@@ -148,8 +154,10 @@ export const editArtifact = (artifact, token) => {
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(editSuccess(artifact));
+        toast.info(`Artifact ${artifact.title} has been edited!`);
       } else {
         dispatch(editFailure());
+        toast.warning(`Artifact ${artifact.title} could not be edited!`);
       }
     });
   };

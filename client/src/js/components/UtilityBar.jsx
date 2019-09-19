@@ -2,12 +2,12 @@ import React from 'react';
 import { Grid, IconButton } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
-import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { openArtifactForm } from '../actions/index';
 import { getArtifacts } from '../actions/artifact';
 import SearchBar from './SearchBar';
+import GroupFilterMenu from './GroupFilterMenu';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -36,9 +36,7 @@ const UtilityBar = () => {
           <IconButton onClick={() => dispatch(getArtifacts(auth.token))} className={classes.button} aria-label='refresh'>
             <RefreshIcon />
           </IconButton>
-          <IconButton className={classes.button} aria-label='menu'>
-            <MenuIcon />
-          </IconButton>
+          <GroupFilterMenu />
         </div>
       </Grid>
     </Grid>

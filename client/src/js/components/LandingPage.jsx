@@ -1,10 +1,10 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import { circleImage } from '../../SVG/SVGImages';
 import { Typography, List, ListItemText, ListItem, Grid, FormGroup } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { rotateIn } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
+import { circleImage } from '../../SVG/SVGImages';
 
 const useStyles = makeStyles(theme => ({
   container: {
