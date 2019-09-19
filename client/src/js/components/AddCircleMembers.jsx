@@ -1,203 +1,170 @@
-// /* eslint-disable react/jsx-props-no-spreading */
-// /* eslint-disable react/require-default-props */
-// /* eslint-disable react/forbid-prop-types */
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import deburr from 'lodash/deburr';
-// import Downshift from 'downshift';
-// import { makeStyles } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
-// import Paper from '@material-ui/core/Paper';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import Chip from '@material-ui/core/Chip';
-// import { useSelector } from 'react-redux';
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/destructuring-assignment */
+import React from 'react';
+import Autosuggest from 'react-autosuggest';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
+import Paper from '@material-ui/core/Paper';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import ChipInput from 'material-ui-chip-input';
+import { useSelector } from 'react-redux';
 
-// function renderInput(inputProps) {
-//   const { InputProps, classes, ref, ...other } = inputProps;
+function renderInput(inputProps) {
+  const { value, onChange, chips, ref, label, name, ...other } = inputProps;
 
-//   return (
-//     <TextField
-//       InputProps={{
-//         inputRef: ref,
-//         classes: {
-//           root: classes.inputRoot,
-//           input: classes.inputInput,
-//         },
-//         ...InputProps,
-//       }}
-//       {...other}
-//     />
-//   );
-// }
+  return <ChipInput clearInputValueOnChange fullWidth onUpdateInput={onChange} value={chips} inputRef={ref} label={label} name={name} {...other} />;
+}
 
-// renderInput.propTypes = {
-//   classes: PropTypes.object.isRequired,
-//   InputProps: PropTypes.object,
-// };
+function renderSuggestion(suggestion, { query, isHighlighted }) {
+  const matches = match(suggestion.username, query);
+  const parts = parse(suggestion.username, matches);
 
-// function renderSuggestion(suggestionProps) {
-//   const { suggestion, index, itemProps, highlightedIndex, selectedItem } = suggestionProps;
-//   const isHighlighted = highlightedIndex === index;
-//   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1;
+  return (
+    <MenuItem
+      selected={isHighlighted}
+      component='div'
+      onMouseDown={e => e.preventDefault()} // prevent the click causing the input to be blurred
+    >
+      <div>
+        {parts.map((part, index) => {
+          return part.highlight ? (
+            <span key={String(index)} style={{ fontWeight: 500 }}>
+              {part.text}
+            </span>
+          ) : (
+            <span key={String(index)}>{part.text}</span>
+          );
+        })}
+      </div>
+    </MenuItem>
+  );
+}
 
-//   return (
-//     <MenuItem
-//       {...itemProps}
-//       key={suggestion.label}
-//       selected={isHighlighted}
-//       component='div'
-//       style={{
-//         fontWeight: isSelected ? 500 : 400,
-//       }}
-//     >
-//       {suggestion.label}
-//     </MenuItem>
-//   );
-// }
+function renderSuggestionsContainer(options) {
+  const { containerProps, children } = options;
 
-// renderSuggestion.propTypes = {
-//   highlightedIndex: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
-//   index: PropTypes.number.isRequired,
-//   itemProps: PropTypes.object.isRequired,
-//   selectedItem: PropTypes.string.isRequired,
-//   suggestion: PropTypes.shape({
-//     label: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
+  return (
+    <Paper {...containerProps} square>
+      {children}
+    </Paper>
+  );
+}
 
-// function getSuggestions(value, suggestions, { showEmpty = false } = {}) {
-//   const inputValue = deburr(value.trim()).toLowerCase();
-//   const inputLength = inputValue.length;
-//   let count = 0;
+function getSuggestionValue(suggestion) {
+  return suggestion.username;
+}
 
-//   return inputLength === 0 && !showEmpty
-//     ? []
-//     : suggestions.filter(suggestion => {
-//         const keep = count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+function getSuggestions(value, suggestionList) {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+  let count = 0;
 
-//         if (keep) {
-//           count += 1;
-//         }
+  return inputLength === 0
+    ? []
+    : suggestionList.filter(suggestion => {
+        const keep = count < 5 && suggestion.username.toLowerCase().slice(0, inputLength) === inputValue;
 
-//         return keep;
-//       });
-// }
+        if (keep) {
+          count += 1;
+        }
 
-// function DownshiftMultiple(props) {
-//   const { classes } = props;
-//   const users = useSelector(store => store.user).map(user => Object.defineProperty(user, 'label', user.username));
-//   const [inputValue, setInputValue] = React.useState('');
-//   const [selectedItem, setSelectedItem] = React.useState([]);
+        return keep;
+      });
+}
 
-//   const handleKeyDown = event => {
-//     if (selectedItem.length && !inputValue.length && event.key === 'Backspace') {
-//       setSelectedItem(selectedItem.slice(0, selectedItem.length - 1));
-//     }
-//   };
+const useStyles = makeStyles(theme => ({
+  container: {
+    flexGrow: 1,
+    position: 'relative',
+  },
+  suggestionsContainerOpen: {
+    position: 'absolute',
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit * 3,
+    left: 0,
+    right: 0,
+    zIndex: 1,
+  },
+  suggestion: {
+    display: 'block',
+  },
+  suggestionsList: {
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
+  },
+  textField: {
+    width: '100%',
+  },
+}));
 
-//   const handleInputChange = event => {
-//     setInputValue(event.target.value);
-//   };
+const AddCircleMembers = ({ field, setField, label, name }) => {
+  const classes = useStyles();
+  const suggestionList = useSelector(store => store.user);
+  const [suggestions, setSuggestions] = React.useState([]);
+  const [textFieldInput, setTextFieldInput] = React.useState('');
 
-//   const handleChange = item => {
-//     let newSelectedItem = [...selectedItem];
-//     if (newSelectedItem.indexOf(item) === -1) {
-//       newSelectedItem = [...newSelectedItem, item];
-//     }
-//     setInputValue('');
-//     setSelectedItem(newSelectedItem);
-//   };
+  const handleSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value, suggestionList));
+  };
 
-//   const handleDelete = item => () => {
-//     const newSelectedItem = [...selectedItem];
-//     newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
-//     setSelectedItem(newSelectedItem);
-//   };
+  const handleSuggestionsClearRequested = () => {
+    setSuggestions(getSuggestions('', suggestionList));
+  };
 
-//   return (
-//     <Downshift id='downshift-multiple' inputValue={inputValue} onChange={handleChange} selectedItem={selectedItem}>
-//       {({ getInputProps, getItemProps, getLabelProps, isOpen, inputValue: inputValue2, selectedItem: selectedItem2, highlightedIndex }) => {
-//         const { onBlur, onChange, onFocus, ...inputProps } = getInputProps({
-//           onKeyDown: handleKeyDown,
-//           placeholder: 'Select multiple countries',
-//         });
+  const handletextFieldInputChange = (event, { newValue }) => {
+    setTextFieldInput(newValue);
+  };
 
-//         return (
-//           <div className={classes.container}>
-//             {renderInput({
-//               fullWidth: true,
-//               classes,
-//               label: 'Countries',
-//               InputLabelProps: getLabelProps(),
-//               InputProps: {
-//                 startAdornment: selectedItem.map(item => <Chip key={item} tabIndex={-1} label={item} className={classes.chip} onDelete={handleDelete(item)} />),
-//                 onBlur,
-//                 onChange: event => {
-//                   handleInputChange(event);
-//                   onChange(event);
-//                 },
-//                 onFocus,
-//               },
-//               inputProps,
-//             })}
+  const handleAddChip = chip => {
+    if (field.indexOf(chip) < 0) {
+      setField([...field, chip]);
+      setTextFieldInput('');
+    }
+  };
 
-//             {isOpen ? (
-//               <Paper className={classes.paper} square>
-//                 {getSuggestions(inputValue2, users).map((suggestion, index) =>
-//                   renderSuggestion({
-//                     suggestion,
-//                     index,
-//                     itemProps: getItemProps({ item: suggestion.label }),
-//                     highlightedIndex,
-//                     selectedItem: selectedItem2,
-//                   })
-//                 )}
-//               </Paper>
-//             ) : null}
-//           </div>
-//         );
-//       }}
-//     </Downshift>
-//   );
-// }
+  const handleDeleteChip = chip => {
+    setField(field.filter(val => val !== chip));
+    return field;
+  };
 
-// DownshiftMultiple.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
+  return (
+    <Autosuggest
+      theme={{
+        container: classes.container,
+        suggestionsContainerOpen: classes.suggestionsContainerOpen,
+        suggestionsList: classes.suggestionsList,
+        suggestion: classes.suggestion,
+      }}
+      renderInputComponent={renderInput}
+      suggestions={suggestions}
+      onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
+      onSuggestionsClearRequested={handleSuggestionsClearRequested}
+      renderSuggestionsContainer={renderSuggestionsContainer}
+      getSuggestionValue={getSuggestionValue}
+      renderSuggestion={renderSuggestion}
+      onSuggestionSelected={(e, { suggestionValue }) => {
+        handleAddChip(suggestionValue);
+        e.preventDefault();
+      }}
+      focusInputOnSuggestionClick={false}
+      inputProps={{
+        chips: field,
+        value: textFieldInput,
+        onChange: handletextFieldInputChange,
+        onAdd: chip => handleAddChip(chip),
+        onDelete: (chip, index) => handleDeleteChip(chip, index),
+        label,
+        name,
+      }}
+    />
+  );
+};
 
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     flexGrow: 1,
-//     height: 250,
-//   },
-//   container: {
-//     flexGrow: 1,
-//     position: 'relative',
-//   },
-//   paper: {
-//     position: 'absolute',
-//     zIndex: 1,
-//     marginTop: theme.spacing(1),
-//     left: 0,
-//     right: 0,
-//   },
-//   chip: {
-//     margin: theme.spacing(0.5, 0.25),
-//   },
-//   inputRoot: {
-//     flexWrap: 'wrap',
-//   },
-//   inputInput: {
-//     width: 'auto',
-//     flexGrow: 1,
-//   },
-//   divider: {
-//     height: theme.spacing(2),
-//   },
-// }));
-
-// export default function IntegrationDownshift() {
-//   const classes = useStyles();
-
-//   return <DownshiftMultiple classes={classes} />;
-// }
+export default AddCircleMembers;

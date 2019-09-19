@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     height: '450px',
-    width: '350px',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -52,10 +51,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   cardMedia: {
-    height: 'auto',
+    height: '250px',
     maxHeight: '300px',
     width: 'auto',
-    maxWidth: '300px',
   },
 }));
 const ArtifactGrid = () => {
