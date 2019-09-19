@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+/* eslint-disable import/order */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-underscore-dangle */
 // Always try and load environment variables from a .env file
 require('dotenv').config();
 
@@ -34,11 +38,11 @@ const s = server.listen(port, () => {
 
 const io = require('socket.io')(s);
 
-var clients = {};
-var users = {};
+const clients = {};
+const users = {};
 
 io.on('connection', socket => {
-  console.log("connection", socket.id)
+  console.log('connection', socket.id);
   clients[socket.id] = socket;
   socket.on('userJoined', userId => onUserJoined(userId, socket));
   socket.on('message', message => onMessageReceived(message, socket));
@@ -47,14 +51,14 @@ io.on('connection', socket => {
 // Event listeners.
 // When a user joins the chatroom.
 function onUserJoined(userId, socket) {
-  console.log("REGISTER USER", userId)
+  console.log('REGISTER USER', userId);
   users[socket.id] = userId;
 }
 
 // When a user sends a message in the chatroom.
 function onMessageReceived(message, senderSocket) {
-  console.log("MESSAGE RECEIVE", message)
-  var userId = users[senderSocket.id];
+  console.log('MESSAGE RECEIVE', message);
+  const userId = users[senderSocket.id];
   // Safety check.
   if (!userId) return;
   _sendAndSaveMessage(message, senderSocket);

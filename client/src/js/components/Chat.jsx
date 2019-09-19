@@ -3,13 +3,7 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { useSelector } from 'react-redux';
 
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText
-} from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
 
 const Chat = () => {
   const [messages, setMessages] = React.useState([]);
@@ -17,6 +11,20 @@ const Chat = () => {
 
   const onReceivedMessage = message => {
     setMessages([...messages, message]);
+  };
+
+  const socket = useSelector(store => store.socket.chatSocket);
+
+  socket.on('message', onReceivedMessage);
+
+  function onSend(message) {
+    socket.emit('message', message);
+  }
+
+  const handleSubmit = () => {
+    onSend(current);
+    setMessages([...messages, current]);
+    setCurrent('');
   };
 
   const onKeyDown = event => {
@@ -33,23 +41,8 @@ const Chat = () => {
     setCurrent(event.target.value);
   };
 
-  const handleSubmit = () => {
-    onSend(current);
-    setMessages([...messages, current]);
-    setCurrent('');
-  };
-
-  const socket = useSelector(store => store.socket.chatSocket);
-
-  socket.on('message', onReceivedMessage);
-
-
-  function onSend(message) {
-    socket.emit('message', message);
-  }
-
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth='xl'>
       <List>
         {messages.map(msg => (
           <ListItem key={msg}>
@@ -60,17 +53,17 @@ const Chat = () => {
           </ListItem>
         ))}
       </List>
-      <ListItem key="textentry">
+      <ListItem key='textentry'>
         <ListItemAvatar>
           <Avatar>?</Avatar>
         </ListItemAvatar>
         <form onSubmit={handleSubmit}>
           <TextField
-            id="outlined-dense"
-            label="Circle Chat"
-            placeholder="type to chat"
-            margin="dense"
-            variant="outlined"
+            id='outlined-dense'
+            label='Circle Chat'
+            placeholder='type to chat'
+            margin='dense'
+            variant='outlined'
             onChange={handleChange}
             value={current}
             onKeyDown={onKeyDown}

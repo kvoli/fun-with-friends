@@ -1,8 +1,9 @@
 const express = require('express');
-var router = express.Router();
 
-const userRouter = require('./user')
-const imageRouter = require('./image')
+const router = express.Router();
+
+const userRouter = require('./user');
+const imageRouter = require('./image');
 const artifactRouter = require('./artifact');
 const circleRouter = require('./circle');
 

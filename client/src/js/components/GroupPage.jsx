@@ -4,56 +4,46 @@ import { useSelector } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import { t, u, v, w, x, y, z } from '../../SVG/SVGImages';
-import {
-  Typography,
-  ListItem,
-  List,
-  ListItemText,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  Grid,
-  Avatar,
-  IconButton
-} from '@material-ui/core';
+import { Typography, ListItem, List, ListItemText, ListItemAvatar, ListItemSecondaryAction, Grid, Avatar, IconButton, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { y } from '../../SVG/SVGImages';
 import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
-import Chat from "./Chat";
+// import Chat from "./Chat";
 
-const headerImages = [t, u, v, w, x, y, z];
+// const headerImages = [t, u, v, w, x, y, z];
 
 const useStyles = makeStyles(theme => ({
   container: {
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
   },
   header: {
-    maxHeight: 450,
-  }
+    maxHeight: '50vh',
+  },
 }));
 
 const GroupPage = props => {
   const [addMode, setAddMode] = React.useState(false);
-  const circle = useSelector(
-    store => store.circles.circles[props.match.params.id]
-  );
-  console.log(circle);
+  // eslint-disable-next-line react/prop-types
+  const circle = useSelector(store => store.circles.circles[props.match.params.id]);
 
   const classes = useStyles();
 
   return (
-    <Container maxWidth="lg" justify="space-between">
-      <Grid container direction="column">
+    <Container maxWidth='lg' justify='space-between'>
+      <Grid container direction='column'>
         <Grid item className={classes.container}>
-          <Typography gutterButtom variant="h3" component="h3" cent>
+          <Typography gutterButtom variant='h3' component='h3' cent>
             {circle.title}
           </Typography>
-          <Typography gutterBottom variant="h5" color="textSecondary">
+          <Typography gutterBottom variant='h5' color='textSecondary'>
             {circle.description}
           </Typography>
         </Grid>
-        <Grid item >
-          <img src={headerImages[Math.round(Math.random() * 6)]} alt=""/>
+        <Grid item>
+          <Box>
+            <img src={y} alt='' />
+          </Box>
         </Grid>
         <Grid item className={classes.container}>
           <Grid container spacing={4}>
@@ -67,7 +57,7 @@ const GroupPage = props => {
                         <ListItemAvatar>
                           <Avatar>{admin.slice(0, 2)}</Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={admin} secondary="description" />
+                        <ListItemText primary={admin} secondary='description' />
                       </ListItem>
                     </List>
                   </Grid>
@@ -81,13 +71,8 @@ const GroupPage = props => {
                   <Grid item>
                     <List>
                       <ListItem>
-                        <RemoveMember
-                          props={{ circle: circle.id, member: member }}
-                        />
-                        <ListItemText
-                          primary={member}
-                          secondary="description"
-                        />
+                        <RemoveMember props={{ circle: circle.id, member }} />
+                        <ListItemText primary={member} secondary='description' />
                       </ListItem>
                     </List>
                   </Grid>
@@ -103,7 +88,7 @@ const GroupPage = props => {
                             </Button>
                           </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="add member" />
+                        <ListItemText primary='add member' />
                       </ListItem>
                     </List>
                   ) : (
@@ -114,10 +99,7 @@ const GroupPage = props => {
                         </ListItemAvatar>
                         <AddMember circle={circle.id} />
                         <ListItemSecondaryAction>
-                          <IconButton
-                            edge="end"
-                            onClick={() => setAddMode(false)}
-                          >
+                          <IconButton edge='end' onClick={() => setAddMode(false)}>
                             <DeleteIcon />
                           </IconButton>
                         </ListItemSecondaryAction>
@@ -130,7 +112,7 @@ const GroupPage = props => {
           </Grid>
         </Grid>
       </Grid>
-      <Chat />
+      {/* <Chat /> */}
     </Container>
   );
 };

@@ -1,13 +1,15 @@
-const User = require('../models/user');
+/* eslint-disable func-names */
+/* eslint-disable jest/valid-expect */
 const { expect } = require('chai');
+const User = require('../models/user');
 
 describe('Testing to see if required user properties are mandatory', function() {
-  var user = new User({
+  const user = new User({
     firstname: '',
     lastname: 'Smith',
     email: 'johnsmith@gmail.com',
     username: 'johnsmith',
-    password: 'password'
+    password: 'password',
   });
   it('User requires an firstname', () => {
     expect(user).property('firstname');
@@ -25,6 +27,8 @@ describe('Testing to see if required user properties are mandatory', function() 
     expect(user).to.have.property('password');
   });
   it('User password should be 6 or more characters', () => {
-    expect(user).to.have.property('password').with.length.greaterThan(6);
+    expect(user)
+      .to.have.property('password')
+      .with.length.greaterThan(6);
   });
-})
+});

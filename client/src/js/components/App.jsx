@@ -7,13 +7,13 @@ import Footer from './Footer';
 
 const App = () => {
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <NavBar />
       <Main />
       <Footer />
-    </React.Fragment>
+    </>
   );
-}
+};
 
 export default App;

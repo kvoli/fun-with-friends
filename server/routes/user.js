@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = require('../middleware/auth');
+
 const userRouter = express.Router();
 const userController = require('../controllers/user');
 
@@ -21,4 +22,4 @@ userRouter.post('/logout/all', auth, userController.logoutUserAll);
 // Get all users
 userRouter.get('/', userController.getAllUsers);
 
-module.exports = userRouter
+module.exports = userRouter;

@@ -1,7 +1,9 @@
-var Artifact = require('../models/artifact');
-var Circle = require('../models/circle');
+/* eslint-disable no-cond-assign */
+/* eslint-disable no-underscore-dangle */
+const Artifact = require('../models/artifact');
+const Circle = require('../models/circle');
 
-var createArtifact = async (req, res) => {
+const createArtifact = async (req, res) => {
   try {
     req.body._id = req.body.id;
     delete req.body.id;
@@ -19,7 +21,7 @@ var createArtifact = async (req, res) => {
   }
 };
 
-var updateArtifact = async (req, res) => {
+const updateArtifact = async (req, res) => {
   try {
     const query = { _id: req.params.artifactId };
     const updated = req.body;
@@ -39,7 +41,7 @@ var updateArtifact = async (req, res) => {
 };
 
 // Helper function to merge any number of arrays and remove duplicates
-var mergeArrays = (...arrays) => {
+const mergeArrays = (...arrays) => {
   let jointArray = [];
   arrays.forEach(array => {
     jointArray = [...jointArray, ...array];
@@ -48,7 +50,7 @@ var mergeArrays = (...arrays) => {
   return uniqueArray;
 };
 
-var getArtifacts = async (req, res) => {
+const getArtifacts = async (req, res) => {
   try {
     // Find all circles that the user is a member of
     const circles = await Circle.find({ members: req.user.id });
@@ -64,7 +66,7 @@ var getArtifacts = async (req, res) => {
   }
 };
 
-var deleteArtifact = async (req, res) => {
+const deleteArtifact = async (req, res) => {
   try {
     // Get the requested artifact
     const artifact = await Artifact.findOne({ _id: req.params.artifactId });

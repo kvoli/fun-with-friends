@@ -1,23 +1,20 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Popper from '@material-ui/core/Popper';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
-import { IconButton } from '@material-ui/core';
+import { IconButton, ListItemAvatar, Avatar } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {  useDispatch } from 'react-redux';
-import { removeCircleUser } from '../actions/circles';
-import {
-  ListItemAvatar,
-  Avatar,
-} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCircleUser } from '../actions/circle';
 
-
-const RemoveMember = ({props}) => {
+const RemoveMember = ({ props }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const token = useSelector(store => store.auth.token);
   const dispatch = useDispatch();
-  const circle = props.circle;
-  const member = props.member;
-  console.log(circle, member)
+  const { circle } = props;
+  const { member } = props;
 
   function handleClick(event) {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -35,13 +32,7 @@ const RemoveMember = ({props}) => {
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper>
-              <IconButton
-                onClick={() =>
-                  dispatch(
-                    removeCircleUser({ circleid: circle, memberid: member })
-                  )
-                }
-              >
+              <IconButton onClick={() => dispatch(deleteCircleUser(member, circle, token))}>
                 <DeleteIcon />
               </IconButton>
             </Paper>
@@ -50,6 +41,6 @@ const RemoveMember = ({props}) => {
       </Popper>
     </div>
   );
-}
+};
 
 export default RemoveMember;

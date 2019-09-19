@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -35,7 +36,6 @@ function getStepContent(step) {
       return 'Unknown step';
   }
 }
-
 
 const CreateCircle = () => {
   const classes = useStyles();
@@ -92,7 +92,7 @@ const CreateCircle = () => {
           const stepProps = {};
           const labelProps = {};
           if (isStepOptional(index)) {
-            labelProps.optional = <Typography variant="caption">Optional</Typography>;
+            labelProps.optional = <Typography variant='caption'>Optional</Typography>;
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
@@ -107,9 +107,7 @@ const CreateCircle = () => {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
+            <Typography className={classes.instructions}>All steps completed - you&apos;re finished</Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
             </Button>
@@ -122,22 +120,12 @@ const CreateCircle = () => {
                 Back
               </Button>
               {isStepOptional(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                  className={classes.button}
-                >
+                <Button variant='contained' color='primary' onClick={handleSkip} className={classes.button}>
                   Skip
                 </Button>
               )}
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
+              <Button variant='contained' color='primary' onClick={handleNext} className={classes.button}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </div>
@@ -146,8 +134,6 @@ const CreateCircle = () => {
       </div>
     </div>
   );
-}
-
-
+};
 
 export default CreateCircle;
