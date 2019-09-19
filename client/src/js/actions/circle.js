@@ -108,6 +108,7 @@ export const getAllCirclesFailure = () => ({
 export const addCircleUser = (userID, circleID, token) => {
   return dispatch => {
     dispatch(addCircleUserRequest());
+    toast.info(`Attempting to add user with ${userID} `);
     const endpoint = `/api/circle/${circleID}/member`;
     const parameters = {
       method: 'POST',
@@ -152,6 +153,7 @@ export const deleteCircleUser = (userID, circleID, token) => {
 export const addCircle = (circle, token) => {
   return dispatch => {
     dispatch(addCircleRequest());
+    toast.info('Circle form submitted');
     const endpoint = '/api/circle';
     const parameters = {
       method: 'POST',

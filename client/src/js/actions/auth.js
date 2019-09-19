@@ -42,6 +42,7 @@ export const logoutRequest = () => ({
 export const login = (username, password) => {
   return dispatch => {
     dispatch(loginRequest());
+    toast.info('Validating login details');
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -79,6 +80,7 @@ export const logout = token => {
 export const signup = (firstname, lastname, email, username, password) => {
   return dispatch => {
     dispatch(signupRequest());
+    toast.info('Signup request being validated');
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

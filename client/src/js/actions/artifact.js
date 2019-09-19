@@ -29,6 +29,7 @@ export const uploadImage = image => {
   return dispatch => {
     const formData = new FormData();
     formData.append('image', image);
+    toast.info('image sent for upload');
     const parameters = { method: 'POST', body: formData };
     const endpoint = '/api/image/upload';
     fetch(endpoint, parameters).then(response =>
@@ -58,6 +59,7 @@ export const createArtifactFailure = () => ({
 export const createArtifact = (artifact, token) => {
   return dispatch => {
     dispatch(createArtifactRequest());
+    toast.info('Artifact form submitted');
     const endpoint = '/api/artifact';
     const parameters = { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(artifact) };
     fetch(endpoint, parameters).then(response =>
@@ -125,6 +127,7 @@ export const getArtifacts = token => {
       response.json().then(json => {
         if (response.status === 200 || response.status === 304) {
           dispatch(getArtifactsSuccess(json));
+          toast.info('Artifacts have been updated');
         } else {
           dispatch(getArtifactsFailure());
         }
@@ -149,12 +152,13 @@ export const editFailure = () => ({
 export const editArtifact = (artifact, token) => {
   return dispatch => {
     dispatch(editRequest());
+    toast.info('Artifact edit form submitted');
     const endpoint = `/api/artifact/${artifact.id}`;
     const parameters = { method: 'PUT', body: JSON.stringify(artifact), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } };
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(editSuccess(artifact));
-        toast.info(`Artifact ${artifact.title} has been edited!`);
+        toast.success(`Artifact ${artifact.title} has been edited!`);
       } else {
         dispatch(editFailure());
         toast.warning(`Artifact ${artifact.title} could not be edited!`);
