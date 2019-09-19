@@ -1,21 +1,19 @@
 const express = require('express');
 const auth = require('../middleware/auth');
+
 const artifactRouter = express.Router();
 const artifactController = require('../controllers/artifact');
 
 // Create a new artifact
-artifactRouter.post('/', artifactController.createArtifact);
+artifactRouter.post('/', auth, artifactController.createArtifact);
 
 // Update an existing artifact
-artifactRouter.put('/:id', artifactController.updateArtifact);
-
-// Logout the current user on the current device
-artifactRouter.get('/:id', artifactController.getArtifact);
+artifactRouter.put('/:artifactId', auth, artifactController.updateArtifact);
 
 // Get all artifacts
-artifactRouter.get('/', artifactController.getArtifacts);
+artifactRouter.get('/', auth, artifactController.getArtifacts);
 
 // Delete an artifact
-artifactRouter.delete('/:id', artifactController.deleteArtifact);
+artifactRouter.delete('/:artifactId', auth, artifactController.deleteArtifact);
 
-module.exports = artifactRouter
+module.exports = artifactRouter;

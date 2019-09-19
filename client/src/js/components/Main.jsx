@@ -7,10 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainPage from './MainPage';
 import Login from './Login';
 import SignUp from './SignUp';
-import { getArtifacts } from '../actions/artifact';
 import GroupPage from './GroupPage';
 import GroupIndex from './GroupIndex';
 import LandingPage from './LandingPage';
+
+// import action methods [api calls]
+import { getArtifacts } from '../actions/artifact';
+import { getAllCircles } from '../actions/circle';
+import { getAllUsers } from '../actions/user';
 
 function Main() {
   const dispatch = useDispatch();
@@ -18,16 +22,11 @@ function Main() {
   return (
     <main>
       <Switch>
-        <Route
-          exact
-          path="/"
-          component={auth.token ? MainPage : LandingPage}
-          onEnterAction={auth.token ? dispatch(getArtifacts()) : null}
-        />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/circle/:id" component={GroupPage} />
-        <Route exact path="/circles" component={GroupIndex} />
+        <Route exact path='/' component={auth.token ? MainPage : LandingPage} onEnterAction={auth.token ? dispatch(getArtifacts()) : null} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={SignUp} />
+        <Route exact path='/circle/:id' component={GroupPage} />
+        <Route exact path='/circles' component={GroupIndex} />
       </Switch>
     </main>
   );

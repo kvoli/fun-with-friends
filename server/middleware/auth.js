@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
@@ -11,15 +12,17 @@ const auth = async (req, res, next) => {
     // Check if the user and token from the request match a user and token in the database
     const user = await User.findOne({ _id: data._id, 'tokens.token': token });
     // Handle no matches
-    if (!user) { throw new Error(); };
+    if (!user) {
+      throw new Error();
+    }
     // Update the request with the matched user and token
     req.user = user;
     req.token = token;
     // Continue with the original request
     next();
   } catch (error) {
-    res.status(401).send({error:'Not authorized to access this resource'});
-  };
+    res.status(401).send({ error: 'Not authorized to access this resource' });
+  }
 };
 
 module.exports = auth;

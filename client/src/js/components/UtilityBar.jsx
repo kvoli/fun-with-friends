@@ -1,13 +1,13 @@
-import React from "react";
-import { Grid, IconButton } from "@material-ui/core";
-import SearchBar from "./SearchBar";
+import React from 'react';
+import { Grid, IconButton } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
-import { openArtifactForm } from "../actions/index";
-import { getArtifacts } from "../actions/artifact";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { openArtifactForm } from '../actions/index';
+import { getArtifacts } from '../actions/artifact';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -19,30 +19,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UtilityBar = () => {
-  
   const classes = useStyles();
   const dispatch = useDispatch();
+  const auth = useSelector(store => store.auth);
 
   return (
-    <Grid container alignItems="center" justify="space-between">
+    <Grid container alignItems='center' justify='space-between'>
       <Grid item>
         <SearchBar />
       </Grid>
       <Grid item>
         <div>
-          <IconButton onClick={() => dispatch(openArtifactForm(false))} className={classes.button} aria-label="add">
+          <IconButton onClick={() => dispatch(openArtifactForm(false))} className={classes.button} aria-label='add'>
             <AddIcon />
           </IconButton>
-          <IconButton onClick={() => dispatch(getArtifacts())} className={classes.button} aria-label="refresh">
+          <IconButton onClick={() => dispatch(getArtifacts(auth.token))} className={classes.button} aria-label='refresh'>
             <RefreshIcon />
           </IconButton>
-          <IconButton className={classes.button} aria-label="menu">
+          <IconButton className={classes.button} aria-label='menu'>
             <MenuIcon />
           </IconButton>
         </div>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default UtilityBar
+export default UtilityBar;
