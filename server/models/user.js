@@ -4,22 +4,51 @@ const jwt = require('jsonwebtoken');
 
 // Define the token schema
 const tokenSchema = mongoose.Schema({
-  token: {type: String, required: true}
+  token: {
+    type: String,
+    required: true
+  }
 });
 
 // Define the acount schema
 const userSchema = mongoose.Schema({
-  firstname: { type: String, required: true, trim: true },
-  lastname: { type: String, required: true, trim: true },
-  email: { type: String, required: true, unique: true, lowercase: true },
-  username: { type: String, required: true, unique: true, lowercase: true },
-  password: { type: String, required: true, minLength: 6 },
+  firstname: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  lastname: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: 6
+  },
+  circleIds: {
+    type: [String],
+    required: false
+  },
   tokens: [tokenSchema]
-},{
+}, {
   toObject: {
-    versionKey: false, 
-    virtuals: true, 
-    transform: function (doc,ret) {
+    versionKey: false,
+    virtuals: true,
+    transform: function (doc, ret) {
       delete ret._id;
       delete ret.password;
     }
@@ -34,16 +63,22 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({_id: user._id}, process.env.SECRET_KEY);
-  user.tokens = user.tokens.concat({token});
+  const token = jwt.sign({
+    _id: user._id
+  }, process.env.SECRET_KEY);
+  user.tokens = user.tokens.concat({
+    token
+  });
   await user.save();
   return token;
 };
 
 userSchema.statics.findByCredentials = async (username, password) => {
-  const user = await User.findOne({ username });
+  const user = await User.findOne({
+    username
+  });
   if (!user) {
     return null;
   }

@@ -25,8 +25,8 @@ const GroupIndex = () => {
   const classes = useStyles();
   const circleKeys = Object.keys(circles);
   console.log(circles);
-  const publicKeys = circleKeys.filter(key => circles[key].public === true)
-  const privateKeys = circleKeys.filter(key => circles[key].public === false)
+  const publicKeys = circleKeys.filter(key => circles[key].public === true);
+  const privateKeys = circleKeys.filter(key => circles[key].public === false);
 
   return (
     <Container maxWidth="lg" justify="space-between">

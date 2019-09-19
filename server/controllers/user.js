@@ -107,11 +107,26 @@ var getAllUsers = async (req, res) => {
   }
 }
 
+var getAllCircles = async (req, res) => {
+  console.log("triggered");
+  try {
+    const user_id = req.params.id;
+    const user = getCurrentUser(user_id);
+    const allCircles = await getAllCircles(user);
+    res.status(200).send(allCircles);
+  } catch (error) {
+    req.status(400).send({
+      error: 'Error Found'
+    });
+  }
+}
+
 module.exports = {
   createUser,
   loginUser,
   getCurrentUser,
   logoutUser,
   logoutUserAll,
-  getAllUsers
+  getAllUsers,
+  getAllCircles
 };

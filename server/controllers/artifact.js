@@ -12,27 +12,37 @@ var createArtifact = async (req, res) => {
     res.status(201).send(artifact.toObject());
   } catch (error) {
     // Return an error message as the artfact was not able to be created
-    res.status(400).send({error:'Unable to create artifact.'});
+    res.status(400).send({
+      error: 'Unable to create artifact.'
+    });
   };
 };
 
 var updateArtifact = async (req, res) => {
   try {
-    const query = {_id: req.params.id};
+    const query = {
+      _id: req.params.id
+    };
     const updates = req.body;
     await Artifact.updateOne(query, updates);
     res.status(200).send();
   } catch (error) {
-    res.status(400).send({error: 'Unable to update artifact.'});
+    res.status(400).send({
+      error: 'Unable to update artifact.'
+    });
   };
 };
 
 var getArtifact = async (req, res) => {
   try {
-    const artifact = await Artifact.find({id:req.params.id});
+    const artifact = await Artifact.find({
+      id: req.params.id
+    });
     res.status(200).send(artifacts);
   } catch (error) {
-    res.status(400).send({error:'Unable to get that artifact.'})
+    res.status(400).send({
+      error: 'Unable to get that artifact.'
+    })
   };
 };
 
@@ -41,21 +51,27 @@ var getArtifacts = async (req, res) => {
     const artifacts = await Artifact.find();
     res.status(200).send(artifacts.map(artifact => artifact.toObject()));
   } catch (error) {
-    res.status(400).send({error:'Unable to get artifacts.'});
+    res.status(400).send({
+      error: 'Unable to get artifacts.'
+    });
   };
 };
 
 var deleteArtifact = async (req, res) => {
   try {
-    await Artifact.deleteOne({_id:req.params.id});
+    await Artifact.deleteOne({
+      _id: req.params.id
+    });
     res.status(200).send();
   } catch (error) {
-    res.status(400).send({error:'Unable to delete artifact.'})
+    res.status(400).send({
+      error: 'Unable to delete artifact.'
+    })
   };
 };
 
 module.exports = {
-  createArtifact, 
+  createArtifact,
   updateArtifact,
   deleteArtifact,
   getArtifact,

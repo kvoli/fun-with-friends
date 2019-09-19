@@ -1,7 +1,9 @@
 const User = require('../models/user');
-const { expect } = require('chai');
+const {
+  expect
+} = require('chai');
 
-describe('Testing to see if required user properties are mandatory', function() {
+describe('Testing to see if required user properties are mandatory', function () {
   var user = new User({
     firstname: '',
     lastname: 'Smith',

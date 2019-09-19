@@ -2,15 +2,16 @@ import {
   ADD_CIRCLE,
   REMOVE_CIRCLE,
   ADD_CIRCLE_USER,
-  REMOVE_CIRCLE_USER
+  REMOVE_CIRCLE_USER,
 } from '../constants/action-types.js';
 
 const circleImages = ["https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif",
-"https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif"]
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif",
+  "https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif"
+]
 
 const initialState = {
   circles: {
@@ -84,7 +85,7 @@ const initialState = {
       admins: ['userid', 'userid'],
       members: [
         'userid',
-        'userid',    
+        'userid',
         'userid',
         'userid',
         'userid',
@@ -140,7 +141,9 @@ const initialState = {
 const circles = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CIRCLE:
-      return { ...state };
+      return {
+        ...state
+      };
     case ADD_CIRCLE_USER:
       return {
         ...state,

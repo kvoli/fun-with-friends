@@ -21,4 +21,6 @@ userRouter.post('/logout/all', auth, userController.logoutUserAll);
 // Get all users
 userRouter.get('/', userController.getAllUsers);
 
+userRouter.get('/circles', userController.getAllCircles);
+
 module.exports = userRouter
