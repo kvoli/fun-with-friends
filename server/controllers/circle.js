@@ -119,6 +119,7 @@ const deleteMember = async (req, res) => {
         useFindAndModify: false,
       }
     );
+    console.log(req.body);
     res.status(200).send();
   } catch (error) {
     res.status(400).send({

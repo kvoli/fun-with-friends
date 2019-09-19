@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 const GroupPage = props => {
   const [addMode, setAddMode] = React.useState(false);
   // eslint-disable-next-line react/prop-types
-  const circle = useSelector(store => store.circles.circles[props.match.params.id]);
+  const circle = useSelector(store => store.circle.circles[props.match.params.id]);
 
   const classes = useStyles();
 

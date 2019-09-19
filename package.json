@@ -10,6 +10,7 @@
     "babel-cli": "^6.23.0",
     "babel-jest": "^24.9.0",
     "babel-preset-airbnb": "^4.0.1",
+    "babel-eslint": "10.0.2",
     "eslint": "^6.4.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.3.0",

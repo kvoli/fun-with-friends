@@ -105,14 +105,14 @@ export const addCircleUser = (userID, circleID, token) => {
     const parameters = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ id: userID, admin: false }),
+      body: JSON.stringify({ id: userID }),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
+      response.json().then(json => {
         if (response.status === 200) {
-          dispatch(addCircleSuccess({ userID, circleID }));
+          dispatch(addCircleSuccess({ memberid: userID, circleid: circleID }));
         } else {
-          dispatch(addCircleUserFailure());
+          dispatch(addCircleUserFailure(json));
         }
       })
     );
@@ -130,11 +130,11 @@ export const deleteCircleUser = (userID, circleID, token) => {
       body: JSON.stringify({ id: userID }),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
+      response.json().then(json => {
         if (response.status === 200) {
-          dispatch(deleteCircleSuccess({ userID, circleID }));
+          dispatch(deleteCircleSuccess({ memberid: userID, circleid: circleID }));
         } else {
-          dispatch(deleteCircleUserFailure());
+          dispatch(deleteCircleUserFailure(json));
         }
       })
     );
@@ -152,11 +152,11 @@ export const addCircle = (circle, token) => {
       body: JSON.stringify(circle),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
+      response.json().then(json => {
         if (response.status === 201) {
           dispatch(addCircleSuccess(circle));
         } else {
-          dispatch(deleteCircleFailure());
+          dispatch(deleteCircleFailure(json));
         }
       })
     );
@@ -174,11 +174,11 @@ export const deleteCircle = (circle, token) => {
       body: JSON.stringify({ id: circle.id }),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
+      response.json().then(json => {
         if (response.status === 200) {
           dispatch(deleteCircleSuccess(circle));
         } else {
-          dispatch(deleteCircleFailure());
+          dispatch(deleteCircleFailure(json));
         }
       })
     );
@@ -199,7 +199,7 @@ export const getAllCircles = token => {
         if (response.status === 200) {
           dispatch(getAllCirclesSuccess(json));
         } else {
-          dispatch(getAllCirclesFailure());
+          dispatch(getAllCirclesFailure(json));
         }
       })
     );

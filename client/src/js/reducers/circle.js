@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { OPEN_CIRCLE_FORM } from '../constants/action-types';
 
 import {
@@ -117,11 +118,17 @@ const initialState = {
   },
 };
 
+const arrayToObject = array =>
+  array.reduce((obj, item) => {
+    obj[item.id] = item;
+    return obj;
+  }, {});
+
 const circle = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_CIRCLES_SUCCESS:
       return {
-        circles: action.payload,
+        circles: arrayToObject(action.payload),
         circleForm: {
           ...state.circleForm,
         },
