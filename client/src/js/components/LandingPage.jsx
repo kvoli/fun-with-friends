@@ -18,7 +18,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(0),
     paddingBottom: theme.spacing(0),
     paddingLeft: theme.spacing(0),
-    paddingRight: theme.spacing(0)
+    paddingRight: theme.spacing(0),
+    height: '100%',
+    display: 'flex'
   },
   title: {
     flexGrow: 1,
@@ -27,17 +29,20 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0.75, 2.5, 0)
   },
   subtitle: {
-    flexGrow: 0,
+    flexGrow: 1,
     marginBottom: 20,
     paddingBottom: 20,
+    paddingRight: 10,
     padding: theme.spacing(0, 2.5, 0)
   },
   header: {
     maxHeight: 450
   },
   image: {
+    flexGrow: 1,
     height: 400,
-    width: 400
+    width: 400,
+    paddingRight: 10
   }
 }));
 
@@ -66,6 +71,16 @@ const LandingPage = () => {
           <div align="right">
             <FormGroup row>
               <div>
+                <StyleRoot>
+                  <img
+                    src={circleImage}
+                    alt=""
+                    style={animationStyles.rotateIn}
+                    className={classes.image}
+                  />
+                </StyleRoot>
+              </div>
+              <div>
                 <List>
                   <ListItem>
                     <ListItemText>
@@ -89,16 +104,6 @@ const LandingPage = () => {
                     </ListItemText>
                   </ListItem>
                 </List>
-              </div>
-              <div>
-                <StyleRoot>
-                  <img
-                    src={circleImage}
-                    alt=""
-                    style={animationStyles.rotateIn}
-                    className={classes.image}
-                  />
-                </StyleRoot>
               </div>
             </FormGroup>
           </div>
