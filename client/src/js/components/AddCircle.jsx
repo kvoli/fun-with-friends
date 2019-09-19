@@ -88,6 +88,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const getID = user => {
+  return user[0].id;
+};
+
+const getUserID = (userlist, username) => {
+  return getID(userlist.filter(user => user.username === username));
+};
+
+const mapUserNameToID = (userlist, usernames) => {
+  return usernames.map(username => getUserID(userlist, username));
+};
+
 function getSteps() {
   return ['Circle Information', 'Customise Your Circle', 'Circle Permissions', 'Privacy'];
 }
@@ -134,8 +146,8 @@ const AddCircle = () => {
       addCircle(
         {
           ...data,
-          admins: currentAdmins.map(name => allUsers.filter(usr => usr.username === name).id),
-          members: currentMembers.map(name => allUsers.filter(usr => usr.username === name).id),
+          admins: mapUserNameToID(allUsers, currentAdmins),
+          members: mapUserNameToID(allUsers, currentMembers),
           artifacts: [],
         },
         token
