@@ -129,10 +129,50 @@ const deleteMember = async (req, res) => {
   }
 };
 
+const addArtifact = async (req, res) => {
+  try {
+    // Check if the user is member of the circle
+    const circle = await Circle.findOne({_id: req.params.id});
+    if (!circle.members.includes(req.user.id)) {
+      return res.status(400).send({error: 'You do not have permissions to add to this circle.'});
+    };
+    // Add the artifact to the circle (ignoring duplicates)
+    await Circle.updateOne(
+      {_id:req.params.id},
+      {$addToSet: {artifacts: req.body.id}},
+      {useFindAndModify:false}
+    );
+    return res.status(200).send();
+  } catch (error) {
+    return res.status(400).send({error: 'Could not add artifact to circle.'});
+  };
+};
+
+const deleteArtifact = async (req, res) => {
+  try {
+    // Check if the user is a member of the circle
+    const circle = await Circle.findOne({_id: req.params.id});
+    if (!circle.members.includes(req.user.id)) {
+      return res.status(400).send({error: 'You do not have permissions to delete from this circle.'});
+    };
+    // Remove the artifact from the circle
+    await Circle.updateOne(
+      {"_id": req.params.id}, 
+      {$pull: {artifacts: req.body.id}},
+      {useFindAndModify:false}
+    );
+    return res.status(200).send();
+  } catch (error) {
+    return res.status(400).send({error: 'Could not remove artifact from circle.'});
+  };
+};
+
 module.exports = {
   createCircle,
   getAllCircles,
   deleteCircle,
   addMember,
   deleteMember,
+  deleteArtifact,
+  addArtifact,
 };

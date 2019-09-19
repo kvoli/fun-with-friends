@@ -23,6 +23,9 @@ const circleSchema = mongoose.Schema(
     src: {
       type: String,
     },
+    previewImage: {
+      type: String,
+    },
     admins: {
       type: [String],
     },
