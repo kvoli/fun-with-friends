@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { y } from '../../SVG/SVGImages';
 import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
+import DeleteCircle from './DeleteCircle';
 // import Chat from "./Chat";
 
 // const headerImages = [t, u, v, w, x, y, z];
@@ -45,9 +46,16 @@ const GroupPage = props => {
           <Typography variant='h3' component='h3'>
             {circle.title}
           </Typography>
-          <Typography variant='h5' color='textSecondary'>
-            {circle.description}
-          </Typography>
+          <Grid container direction='row' alignItems='center'>
+            <Grid item>
+              <Typography variant='h5' color='textSecondary'>
+                {circle.description}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <DeleteCircle circle={circle} />
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item>
           <Box>

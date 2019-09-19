@@ -160,6 +160,10 @@ const circle = (state = initialState, action) => {
     case DELETE_CIRCLE_SUCCESS:
       return {
         ...state,
+        circles: [delete state.circles[action.payload]],
+        circleForm: {
+          ...state.circleForm,
+        },
       };
     case DELETE_CIRCLE_USER_SUCCESS:
       return {

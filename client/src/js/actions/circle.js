@@ -161,11 +161,10 @@ export const addCircle = (circle, token) => {
 export const deleteCircle = (circle, token) => {
   return dispatch => {
     dispatch(deleteCircleRequest());
-    const endpoint = '/api/circle';
+    const endpoint = `/api/circle/${circle.id}`;
     const parameters = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ id: circle.id }),
     };
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
