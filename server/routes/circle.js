@@ -14,16 +14,9 @@ circleRouter.get('/', auth, circleController.getAllCircles);
 circleRouter.delete('/:id', auth, circleController.deleteCircle);
 
 // Add a member to a circle
-<<<<<<< HEAD
-circleRouter.post('/:id/member', circleController.addMember);
-
-// delete a member to a circle
-circleRouter.delete('/:id/member', circleController.deleteMember);
-=======
 circleRouter.post('/:id/member', auth, circleController.addMember);
 
 // delete a member to a circle
 circleRouter.delete('/:id/member', auth, circleController.deleteMember);
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
 
 module.exports = circleRouter;

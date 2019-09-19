@@ -1,20 +1,12 @@
-<<<<<<< HEAD
-const User = require('../models/user');
+/* eslint-disable func-names */
+/* eslint-disable jest/valid-expect */
 const {
   expect
 } = require('chai');
-
-describe('Testing to see if required user properties are mandatory', function () {
-  var user = new User({
-=======
-/* eslint-disable func-names */
-/* eslint-disable jest/valid-expect */
-const { expect } = require('chai');
 const User = require('../models/user');
 
-describe('Testing to see if required user properties are mandatory', function() {
+describe('Testing to see if required user properties are mandatory', function () {
   const user = new User({
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
     firstname: '',
     lastname: 'Smith',
     email: 'johnsmith@gmail.com',
@@ -41,8 +33,4 @@ describe('Testing to see if required user properties are mandatory', function() 
       .to.have.property('password')
       .with.length.greaterThan(6);
   });
-<<<<<<< HEAD
-})
-=======
 });
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0

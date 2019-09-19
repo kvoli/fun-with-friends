@@ -12,30 +12,18 @@ const createUser = async (req, res) => {
     // Respond with the token and user data
     res.status(201).send({
       user: user.toObject(),
-<<<<<<< HEAD
-      token
-=======
       token,
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
     });
   } catch (error) {
     // Handle different types of errors
     if (error.code === 11000) {
       res.status(400).send({
-<<<<<<< HEAD
-        error: 'Username or email already exists.'
-=======
         error: 'Username or email already exists.',
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
       });
     } else {
       // Purposefully send an unknown error message
       res.status(400).send({
-<<<<<<< HEAD
-        error: 'An unknown error has occured.'
-=======
         error: 'An unknown error has occured.',
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
       });
     }
   }
@@ -53,37 +41,18 @@ const loginUser = async (req, res) => {
     // Return an error response if the user couldn't be found in the database
     if (!user) {
       return res.status(401).send({
-<<<<<<< HEAD
-        error: 'Incorrect username or password.'
-=======
         error: 'Incorrect username or password.',
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
       });
     }
     // Generate a new token and respond with the token and user data
     const token = await user.generateAuthToken();
     res.send({
       user: user.toObject(),
-<<<<<<< HEAD
-      token
-=======
       token,
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
     });
   } catch (error) {
     // Purposefully send an unknown error message
     res.status(400).send({
-<<<<<<< HEAD
-      error: 'An unknown error as occured.'
-    });
-  };
-};
-
-// Get the current user
-var getCurrentUser = async (req, res) => {
-  res.status(200).send({
-    user: await req.user.toObject()
-=======
       error: 'An unknown error as occured.',
     });
   }
@@ -93,7 +62,6 @@ var getCurrentUser = async (req, res) => {
 const getCurrentUser = async (req, res) => {
   res.status(200).send({
     user: await req.user.toObject(),
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
   });
 };
 
@@ -108,11 +76,7 @@ const logoutUser = async (req, res) => {
   } catch (error) {
     // Purposefully send an unknown error message
     res.status(400).send({
-<<<<<<< HEAD
-      error: 'An unknown error as occured.'
-=======
       error: 'An unknown error as occured.',
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
     });
   }
 };
@@ -126,9 +90,6 @@ const logoutUserAll = async (req, res) => {
   } catch (error) {
     // Purposefully send an unknown error message
     res.status(400).send({
-<<<<<<< HEAD
-      error: 'An unknown error as occured.'
-=======
       error: 'An unknown error as occured.',
     });
   }
@@ -143,23 +104,9 @@ const getAllUsers = async (req, res) => {
   } catch (error) {
     req.status(400).send({
       error: 'Error found',
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
     });
   }
 };
-
-//get all users in the database
-var getAllUsers = async (req, res) => {
-  try {
-    //get all users
-    const allUsers = await User.find();
-    res.status(200).send(allUsers.map(user => user.toObject()));
-  } catch (error) {
-    req.status(400).send({
-      error: 'Error found'
-    });
-  }
-}
 
 var getAllCircles = async (req, res) => {
   console.log("triggered");
@@ -182,9 +129,4 @@ module.exports = {
   logoutUser,
   logoutUserAll,
   getAllUsers,
-<<<<<<< HEAD
-  getAllCircles
 };
-=======
-};
->>>>>>> ca5173897b24e774909d48cd7e5ee725c535cac0
