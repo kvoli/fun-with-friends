@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import UtilityBar from './UtilityBar';
 import { artifactSwitch } from '../actions/index';
 import ArtifactModal from './ArtifactModal';
-import { getVisibleArtifacts } from '../selectors/index';
+import { getVisibleArtifacts, getCircleArtifacts, getPersonalArtifacts } from '../selectors/index';
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -62,6 +62,8 @@ const ArtifactGrid = () => {
   const state = useSelector(store => store);
   const artifacts = getVisibleArtifacts(state);
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
+  console.log(getCircleArtifacts(state));
+  console.log(getPersonalArtifacts(state));
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>

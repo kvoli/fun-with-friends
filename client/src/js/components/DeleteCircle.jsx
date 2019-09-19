@@ -7,7 +7,6 @@ import { deleteCircle } from '../actions/circle';
 
 const DeleteCircle = ({ circle }) => {
   const dispatch = useDispatch();
-  console.log(circle);
 
   return (
     <IconButton onClick={() => dispatch(deleteCircle(circle))}>
