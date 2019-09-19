@@ -4,15 +4,27 @@ import { useSelector } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import { Typography, ListItem, List, ListItemText, ListItemAvatar, ListItemSecondaryAction, Grid, Avatar, IconButton, Box } from '@material-ui/core';
+import {
+  Typography,
+  ListItem,
+  List,
+  ListItemText,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  Grid,
+  Avatar,
+  IconButton,
+  Paper,
+  Tabs,
+  Tab,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { y } from '../../SVG/SVGImages';
 import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
 import DeleteCircle from './DeleteCircle';
+import CirclesArtifactsFeed from './CircleArtifactsFeed';
 // import Chat from "./Chat";
-
-// const headerImages = [t, u, v, w, x, y, z];
 
 const indexUser = userObject => {
   return userObject[0];
@@ -29,6 +41,15 @@ const useStyles = makeStyles(theme => ({
   header: {
     maxHeight: '50vh',
   },
+  feed: {
+    marginTop: theme.spacing(4),
+  },
+  tabPanel: {
+    display: 'none',
+  },
+  tabSpacing: {
+    marginTop: theme.spacing(2.5),
+  },
 }));
 
 const GroupPage = props => {
@@ -36,6 +57,7 @@ const GroupPage = props => {
   // eslint-disable-next-line react/prop-types
   const circle = useSelector(store => store.circle.circles[props.match.params.id]);
   const userList = useSelector(store => store.user);
+  const [tabValue, setTabValue] = React.useState(0);
 
   const classes = useStyles();
 
@@ -58,15 +80,26 @@ const GroupPage = props => {
           </Grid>
         </Grid>
         <Grid item>
-          <Box>
-            <img src={y} alt='' />
-          </Box>
+          <Grid container alignItems='center' justify='center'>
+            <Grid item>
+              <img src={y} alt='' />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item className={classes.container}>
-          <Grid container spacing={4}>
+        <Grid container alignItems='center' justify='center' direction='column' className={classes.tabSpacing}>
+          <Paper square>
+            <Tabs value={tabValue} onChange={(event, newValue) => setTabValue(newValue)} centered>
+              <Tab label='Members & Admins' value={0} />
+              <Tab label='Artifact Feed' value={1} />
+              <Tab label='Chat' value={2} />
+            </Tabs>
+          </Paper>
+        </Grid>
+        <Grid item className={tabValue === 0 ? classes.container : classes.tabPanel}>
+          <Grid container spacing={4} direction='column'>
             <Grid item>
               <Typography>Admins</Typography>
-              <Grid container>
+              <Grid container direction='row'>
                 {circle.admins.map(admin => (
                   <Grid item key={admin}>
                     <List>
@@ -127,6 +160,12 @@ const GroupPage = props => {
               </Grid>
             </Grid>
           </Grid>
+        </Grid>
+        <Grid item className={tabValue === 1 ? classes.feed : classes.tabPanel}>
+          <CirclesArtifactsFeed circle={circle} />
+        </Grid>
+        <Grid item className={tabValue === 2 ? classes.feed : classes.tabPanel}>
+          nothing to see here!
         </Grid>
       </Grid>
       {/* <Chat /> */}
