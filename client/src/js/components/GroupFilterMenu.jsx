@@ -17,6 +17,8 @@ import { setCircleFilter, setPersonalFilter } from '../actions/index';
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
+    position: 'relative',
+    zIndex: 100000,
   },
   input: {
     display: 'none',

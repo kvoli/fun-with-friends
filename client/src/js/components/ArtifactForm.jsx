@@ -32,10 +32,6 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: 6,
     },
   },
-  cardMedia: {
-    height: '100%',
-    width: '100%',
-  },
   cardText: {
     margin: theme.spacing(1, 0),
   },
@@ -50,6 +46,12 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     display: 'none',
+  },
+  cardMedia: {
+    maxHeight: '300px',
+    maxWidth: 'initial',
+    overflow: 'hidden',
+    textIndent: '30%',
   },
 }));
 

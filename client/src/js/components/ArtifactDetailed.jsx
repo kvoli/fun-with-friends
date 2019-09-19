@@ -44,6 +44,12 @@ const useStyles = makeStyles(theme => ({
   chip: {
     margin: theme.spacing(0, 0.25),
   },
+  cardMedia: {
+    maxHeight: '400px',
+    maxWidth: 'initial',
+    overflow: 'hidden',
+    textIndent: '30%',
+  },
 }));
 
 const relatives = [
