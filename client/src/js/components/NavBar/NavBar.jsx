@@ -6,11 +6,11 @@ import IconButton from '@material-ui/core/IconButton';
 import HomeRounded from '@material-ui/icons/HomeRounded';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import { NavProfile } from './NavProfile';
+import GroupIcon from '@material-ui/icons/Group';
+import NavProfile from './NavProfile';
 import LoginButton from './LoginButton';
 import SignupButton from './SignupButton';
 import UserTitle from './UserTitle';
-import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles(theme => ({
   navBar: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 export default function NavBar() {
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <>
       <AppBar position='static' className={classes.navBar}>
         <Toolbar>
           <IconButton component={Link} to='/' edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
@@ -46,6 +46,6 @@ export default function NavBar() {
           <NavProfile />
         </Toolbar>
       </AppBar>
-    </React.Fragment>
+    </>
   );
 }

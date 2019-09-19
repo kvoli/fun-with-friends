@@ -1,18 +1,18 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, Button, CardActionArea, Typography, Switch } from '@material-ui/core';
+import { TextField, Button, CardActionArea, Typography, Switch, CardMedia, Card, CardContent } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { CardMedia, Card, CardContent } from '@material-ui/core';
+
 import SaveIcon from '@material-ui/icons/Save';
-import { addCircle, openCircleForm } from '../actions/circle';
-import { uploadImage } from '../actions/artifact';
 import uuid from 'uuid';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import ChipInput from 'material-ui-chip-input';
+import { uploadImage } from '../actions/artifact';
+import { addCircle, openCircleForm } from '../actions/circle';
 
 const circleImages = [
   'https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif',
@@ -116,7 +116,7 @@ const AddCircle = () => {
 
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
 
-  const { register, handleSubmit, getValues } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: fillcircle,
   });
 
@@ -195,9 +195,9 @@ const AddCircle = () => {
                   <CardMedia
                     component='img'
                     className={classes.cardMedia}
-                    image={pictureSrc ? pictureSrc : defaultImage}
-                    alt={pictureSrc ? pictureSrc : defaultImage}
-                    src={pictureSrc ? pictureSrc : defaultImage}
+                    image={pictureSrc || defaultImage}
+                    alt={pictureSrc || defaultImage}
+                    src={pictureSrc || defaultImage}
                   />
                 </label>
               </CardActionArea>
@@ -270,7 +270,6 @@ const AddCircle = () => {
                   color='primary'
                   onClick={() => {
                     setActiveStep(activeStep + 1);
-                    console.log(getValues());
                   }}
                 >
                   Next

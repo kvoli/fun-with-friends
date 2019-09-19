@@ -1,4 +1,4 @@
-import { OPEN_CIRCLE_FORM } from '../constants/action-types.js';
+import { OPEN_CIRCLE_FORM } from '../constants/action-types';
 import {
   GET_ALL_CIRCLES_FAILURE,
   GET_ALL_CIRCLES_SUCCESS,
@@ -21,7 +21,7 @@ import {
 
 export const openCircleForm = payload => ({
   type: OPEN_CIRCLE_FORM,
-  payload: payload,
+  payload,
 });
 
 // pending states
@@ -50,27 +50,27 @@ export const getAllCirclesRequest = () => ({
 
 export const addCircleSuccess = payload => ({
   type: ADD_CIRCLE_SUCCESS,
-  payload: payload,
+  payload,
 });
 
 export const addCircleUserSuccess = payload => ({
   type: ADD_CIRCLE_USER_SUCCESS,
-  payload: payload,
+  payload,
 });
 
 export const deleteCircleSuccess = payload => ({
   type: DELETE_CIRCLE_SUCCESS,
-  payload: payload,
+  payload,
 });
 
 export const deleteCircleUserSuccess = payload => ({
   type: DELETE_CIRCLE_USER_SUCCESS,
-  payload: payload,
+  payload,
 });
 
 export const getAllCirclesSuccess = payload => ({
   type: GET_ALL_CIRCLES_SUCCESS,
-  payload: payload,
+  payload,
 });
 
 // failure states
@@ -101,16 +101,16 @@ export const getAllCirclesFailure = () => ({
 export const addCircleUser = (userID, circleID, token) => {
   return dispatch => {
     dispatch(addCircleUserRequest());
-    const endpoint = '/api/circle/' + circleID + '/member';
+    const endpoint = `/api/circle/${circleID}/member`;
     const parameters = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ id: userID, admin: false }),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
+      response.json().then(() => {
         if (response.status === 200) {
-          dispatch(addCircleSuccess({ userID: userID, circleID: circleID }));
+          dispatch(addCircleSuccess({ userID, circleID }));
         } else {
           dispatch(addCircleUserFailure());
         }
@@ -123,16 +123,16 @@ export const addCircleUser = (userID, circleID, token) => {
 export const deleteCircleUser = (userID, circleID, token) => {
   return dispatch => {
     dispatch(deleteCircleUserRequest());
-    const endpoint = '/api/circle/' + circleID + '/member';
+    const endpoint = `/api/circle/${circleID}/member`;
     const parameters = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ id: userID }),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
+      response.json().then(() => {
         if (response.status === 200) {
-          dispatch(deleteCircleSuccess({ userID: userID, circleID: circleID }));
+          dispatch(deleteCircleSuccess({ userID, circleID }));
         } else {
           dispatch(deleteCircleUserFailure());
         }
@@ -152,7 +152,7 @@ export const addCircle = (circle, token) => {
       body: JSON.stringify(circle),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
+      response.json().then(() => {
         if (response.status === 201) {
           dispatch(addCircleSuccess(circle));
         } else {
@@ -174,7 +174,7 @@ export const deleteCircle = (circle, token) => {
       body: JSON.stringify({ id: circle.id }),
     };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
+      response.json().then(() => {
         if (response.status === 200) {
           dispatch(deleteCircleSuccess(circle));
         } else {

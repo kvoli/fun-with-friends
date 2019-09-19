@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
 
 const tagSchema = mongoose.Schema(
@@ -34,14 +37,14 @@ const artifactSchema = mongoose.Schema(
     tags: { type: String },
     uploaded: { type: Date, default: Date.now },
     uploader: { type: String },
-    //tags: { type: [tagSchema], required: false },
-    //relations: { type: [relationSchema] }
+    // tags: { type: [tagSchema], required: false },
+    // relations: { type: [relationSchema] }
   },
   {
     toObject: {
       versionKey: false,
       virtuals: true,
-      transform: function(doc, ret) {
+      transform(doc, ret) {
         delete ret._id;
       },
     },

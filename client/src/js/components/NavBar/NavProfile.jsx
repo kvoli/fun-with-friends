@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
-import { useState } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import { logout } from '../../actions/auth';
 
-export const NavProfile = () => {
+const NavProfile = () => {
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -46,7 +46,7 @@ export const NavProfile = () => {
         onClose={handleClose}
       >
         <MenuItem
-          onClick={e => {
+          onClick={() => {
             dispatch(logout(auth.token));
             handleClose();
           }}
@@ -57,3 +57,5 @@ export const NavProfile = () => {
     </div>
   );
 };
+
+export default NavProfile;

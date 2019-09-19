@@ -1,7 +1,43 @@
 import history from '../../history';
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST } from '../constants/auth.js';
-import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from '../constants/auth.js';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from '../constants/auth';
+
 import { clearArtifacts } from './artifact';
+
+export const signupRequest = () => ({
+  type: SIGNUP_REQUEST,
+});
+
+export const signupSuccess = (user, token) => ({
+  type: SIGNUP_SUCCESS,
+  user,
+  token,
+});
+
+export const signupFailure = () => ({
+  type: SIGNUP_FAILURE,
+});
+
+export const loginRequest = () => ({
+  type: LOGIN_REQUEST,
+});
+
+export const loginSuccess = (user, token) => ({
+  type: LOGIN_SUCCESS,
+  user,
+  token,
+});
+
+export const loginFailure = () => ({
+  type: LOGIN_FAILURE,
+});
+
+export const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
+});
+
+export const logoutRequest = () => ({
+  type: LOGOUT_REQUEST,
+});
 
 export const login = (username, password) => {
   return dispatch => {
@@ -10,8 +46,8 @@ export const login = (username, password) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: username,
-        password: password,
+        username,
+        password,
       }),
     };
     fetch('/api/user/login', request).then(response =>
@@ -30,7 +66,7 @@ export const login = (username, password) => {
 export const logout = token => {
   return dispatch => {
     dispatch(logoutRequest());
-    fetch('/api/user/logout', { method: 'POST', headers: { Authorization: 'Bearer ' + token } });
+    fetch('/api/user/logout', { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
     dispatch(logoutSuccess());
     dispatch(clearArtifacts());
     history.push('/login');
@@ -44,11 +80,11 @@ export const signup = (firstname, lastname, email, username, password) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        username: username,
-        password: password,
+        firstname,
+        lastname,
+        email,
+        username,
+        password,
       }),
     };
     fetch('/api/user/signup', request).then(response =>
@@ -63,39 +99,3 @@ export const signup = (firstname, lastname, email, username, password) => {
     );
   };
 };
-
-export const signupRequest = () => ({
-  type: SIGNUP_REQUEST,
-});
-
-export const signupSuccess = (user, token) => ({
-  type: SIGNUP_SUCCESS,
-  user: user,
-  token: token,
-});
-
-export const signupFailure = error => ({
-  type: SIGNUP_FAILURE,
-});
-
-export const loginRequest = () => ({
-  type: LOGIN_REQUEST,
-});
-
-export const loginSuccess = (user, token) => ({
-  type: LOGIN_SUCCESS,
-  user: user,
-  token: token,
-});
-
-export const loginFailure = error => ({
-  type: LOGIN_FAILURE,
-});
-
-export const logoutSuccess = () => ({
-  type: LOGOUT_SUCCESS,
-});
-
-export const logoutRequest = () => ({
-  type: LOGOUT_REQUEST,
-});

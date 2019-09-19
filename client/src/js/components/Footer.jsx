@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Copyright from './Copyright';
 import { makeStyles } from '@material-ui/core/styles';
+import Copyright from './Copyright';
 
 const useStyles = makeStyles(theme => ({
   footer: {

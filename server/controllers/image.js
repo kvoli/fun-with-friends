@@ -1,4 +1,4 @@
-var uploadImage = async (req, res) => {
+const uploadImage = async (req, res) => {
   try {
     if (req.file) {
       res.status(201).send({ src: req.file.secure_url });

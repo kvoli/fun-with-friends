@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -10,8 +11,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
-import DeletePopup from './DeletePopup';
 import { useSelector, useDispatch } from 'react-redux';
+import DeletePopup from './DeletePopup';
 import LoadingCircle from './LoadingCircle';
 import { openArtifactForm, artifactSwitch } from '../actions/index';
 
@@ -98,7 +99,7 @@ const ArtifactDetailed = () => {
               </Typography>
               <Divider variant='middle' />
               <Typography variant='h6'>Relations</Typography>
-              <List dense={true}>
+              <List dense>
                 {relatives.map(relative => (
                   <ListItem key={relative.name} alignItems='flex-start'>
                     <ListItemAvatar>

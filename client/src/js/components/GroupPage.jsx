@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import { y } from '../../SVG/SVGImages';
 import { Typography, ListItem, List, ListItemText, ListItemAvatar, ListItemSecondaryAction, Grid, Avatar, IconButton, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { y } from '../../SVG/SVGImages';
 import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
 // import Chat from "./Chat";
@@ -24,8 +24,8 @@ const useStyles = makeStyles(theme => ({
 
 const GroupPage = props => {
   const [addMode, setAddMode] = React.useState(false);
+  // eslint-disable-next-line react/prop-types
   const circle = useSelector(store => store.circles.circles[props.match.params.id]);
-  console.log(circle);
 
   const classes = useStyles();
 
@@ -71,7 +71,7 @@ const GroupPage = props => {
                   <Grid item>
                     <List>
                       <ListItem>
-                        <RemoveMember props={{ circle: circle.id, member: member }} />
+                        <RemoveMember props={{ circle: circle.id, member }} />
                         <ListItemText primary={member} secondary='description' />
                       </ListItem>
                     </List>

@@ -1,4 +1,4 @@
-import { OPEN_CIRCLE_FORM } from '../constants/action-types.js';
+import { OPEN_CIRCLE_FORM } from '../constants/action-types';
 
 import {
   // GET_ALL_USERS_SUCCESS,

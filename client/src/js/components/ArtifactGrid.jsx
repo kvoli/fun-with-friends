@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable react/jsx-one-expression-per-line */
 // Import Packages
 import React from 'react';
 import Card from '@material-ui/core/Card';
@@ -11,10 +13,10 @@ import Container from '@material-ui/core/Container';
 import Zoom from '@material-ui/core/Zoom';
 import Chip from '@material-ui/core/Chip';
 import { Divider } from '@material-ui/core';
-import UtilityBar from './UtilityBar';
-import { artifactSwitch } from '../actions/index.js';
-import ArtifactModal from './ArtifactModal';
 import { useSelector, useDispatch } from 'react-redux';
+import UtilityBar from './UtilityBar';
+import { artifactSwitch } from '../actions/index';
+import ArtifactModal from './ArtifactModal';
 import { getVisibleArtifacts } from '../selectors/index';
 
 const useStyles = makeStyles(theme => ({
@@ -62,7 +64,7 @@ const ArtifactGrid = () => {
       <Grid container spacing={6} className={classes.artifactGrid}>
         {artifacts.map(artifact => (
           <Grid item key={artifact.id} xs={12} sm={7} md={4}>
-            <Zoom in={true} style={{ transitionDelay: '50ms' }}>
+            <Zoom in style={{ transitionDelay: '50ms' }}>
               <Card className={classes.card}>
                 <CardActionArea onClick={() => dispatch(artifactSwitch(artifact))}>
                   <CardMedia component='img' className={classes.cardMedia} image={artifact.src ? artifact.src : defaultImage} title={artifact.title} />

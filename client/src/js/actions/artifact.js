@@ -1,9 +1,19 @@
 import { UPLOAD_IMAGE } from '../constants/action-types';
-import { GET_ARTIFACTS_REQUEST, GET_ARTIFACTS_SUCCESS, GET_ARTIFACTS_FAILURE } from '../constants/artifact';
-import { EDIT_ARTIFACT_REQUEST, EDIT_ARTIFACT_SUCCESS, EDIT_ARTIFACT_FAILURE } from '../constants/artifact';
-import { CREATE_ARTIFACT_REQUEST, CREATE_ARTIFACT_SUCCESS, CREATE_ARTIFACT_FAILURE } from '../constants/artifact';
-import { DELETE_ARTIFACT_SUCCESS, DELETE_ARTIFACT_REQUEST, DELETE_ARTIFACT_FAILURE } from '../constants/artifact';
-import { CLEAR_ARTIFACTS } from '../constants/artifact';
+import {
+  GET_ARTIFACTS_REQUEST,
+  GET_ARTIFACTS_SUCCESS,
+  GET_ARTIFACTS_FAILURE,
+  EDIT_ARTIFACT_REQUEST,
+  EDIT_ARTIFACT_SUCCESS,
+  EDIT_ARTIFACT_FAILURE,
+  CREATE_ARTIFACT_REQUEST,
+  CREATE_ARTIFACT_SUCCESS,
+  CREATE_ARTIFACT_FAILURE,
+  DELETE_ARTIFACT_SUCCESS,
+  DELETE_ARTIFACT_REQUEST,
+  DELETE_ARTIFACT_FAILURE,
+  CLEAR_ARTIFACTS,
+} from '../constants/artifact';
 
 export const clearArtifacts = () => ({
   type: CLEAR_ARTIFACTS,
@@ -36,7 +46,7 @@ export const createArtifactRequest = () => ({
 
 export const createArtifactSuccess = artifact => ({
   type: CREATE_ARTIFACT_SUCCESS,
-  artifact: artifact,
+  artifact,
 });
 
 export const createArtifactFailure = () => ({
@@ -49,7 +59,7 @@ export const createArtifact = (artifact, token) => {
     const endpoint = '/api/artifact';
     const parameters = { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(artifact) };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(json => {
+      response.json().then(() => {
         if (response.status === 201) {
           dispatch(createArtifactSuccess(artifact));
         } else {
@@ -66,7 +76,7 @@ export const deleteArtifactRequest = () => ({
 
 export const deleteArtifactSuccess = artifact => ({
   type: DELETE_ARTIFACT_SUCCESS,
-  artifact: artifact,
+  artifact,
 });
 
 export const deleteArtifactFailure = () => ({
@@ -94,7 +104,7 @@ export const getArtifactsRequest = () => ({
 
 export const getArtifactsSuccess = artifacts => ({
   type: GET_ARTIFACTS_SUCCESS,
-  artifacts: artifacts,
+  artifacts,
 });
 
 export const getArtifactsFailure = () => ({
@@ -123,7 +133,7 @@ export const editRequest = () => ({
 
 export const editSuccess = artifact => ({
   type: EDIT_ARTIFACT_SUCCESS,
-  artifact: artifact,
+  artifact,
 });
 
 export const editFailure = () => ({

@@ -13,6 +13,20 @@ const Chat = () => {
     setMessages([...messages, message]);
   };
 
+  const socket = useSelector(store => store.socket.chatSocket);
+
+  socket.on('message', onReceivedMessage);
+
+  function onSend(message) {
+    socket.emit('message', message);
+  }
+
+  const handleSubmit = () => {
+    onSend(current);
+    setMessages([...messages, current]);
+    setCurrent('');
+  };
+
   const onKeyDown = event => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -26,20 +40,6 @@ const Chat = () => {
     event.stopPropagation();
     setCurrent(event.target.value);
   };
-
-  const handleSubmit = () => {
-    onSend(current);
-    setMessages([...messages, current]);
-    setCurrent('');
-  };
-
-  const socket = useSelector(store => store.socket.chatSocket);
-
-  socket.on('message', onReceivedMessage);
-
-  function onSend(message) {
-    socket.emit('message', message);
-  }
 
   return (
     <Container maxWidth='xl'>

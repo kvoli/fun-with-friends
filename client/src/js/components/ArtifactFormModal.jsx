@@ -1,7 +1,7 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import { openArtifactForm } from '../actions/index.js';
 import { useSelector, useDispatch } from 'react-redux';
+import { openArtifactForm } from '../actions/index';
 import ArtifactForm from './ArtifactForm';
 
 const ArtifactFormModal = () => {

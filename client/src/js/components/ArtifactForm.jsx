@@ -1,15 +1,16 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import useForm from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, Button, CardActionArea, CardActions } from '@material-ui/core';
+import { TextField, Button, CardActionArea, CardActions, CardMedia, Card, CardContent } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { CardMedia, Card, CardContent } from '@material-ui/core';
+
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
+import uuid from 'uuid';
 import { openArtifactForm, artifactSwitch } from '../actions/index';
 import { uploadImage, createArtifact, editArtifact } from '../actions/artifact';
-import uuid from 'uuid';
 import { launchAddSnackbar, launchEditSnackbar } from '../actions/snackbar';
 
 const useStyles = makeStyles(theme => ({
@@ -57,7 +58,7 @@ const ArtifactForm = () => {
   const auth = useSelector(store => store.auth);
   const dispatch = useDispatch();
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
-  const editMode = artifact ? true : false;
+  const editMode = !!artifact;
 
   const fillArtifact = {
     title: artifact.title ? artifact.title : '',
@@ -88,15 +89,15 @@ const ArtifactForm = () => {
     <Grid container justify='center' className={classes.contained}>
       <Card>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input readOnly className={classes.input} ref={register({ required: true })} name='src' value={pictureSrc ? pictureSrc : defaultImage} />
+          <input readOnly className={classes.input} ref={register({ required: true })} name='src' value={pictureSrc || defaultImage} />
           <input readOnly className={classes.input} ref={register({ required: true })} name='id' value={artifact.id ? artifact.id : uuid.v4()} />
           <CardActionArea>
             <CardMedia
               component='img'
               className={classes.cardMedia}
-              image={pictureSrc ? pictureSrc : defaultImage}
-              alt={pictureSrc ? pictureSrc : defaultImage}
-              src={pictureSrc ? pictureSrc : defaultImage}
+              image={pictureSrc || defaultImage}
+              alt={pictureSrc || defaultImage}
+              src={pictureSrc || defaultImage}
             />
           </CardActionArea>
           <CardContent className={classes.cardContent}>
@@ -179,7 +180,7 @@ const ArtifactForm = () => {
                   defaultValue={fillArtifact.text || ''}
                 />
               </Grid>
-              <Grid></Grid>
+              <Grid />
             </div>
           </CardContent>
           <CardActions>
@@ -198,7 +199,7 @@ const ArtifactForm = () => {
                   size='small'
                   name='cancel'
                   className={classes.button}
-                  onClick={event => {
+                  onClick={() => {
                     dispatch(openArtifactForm(false));
                   }}
                 >

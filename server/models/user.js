@@ -1,3 +1,7 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable func-names */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -21,7 +25,7 @@ const userSchema = mongoose.Schema(
     toObject: {
       versionKey: false,
       virtuals: true,
-      transform: function(doc, ret) {
+      transform(doc, ret) {
         delete ret._id;
         delete ret.password;
       },

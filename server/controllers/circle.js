@@ -1,6 +1,7 @@
-var Circle = require('../models/circle');
+/* eslint-disable no-underscore-dangle */
+const Circle = require('../models/circle');
 
-var createCircle = async (req, res) => {
+const createCircle = async (req, res) => {
   try {
     req.body._id = req.body.id;
     delete req.body.id;
@@ -18,9 +19,9 @@ var createCircle = async (req, res) => {
   }
 };
 
-var getAllCircles = async (req, res) => {
+const getAllCircles = async (req, res) => {
   try {
-    //get all the circles in the database that contain the user as a member
+    // get all the circles in the database that contain the user as a member
     const circles = await Circle.find({ members: req.user.id });
 
     res.status(200).send(circles.map(circle => circle.toObject()));
@@ -31,9 +32,9 @@ var getAllCircles = async (req, res) => {
   }
 };
 
-var deleteCircle = async (req, res) => {
+const deleteCircle = async (req, res) => {
   try {
-    //delete circle according to the id of the request
+    // delete circle according to the id of the request
     await Circle.deleteOne({
       _id: req.params.id,
     });
@@ -45,11 +46,11 @@ var deleteCircle = async (req, res) => {
   }
 };
 
-//add a member to a circle
-//member details that should be included in payload: { memberId: string, admin: boolean }
-//only added members that are not already members and admins that are not already admins to avoid unnecessary data storage
-//This means that member IDs must be unique
-var addMember = async (req, res) => {
+// add a member to a circle
+// member details that should be included in payload: { memberId: string, admin: boolean }
+// only added members that are not already members and admins that are not already admins to avoid unnecessary data storage
+// This means that member IDs must be unique
+const addMember = async (req, res) => {
   try {
     const addedMember = req.body.id;
     const isAdmin = req.body.admin;
@@ -89,10 +90,9 @@ var addMember = async (req, res) => {
   }
 };
 
-var deleteMember = async (req, res) => {
+const deleteMember = async (req, res) => {
   try {
     const deletedMember = req.body.id;
-    console.log(deletedMember);
     await Circle.findOneAndUpdate(
       {
         _id: req.params.id,

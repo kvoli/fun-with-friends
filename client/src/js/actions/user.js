@@ -6,7 +6,7 @@ export const getAllUsersRequest = () => ({
 
 export const getAllUsersSuccess = payload => ({
   type: GET_ALL_USERS_SUCCESS,
-  payload: payload,
+  payload,
 });
 
 export const getAllUsersFailure = () => ({

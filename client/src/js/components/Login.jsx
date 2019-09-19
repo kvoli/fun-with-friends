@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+
 import { login } from '../actions/auth';
 
 const useStyles = makeStyles(theme => ({
@@ -85,7 +85,7 @@ const Login = () => {
             autoComplete='current-password'
           />
           <Button
-            onClick={e => {
+            onClick={() => {
               dispatch(login(username, password));
             }}
             fullWidth

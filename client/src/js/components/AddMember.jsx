@@ -1,12 +1,18 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { addCircleUser } from '../actions/circle';
 import { useDispatch, useSelector } from 'react-redux';
+import { addCircleUser } from '../actions/circle';
 
 const AddMember = ({ circle }) => {
   const [memberForm, setMemberForm] = React.useState('');
   const token = useSelector(store => store.auth.token);
   const dispatch = useDispatch();
+
+  function handleSubmit() {
+    setMemberForm('');
+    dispatch(addCircleUser(memberForm, circle, token));
+  }
 
   const onKeyDown = event => {
     if (event.key === 'Enter') {
@@ -15,12 +21,6 @@ const AddMember = ({ circle }) => {
       handleSubmit();
     }
   };
-
-  function handleSubmit() {
-    setMemberForm('');
-    dispatch(addCircleUser(memberForm, circle, token));
-  }
-
   function handleChange(event) {
     event.preventDefault();
     event.stopPropagation();

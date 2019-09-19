@@ -7,7 +7,7 @@ const UserTitle = () => {
   // Do not render the UserTitle if the user is not authenticated
   if (!auth.success) return null;
   // Otherwise render the UserTitle
-  return <Typography>{auth.user.firstname + ' ' + auth.user.lastname}</Typography>;
+  return <Typography>{`${auth.user.firstname} ${auth.user.lastname}`}</Typography>;
 };
 
 export default UserTitle;

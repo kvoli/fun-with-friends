@@ -1,7 +1,7 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import { artifactSwitch } from '../actions/index.js';
 import { useSelector, useDispatch } from 'react-redux';
+import { artifactSwitch } from '../actions/index';
 import ArtifactDetailed from './ArtifactDetailed';
 
 const ArtifactModal = () => {

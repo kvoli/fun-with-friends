@@ -1,13 +1,13 @@
 import React from 'react';
 import { Grid, IconButton } from '@material-ui/core';
-import SearchBar from './SearchBar';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
 import { openArtifactForm } from '../actions/index';
 import { getArtifacts } from '../actions/artifact';
-import { useSelector, useDispatch } from 'react-redux';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles(theme => ({
   button: {

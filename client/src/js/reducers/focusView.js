@@ -1,4 +1,4 @@
-import { ARTIFACT_SWITCH, OPEN_ARTIFACT_FORM, UPLOAD_IMAGE } from '../constants/action-types.js';
+import { ARTIFACT_SWITCH, OPEN_ARTIFACT_FORM, UPLOAD_IMAGE } from '../constants/action-types';
 
 const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
 

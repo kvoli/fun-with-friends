@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { filterArtifacts } from '../actions/index';
 import { useSelector, useDispatch } from 'react-redux';
+import { filterArtifacts } from '../actions/index';
 
 const SearchBar = () => {
   const dispatch = useDispatch();

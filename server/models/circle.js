@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 const circleSchema = mongoose.Schema(
@@ -41,7 +43,7 @@ const circleSchema = mongoose.Schema(
     toObject: {
       versionKey: false,
       virtuals: true,
-      transform: function(doc, ret) {
+      transform(doc, ret) {
         delete ret._id;
       },
     },

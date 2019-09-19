@@ -1,7 +1,7 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS, LOGOUT_SUCCESS, LOGOUT_REQUEST } from '../constants/auth';
 
-let user = JSON.parse(localStorage.getItem('user'));
-let token = JSON.parse(localStorage.getItem('token'));
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
 const initialState = user
   ? {
       pending: false,

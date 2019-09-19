@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = require('../middleware/auth');
+
 const circleRouter = express.Router();
 const circleController = require('../controllers/circle');
 

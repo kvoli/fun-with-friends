@@ -34,7 +34,7 @@ const GroupIndex = () => {
   const privateKeys = circleKeys.filter(key => circles[key].public === false || circles[key].public === 'false');
 
   return (
-    <React.Fragment>
+    <>
       <Container maxWidth='lg' justify='space-between'>
         <Grid container direction='column'>
           <Grid item className={classes.container}>
@@ -44,8 +44,8 @@ const GroupIndex = () => {
             <Grid container>
               {privateKeys.map(key => (
                 <Grid item key={key}>
-                  <IconButton component={Link} to={'/circle/' + key}>
-                    <Avatar alt={circles[key].title} src={circles[key].previewImage} className={classes.bigAvatar}></Avatar>
+                  <IconButton component={Link} to={`/circle/${key}`}>
+                    <Avatar alt={circles[key].title} src={circles[key].previewImage} className={classes.bigAvatar} />
                   </IconButton>
                   <Typography align='center'>{circles[key].title}</Typography>
                 </Grid>
@@ -66,8 +66,8 @@ const GroupIndex = () => {
             <Grid container>
               {publicKeys.map(key => (
                 <Grid item key={key}>
-                  <IconButton component={Link} to={'/circle/' + key}>
-                    <Avatar alt={circles[key].title} src={circles[key].previewImage} className={classes.bigAvatar}></Avatar>
+                  <IconButton component={Link} to={`/circle/${key}`}>
+                    <Avatar alt={circles[key].title} src={circles[key].previewImage} className={classes.bigAvatar} />
                   </IconButton>
                   <Typography align='center'>{circles[key].title}</Typography>
                 </Grid>
@@ -77,7 +77,7 @@ const GroupIndex = () => {
         </Grid>
       </Container>
       <AddCircleModal />
-    </React.Fragment>
+    </>
   );
 };
 

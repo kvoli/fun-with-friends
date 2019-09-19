@@ -1,7 +1,8 @@
-var User = require('../models/user');
+/* eslint-disable consistent-return */
+const User = require('../models/user');
 
 // Create a new user
-var createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     // Create a new user and save it in the database
     const user = new User(req.body);
@@ -29,7 +30,7 @@ var createUser = async (req, res) => {
 };
 
 // Login to an existing user
-var loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     // Get the username and password from the request body and find the user in the database
     const { username, password } = req.body;
@@ -55,17 +56,17 @@ var loginUser = async (req, res) => {
 };
 
 // Get the current user
-var getCurrentUser = async (req, res) => {
+const getCurrentUser = async (req, res) => {
   res.status(200).send({
     user: await req.user.toObject(),
   });
 };
 
 // Logout the current user on the current device
-var logoutUser = async (req, res) => {
+const logoutUser = async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter(token => {
-      return token.token != req.token;
+      return token.token !== req.token;
     });
     await req.user.save();
     res.status(200).send();
@@ -78,7 +79,7 @@ var logoutUser = async (req, res) => {
 };
 
 // Logout the current user on all devices
-var logoutUserAll = async (req, res) => {
+const logoutUserAll = async (req, res) => {
   try {
     req.user.tokens.splice(0, req.user.tokens.length);
     await req.user.save();
@@ -91,12 +92,11 @@ var logoutUserAll = async (req, res) => {
   }
 };
 
-//get all users in the database
-var getAllUsers = async (req, res) => {
+// get all users in the database
+const getAllUsers = async (req, res) => {
   try {
-    //get all users
+    // get all users
     const allUsers = await User.find();
-    console.log(allUsers);
     res.status(200).send(allUsers.map(user => user.toObject()));
   } catch (error) {
     req.status(400).send({

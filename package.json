@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Fun With Friends",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "clsx": "^1.0.4"
+  },
   "devDependencies": {
     "babel-cli": "^6.23.0",
-    "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-preset-airbnb": "^4.0.1",
     "eslint": "^6.4.0",
@@ -18,7 +19,6 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "jest": "^24.9.0",
     "prettier": "^1.18.2"
   },
   "scripts": {
