@@ -64,6 +64,7 @@ const ArtifactGrid = () => {
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
   console.log(getCircleArtifacts(state));
   console.log(getPersonalArtifacts(state));
+  console.log(artifacts);
 
   return (
     <Container className={classes.cardGrid} maxWidth='lg'>
