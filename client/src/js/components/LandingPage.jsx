@@ -1,6 +1,6 @@
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import { circleImage } from '../../SVG/SVGImages';
+import React from "react";
+import Container from "@material-ui/core/Container";
+import { circleImage } from "../../SVG/SVGImages";
 import {
   Typography,
   List,
@@ -8,10 +8,10 @@ import {
   ListItem,
   Grid,
   FormGroup
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { rotateIn } from 'react-animations';
-import Radium, { StyleRoot } from 'radium';
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { rotateIn } from "react-animations";
+import Radium, { StyleRoot } from "radium";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(0),
     paddingLeft: theme.spacing(0),
     paddingRight: theme.spacing(0),
-    height: '100%',
-    display: 'flex'
+    height: "100%",
+    display: "flex"
   },
   title: {
     flexGrow: 1,
@@ -48,8 +48,8 @@ const useStyles = makeStyles(theme => ({
 
 const animationStyles = {
   rotateIn: {
-    animation: 'x 5s',
-    animationName: Radium.keyframes(rotateIn, 'rotateIn')
+    animation: "x 5s",
+    animationName: Radium.keyframes(rotateIn, "rotateIn")
   }
 };
 
