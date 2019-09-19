@@ -9,6 +9,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import GroupPage from './GroupPage';
 import GroupIndex from './GroupIndex';
+import LandingPage from './LandingPage';
 
 // import action methods [api calls]
 import { getArtifacts } from '../actions/artifact';
@@ -21,7 +22,7 @@ function Main() {
   return (
     <main>
       <Switch>
-        <Route exact path='/' component={MainPage} onEnterAction={auth.token ? dispatch(getArtifacts(auth.token)) : null} />
+        <Route exact path='/' component={auth.token ? MainPage : LandingPage} onEnterAction={auth.token ? dispatch(getArtifacts(auth.token)) : null} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/circle/:id' component={GroupPage} onEnterAction={auth.token ? dispatch(getAllUsers(auth.token)) : null} />
