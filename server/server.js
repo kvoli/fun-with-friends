@@ -9,6 +9,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const router = require('./routes/routes');
+const chatController = require('./controllers/chat');
 
 // Start the express server
 const server = express();
@@ -38,21 +39,32 @@ const s = server.listen(port, () => {
 
 const io = require('socket.io')(s);
 
+const { addMessage } = chatController;
+const { getChatLog } = chatController;
 const clients = {};
 const users = {};
+const allClients = [];
 
 io.on('connection', socket => {
   console.log('connection', socket.id);
   clients[socket.id] = socket;
   socket.on('userJoined', userId => onUserJoined(userId, socket));
   socket.on('message', message => onMessageReceived(message, socket));
+  socket.on('disconnect', function() {
+    console.log('Got disconnect!');
+
+    const i = allClients.indexOf(socket);
+    allClients.splice(i, 1);
+  });
 });
 
 // Event listeners.
 // When a user joins the chatroom.
-function onUserJoined(userId, socket) {
+function onUserJoined(userId, circleID, socket) {
   console.log('REGISTER USER', userId);
   users[socket.id] = userId;
+  allClients.push(socket);
+  socket.emit(getChatLog(circleID));
 }
 
 // When a user sends a message in the chatroom.
@@ -66,6 +78,7 @@ function onMessageReceived(message, senderSocket) {
 
 // Save the message to the db and send all sockets but the sender.
 function _sendAndSaveMessage(message, socket) {
+  addMessage(message);
   // If the message is from the server, then send to everyone.
   socket.broadcast.emit('message', message);
 }
