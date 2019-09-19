@@ -14,6 +14,7 @@
     "history": "^4.10.0",
     "jest-enzyme": "^7.1.1",
     "material-ui-chip-input": "^2.0.0-beta.1",
+    "notistack": "^0.9.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-autosuggest": "^9.4.3",

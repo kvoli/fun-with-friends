@@ -90,6 +90,7 @@ const ArtifactForm = () => {
 
   const { register, handleSubmit } = useForm({
     defaultValues: fillArtifact,
+    nativeValidation: true,
   });
 
   const onSubmit = (data, e) => {
@@ -126,7 +127,7 @@ const ArtifactForm = () => {
                   <TextField
                     name='title'
                     label='title'
-                    inputRef={register({ required: true })}
+                    inputRef={register({ required: 'please enter a title' })}
                     placeholder="Grandma's Teeth"
                     defaultValue={fillArtifact.title || ''}
                   />
@@ -154,13 +155,19 @@ const ArtifactForm = () => {
               <Grid item>
                 <Grid container direction='row' justify='space-between'>
                   <Grid item>
-                    <TextField name='date' label='date' inputRef={register({ required: true })} placeholder='3/9/1997' defaultValue={fillArtifact.date || ''} />
+                    <TextField
+                      name='date'
+                      label='date'
+                      inputRef={register({ required: 'please enter a date' })}
+                      placeholder='3/9/1997'
+                      defaultValue={fillArtifact.date || ''}
+                    />
                   </Grid>
                   <Grid item>
                     <TextField
                       name='origin'
                       label='origin'
-                      inputRef={register({ required: true })}
+                      inputRef={register({ required: 'please enter an origin' })}
                       placeholder='e.g. United Kingdom'
                       defaultValue={fillArtifact.origin || ''}
                     />
@@ -181,7 +188,7 @@ const ArtifactForm = () => {
                 <TextField
                   name='desc'
                   label='summary'
-                  inputRef={register({ required: true })}
+                  inputRef={register({ required: 'please enter a short description' })}
                   placeholder='A short summary'
                   rows='2'
                   margin='normal'

@@ -17,6 +17,7 @@ import {
   DELETE_CIRCLE_USER_REQUEST,
   ATTATCH_ARTIFACT,
 } from '../constants/circle';
+import toast from '../components/NodeSnack';
 
 // local changes
 
@@ -116,8 +117,10 @@ export const addCircleUser = (userID, circleID, token) => {
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(addCircleUserSuccess({ memberid: userID, circleid: circleID }));
+        toast.success(`User with user id: ${userID} has been successfully added`);
       } else {
         dispatch(addCircleUserFailure());
+        toast.failure(`User with user id: ${userID} could not be added :()`);
       }
     });
   };
@@ -136,8 +139,10 @@ export const deleteCircleUser = (userID, circleID, token) => {
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(deleteCircleUserSuccess({ memberid: userID, circleid: circleID }));
+        toast.success(`User with user id: ${userID} has been successfully removed!`);
       } else {
         dispatch(deleteCircleUserFailure());
+        toast.failure(`User with user id: ${userID} could not be removed :()`);
       }
     });
   };
@@ -156,8 +161,10 @@ export const addCircle = (circle, token) => {
     fetch(endpoint, parameters).then(response => {
       if (response.status === 201) {
         dispatch(addCircleSuccess(circle));
+        toast.success(`Circle: ${circle.title} has been created!`);
       } else {
         dispatch(addCircleFailure());
+        toast.failure(`Circle: ${circle.title} could not be created :()`);
       }
     });
   };
@@ -175,8 +182,10 @@ export const deleteCircle = (circle, token) => {
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(deleteCircleSuccess(circle));
+        toast.success(`Circle: ${circle.title} has been deleted!`);
       } else {
         dispatch(deleteCircleFailure());
+        toast.failure(`Circle: ${circle.title} could not be deleted :()`);
       }
     });
   };
