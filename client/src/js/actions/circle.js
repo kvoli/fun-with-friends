@@ -15,12 +15,18 @@ import {
   DELETE_CIRCLE_REQUEST,
   ADD_CIRCLE_USER_REQUEST,
   DELETE_CIRCLE_USER_REQUEST,
+  ATTATCH_ARTIFACT,
 } from '../constants/circle';
 
 // local changes
 
 export const openCircleForm = payload => ({
   type: OPEN_CIRCLE_FORM,
+  payload,
+});
+
+export const attatchArtifact = payload => ({
+  type: ATTATCH_ARTIFACT,
   payload,
 });
 

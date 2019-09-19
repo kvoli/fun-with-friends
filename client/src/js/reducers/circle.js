@@ -20,6 +20,7 @@ import {
   // DELETE_CIRCLE_REQUEST,
   // ADD_CIRCLE_USER_REQUEST,
   // DELETE_CIRCLE_USER_REQUEST,
+  ATTATCH_ARTIFACT,
 } from '../constants/circle';
 
 const circleImages = [
@@ -182,6 +183,17 @@ const circle = (state = initialState, action) => {
         circleForm: {
           open: !state.circleForm.open,
           circle: action.payload.circle,
+        },
+      };
+    case ATTATCH_ARTIFACT:
+      return {
+        ...state,
+        circles: {
+          ...state.circles,
+          [action.payload.circleid]: {
+            ...state.circles[action.payload.circleid],
+            artifacts: [...state.circles[action.payload.circleid].artifacts, action.payload.artifactid],
+          },
         },
       };
     default:

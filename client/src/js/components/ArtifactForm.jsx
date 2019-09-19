@@ -10,8 +10,10 @@ import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import uuid from 'uuid';
 import { openArtifactForm, artifactSwitch } from '../actions/index';
+import { attatchArtifact } from '../actions/circle';
 import { uploadImage, createArtifact, editArtifact } from '../actions/artifact';
 import { launchAddSnackbar, launchEditSnackbar } from '../actions/snackbar';
+import SuggestInput from './SuggestInput';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -58,6 +60,8 @@ const ArtifactForm = () => {
   const auth = useSelector(store => store.auth);
   const dispatch = useDispatch();
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
+  const allCircles = useSelector(store => store.circle.circles);
+  const cKeys = Object.keys(allCircles);
   const editMode = !!artifact;
 
   const fillArtifact = {
@@ -71,6 +75,17 @@ const ArtifactForm = () => {
     id: artifact.id ? artifact.id : uuid.v4(),
   };
 
+  const currentCircleIDs = cKeys.filter(key => allCircles[key].artifacts.includes(fillArtifact.id));
+  const currentCircleNames = currentCircleIDs.map(key => allCircles[key].title);
+  const availableCircleIDs = cKeys.filter(key => allCircles[key].members.includes(auth.user.id));
+  const availableCircleNames = availableCircleIDs.map(key => allCircles[key].title);
+
+  function getCircleID(circleTitle) {
+    return cKeys.filter(key => allCircles[key].title === circleTitle);
+  }
+
+  const [circles, setCircles] = React.useState(currentCircleNames || []);
+
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
 
   const { register, handleSubmit } = useForm({
@@ -80,6 +95,10 @@ const ArtifactForm = () => {
   const onSubmit = (data, e) => {
     editMode ? dispatch(editArtifact(data, auth.token)) : dispatch(createArtifact(data, auth.token));
     editMode ? dispatch(launchEditSnackbar()) : dispatch(launchAddSnackbar());
+    for (let i = 0; i < circles.length; i += 1) {
+      console.log(circles[i], data.id);
+      dispatch(attatchArtifact({ circleid: getCircleID(circles[i]), artifactid: data.id }));
+    }
     e.target.reset();
     dispatch(openArtifactForm(false));
     dispatch(artifactSwitch(data));
@@ -104,7 +123,13 @@ const ArtifactForm = () => {
             <div className={classes.cardText}>
               <Grid container justify='space-between'>
                 <Grid item>
-                  <TextField name='title' label='title' inputRef={register({ required: true })} placeholder="Grandma's Teeth" />
+                  <TextField
+                    name='title'
+                    label='title'
+                    inputRef={register({ required: true })}
+                    placeholder="Grandma's Teeth"
+                    defaultValue={fillArtifact.title || ''}
+                  />
                 </Grid>
                 <Grid item>
                   <Grid container direction='row-reverse' justify='flex-end'>
@@ -179,6 +204,9 @@ const ArtifactForm = () => {
                   palceholder='A detailed description '
                   defaultValue={fillArtifact.text || ''}
                 />
+              </Grid>
+              <Grid item>
+                <SuggestInput field={circles} setField={setCircles} label='share with circles' name='circles' suggestionList={availableCircleNames} />
               </Grid>
               <Grid />
             </div>
