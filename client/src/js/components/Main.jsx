@@ -10,7 +10,6 @@ import SignUp from './SignUp';
 import GroupPage from './GroupPage';
 import GroupIndex from './GroupIndex';
 import LandingPage from './LandingPage';
-import toast from './NodeSnack';
 
 // import action methods [api calls]
 import { getArtifacts } from '../actions/artifact';
@@ -30,7 +29,7 @@ function Main() {
           exact
           path='/circle/:id'
           component={auth.token ? GroupPage : LandingPage}
-          onEnterAction={auth.token ? dispatch(getAllUsers(auth.token)) : toast.error('You do not have permissions to view this page')}
+          onEnterAction={auth.token ? dispatch(getAllUsers(auth.token)) : null}
         />
         <Route
           exact
