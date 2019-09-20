@@ -4,27 +4,37 @@
   "description": "Fun with Friends Artifact Register Client",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.4.0",
-    "@material-ui/icons": "^4.2.1",
+    "@material-ui/core": "^4.4.2",
+    "@material-ui/icons": "^4.4.1",
+    "autosuggest-highlight": "^3.1.1",
     "babel": "^6.23.0",
     "babel-jest": "^24.9.0",
+    "d3-scale": "^3.1.0",
+    "d3-time": "^1.0.11",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "history": "^4.9.0",
+    "history": "^4.10.0",
     "jest-enzyme": "^7.1.1",
+    "material-ui-chip-input": "^2.0.0-beta.1",
+    "notistack": "^0.9.0",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
+    "react-autosuggest": "^9.4.3",
+    "radium": "^0.26.0",
+    "react-animations": "^1.0.0",
     "react-dom": "^16.9.0",
     "react-flexbox-grid": "^2.1.2",
-    "react-hook-form": "^3.23.1",
+    "react-hook-form": "^3.23.8",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.1.1",
     "react-test-renderer": "^16.9.0",
     "redux": "^4.0.4",
     "redux-mock-store": "^1.5.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "socket.io-client": "^2.2.0",
     "uuid": "^3.3.3"
   },
   "scripts": {
@@ -32,9 +42,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -48,6 +55,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080",
-  "devDependencies": {}
+  "proxy": "http://localhost:8080"
 }

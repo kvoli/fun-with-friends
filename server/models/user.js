@@ -1,32 +1,39 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable func-names */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // Define the token schema
 const tokenSchema = mongoose.Schema({
-  token: {type: String, required: true}
+  token: { type: String, required: true },
 });
 
 // Define the acount schema
-const userSchema = mongoose.Schema({
-  firstname: { type: String, required: true, trim: true },
-  lastname: { type: String, required: true, trim: true },
-  email: { type: String, required: true, unique: true, lowercase: true },
-  username: { type: String, required: true, unique: true, lowercase: true },
-  password: { type: String, required: true, minLength: 6 },
-  tokens: [tokenSchema]
-},{
-  toObject: {
-    versionKey: false, 
-    virtuals: true, 
-    transform: function (doc,ret) {
-      delete ret._id;
-      delete ret.password;
-    }
+const userSchema = mongoose.Schema(
+  {
+    firstname: { type: String, required: true, trim: true },
+    lastname: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, lowercase: true },
+    username: { type: String, required: true, unique: true, lowercase: true },
+    password: { type: String, required: true, minLength: 6 },
+    tokens: [tokenSchema],
+  },
+  {
+    toObject: {
+      versionKey: false,
+      virtuals: true,
+      transform(doc, ret) {
+        delete ret._id;
+        delete ret.password;
+      },
+    },
   }
-});
+);
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function(next) {
   const user = this;
   if (user.isModified('password')) {
     user.password = await bcrypt.hash(user.password, 8);
@@ -47,7 +54,7 @@ userSchema.statics.findByCredentials = async (username, password) => {
   if (!user) {
     return null;
   }
-  const passwordMatch = await bcrypt.compare(password, user.password)
+  const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) {
     return null;
   }

@@ -1,19 +1,20 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+/* eslint-disable react/jsx-one-expression-per-line */
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color="inherit" href="https://funwithfriends.net">
+      <Link color='inherit' href='https://funwithfriends.net'>
         funwithfriends.net
-        </Link>{' '}
+      </Link>{' '}
       {new Date().getFullYear()}
       {'.  '}
-      <Link color="inherit" href="https://github.com/kvoli/fun-with-friends">
+      <Link color='inherit' href='https://github.com/kvoli/fun-with-friends'>
         GitHub
-        </Link>
+      </Link>
     </Typography>
   );
 }

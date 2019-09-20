@@ -1,12 +1,12 @@
 sudo: required
 language: node_js
 node_js:
-- stable
+  - stable
 services:
-- docker
-cache: 
-  directories: 
-  - $HOME/.npm
+  - docker
+cache:
+  directories:
+    - $HOME/.npm
 install:
 - cd ./server && npm ci && cd ../
 - cd ./client && npm ci && cd ../
@@ -17,8 +17,8 @@ notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
   only:
-  - staging
-  - production
+    - staging
+    - production
 after_success:
 - cd ./server && npm ci --only=production && cd ../
 - cd ./client && npm ci --only=production && cd ../
@@ -28,6 +28,6 @@ after_success:
 - docker build -t $REPO:$TAG .
 - docker push $REPO
 env:
-  global: 
-  - secure: dLH4EKqAOHX/REp0IJyL2JzEcuqhUU/l3WZWz9P+guxOse0A7rNAUQ1zvoLJYQWqKJB2Obcukyszw9rMj+i11fDACygCOx8NSESGuVj2zvQBd9er3eu05evY7z5v2RTZZCFaeqw9DH7T0YHRcrwyo3uVf1yjlzwJJw0NSJJWfU5QXBRfFQ8FGO+XFigaevXd0L9MpWautiyn1uh6ixI0zLhrzpc2slKdkzWdlN7H4kEf1O9HDUTdRolhin6zqbrj+wCWQpChloeu0MjeuocflBktJnRVgIolhhCXpNIIB/iINjDkuYCqrOzedExT1DzKx/nV8S7i/vM7fxGqrwut92TpsAzEnFLXjAisApqYcC3Yii2oWUlR6r2UHKEw+pNuUa0nxOHE69J7eWPCEAui/lXZ1JAmU2haLjPtsdWAFKku8pZtPYAyTP/JswjTuQkJrNo5DpKXIOq9pUVgCX6QANibpTNnSO2gG4eA5C4/xh19oNPFF87Me4FKS8RM7+6KZWY87oz7lxFbY4PGi0x8g1v4ZhxPTOWog0zr2g3ADC+sI1gv+GjK7uvN48U6k0dtEPuWsLzgSnyo6EQAVuppWSoETezUieSBEgLT0tDTYBgTWdaW6jh+dDFqJkd9LsfdU+nD2AwV6C40OFdSSjGlVYROf6cVnu+yPLUklgqGVkQ=
-  - secure: WoU5fBsFPBKUiNIs8kM5SAINDwxXG9MZLzgH4RHKjnU26I4EKvGI6h3mkwbPeL7fLQuuaxpDp7GZTdEyzCCqdCq8KOMwYpopMvefm6e1guYX4au14G7pBtpTwasgGe91lk8DQne2LcRperKuptYHKrkBA97hwmmaPePLHOQOCkxL9R55n1oGukgBWrsmhPGt/NYra9ZSGGaIlXKr4koaSZLXp2KSpNp4NirX7z2BOm1RuFkZDqtU1AyFvTt2IOKFoCKedSJAvaiHfyO/uzRPD/TFBM3kns968shKRgiUcCiYUeBEsRZaVNKv5GiO/e+nbQKZ7vnnZV5ZEzNboYWhcKT66G9f1kZuj8fPIUnGkMDm87hR1iObb5OCYS3CyYs3yhvAk3qXkDcIzMqQ6sd1a6E04pmBA4mFzSsWePzHjqrdLsSsVcmXDJlkLZFZyHrH9phmr4yeqlvZlz4ojbTfonq+WSFmwuH0bnofoUOejXRpM8p08VcExL/sxEx2oxTWqE6atf9FpgtyhPcFrfFuoBtRZIzpnL7aHuk1v/rQN9ysMalv7fyMg6a2wPgthvKLZvehwKHjabcp3u0OOoV51FzUUnQbwF2luC6qgYvaKLzvjDI6kl8NOZbjrXE/QThOdVuCqcidwinaB7FNnansNmU5HDHsUoNa0gpgGbUsVTE=
+  global:
+    - secure: dLH4EKqAOHX/REp0IJyL2JzEcuqhUU/l3WZWz9P+guxOse0A7rNAUQ1zvoLJYQWqKJB2Obcukyszw9rMj+i11fDACygCOx8NSESGuVj2zvQBd9er3eu05evY7z5v2RTZZCFaeqw9DH7T0YHRcrwyo3uVf1yjlzwJJw0NSJJWfU5QXBRfFQ8FGO+XFigaevXd0L9MpWautiyn1uh6ixI0zLhrzpc2slKdkzWdlN7H4kEf1O9HDUTdRolhin6zqbrj+wCWQpChloeu0MjeuocflBktJnRVgIolhhCXpNIIB/iINjDkuYCqrOzedExT1DzKx/nV8S7i/vM7fxGqrwut92TpsAzEnFLXjAisApqYcC3Yii2oWUlR6r2UHKEw+pNuUa0nxOHE69J7eWPCEAui/lXZ1JAmU2haLjPtsdWAFKku8pZtPYAyTP/JswjTuQkJrNo5DpKXIOq9pUVgCX6QANibpTNnSO2gG4eA5C4/xh19oNPFF87Me4FKS8RM7+6KZWY87oz7lxFbY4PGi0x8g1v4ZhxPTOWog0zr2g3ADC+sI1gv+GjK7uvN48U6k0dtEPuWsLzgSnyo6EQAVuppWSoETezUieSBEgLT0tDTYBgTWdaW6jh+dDFqJkd9LsfdU+nD2AwV6C40OFdSSjGlVYROf6cVnu+yPLUklgqGVkQ=
+    - secure: WoU5fBsFPBKUiNIs8kM5SAINDwxXG9MZLzgH4RHKjnU26I4EKvGI6h3mkwbPeL7fLQuuaxpDp7GZTdEyzCCqdCq8KOMwYpopMvefm6e1guYX4au14G7pBtpTwasgGe91lk8DQne2LcRperKuptYHKrkBA97hwmmaPePLHOQOCkxL9R55n1oGukgBWrsmhPGt/NYra9ZSGGaIlXKr4koaSZLXp2KSpNp4NirX7z2BOm1RuFkZDqtU1AyFvTt2IOKFoCKedSJAvaiHfyO/uzRPD/TFBM3kns968shKRgiUcCiYUeBEsRZaVNKv5GiO/e+nbQKZ7vnnZV5ZEzNboYWhcKT66G9f1kZuj8fPIUnGkMDm87hR1iObb5OCYS3CyYs3yhvAk3qXkDcIzMqQ6sd1a6E04pmBA4mFzSsWePzHjqrdLsSsVcmXDJlkLZFZyHrH9phmr4yeqlvZlz4ojbTfonq+WSFmwuH0bnofoUOejXRpM8p08VcExL/sxEx2oxTWqE6atf9FpgtyhPcFrfFuoBtRZIzpnL7aHuk1v/rQN9ysMalv7fyMg6a2wPgthvKLZvehwKHjabcp3u0OOoV51FzUUnQbwF2luC6qgYvaKLzvjDI6kl8NOZbjrXE/QThOdVuCqcidwinaB7FNnansNmU5HDHsUoNa0gpgGbUsVTE=

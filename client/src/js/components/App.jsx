@@ -3,15 +3,17 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Main from './Main';
 import NavBar from './NavBar/NavBar';
+import Footer from './Footer';
 
 const App = () => {
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <NavBar />
       <Main />
-    </React.Fragment>
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;

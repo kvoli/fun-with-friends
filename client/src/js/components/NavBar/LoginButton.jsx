@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   loginButton: {
     minWidth: 60,
     maxWidth: 90,
     marginLeft: 5,
     marginRight: 5,
-  }
+  },
 }));
 
 const LoginButton = () => {
@@ -20,7 +20,7 @@ const LoginButton = () => {
   if (auth.success) return null;
   // Otherwise render the LoginButton
   return (
-    <Button component={Link} to='/login' variant="outlined" color="inherit" className={classes.loginButton}>
+    <Button component={Link} to='/login' variant='outlined' color='inherit' className={classes.loginButton}>
       Login
     </Button>
   );
