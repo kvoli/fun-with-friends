@@ -7,7 +7,8 @@ let mockDatabase;
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
-}
+  useUnifiedTopology: true,
+};
 
 beforeAll(async () => {
   mockDatabase = new MongoMemoryServer();
