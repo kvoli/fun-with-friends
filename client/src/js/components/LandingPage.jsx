@@ -1,12 +1,27 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import { Typography, List, ListItemText, ListItem, Grid, FormGroup } from '@material-ui/core';
+import { Typography, Grid, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { rotateIn, bounce, rollIn } from 'react-animations';
-import Radium, { StyleRoot } from 'radium';
-import { imageLogo, downloadLogo, communityLogo, shareLogo } from '../../SVG/SVGImages';
+import { downloadLogo, communityLogo, shareLogo, v, x, y, z, w, t, u } from '../../SVG/SVGImages';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+    marginBottom: 10,
+    marginTop: 40,
+  },
+  gridList: {
+    flexWrap: 'nowrap',
+    transform: 'translateZ(0)',
+  },
+  gridListIcon: {
+    width: 400,
+    height: 400,
+    transform: 'translateZ(0)',
+  },
   container: {
     marginTop: theme.spacing(0),
     paddingBottom: theme.spacing(0),
@@ -23,107 +38,54 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 15,
     padding: theme.spacing(0.75, 2.5, 0),
   },
-  subtitle: {
-    flexGrow: 1,
-    marginBottom: 20,
-    paddingBottom: 20,
-    marginTop: 10,
-    paddingTop: 10,
-    paddingRight: 10,
-    padding: theme.spacing(0, 2.5, 0),
-  },
-  header: {
-    maxHeight: 450,
-  },
-  image: {
-    flexGrow: 1,
-    height: 400,
-    width: 400,
-    paddingRight: 10,
-    marginLeft: 200,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  subImage: {
-    flexGrow: 1,
-    height: 60,
-    width: 60,
-    marginLeft: 100,
-    paddingLeft: 10,
-    marginTop: 10,
-    paddingTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
 }));
 
-const animationStyles = {
-  rotateIn: {
-    animation: '20s',
-    animationName: Radium.keyframes(rotateIn, 'rotateIn'),
+const tileImages = [v, x, y, z, w, t, u];
+const logoImages = [
+  {
+    img: downloadLogo,
+    title: 'Upload Your Artifacts.',
   },
-  bounce: {
-    animation: '5s',
-    animationName: Radium.keyframes(bounce, 'bounce'),
+  {
+    img: shareLogo,
+    title: 'Share With Friends',
   },
-  rollIn: {
-    animation: '5s',
-    animationName: Radium.keyframes(rollIn, 'rollIn'),
+  {
+    img: communityLogo,
+    title: 'Create Your Community.',
   },
-};
+];
 
 const LandingPage = () => {
   const classes = useStyles();
 
   return (
-    <Container className={classes.container} maxWidth='lg' justify='space-between' style={useStyles.container}>
-      <FormGroup>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={12} align='center'>
-            <Typography variant='h1' className={classes.title}>
-              Fun. With. Friends.
-            </Typography>
-            <FormGroup row>
-              <StyleRoot>
-                <img src={imageLogo} alt='' style={animationStyles.rotateIn} className={classes.image} />
-              </StyleRoot>
-              <List>
-                <ListItem>
-                  <FormGroup row>
-                    <img src={downloadLogo} alt='' className={classes.subImage} />
-                    <ListItemText align='center'>
-                      <Typography className={classes.subtitle} variant='h4'>
-                        Upload Your Artifacts.
-                      </Typography>
-                    </ListItemText>
-                  </FormGroup>
-                </ListItem>
-                <ListItem>
-                  <FormGroup row>
-                    <img src={shareLogo} alt='' className={classes.subImage} />
-                    <ListItemText>
-                      <Typography className={classes.subtitle} variant='h4'>
-                        Share With Friends.
-                      </Typography>
-                    </ListItemText>
-                  </FormGroup>
-                </ListItem>
-                <ListItem>
-                  <FormGroup row>
-                    <img src={communityLogo} alt='' className={classes.subImage} />
-                    <ListItemText>
-                      <Typography className={classes.subtitle} variant='h4'>
-                        Create Your Community.
-                      </Typography>
-                    </ListItemText>
-                  </FormGroup>
-                </ListItem>
-              </List>
-            </FormGroup>
-          </Grid>
-        </Grid>
-      </FormGroup>
-    </Container>
+    <Grid container direction='column' justify='space-evenly' alignItems='center' spacing={10}>
+      <div className={classes.root}>
+        <GridList className={classes.gridList} cols={2.5}>
+          {tileImages.map(tile => (
+            <GridListTile key={tile}>
+              <img src={tile} alt='' />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+      <div>
+        <Typography variant='h1' className={classes.title}>
+          Fun. With. Friends.
+        </Typography>
+      </div>
+      <div>
+        <GridList cellHeight={400} cellWidth={400} className={classes.gridList} cols={1}>
+          {logoImages.map(logo => (
+            <GridListTile key={logo.img} cols={1}>
+              <img src={logo.img} alt='' width='400' height='400' />
+              <GridListTileBar title={logo.title} align='center' />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+    </Grid>
   );
 };
 
