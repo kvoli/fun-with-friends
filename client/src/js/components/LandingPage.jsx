@@ -62,7 +62,7 @@ const LandingPage = () => {
   return (
     <Grid container direction='column' justify='space-evenly' alignItems='center' spacing={10}>
       <div className={classes.root}>
-        <GridList className={classes.gridList} cols={2.5}>
+        <GridList cellHeight={300} className={classes.gridList} cols={2.5}>
           {tileImages.map(tile => (
             <GridListTile key={tile}>
               <img src={tile} alt='' />
