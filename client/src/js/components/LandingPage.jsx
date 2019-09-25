@@ -1,12 +1,27 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import { Typography, List, ListItemText, ListItem, Grid, FormGroup } from '@material-ui/core';
+import { Typography, Grid, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { rotateIn } from 'react-animations';
-import Radium, { StyleRoot } from 'radium';
-import { circleImage } from '../../SVG/SVGImages';
+import { downloadLogo, communityLogo, shareLogo, v, x, y, z, w, t, u } from '../../SVG/SVGImages';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+    marginBottom: 10,
+    marginTop: 40,
+  },
+  gridList: {
+    flexWrap: 'nowrap',
+    transform: 'translateZ(0)',
+  },
+  gridListIcon: {
+    width: 400,
+    height: 400,
+    transform: 'translateZ(0)',
+  },
   container: {
     marginTop: theme.spacing(0),
     paddingBottom: theme.spacing(0),
@@ -17,82 +32,60 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    marginBottom: 1,
-    paddingBottom: 20,
-    padding: theme.spacing(0.75, 2.5, 0),
-  },
-  subtitle: {
-    flexGrow: 1,
     marginBottom: 20,
     paddingBottom: 20,
-    paddingRight: 10,
-    padding: theme.spacing(0, 2.5, 0),
-  },
-  header: {
-    maxHeight: 450,
-  },
-  image: {
-    flexGrow: 1,
-    height: 400,
-    width: 400,
-    paddingRight: 10,
+    marginTop: 15,
+    paddingTop: 15,
+    padding: theme.spacing(0.75, 2.5, 0),
   },
 }));
 
-const animationStyles = {
-  rotateIn: {
-    animation: 'x 5s',
-    animationName: Radium.keyframes(rotateIn, 'rotateIn'),
+const tileImages = [v, x, y, z, w, t, u];
+const logoImages = [
+  {
+    img: downloadLogo,
+    title: 'Upload Your Artifacts.',
   },
-};
+  {
+    img: shareLogo,
+    title: 'Share With Friends',
+  },
+  {
+    img: communityLogo,
+    title: 'Create Your Community.',
+  },
+];
 
 const LandingPage = () => {
   const classes = useStyles();
 
   return (
-    <Container className={classes.container} maxWidth='lg' justify='space-between' style={useStyles.container}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={12}>
-          <Typography variant='h1' className={classes.title}>
-            Fun. With. Friends.
-          </Typography>
-          <div align='right'>
-            <FormGroup row>
-              <div>
-                <StyleRoot>
-                  <img src={circleImage} alt='' style={animationStyles.rotateIn} className={classes.image} />
-                </StyleRoot>
-              </div>
-              <div>
-                <List>
-                  <ListItem>
-                    <ListItemText>
-                      <Typography className={classes.subtitle} variant='h4'>
-                        Upload Your Artifacts.
-                      </Typography>
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      <Typography className={classes.subtitle} variant='h4'>
-                        Share With Friends.
-                      </Typography>
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      <Typography className={classes.subtitle} variant='h4'>
-                        Create Your Community.
-                      </Typography>
-                    </ListItemText>
-                  </ListItem>
-                </List>
-              </div>
-            </FormGroup>
-          </div>
-        </Grid>
-      </Grid>
-    </Container>
+    <Grid container direction='column' justify='space-evenly' alignItems='center' spacing={10}>
+      <div className={classes.root}>
+        <GridList cellHeight={300} className={classes.gridList} cols={2.5}>
+          {tileImages.map(tile => (
+            <GridListTile key={tile}>
+              <img src={tile} alt='' />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+      <div>
+        <Typography variant='h1' className={classes.title}>
+          Fun. With. Friends.
+        </Typography>
+      </div>
+      <div>
+        <GridList cellHeight={400} cellWidth={400} className={classes.gridList} cols={1}>
+          {logoImages.map(logo => (
+            <GridListTile key={logo.img} cols={1}>
+              <img src={logo.img} alt='' width='400' height='400' />
+              <GridListTileBar title={logo.title} align='center' />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+    </Grid>
   );
 };
 

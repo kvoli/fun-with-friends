@@ -8,12 +8,11 @@ cache:
   directories:
     - $HOME/.npm
 install:
-  - cd ./server && npm ci --only=production
-  - cd ../client && npm ci --only=production
+- cd ./server && npm ci && cd ../
+- cd ./client && npm ci && cd ../
 script:
-  - npm run build
-  - npm test
-  - cd ../
+- cd ./server && npm test && cd ../
+- cd ./client && npm run build && npm test && cd ../
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
@@ -21,11 +20,13 @@ branches:
     - staging
     - production
 after_success:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - export REPO=kvoli/fun-with-friends
-  - export TAG=`if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "latest"; else echo "pull-request-$TRAVIS_PULL_REQUEST_BRANCH" ; fi`
-  - docker build -t $REPO:$TAG .
-  - docker push $REPO
+- cd ./server && npm ci --only=production && cd ../
+- cd ./client && npm ci --only=production && cd ../
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- export REPO=kvoli/fun-with-friends
+- export TAG=`if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "latest"; else echo "pull-request-$TRAVIS_PULL_REQUEST_BRANCH" ; fi`
+- docker build -t $REPO:$TAG .
+- docker push $REPO
 env:
   global:
     - secure: dLH4EKqAOHX/REp0IJyL2JzEcuqhUU/l3WZWz9P+guxOse0A7rNAUQ1zvoLJYQWqKJB2Obcukyszw9rMj+i11fDACygCOx8NSESGuVj2zvQBd9er3eu05evY7z5v2RTZZCFaeqw9DH7T0YHRcrwyo3uVf1yjlzwJJw0NSJJWfU5QXBRfFQ8FGO+XFigaevXd0L9MpWautiyn1uh6ixI0zLhrzpc2slKdkzWdlN7H4kEf1O9HDUTdRolhin6zqbrj+wCWQpChloeu0MjeuocflBktJnRVgIolhhCXpNIIB/iINjDkuYCqrOzedExT1DzKx/nV8S7i/vM7fxGqrwut92TpsAzEnFLXjAisApqYcC3Yii2oWUlR6r2UHKEw+pNuUa0nxOHE69J7eWPCEAui/lXZ1JAmU2haLjPtsdWAFKku8pZtPYAyTP/JswjTuQkJrNo5DpKXIOq9pUVgCX6QANibpTNnSO2gG4eA5C4/xh19oNPFF87Me4FKS8RM7+6KZWY87oz7lxFbY4PGi0x8g1v4ZhxPTOWog0zr2g3ADC+sI1gv+GjK7uvN48U6k0dtEPuWsLzgSnyo6EQAVuppWSoETezUieSBEgLT0tDTYBgTWdaW6jh+dDFqJkd9LsfdU+nD2AwV6C40OFdSSjGlVYROf6cVnu+yPLUklgqGVkQ=
