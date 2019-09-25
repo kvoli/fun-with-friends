@@ -21,9 +21,13 @@ const createCircle = async (req, res) => {
 
 const getAllCircles = async (req, res) => {
   try {
-    // get all the circles in the database that contain the user as a member
-    const circles = await Circle.find({ members: req.user.id });
-
+    // get all the circles in the database that contain the user as a member, admin or that are public
+    const circles = await Circle.find({
+      $or: [
+        { members: req.user.id }, 
+        { admins: req.user.id },
+        { public: true }],
+      });
     res.status(200).send(circles.map(circle => circle.toObject()));
   } catch (error) {
     res.status(400).send({
@@ -47,48 +51,48 @@ const deleteCircle = async (req, res) => {
 };
 
 // add a member to a circle
-// member details that should be included in payload: { memberId: string, admin: boolean }
+// member details that should be included in payload: { member: string, admin: boolean }
 // only added members that are not already members and admins that are not already admins to avoid unnecessary data storage
 // This means that member IDs must be unique
 const addMember = async (req, res) => {
   try {
-    const addedMember = req.body.id;
-    const isAdmin = req.body.admin;
-    await Circle.findOneAndUpdate(
-      {
-        _id: req.params.id,
-      },
-      {
-        $addToSet: {
-          members: addedMember,
-        },
-      },
-      {
-        useFindAndModify: false,
+
+    // extract values from request parameters and body
+    const circleId = req.params.id;
+    const memberId = req.body.id;
+    const adminFlag = req.body.admin;
+
+    // mongoose find and update parameters
+    const query = {_id: req.params.id};
+    const update = adminFlag ? {$addToSet: {admins: memberId}} : {$addToSet: {members: memberId}};
+    const options = {useFindAndModify: false};
+
+    // get the circle of interest
+    const circle = await Circle.findOne(query);
+    const members = circle.members;
+    const admins = circle.admins;
+
+    // check if the user being added is already a circle member or admin
+    if (adminFlag) {
+      if (circle.admins.includes(memberId)) {
+        res.status(400).send({ error: 'User is already an admin of this circle.' });
+      };
+    } else {
+      if (circle.members.includes(memberId)) {
+        res.status(400).send({ error: 'User is already a member of this circle.' });
       }
-    );
-    if (isAdmin) {
-      await Circle.findOneAndUpdate(
-        {
-          _id: req.params.id,
-        },
-        {
-          $addToSet: {
-            admins: addedMember,
-          },
-        },
-        {
-          useFindAndModify: false,
-        }
-      );
     }
-    console.log(req.body);
+
+    // update the circle's members or admins by adding the current user
+    await Circle.findOneAndUpdate(query, update, options);
     res.status(200).send();
+
   } catch (error) {
+
     res.status(400).send({
       error: 'unable to update circle',
     });
-  }
+  };
 };
 
 const deleteMember = async (req, res) => {
@@ -120,7 +124,6 @@ const deleteMember = async (req, res) => {
         useFindAndModify: false,
       }
     );
-    console.log(req.body);
     res.status(200).send();
   } catch (error) {
     res.status(400).send({
@@ -131,17 +134,18 @@ const deleteMember = async (req, res) => {
 
 const addArtifact = async (req, res) => {
   try {
-    // Check if the user is member of the circle
+    // Check if the user is member or an admin of the circle
     const circle = await Circle.findOne({_id: req.params.id});
-    if (!circle.members.includes(req.user.id)) {
+    if (circle.public === false && !circle.members.includes(req.user.id) && !circle.admins.includes(req.user.id)) {
       return res.status(400).send({error: 'You do not have permissions to add to this circle.'});
     };
     // Add the artifact to the circle (ignoring duplicates)
-    await Circle.updateOne(
+    await Circle.findOneAndUpdate(
       {_id:req.params.id},
       {$addToSet: {artifacts: req.body.id}},
       {useFindAndModify:false}
     );
+
     return res.status(200).send();
   } catch (error) {
     return res.status(400).send({error: 'Could not add artifact to circle.'});

@@ -29,13 +29,13 @@ export const uploadImage = image => {
   return dispatch => {
     const formData = new FormData();
     formData.append('image', image);
-    toast.info('image sent for upload');
+    toast.info('Uploading Image...');
     const parameters = { method: 'POST', body: formData };
     const endpoint = '/api/image/upload';
     fetch(endpoint, parameters).then(response =>
       response.json().then(json => {
         if (response.status === 201) {
-          toast.success('image uploaded');
+          toast.success('Image Uploaded');
           dispatch(updateImage(json.src));
         }
       })
@@ -59,17 +59,16 @@ export const createArtifactFailure = () => ({
 export const createArtifact = (artifact, token) => {
   return dispatch => {
     dispatch(createArtifactRequest());
-    toast.info('Artifact form submitted');
     const endpoint = '/api/artifact';
     const parameters = { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(artifact) };
     fetch(endpoint, parameters).then(response =>
-      response.json().then(() => {
+      response.json().then(json => {
         if (response.status === 201) {
-          dispatch(createArtifactSuccess(artifact));
-          toast.success(`Artifact ${artifact.title} has been created!`);
+          dispatch(createArtifactSuccess(json));
+          toast.success(`Created Artifact ${artifact.title}`);
         } else {
           dispatch(createArtifactFailure());
-          toast.error(`Artifact ${artifact.title} could not be created!`);
+          toast.error(json.error);
         }
       })
     );
@@ -97,10 +96,12 @@ export const deleteArtifact = (artifact, token) => {
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(deleteArtifactSuccess(artifact));
-        toast.success(`Artifact ${artifact.title} has been deleted!`);
+        toast.success(`Deleted Artifact ${artifact.title}`);
       } else {
         dispatch(deleteArtifactFailure());
-        toast.error(`Artifact ${artifact.title} could not be deleted :()`);
+        response.json().then(json => {
+          toast.error(json);
+        });
       }
     });
   };
@@ -152,16 +153,17 @@ export const editFailure = () => ({
 export const editArtifact = (artifact, token) => {
   return dispatch => {
     dispatch(editRequest());
-    toast.info('Artifact edit form submitted');
     const endpoint = `/api/artifact/${artifact.id}`;
     const parameters = { method: 'PUT', body: JSON.stringify(artifact), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } };
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
         dispatch(editSuccess(artifact));
-        toast.success(`Artifact ${artifact.title} has been edited!`);
+        toast.success(`Edited Artifact ${artifact.title}`);
       } else {
         dispatch(editFailure());
-        toast.warning(`Artifact ${artifact.title} could not be edited!`);
+        response.json().then(json => {
+          toast.error(json.error);
+        });
       }
     });
   };

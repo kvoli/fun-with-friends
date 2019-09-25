@@ -9,7 +9,7 @@ const AddCircleModal = () => {
   const { open, circle } = useSelector(store => store.circle.circleForm);
 
   return (
-    <Dialog open={open} fillWidth maxWidth='xl' onClose={() => dispatch(openCircleForm({ circle: false }))} transitionDuration={250}>
+    <Dialog open={open} maxWidth='xl' onClose={() => dispatch(openCircleForm({ circle: false }))} transitionDuration={250}>
       <AddCircle props={circle} />
     </Dialog>
   );

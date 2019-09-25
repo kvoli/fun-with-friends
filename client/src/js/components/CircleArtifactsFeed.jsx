@@ -26,6 +26,7 @@ const CirclesArtifactsFeed = ({ circle }) => {
   const artifacts = useSelector(store => store.artifacts);
   const [focus, setFocus] = React.useState(false);
   const dispatch = useDispatch();
+  const circleArtifacts = artifacts.filter(artifact => circle.artifacts.includes(artifact.id));
 
   return (
     <Grid container alignItems='center' direction='column' justify='center' className={classes.cardGrid}>
@@ -35,7 +36,7 @@ const CirclesArtifactsFeed = ({ circle }) => {
         </Typography>
       </Grid>
       <GridList cellHeight={250} cols={3}>
-        {artifacts.map(artifact => (
+        {circleArtifacts.map(artifact => (
           <GridListTile key={artifact.id} onMouse={() => setFocus(false)} onMouseEnter={() => setFocus(artifact)}>
             <img src={artifact.src} alt={artifact.title} />
             {focus && focus === artifact ? (

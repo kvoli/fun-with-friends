@@ -10,7 +10,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import uuid from 'uuid';
 import { openArtifactForm, artifactSwitch } from '../actions/index';
-import { attatchArtifact } from '../actions/circle';
+import { addCircleArtifact } from '../actions/circle';
 import { uploadImage, createArtifact, editArtifact } from '../actions/artifact';
 import SuggestInput from './SuggestInput';
 
@@ -78,7 +78,7 @@ const ArtifactForm = () => {
 
   const currentCircleIDs = cKeys.filter(key => allCircles[key].artifacts.includes(fillArtifact.id));
   const currentCircleNames = currentCircleIDs.map(key => allCircles[key].title);
-  const availableCircleIDs = cKeys.filter(key => allCircles[key].members.includes(auth.user.id));
+  const availableCircleIDs = cKeys.filter(key => (allCircles[key].members.includes(auth.user.id) || allCircles[key].admins.includes(auth.user.id)) || allCircles[key].public === true);
   const availableCircleNames = availableCircleIDs.map(key => allCircles[key].title);
 
   function getCircleID(circleTitle) {
@@ -97,7 +97,9 @@ const ArtifactForm = () => {
   const onSubmit = (data, e) => {
     editMode ? dispatch(editArtifact(data, auth.token)) : dispatch(createArtifact(data, auth.token));
     for (let i = 0; i < circles.length; i += 1) {
-      dispatch(attatchArtifact({ circleid: getCircleID(circles[i]), artifactid: data.id }));
+      const circleID = getCircleID(circles[i]);
+      const artifactID = data.id;
+      dispatch(addCircleArtifact(circleID, artifactID, auth.token));
     }
     e.target.reset();
     dispatch(openArtifactForm(false));

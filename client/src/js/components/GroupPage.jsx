@@ -24,6 +24,7 @@ import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
 import DeleteCircle from './DeleteCircle';
 import CirclesArtifactsFeed from './CircleArtifactsFeed';
+import AdminAvatar from './CirclePage/AdminAvatar';
 // import Chat from "./Chat";
 
 const indexUser = userObject => {
@@ -53,9 +54,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GroupPage = props => {
-  const [addMode, setAddMode] = React.useState(false);
-  // eslint-disable-next-line react/prop-types
+  const user = useSelector(store => store.auth.user);
   const circle = useSelector(store => store.circle.circles[props.match.params.id]);
+  const adminPerms = circle.admins.includes(user.id);
+
+  const [addAdmin, setAddAdmin] = React.useState(false);
+  const [addMember, setAddMember] = React.useState(false);
+  // eslint-disable-next-line react/prop-types
   const userList = useSelector(store => store.user);
   const [tabValue, setTabValue] = React.useState(0);
 
@@ -89,7 +94,7 @@ const GroupPage = props => {
         <Grid container alignItems='center' justify='center' direction='column' className={classes.tabSpacing}>
           <Paper square>
             <Tabs value={tabValue} onChange={(event, newValue) => setTabValue(newValue)} centered>
-              <Tab label='Members & Admins' value={0} />
+              <Tab label={circle.public ? 'Admins' : 'Members & Admins'} value={0} />
               <Tab label='Artifact Feed' value={1} />
               <Tab label='Chat' value={2} />
             </Tabs>
@@ -98,67 +103,116 @@ const GroupPage = props => {
         <Grid item className={tabValue === 0 ? classes.container : classes.tabPanel}>
           <Grid container spacing={4} direction='column'>
             <Grid item>
+
               <Typography>Admins</Typography>
-              <Grid container direction='row'>
+              <Grid 
+                container
+                direction='row'
+                alignItems='center'
+              >
                 {circle.admins.map(admin => (
                   <Grid item key={admin}>
                     <List>
                       <ListItem key={admin}>
-                        <ListItemAvatar>
-                          <Avatar>{getUser(admin, userList).username.slice(0, 2)}</Avatar>
-                        </ListItemAvatar>
+                        <AdminAvatar props={{ circle: circle.id, member: getUser(admin, userList), adminPerms }} />
                         <ListItemText primary={getUser(admin, userList).username} secondary={getUser(admin, userList).email} />
                       </ListItem>
                     </List>
                   </Grid>
                 ))}
+                
+                {adminPerms ? 
+                  <Grid item>
+                    {!addAdmin ? (
+                      <List>
+                        <ListItem key='add'>
+                          <ListItemAvatar>
+                            <Avatar>
+                              <Button onClick={() => setAddAdmin(true)}>
+                                <AddIcon />
+                              </Button>
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText primary='add admin' secondary=''/>
+                        </ListItem>
+                      </List>
+                    ) : (
+                      <List>
+                        <ListItem key='add-user'>
+                          <ListItemAvatar>
+                            <Avatar>?</Avatar>
+                          </ListItemAvatar>
+                          <AddMember circle={circle.id} admin={true}/>
+                          <ListItemSecondaryAction>
+                            <IconButton edge='end' onClick={() => setAddAdmin(false)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                      </List>
+                    )}
+                  </Grid> : 
+                  <div/>
+                }
               </Grid>
             </Grid>
-            <Grid item>
-              <Typography>Members</Typography>
-              <Grid container>
-                {circle.members.map(member => (
-                  <Grid item key={member}>
-                    <List>
-                      <ListItem key={member}>
-                        <RemoveMember props={{ circle: circle.id, member: getUser(member, userList) }} />
-                        <ListItemText primary={getUser(member, userList).username} secondary={getUser(member, userList).email} />
-                      </ListItem>
-                    </List>
-                  </Grid>
-                ))}
-                <Grid item>
-                  {!addMode ? (
-                    <List>
-                      <ListItem key='add'>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <Button onClick={() => setAddMode(true)}>
-                              <AddIcon />
-                            </Button>
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary='add member' />
-                      </ListItem>
-                    </List>
-                  ) : (
-                    <List>
-                      <ListItem key='add-user'>
-                        <ListItemAvatar>
-                          <Avatar>?</Avatar>
-                        </ListItemAvatar>
-                        <AddMember circle={circle.id} />
-                        <ListItemSecondaryAction>
-                          <IconButton edge='end' onClick={() => setAddMode(false)}>
-                            <DeleteIcon />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                    </List>
-                  )}
+            {!circle.public ? 
+              <Grid item>
+
+                <Typography>Members</Typography>
+                <Grid 
+                  container
+                  direction='row'
+                  alignItems='center'
+                >
+                  {circle.members.map(member => (
+                    <Grid item key={member}>
+                      <List>
+                        <ListItem key={member}>
+                          <RemoveMember props={{ circle: circle.id, member: getUser(member, userList), adminPerms }} />
+                          <ListItemText primary={getUser(member, userList).username} secondary={getUser(member, userList).email} />
+                        </ListItem>
+                      </List>
+                    </Grid>
+                  ))}
+
+                  {adminPerms ? 
+                    <Grid item>
+                      {!addMember ? (
+                        <List>
+                          <ListItem key='add'>
+                            <ListItemAvatar>
+                              <Avatar>
+                                <Button onClick={() => setAddMember(true)}>
+                                  <AddIcon />
+                                </Button>
+                              </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary='add member' secondary=''/>
+                          </ListItem>
+                        </List>
+                      ) : (
+                        <List>
+                          <ListItem key='add-user'>
+                            <ListItemAvatar>
+                              <Avatar>?</Avatar>
+                            </ListItemAvatar>
+                            <AddMember circle={circle.id} />
+                            <ListItemSecondaryAction>
+                              <IconButton edge='end' onClick={() => setAddMember(false)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          </ListItem>
+                        </List>
+                      )}
+                    </Grid> :
+                    <div/>
+                  }
                 </Grid>
-              </Grid>
-            </Grid>
+              </Grid> : 
+              <div/>
+            }
           </Grid>
         </Grid>
         <Grid item className={tabValue === 1 ? classes.feed : classes.tabPanel}>

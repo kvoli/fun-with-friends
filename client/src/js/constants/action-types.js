@@ -22,3 +22,5 @@ export const GET_SOCKET = 'GET_SOCKET';
 export const SET_CIRCLE_FILTER = 'SET_CIRCLE_FILTER';
 
 export const SET_PERSONAL_FILTER = 'SET_PERSONAL_FILTER';
+
+export const SET_ALL_FILTER = 'SET_ALL_FILTER';

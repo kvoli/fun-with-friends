@@ -25,4 +25,5 @@ circleRouter.post('/:id/artifact', auth, circleController.addArtifact);
 // Deletes an artifact from a circle
 circleRouter.delete('/:id/artifact', auth, circleController.deleteArtifact);
 
+
 module.exports = circleRouter;
