@@ -15,7 +15,7 @@ mongoose.connect(DbConnection, Options).then(
   () => {
     console.log('Database: Connected');
   },
-  _err => {
+  err => {
     console.log('Database: Failed to Connect');
   }
 );

@@ -20,7 +20,9 @@ import {
   // DELETE_CIRCLE_REQUEST,
   // ADD_CIRCLE_USER_REQUEST,
   // DELETE_CIRCLE_USER_REQUEST,
-  ATTATCH_ARTIFACT,
+  DELETE_CIRCLE_ADMIN_SUCCESS,
+  ADD_CIRCLE_ADMIN_SUCCESS,
+  ADD_CIRCLE_ARTIFACT_SUCCESS,
 } from '../constants/circle';
 
 const circleImages = [
@@ -158,10 +160,23 @@ const circle = (state = initialState, action) => {
           },
         },
       };
-    case DELETE_CIRCLE_SUCCESS:
+    case ADD_CIRCLE_ADMIN_SUCCESS:
       return {
         ...state,
-        circles: [delete state.circles[action.payload]],
+        circles: {
+          ...state.circles,
+          [action.payload.circleid]: {
+            ...state.circles[action.payload.circleid],
+            admins: [...state.circles[action.payload.circleid].admins, action.payload.memberid],
+          },
+        },
+      };
+    case DELETE_CIRCLE_SUCCESS:
+      // use destructuring to remove the old circle
+      const { [action.payload.id]: value, ...newCircles } = state.circles;
+      return {
+        ...state,
+        circles: newCircles,
         circleForm: {
           ...state.circleForm,
         },
@@ -177,6 +192,17 @@ const circle = (state = initialState, action) => {
           },
         },
       };
+    case DELETE_CIRCLE_ADMIN_SUCCESS:
+      return {
+        ...state,
+        circles: {
+          ...state.circles,
+          [action.payload.circleid]: {
+            ...state.circles[action.payload.circleid],
+            admins: [...state.circles[action.payload.circleid].admins].filter(uid => uid !== action.payload.memberid),
+          },
+        },
+      };
     case OPEN_CIRCLE_FORM:
       return {
         ...state,
@@ -185,14 +211,14 @@ const circle = (state = initialState, action) => {
           circle: action.payload.circle,
         },
       };
-    case ATTATCH_ARTIFACT:
+    case ADD_CIRCLE_ARTIFACT_SUCCESS:
       return {
         ...state,
         circles: {
           ...state.circles,
-          [action.payload.circleid]: {
-            ...state.circles[action.payload.circleid],
-            artifacts: [...state.circles[action.payload.circleid].artifacts, action.payload.artifactid],
+          [action.payload.circleID]: {
+            ...state.circles[action.payload.circleID],
+            artifacts: [...state.circles[action.payload.circleID].artifacts, action.payload.artifactID],
           },
         },
       };

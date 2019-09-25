@@ -97,6 +97,10 @@ const getUserID = (userlist, username) => {
 };
 
 const mapUserNameToID = (userlist, usernames) => {
+  // handle if usernames is undefined (for whatever reason)
+  if (!usernames) {
+    return []
+  }
   return usernames.map(username => getUserID(userlist, username));
 };
 
@@ -116,7 +120,7 @@ const AddCircle = () => {
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
   const allUsers = useSelector(store => store.user);
 
-  const [currentMembers, setCurrentMembers] = React.useState([user.username]);
+  const [currentMembers, setCurrentMembers] = React.useState();
   const [currentAdmins, setCurrentAdmins] = React.useState([user.username]);
   const [circlePublic, setCirclePublic] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
@@ -142,6 +146,8 @@ const AddCircle = () => {
   });
 
   const onSubmit = (data, e) => {
+    // ensure form data is converted back to a bool
+    data.public = data.public === 'true' || data.public === true;
     dispatch(
       addCircle(
         {

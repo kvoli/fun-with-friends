@@ -40,8 +40,8 @@ const updateArtifact = async (req, res) => {
   }
 };
 
-// Helper function to merge any number of arrays and remove duplicates
-const mergeArrays = (...arrays) => {
+// Helper function to merge an array of arrays while removing duplicates
+const mergeArrays = (arrays) => {
   let jointArray = [];
   arrays.forEach(array => {
     jointArray = [...jointArray, ...array];
@@ -53,7 +53,13 @@ const mergeArrays = (...arrays) => {
 const getArtifacts = async (req, res) => {
   try {
     // Find all circles that the user is a member of
-    const circles = await Circle.find({ members: req.user.id });
+    const circles = await Circle.find({
+      $or: [
+        { members: req.user.id }, 
+        { admins: req.user.id },
+        { public: true },
+      ],
+    });
     // Find all artifact ids from within those circles (removing duplicates)
     const artifactIds = mergeArrays(circles.map(circle => circle.artifacts));
     // Get all artifacts with corresponding ids from the database
@@ -72,7 +78,7 @@ const deleteArtifact = async (req, res) => {
     const artifact = await Artifact.findOne({ _id: req.params.artifactId });
     if (artifact.uploader === req.user.id) {
       // If the user is the uploader then delete as requested
-      await Artifact.deleteOne({ _id: req.params.id });
+      await Artifact.deleteOne({ _id: req.params.artifactId });
       res.status(200).send();
     } else {
       // Otherwise don't delete and return an error response

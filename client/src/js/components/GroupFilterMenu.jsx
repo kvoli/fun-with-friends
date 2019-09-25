@@ -12,7 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { setCircleFilter, setPersonalFilter } from '../actions/index';
+import { setCircleFilter, setPersonalFilter, setAllFilter } from '../actions/index';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -43,6 +43,11 @@ const GroupFilterMenu = () => {
   const availableCircles = useSelector(store => store.circle.circles);
   const personalFilter = useSelector(store => store.filters.personalFilter);
   const userID = useSelector(store => store.auth.user.id);
+  const allFilter = useSelector(store => store.filters.allFilter);
+  
+  function toggleAllFilter() {
+    dispatch(setAllFilter(!allFilter));
+  };
 
   const cKeys = Object.keys(availableCircles);
 
@@ -81,8 +86,20 @@ const GroupFilterMenu = () => {
             <Paper id='menu-list-grow'>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList>
+
+                  <MenuItem key='all' onClick={() => toggleAllFilter()}>
+                    <Grid container direction='row' justify='space-between'>
+                      <Grid item className={classes.option}>
+                        All
+                      </Grid>
+                      <Grid item className={classes.option}>
+                        {allFilter ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+                      </Grid>
+                    </Grid>
+                  </MenuItem>
+
                   {cKeys.map(key => (
-                    <MenuItem onClick={() => handleSelect(key)}>
+                    <MenuItem key={key} onClick={() => handleSelect(key)}>
                       <Grid container direction='row' justify='space-between'>
                         <Grid item className={classes.option}>
                           {availableCircles[key].title}
@@ -93,7 +110,8 @@ const GroupFilterMenu = () => {
                       </Grid>
                     </MenuItem>
                   ))}
-                  <MenuItem onClick={() => dispatch(setPersonalFilter(userID))}>
+
+                  <MenuItem key='personal' onClick={() => dispatch(setPersonalFilter(userID))}>
                     <Grid container direction='row' justify='space-between'>
                       <Grid item className={classes.option}>
                         User Created
@@ -103,6 +121,7 @@ const GroupFilterMenu = () => {
                       </Grid>
                     </Grid>
                   </MenuItem>
+                  
                 </MenuList>
               </ClickAwayListener>
             </Paper>
