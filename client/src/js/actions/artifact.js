@@ -127,7 +127,6 @@ export const getArtifacts = token => {
       response.json().then(json => {
         if (response.status === 200 || response.status === 304) {
           dispatch(getArtifactsSuccess(json));
-          toast.info('Artifacts have been updated');
         } else {
           dispatch(getArtifactsFailure());
         }
