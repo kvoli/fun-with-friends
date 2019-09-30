@@ -1,7 +1,7 @@
 {
-  "extends": ["airbnb", "prettier", "plugin:jest/recommended"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:jest/recommended", "prettier", "prettier/babel", "prettier/react"],
   "parser": "babel-eslint",
-  "plugins": ["prettier", "jest"],
+  "plugins": ["babel", "import", "jest", "jsx-a11y", "prettier", "react"],
   "rules": {
     "prettier/prettier": ["error"]
   },
@@ -9,6 +9,7 @@
     "jest/globals": true,
     "browser": true,
     "node": true,
-    "mongo": true
+    "mongo": true,
+    "es6": true
   }
 }
