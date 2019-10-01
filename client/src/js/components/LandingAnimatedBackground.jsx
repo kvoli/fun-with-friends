@@ -94,7 +94,7 @@ const particleStyles = {
     }
   },
   "retina_detect": true
-}
+};
 
 export default () => {
   const classes = useStyles();
