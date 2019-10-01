@@ -10,6 +10,7 @@ import logo from './imageLogo.svg';
 import download from './downloadLogo.svg';
 import community from './communityLogo.svg';
 import share from './shareLogo.svg';
+import backupAnimation from './Network.svg';
 
 export const v = one;
 export const x = two;
@@ -23,3 +24,4 @@ export const downloadLogo = download;
 export const communityLogo = community;
 export const shareLogo = share;
 export const imageLogo = logo;
+export const backupAnimationImage = backupAnimation;
