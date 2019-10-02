@@ -1,3 +1,7 @@
+/**
+ * The logic specified for getting all users. These are used to update the redux state according to the input from the user and the success or failure of the 
+ * requests made, according to the connection with the backend endpoints and subsequently the database.
+ */
 import {
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_FAILURE,
