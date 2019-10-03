@@ -19,8 +19,8 @@ const createArtifact = async (req, res) => {
     // Return an error message as the artfact was not able to be created
     res.status(400).send({
       error: 'Unable to create artifact.'
-    })
-  };
+    });
+  }
 };
 
 const updateArtifact = async (req, res) => {

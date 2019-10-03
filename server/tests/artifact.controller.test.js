@@ -107,7 +107,7 @@ beforeAll(async () => {
   await circleController.createCircle(req4, res4)
     .then(async () => {
       const body = await res4._getData();
-      circleID3 = body.id;
+      const circleID3 = body.id;
     });
 });
 
@@ -925,7 +925,7 @@ describe('Artifact Controller - Get Artifacts', () => {
       .then(async () => {
         // since user does not have authorisation token1, we should expect that the request is rejected, leading to a 401 response.
         expect(res.statusCode).toBe(201);
-      })
+      });
   });
   it('Should upload the artifact to the public circle', async () => {
     // Create the mock request
@@ -1056,11 +1056,11 @@ describe('Artifact Controller - Get Artifacts', () => {
           artifactIDs.push(element.id);
         });
         // ensure that the three relevant artifacts are in the artifact array 
-        const privatecricle1 = artifactIDs.indexOf('privateCircleArtifact1')
+        const privatecricle1 = artifactIDs.indexOf('privateCircleArtifact1');
         expect(privatecricle1).not.toBe(-1);
-        const publiccricle = artifactIDs.indexOf('publicCircleArtifact1')
+        const publiccricle = artifactIDs.indexOf('publicCircleArtifact1');
         expect(publiccricle).not.toBe(-1);
-        const privatecricle2 = artifactIDs.indexOf('privateCircleArtifact2')
+        const privatecricle2 = artifactIDs.indexOf('privateCircleArtifact2');
         expect(privatecricle2).not.toBe(-1);
       });
   });
