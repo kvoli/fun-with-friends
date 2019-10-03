@@ -874,7 +874,7 @@ describe('Artifact Controller - Get Artifacts', () => {
       .then(async () => {
         // since user does not have authorisation token1, we should expect that the request is rejected, leading to a 401 response.
         expect(res.statusCode).toBe(201);
-      })
+      });
   });
   it('Should upload the artifact to the circle', async () => {
     // Create the mock request
