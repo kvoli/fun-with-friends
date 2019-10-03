@@ -14,11 +14,11 @@ const createArtifact = async (req, res) => {
     // Wait for the artifact to be saved in the database
     await artifact.save();
     // Return the artifact back to the client
-    res.status(201).send(artifact.toObject());
+    res.status(201).send(artifact);
   } catch (error) {
     // Return an error message as the artfact was not able to be created
     res.status(400).send({ error: 'Unable to create artifact.' });
-  }
+  };
 };
 
 const updateArtifact = async (req, res) => {
