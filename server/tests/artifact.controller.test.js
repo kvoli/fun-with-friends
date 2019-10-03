@@ -107,7 +107,7 @@ beforeAll(async () => {
   await circleController.createCircle(req4, res4)
     .then(async () => {
       const body = await res4._getData();
-      const circleID3 = body.id;
+      circleID3 = body.id;
     });
 });
 
