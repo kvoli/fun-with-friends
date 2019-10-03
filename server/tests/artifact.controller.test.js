@@ -20,7 +20,7 @@ beforeAll(async () => {
   const dbUri = await database.getConnectionString();
   // Connect to the mock database
   await mongoose.connect(dbUri, options, error => {
-    console.error(error);
+    if(error) console.error(error);
   });
   // Create a new user and token to test artifact actions that require authentication
   const req = httpMocks.createRequest({
