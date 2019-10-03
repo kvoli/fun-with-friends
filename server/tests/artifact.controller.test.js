@@ -9,8 +9,10 @@ const auth = require('../middleware/auth');
 let token1;
 let token2;
 let userID1;
+let userID2;
 let circleID1;
 let circleID2;
+let cricleID3;
 let database;
 const options = {
   useNewUrlParser: true,
@@ -24,9 +26,7 @@ beforeAll(async () => {
   database = new MongoMemoryServer();
   const dbUri = await database.getConnectionString();
   // Connect to the mock database
-  await mongoose.connect(dbUri, options, error => {
-    if (error) console.error(error);
-  });
+  await mongoose.connect(dbUri, options, error => {});
   // Create a new user and token1 to test artifact actions that require authentication
   const req = httpMocks.createRequest({
     method: 'POST',
@@ -1001,7 +1001,7 @@ describe('Artifact Controller - Get Artifacts', () => {
         const body = await res._getData();
         // since user does not have authorisation token1, we should expect that the request is rejected, leading to a 401 response.
         expect(res.statusCode).toBe(201);
-      })
+      });
   });
   it('Should upload the artifact to the second private circle', async () => {
     // Create the mock request
@@ -1114,13 +1114,14 @@ describe('Artifact Controller - Get Artifacts', () => {
         // map all artifact IDs into an array
         body.forEach(element => {
           artifactIDs.push(element.id);
-        });;
+        });
+
         // ensure that the three relevant artifacts are in the artifact array 
-        const privatecricle1 = artifactIDs.indexOf('privateCircleArtifact1')
+        const privatecricle1 = artifactIDs.indexOf('privateCircleArtifact1');
         expect(privatecricle1).not.toBe(-1);
-        const publiccricle = artifactIDs.indexOf('publicCircleArtifact1')
+        const publiccricle = artifactIDs.indexOf('publicCircleArtifact1');
         expect(publiccricle).not.toBe(-1);
-        const privatecricle2 = artifactIDs.indexOf('privateCircleArtifact2')
+        const privatecricle2 = artifactIDs.indexOf('privateCircleArtifact2');
         expect(privatecricle2).toBe(-1);
       });
   });
