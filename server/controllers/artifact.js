@@ -14,29 +14,38 @@ const createArtifact = async (req, res) => {
     // Wait for the artifact to be saved in the database
     await artifact.save();
     // Return the artifact back to the client
-    res.status(201).send(artifact.toObject());
+    res.status(201).send(artifact);
   } catch (error) {
     // Return an error message as the artfact was not able to be created
-    res.status(400).send({ error: 'Unable to create artifact.' });
+    res.status(400).send({
+      error: 'Unable to create artifact.'
+    });
   }
 };
 
 const updateArtifact = async (req, res) => {
   try {
-    const query = { _id: req.params.artifactId };
+    const query = {
+      _id: req.params.artifactId
+    };
     const updated = req.body;
     // Get the requested artifact from the database
     const artifact = await Artifact.findOne(query);
-    if ((artifact.uploader = req.user.id)) {
+    if (artifact.uploader = req.user.id && updated.title && updated.desc) {
       // If the user is the uploader, update the artifact as requested
       await Artifact.updateOne(query, updated);
-      res.status(200).send();
+      const newArtifact = await Artifact.findOne(query);
+      res.status(200).send(newArtifact);
     } else {
       // Otherwise don't and return an error response
-      res.status(400).send({ error: `You don't have permissions to update this artifact.` });
+      res.status(400).send({
+        error: `You don't have permissions to update this artifact.`
+      });
     }
   } catch (error) {
-    res.status(400).send({ error: 'Unable to update artifact.' });
+    res.status(400).send({
+      error: 'Unable to update artifact.'
+    });
   }
 };
 
@@ -54,38 +63,59 @@ const getArtifacts = async (req, res) => {
   try {
     // Find all circles that the user is a member of
     const circles = await Circle.find({
-      $or: [
-        { members: req.user.id }, 
-        { admins: req.user.id },
-        { public: true },
+      $or: [{
+          members: req.user.id
+        },
+        {
+          admins: req.user.id
+        },
+        {
+          public: true
+        },
       ],
     });
     // Find all artifact ids from within those circles (removing duplicates)
     const artifactIds = mergeArrays(circles.map(circle => circle.artifacts));
     // Get all artifacts with corresponding ids from the database
     const artifacts = await Artifact.find({
-      $or: [{ _id: { $in: artifactIds } }, { uploader: req.user.id }],
+      $or: [{
+        _id: {
+          $in: artifactIds
+        }
+      }, {
+        uploader: req.user.id
+      }],
     });
     res.status(200).send(artifacts.map(artifact => artifact.toObject()));
   } catch (error) {
-    res.status(400).send({ error: 'Unable to get artifacts.' });
+    res.status(400).send({
+      error: 'Unable to get artifacts.'
+    });
   }
 };
 
 const deleteArtifact = async (req, res) => {
   try {
     // Get the requested artifact
-    const artifact = await Artifact.findOne({ _id: req.params.artifactId });
+    const artifact = await Artifact.findOne({
+      _id: req.params.artifactId
+    });
     if (artifact.uploader === req.user.id) {
       // If the user is the uploader then delete as requested
-      await Artifact.deleteOne({ _id: req.params.artifactId });
+      await Artifact.deleteOne({
+        _id: req.params.artifactId
+      });
       res.status(200).send();
     } else {
       // Otherwise don't delete and return an error response
-      res.status(400).send({ error: `You don't have permissions to delete this artifact` });
+      res.status(400).send({
+        error: `You don't have permissions to delete this artifact`
+      });
     }
   } catch (error) {
-    res.status(400).send({ error: 'Unable to delete artifact.' });
+    res.status(400).send({
+      error: 'Unable to delete artifact.'
+    });
   }
 };
 
