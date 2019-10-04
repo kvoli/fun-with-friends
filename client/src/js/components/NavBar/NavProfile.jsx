@@ -27,7 +27,7 @@ const NavProfile = () => {
   // Otherwise render the LoginButton
   return (
     <div>
-      <IconButton aria-label='account of current user' aria-controls='menu-appbar' aria-haspopup='true' onClick={handleMenu} color='inherit'>
+      <IconButton id='profileButton' aria-label='account of current user' aria-controls='menu-appbar' aria-haspopup='true' onClick={handleMenu} color='inherit'>
         <AccountCircle />
       </IconButton>
       <Menu
@@ -46,6 +46,7 @@ const NavProfile = () => {
         onClose={handleClose}
       >
         <MenuItem
+          id='logoutButton'
           onClick={() => {
             dispatch(logout(auth.token));
             handleClose();

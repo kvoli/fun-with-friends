@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently --kill-others \"nodemon server.js\" \"cd ../client && npm start\"",
-    "test": "jest tests"
+    "dev-test": "NODE_ENV=test concurrently --kill-others \"nodemon server.js\" \"cd ../client && npm start\"",
+    "test": "jest tests",
+    "test-all": "start-server-and-test dev-test http://localhost:3000 test"
   },
   "repository": {
     "type": "git",
@@ -34,9 +36,12 @@
     "chai": "^4.2.0",
     "concurrently": "^4.1.2",
     "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
     "mocha": "^6.2.0",
     "mongodb-memory-server": "^5.2.3",
     "node-mocks-http": "^1.8.0",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "puppeteer": "^1.20.0",
+    "start-server-and-test": "^1.10.3"
   }
 }

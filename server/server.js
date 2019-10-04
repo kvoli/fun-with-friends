@@ -15,7 +15,11 @@ const chatController = require('./controllers/chat');
 const server = express();
 
 // Connect to the database
-require('./models/db');
+if (process.env.NODE_ENV === 'test') {
+  require('./models/mockdb');
+} else {
+  require('./models/db');
+}
 
 // Setup middlewares
 server.use(express.json());

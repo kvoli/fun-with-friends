@@ -56,7 +56,7 @@ export default () => {
             <LandingAnimatedBackground/>
           </div>
           <div className={classes.title}>
-            <Typography align='center' variant='h1'>Fun With Friends</Typography>
+            <Typography id='landingTitle' align='center' variant='h1'>Fun With Friends</Typography>
           </div>
         </Grid>
         <div className={classes.fakeTop}/>

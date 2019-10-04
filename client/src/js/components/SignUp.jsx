@@ -130,6 +130,7 @@ const SignUp = () => {
             </Grid>
           </Grid>
           <Button
+            id='submitButton'
             onClick={() => {
               dispatch(signup(firstname, lastname, email, username, password));
             }}

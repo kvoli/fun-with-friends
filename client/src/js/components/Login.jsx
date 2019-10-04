@@ -81,6 +81,7 @@ const Login = () => {
             autoComplete='current-password'
           />
           <Button
+            id='loginButton'
             onClick={() => {
               dispatch(login(username, password));
             }}
