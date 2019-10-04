@@ -60,13 +60,13 @@ beforeAll(async () => {
       userID2 = body.user.id;
       token2 = body.token;
     });
+});
 
 
-  // After executing all tests, stop the mock database
-  afterAll(async () => {
-    await mongoose.disconnect();
-    await database.stop();
-  });
+// After executing all tests, stop the mock database
+afterAll(async () => {
+  await mongoose.disconnect();
+  await database.stop();
 });
 
 describe('Artifact Controller - Update Artifact', () => {
