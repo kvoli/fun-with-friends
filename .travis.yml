@@ -12,7 +12,7 @@ install:
 - cd ./client && npm ci && cd ../
 script:
 - cd ./client && npm run build && npm test && cd ../
-- cd ./server && npm run test-all && cd ../
+- cd ./server && npm run test && cd ../
 notifications:
   slack: fwf30022:vAysC0wefIZnRdZ3N3jGoDNN
 branches:
