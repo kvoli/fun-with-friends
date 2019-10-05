@@ -81,18 +81,18 @@ const ArtifactGrid = () => {
                   <div className={classes.cardText}>
                     <Grid container alignItems='center'>
                       <Grid item xs>
-                        <Typography gutterBottom variant='h6'>
+                        <Typography id='gridArtifactTitle' gutterBottom variant='h6'>
                           {artifact.title}
                         </Typography>
                       </Grid>
                       <Grid item>
-                        <Typography gutterBottom variant='body2'>
+                        <Typography id='gridArtifactDate' gutterBottom variant='body2'>
                           Date: {artifact.date}
                         </Typography>
                       </Grid>
                     </Grid>
-                    <Typography variant='body2'>Origin: {artifact.origin}</Typography>
-                    <Typography color='textSecondary' variant='body2'>
+                    <Typography id='gridArtifactOrigin' variant='body2'>Origin: {artifact.origin}</Typography>
+                    <Typography id='gridArtifactDescription' color='textSecondary' variant='body2'>
                       {artifact.desc}
                     </Typography>
                   </div>

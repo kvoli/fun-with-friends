@@ -26,17 +26,17 @@ const UtilityBar = () => {
   return (
     <Grid container alignItems='center' justify='space-between'>
       <Grid item>
-        <SearchBar />
+        <SearchBar id='filterArtifactsTextbox' />
       </Grid>
       <Grid item>
         <div>
-          <IconButton onClick={() => dispatch(openArtifactForm(false))} className={classes.button} aria-label='add'>
+          <IconButton id='addArtifactButton' onClick={() => dispatch(openArtifactForm(false))} className={classes.button} aria-label='add'>
             <AddIcon />
           </IconButton>
-          <IconButton onClick={() => dispatch(getArtifacts(auth.token))} className={classes.button} aria-label='refresh'>
+          <IconButton id='refreshArtifactsButton' onClick={() => dispatch(getArtifacts(auth.token))} className={classes.button} aria-label='refresh'>
             <RefreshIcon />
           </IconButton>
-          <GroupFilterMenu />
+          <GroupFilterMenu id='filterArtifactsMenu' />
         </div>
       </Grid>
     </Grid>

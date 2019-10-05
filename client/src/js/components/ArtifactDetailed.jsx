@@ -78,7 +78,7 @@ const ArtifactDetailed = ({ artifact }) => {
             <div className={classes.cardText}>
               <Grid container justify='space-between'>
                 <Grid item>
-                  <Typography gutterBottom variant='h4'>
+                  <Typography id='artifactTitleText' gutterBottom variant='h4'>
                     {artifact.title}
                   </Typography>
                 </Grid>
@@ -86,6 +86,7 @@ const ArtifactDetailed = ({ artifact }) => {
                   <Grid container direction='row-reverse' justify='flex-end'>
                     <Grid item>
                       <IconButton
+                        id='artifactEditButton'
                         onClick={() => {
                           dispatch(openArtifactForm(artifact));
                           dispatch(artifactSwitch(artifact));
@@ -95,12 +96,12 @@ const ArtifactDetailed = ({ artifact }) => {
                       </IconButton>
                     </Grid>
                     <Grid item>
-                      <DeletePopup />
+                      <DeletePopup id='artifactDeleteButton' />
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-              <Typography gutterBottom color='textSecondary' variant='body2' paragraph>
+              <Typography id='artifactTextText' gutterBottom color='textSecondary' variant='body2' paragraph>
                 {artifact.text}
               </Typography>
               <Divider variant='middle' />

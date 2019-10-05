@@ -1,7 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable import/order */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-underscore-dangle */
 // Always try and load environment variables from a .env file
 require('dotenv').config();
 
@@ -15,7 +11,7 @@ const chatController = require('./controllers/chat');
 const server = express();
 
 // Connect to the database
-if (process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'local') {
   require('./models/mockdb');
 } else {
   require('./models/db');

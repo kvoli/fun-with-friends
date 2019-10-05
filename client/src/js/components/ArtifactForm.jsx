@@ -126,6 +126,7 @@ const ArtifactForm = () => {
               <Grid container justify='space-between'>
                 <Grid item>
                   <TextField
+                    id='titleTextbox'
                     name='title'
                     label='title'
                     inputRef={register({ required: 'please enter a title' })}
@@ -157,6 +158,7 @@ const ArtifactForm = () => {
                 <Grid container direction='row' justify='space-between'>
                   <Grid item>
                     <TextField
+                      id='dateTextbox'
                       name='date'
                       label='date'
                       inputRef={register({ required: 'please enter a date' })}
@@ -166,6 +168,7 @@ const ArtifactForm = () => {
                   </Grid>
                   <Grid item>
                     <TextField
+                      id='originTextbox'
                       name='origin'
                       label='origin'
                       inputRef={register({ required: 'please enter an origin' })}
@@ -177,6 +180,7 @@ const ArtifactForm = () => {
               </Grid>
               <Grid item>
                 <TextField
+                  id='tagsTextbox'
                   name='tags'
                   label='tags'
                   inputRef={register}
@@ -187,6 +191,7 @@ const ArtifactForm = () => {
               </Grid>
               <Grid item>
                 <TextField
+                  id='summaryTextbox'
                   name='desc'
                   label='summary'
                   inputRef={register({ required: 'please enter a short description' })}
@@ -201,6 +206,7 @@ const ArtifactForm = () => {
               </Grid>
               <Grid item>
                 <TextField
+                  id='textTextbox'
                   rows='6'
                   variant='outlined'
                   margin='normal'
@@ -223,13 +229,14 @@ const ArtifactForm = () => {
             <Grid container direction='row-reverse'>
               <Grid item>
                 <input name='submit' type='submit' className={classes.input} />
-                <Button variant='contained' color='primary' size='small' className={classes.button} type='submit'>
+                <Button id='saveButton' variant='contained' color='primary' size='small' className={classes.button} type='submit'>
                   <SaveIcon />
                   Save
                 </Button>
               </Grid>
               <Grid item>
                 <Button
+                  id='cancelButton'
                   variant='contained'
                   color='secondary'
                   size='small'

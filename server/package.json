@@ -5,10 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "start:test": "NODE_ENV=local node server.js",
     "dev": "concurrently --kill-others \"nodemon server.js\" \"cd ../client && npm start\"",
-    "dev-test": "NODE_ENV=test concurrently --kill-others \"nodemon server.js\" \"cd ../client && npm start\"",
-    "test": "jest tests",
-    "test-all": "start-server-and-test dev-test http://localhost:3000 test"
+    "dev:test": "NODE_ENV=local concurrently --kill-others \"nodemon server.js\" \"cd ../client && npm start\"",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:endtoend": "jest tests/endtoend",
+    "test:all": "jest tests",
+    "test": "start-server-and-test start:test 8080 test:all"
   },
   "repository": {
     "type": "git",

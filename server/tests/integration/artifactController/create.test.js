@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const httpMocks = require('node-mocks-http');
 const MongoMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
-const userController = require('../../controllers/user');
-const artifactController = require('../../controllers/artifact');
-const auth = require('../../middleware/auth');
+const userController = require('../../../controllers/user');
+const artifactController = require('../../../controllers/artifact');
+const auth = require('../../../middleware/auth');
 
 let token1;
 let userID1;

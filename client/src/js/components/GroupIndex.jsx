@@ -44,14 +44,14 @@ const GroupIndex = () => {
             <Grid container>
               {privateKeys.map(key => (
                 <Grid item key={key}>
-                  <IconButton component={Link} to={`/circle/${key}`}>
+                  <IconButton id='circlePreview' component={Link} to={`/circle/${key}`}>
                     <Avatar alt={circles[key].title} src={circles[key].previewImage} className={classes.bigAvatar} />
                   </IconButton>
                   <Typography align='center'>{circles[key].title}</Typography>
                 </Grid>
               ))}
               <Grid item>
-                <IconButton onClick={() => dispatch(openCircleForm({ circle: false }))}>
+                <IconButton id='createCircleButton' onClick={() => dispatch(openCircleForm({ circle: false }))}>
                   <AddCircleIcon className={classes.bigAvatar} />
                 </IconButton>
                 <Typography align='center'>Create New Circle</Typography>

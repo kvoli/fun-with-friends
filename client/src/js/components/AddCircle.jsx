@@ -184,13 +184,14 @@ const AddCircle = () => {
               <Typography variant='h6'>Enter a name for your Circle</Typography>
             </Grid>
             <Grid item>
-              <TextField name='title' label='Circle Name' inputRef={register({ required: true })} placeholder='Smith Inner Circle' variant='outlined' />
+              <TextField id='circleNameInput' name='title' label='Circle Name' inputRef={register({ required: true })} placeholder='Smith Inner Circle' variant='outlined' />
             </Grid>
             <Grid item>
               <Typography variant='h6'>Enter a description for your Circle</Typography>
             </Grid>
             <Grid item>
               <TextField
+                id='circleDescriptionInput'
                 name='description'
                 label='Circle Description'
                 inputRef={register({ required: true })}
@@ -274,7 +275,7 @@ const AddCircle = () => {
             {activeStep === steps.length - 1 ? (
               <Grid item>
                 <input name='submit' type='submit' className={classes.input} />
-                <Button variant='contained' color='primary' type='submit'>
+                <Button id='saveButton' variant='contained' color='primary' type='submit'>
                   <SaveIcon />
                   Save
                 </Button>
@@ -282,6 +283,7 @@ const AddCircle = () => {
             ) : (
               <Grid item>
                 <Button
+                  id='nextButton'
                   variant='contained'
                   color='primary'
                   onClick={() => {
@@ -293,7 +295,7 @@ const AddCircle = () => {
               </Grid>
             )}
             <Grid item>
-              <Button disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>
+              <Button id='backButton' disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>
                 Back
               </Button>
             </Grid>

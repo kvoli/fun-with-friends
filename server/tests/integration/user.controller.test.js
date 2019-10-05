@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const httpMocks = require('node-mocks-http');
 const MongoMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
-const userController = require('../controllers/user');
+const userController = require('../../controllers/user');
 
 let mockDatabase;
 const options = {
