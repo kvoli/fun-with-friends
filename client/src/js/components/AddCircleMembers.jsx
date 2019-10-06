@@ -85,8 +85,8 @@ const useStyles = makeStyles(theme => ({
   },
   suggestionsContainerOpen: {
     position: 'absolute',
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit * 3,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(3),
     left: 0,
     right: 0,
     zIndex: 1,

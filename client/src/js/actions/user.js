@@ -1,5 +1,14 @@
-import { GET_ALL_USERS_SUCCESS, GET_ALL_USERS_FAILURE, GET_ALL_USERS_REQUEST } from '../constants/circle';
+/**
+ * The logic specified for getting all users. These are used to update the redux state according to the input from the user and the success or failure of the 
+ * requests made, according to the connection with the backend endpoints and subsequently the database.
+ */
+import {
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_FAILURE,
+  GET_ALL_USERS_REQUEST
+} from '../constants/circle';
 
+// Different dispatch possibilities for getting all userss. Either a request, success or failure.
 export const getAllUsersRequest = () => ({
   type: GET_ALL_USERS_REQUEST,
 });
@@ -20,7 +29,10 @@ export const getAllUsers = token => {
     const endpoint = '/api/user';
     const parameters = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
     };
     fetch(endpoint, parameters).then(response =>
       response.json().then(json => {

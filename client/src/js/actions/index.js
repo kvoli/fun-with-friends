@@ -1,4 +1,12 @@
-import { ARTIFACT_SWITCH, FILTER_ARTIFACTS, OPEN_ARTIFACT_FORM, SET_CIRCLE_FILTER, SET_PERSONAL_FILTER, TOGGLE_DARK_MODE } from '../constants/action-types';
+import {
+  ARTIFACT_SWITCH,
+  FILTER_ARTIFACTS,
+  OPEN_ARTIFACT_FORM,
+  SET_CIRCLE_FILTER,
+  SET_PERSONAL_FILTER,
+  SET_ALL_FILTER,
+  TOGGLE_DARK_MODE
+} from '../constants/action-types';
 
 export const artifactSwitch = payload => ({
   type: ARTIFACT_SWITCH,
@@ -24,6 +32,11 @@ export const setPersonalFilter = payload => ({
   type: SET_PERSONAL_FILTER,
   payload,
 });
+
+export const setAllFilter = filterState => ({
+  type: SET_ALL_FILTER,
+  filterState,
+})
 
 export const toggleDarkMode = () => ({
   type: TOGGLE_DARK_MODE,

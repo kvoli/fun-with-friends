@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
     // Extract just the token from the Authorization header
     const token = req.header('Authorization').replace('Bearer ', '');
     // Verify that the token was created by this server
-    const data = jwt.verify(token, process.env.SECRET_KEY);
+    const data = jwt.verify(token, process.env.SECRET_KEY || 'testing');
     // Check if the user and token from the request match a user and token in the database
     const user = await User.findOne({ _id: data._id, 'tokens.token': token });
     // Handle no matches
@@ -19,7 +19,11 @@ const auth = async (req, res, next) => {
     req.user = user;
     req.token = token;
     // Continue with the original request
-    next();
+    if (process.env.NODE_ENV === 'test') {
+      await next(req, res);
+    } else {
+      next();
+    }
   } catch (error) {
     res.status(401).send({ error: 'Not authorized to access this resource' });
   }
