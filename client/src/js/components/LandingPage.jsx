@@ -53,6 +53,7 @@ const useStyles = makeStyles(theme => ({
     height: 175,
     width: 175,
     margin: 4,
+    color: '#3e4360',
   },
 }));
 
