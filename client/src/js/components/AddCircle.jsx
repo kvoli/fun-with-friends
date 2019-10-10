@@ -120,7 +120,7 @@ const AddCircle = () => {
   const pictureSrc = useSelector(store => store.focusView.artifactImageUpload);
   const allUsers = useSelector(store => store.user);
 
-  const [currentMembers, setCurrentMembers] = React.useState();
+  const [currentMembers, setCurrentMembers] = React.useState([]);
   const [currentAdmins, setCurrentAdmins] = React.useState([user.username]);
   const [circlePublic, setCirclePublic] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
