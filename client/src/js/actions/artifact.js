@@ -1,10 +1,9 @@
 /**
- * The logic specifiedfor the artifact actions.These are used to update the redux state according to the input from the user and the success or failure of the 
+ * The logic specifiedfor the artifact actions.These are used to update the redux state according to the input from the user and the success or failure of the
  * requests made, according to the connection with the backend endpoints and subsequently the database.
  */
-import {
-  UPLOAD_IMAGE
-} from '../constants/action-types';
+import { UPLOAD_IMAGE } from '../constants/action-types';
+import { openArtifactForm } from './index';
 
 // imports from the aritfact constants defined and collated in the actifact file in the constants folder
 import {
@@ -27,7 +26,6 @@ import {
 // Snackbars give the user feedback about actions that they have sent and their status such as success, failure, processing etc
 import toast from '../components/NodeSnack';
 
-
 export const clearArtifacts = () => ({
   type: CLEAR_ARTIFACTS,
 });
@@ -39,7 +37,7 @@ export const updateImage = src => ({
 });
 
 // dispatch logic for uploading an image.  information comes though the Upload Artifact form.
-// If there is an image uploaded through the form, the image file is appended to the artifact data and sent 
+// If there is an image uploaded through the form, the image file is appended to the artifact data and sent
 // through the API endpoint to the database
 export const uploadImage = image => {
   return dispatch => {
@@ -50,7 +48,7 @@ export const uploadImage = image => {
     // set the details of the API request as a post request containing the image
     const parameters = {
       method: 'POST',
-      body: formData
+      body: formData,
     };
     const endpoint = '/api/image/upload';
     // Artifact image sent to the database via the API endpoint for posting form data
@@ -82,7 +80,7 @@ export const createArtifactFailure = () => ({
 });
 
 // Dispatch logic for creating a new artifact
-// Takes the artifact given in the form and the user token. This ensure that the user is correctly logged in 
+// Takes the artifact given in the form and the user token. This ensure that the user is correctly logged in
 // in order to create a new artifact.
 export const createArtifact = (artifact, token) => {
   return dispatch => {
@@ -94,9 +92,9 @@ export const createArtifact = (artifact, token) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(artifact)
+      body: JSON.stringify(artifact),
     };
     fetch(endpoint, parameters).then(response =>
       response.json().then(json => {
@@ -104,6 +102,7 @@ export const createArtifact = (artifact, token) => {
         if (response.status === 201) {
           // Sends a success dispatch to the redux to update the redux state
           dispatch(createArtifactSuccess(json));
+          dispatch(openArtifactForm(false));
           // Sends snackbar to the user to signify that the artifact is correctly created
           toast.success(`Created Artifact ${artifact.title}`);
         } else {
@@ -131,7 +130,7 @@ export const deleteArtifactFailure = () => ({
 });
 
 // Dispatch logic for deleting an existing artifact
-// Takes the id of the relevant artifact and the user token. This ensure that the user is correctly logged in 
+// Takes the id of the relevant artifact and the user token. This ensure that the user is correctly logged in
 // in order to delete an artifact.
 export const deleteArtifact = (artifact, token) => {
   return dispatch => {
@@ -143,8 +142,8 @@ export const deleteArtifact = (artifact, token) => {
     const parameters = {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     };
     fetch(endpoint, parameters).then(response => {
       // checks that the endpoint is correctly 200
@@ -186,8 +185,8 @@ export const getArtifacts = token => {
     const parameters = {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     };
     fetch(endpoint, parameters).then(response =>
       // ensures that the response is either a 200 response or a 304 response which would correctly signify getting an artifact.
@@ -219,7 +218,7 @@ export const editFailure = () => ({
 });
 
 // Dispatch logic for editing an existing artifact
-// Takes the id of the relevant artifact and the user token. This ensure that the user is correctly logged in 
+// Takes the id of the relevant artifact and the user token. This ensure that the user is correctly logged in
 // in order to delete an artifact.
 export const editArtifact = (artifact, token) => {
   return dispatch => {
@@ -232,8 +231,8 @@ export const editArtifact = (artifact, token) => {
       body: JSON.stringify(artifact),
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     };
     fetch(endpoint, parameters).then(response => {
       // 200 response signifies that the request was successful

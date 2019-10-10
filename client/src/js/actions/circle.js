@@ -1,10 +1,8 @@
 /**
- * The logic specified for the circle actions.These are used to update the redux state according to the input from the user and the success or failure of the 
+ * The logic specified for the circle actions.These are used to update the redux state according to the input from the user and the success or failure of the
  * requests made, according to the connection with the backend endpoints and subsequently the database.
  */
-import {
-  OPEN_CIRCLE_FORM
-} from '../constants/action-types';
+import { OPEN_CIRCLE_FORM } from '../constants/action-types';
 
 // imports from the circle constants defined and collated in the circle file in the constants folder
 import {
@@ -124,10 +122,9 @@ export const addCircleArtifactSuccess = (circleID, artifactID) => ({
   type: ADD_CIRCLE_ARTIFACT_SUCCESS,
   payload: {
     circleID,
-    artifactID
+    artifactID,
   },
 });
-
 
 // error states
 export const addCircleFailure = () => ({
@@ -175,10 +172,10 @@ export const addCircleArtifact = (circleID, artifactID, token) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        id: artifactID
+        id: artifactID,
       }),
     };
     // updates redux state and provides user feedback based on the response of the API endpoint
@@ -190,11 +187,10 @@ export const addCircleArtifact = (circleID, artifactID, token) => {
         response.json().then(json => {
           toast.error(json.error);
         });
-      };
+      }
     });
   };
 };
-
 
 // adds a user to the an existing circle
 export const addCircleUser = (userID, circleID, token) => {
@@ -206,26 +202,28 @@ export const addCircleUser = (userID, circleID, token) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        id: userID
+        id: userID,
       }),
     };
     // updates redux state and provides user feedback based on the response of the API endpoint
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
-        dispatch(addCircleUserSuccess({
-          memberid: userID,
-          circleid: circleID
-        }));
+        dispatch(
+          addCircleUserSuccess({
+            memberid: userID,
+            circleid: circleID,
+          })
+        );
         toast.success(`Added User to Circle`);
       } else {
         dispatch(addCircleUserFailure());
         response.json().then(json => {
           toast.error(json.error);
         });
-      };
+      }
     });
   };
 };
@@ -240,27 +238,29 @@ export const addCircleAdmin = (userID, circleID, token) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         id: userID,
-        admin: true
+        admin: true,
       }),
     };
     // updates redux state and provides user feedback based on the response of the API endpoint
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
-        dispatch(addCircleAdminSuccess({
-          memberid: userID,
-          circleid: circleID
-        }));
+        dispatch(
+          addCircleAdminSuccess({
+            memberid: userID,
+            circleid: circleID,
+          })
+        );
         toast.success(`Added Admin to Circle`);
       } else {
         dispatch(addCircleAdminFailure());
         response.json().then(json => {
           toast.error(json.error);
         });
-      };
+      }
     });
   };
 };
@@ -275,26 +275,28 @@ export const deleteCircleUser = (userID, circleID, token) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        id: userID
+        id: userID,
       }),
     };
     // updates redux state and provides user feedback based on the response of the API endpoint
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
-        dispatch(deleteCircleUserSuccess({
-          memberid: userID,
-          circleid: circleID
-        }));
+        dispatch(
+          deleteCircleUserSuccess({
+            memberid: userID,
+            circleid: circleID,
+          })
+        );
         toast.success(`Removed User from Circle`);
       } else {
         dispatch(deleteCircleUserFailure());
         response.json().then(json => {
           toast.error(json.error);
         });
-      };
+      }
     });
   };
 };
@@ -309,27 +311,29 @@ export const deleteCircleAdmin = (userID, circleID, token) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         id: userID,
-        admin: true
+        admin: true,
       }),
     };
     // updates redux state and provides user feedback based on the response of the API endpoint
     fetch(endpoint, parameters).then(response => {
       if (response.status === 200) {
-        dispatch(deleteCircleAdminSuccess({
-          memberid: userID,
-          circleid: circleID
-        }));
+        dispatch(
+          deleteCircleAdminSuccess({
+            memberid: userID,
+            circleid: circleID,
+          })
+        );
         toast.success(`Removed Admin from Circle`);
       } else {
         dispatch(deleteCircleAdminFailure());
         response.json().then(json => {
           toast.error(json.error);
         });
-      };
+      }
     });
   };
 };
@@ -344,7 +348,7 @@ export const addCircle = (circle, token) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(circle),
     };
@@ -358,7 +362,7 @@ export const addCircle = (circle, token) => {
         response.json().then(json => {
           toast.error(json.error);
         });
-      };
+      }
     });
   };
 };
@@ -367,13 +371,13 @@ export const addCircle = (circle, token) => {
 export const deleteCircle = (circle, token) => {
   return dispatch => {
     dispatch(deleteCircleRequest());
-    // makes a DELETE request {circleID} requesting that circle is deleted. The token needs to signify that the user correctly logged in. The backend circle controller ensures that the user making the change is an admin and therefore authorised to make the change. 
+    // makes a DELETE request {circleID} requesting that circle is deleted. The token needs to signify that the user correctly logged in. The backend circle controller ensures that the user making the change is an admin and therefore authorised to make the change.
     const endpoint = `/api/circle/${circle.id}`;
     const parameters = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     };
     // updates redux state and provides user feedback based on the response of the request
@@ -387,7 +391,7 @@ export const deleteCircle = (circle, token) => {
         response.json().then(json => {
           toast.error(json.error);
         });
-      };
+      }
     });
   };
 };
@@ -396,13 +400,13 @@ export const deleteCircle = (circle, token) => {
 export const getAllCircles = token => {
   return dispatch => {
     dispatch(getAllCirclesRequest());
-    // makes a GET request requesting to get all circles. The token needs to signify that the user correctly logged in. 
+    // makes a GET request requesting to get all circles. The token needs to signify that the user correctly logged in.
     const endpoint = '/api/circle/';
     const parameters = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     };
     // updates redux state and provides user feedback based on the response of the request

@@ -19,6 +19,7 @@ const addMessage = async messageData => {
 const getChatLog = async circleID => {
   try {
     const chatLog = await ChatLog.find({ _id: circleID });
+    return chatLog;
   } catch (error) {
     console.log(error);
   }
