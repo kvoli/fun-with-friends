@@ -14,24 +14,24 @@ import AddCircleMembers from './AddCircleMembers';
 import { uploadImage } from '../actions/artifact';
 import { addCircle, openCircleForm } from '../actions/circle';
 
-const circleImages = [
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-3.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-2.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-1.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-6.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-7.gif',
-  'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-11.gif',
-];
+// const circleImages = [
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-gif-300x300-200kb-9.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-5.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-10.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-good-morning-gif-8.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-9.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-4.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-3.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-2.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-1.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-6.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-7.gif',
+//   'https://gifimage.net/wp-content/uploads/2017/09/anime-girl-angry-gif-11.gif',
+// ];
 
-const selectRandom = () => {
-  return circleImages[Math.floor(Math.random() * circleImages.length) - 1];
-};
+// const selectRandom = () => {
+//   return circleImages[Math.floor(Math.random() * circleImages.length) - 1];
+// };
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -99,7 +99,7 @@ const getUserID = (userlist, username) => {
 const mapUserNameToID = (userlist, usernames) => {
   // handle if usernames is undefined (for whatever reason)
   if (!usernames) {
-    return []
+    return [];
   }
   return usernames.map(username => getUserID(userlist, username));
 };
@@ -112,7 +112,7 @@ const AddCircle = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const steps = getSteps();
-  const randomPreview = selectRandom();
+  // const randomPreview = selectRandom();
 
   const user = useSelector(store => store.auth.user);
   const token = useSelector(store => store.auth.token);
@@ -169,7 +169,7 @@ const AddCircle = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input readOnly className={classes.input} ref={register({ required: true })} name='id' value={circle ? circle.id : uuid.v4()} />
         <input readOnly className={classes.input} ref={register({ required: true })} name='public' value={circlePublic} />
-        <input readOnly className={classes.input} ref={register({ required: true })} name='previewImage' value={randomPreview} />
+        <input readOnly className={classes.input} ref={register({ required: true })} name='previewImage' value={pictureSrc || defaultImage} />
         <input readOnly className={classes.input} ref={register({ required: true })} name='text' value='placeholder text' />
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => (
@@ -207,7 +207,7 @@ const AddCircle = () => {
           </Grid>
           <Grid container direction='column' justify='center' alignItems='center' className={activeStep === 1 ? classes.inputBox : classes.input}>
             <Grid item>
-              <Typography variant='h5'>Click on the image below to upload a banner image for your Circle</Typography>
+              <Typography variant='h5'>Click on the image below to upload a preview image for your circle</Typography>
             </Grid>
             <Grid item>
               <CardActionArea>

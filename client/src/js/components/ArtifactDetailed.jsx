@@ -12,9 +12,10 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DeletePopup from './DeletePopup';
 import LoadingCircle from './LoadingCircle';
+// import Map from './Map';
 import { openArtifactForm, artifactSwitch } from '../actions/index';
 
 const useStyles = makeStyles(theme => ({
@@ -50,18 +51,18 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     textIndent: '30%',
   },
+  mapStyle: {
+    maxHeight: '250px',
+    maxWidth: '250px',
+  },
 }));
-
-const relatives = [
-  { name: 'Harry McClernon', about: 'Soldier | Infantry | 1894-1931' },
-  { name: 'Mary McClernon', about: 'Homemaker | Daughter | 1915-1977' },
-  { name: 'Rose McClernon', about: 'Teacher | Wife | 1896-1941' },
-];
 
 const ArtifactDetailed = ({ artifact }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
+  const users = useSelector(store => store.user);
+  const user = users.filter(u => u.id === artifact.uploader)[0];
 
   return (
     <Grid container justify='center'>
@@ -105,18 +106,19 @@ const ArtifactDetailed = ({ artifact }) => {
                 {artifact.text}
               </Typography>
               <Divider variant='middle' />
-              <Typography variant='h6'>Relations</Typography>
+              <Typography variant='h6'>Uploaded By</Typography>
               <List dense>
-                {relatives.map(relative => (
-                  <ListItem key={relative.name} alignItems='flex-start'>
-                    <ListItemAvatar>
-                      <Avatar alt={relative.name} />
-                    </ListItemAvatar>
-                    <ListItemText primary={relative.name} secondary={relative.about} />
-                  </ListItem>
-                ))}
+                <ListItem key={artifact.uploader} alignItems='flex-start'>
+                  <ListItemAvatar>
+                    <Avatar>{user ? user.firstname.slice(0, 1).concat(user.lastname.slice(0, 1)) : '?'}</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={user ? user.firstname : 'Unknown'} secondary={user ? user.email : 'unknown email'} />
+                </ListItem>
               </List>
             </div>
+            <Grid container justify='center' alignItems='center'>
+              <Grid item>{/* <Map className={classes.mapStyle} /> */}</Grid>
+            </Grid>
             <Divider variant='middle' />
             <div className={classes.cardTags}>
               <Grid container>

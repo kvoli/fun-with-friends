@@ -78,7 +78,9 @@ const ArtifactForm = () => {
 
   const currentCircleIDs = cKeys.filter(key => allCircles[key].artifacts.includes(fillArtifact.id));
   const currentCircleNames = currentCircleIDs.map(key => allCircles[key].title);
-  const availableCircleIDs = cKeys.filter(key => (allCircles[key].members.includes(auth.user.id) || allCircles[key].admins.includes(auth.user.id)) || allCircles[key].public === true);
+  const availableCircleIDs = cKeys.filter(
+    key => allCircles[key].members.includes(auth.user.id) || allCircles[key].admins.includes(auth.user.id) || allCircles[key].public === true
+  );
   const availableCircleNames = availableCircleIDs.map(key => allCircles[key].title);
 
   function getCircleID(circleTitle) {
@@ -102,7 +104,6 @@ const ArtifactForm = () => {
       dispatch(addCircleArtifact(circleID, artifactID, auth.token));
     }
     e.target.reset();
-    dispatch(openArtifactForm(false));
     dispatch(artifactSwitch(data));
   };
 
