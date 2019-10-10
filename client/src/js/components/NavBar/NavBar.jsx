@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
   navBar: {
     flexGrow: 1,
     background: '#3e4360',
+    position: 'relative',
   },
   menuButton: {
     marginRight: theme.spacing(2),
