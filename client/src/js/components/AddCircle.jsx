@@ -148,7 +148,6 @@ const AddCircle = () => {
   const onSubmit = (data, e) => {
     // ensure form data is converted back to a bool
     data.public = data.public === 'true' || data.public === true;
-    console.log(data);
     dispatch(
       addCircle(
         {
