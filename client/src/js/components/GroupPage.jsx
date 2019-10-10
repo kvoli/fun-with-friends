@@ -51,6 +51,12 @@ const useStyles = makeStyles(theme => ({
   tabSpacing: {
     marginTop: theme.spacing(2.5),
   },
+  image: {
+    maxHeight: '350px',
+    maxWidth: 'initial',
+    overflow: 'hidden',
+    textIndent: '30%',
+  },
 }));
 
 const GroupPage = props => {
@@ -87,7 +93,7 @@ const GroupPage = props => {
         <Grid item>
           <Grid container alignItems='center' justify='center'>
             <Grid item>
-              <img src={y} alt='' />
+              <img src={y} alt='' className={classes.image} />
             </Grid>
           </Grid>
         </Grid>
@@ -96,20 +102,15 @@ const GroupPage = props => {
             <Tabs value={tabValue} onChange={(event, newValue) => setTabValue(newValue)} centered>
               <Tab label={circle.public ? 'Admins' : 'Members & Admins'} value={0} />
               <Tab label='Artifact Feed' value={1} />
-              <Tab label='Chat' value={2} />
+              <Tab label='Circle Log' value={2} />
             </Tabs>
           </Paper>
         </Grid>
         <Grid item className={tabValue === 0 ? classes.container : classes.tabPanel}>
           <Grid container spacing={4} direction='column'>
             <Grid item>
-
               <Typography>Admins</Typography>
-              <Grid 
-                container
-                direction='row'
-                alignItems='center'
-              >
+              <Grid container direction='row' alignItems='center'>
                 {circle.admins.map(admin => (
                   <Grid item key={admin}>
                     <List>
@@ -120,8 +121,8 @@ const GroupPage = props => {
                     </List>
                   </Grid>
                 ))}
-                
-                {adminPerms ? 
+
+                {adminPerms ? (
                   <Grid item>
                     {!addAdmin ? (
                       <List>
@@ -133,7 +134,7 @@ const GroupPage = props => {
                               </Button>
                             </Avatar>
                           </ListItemAvatar>
-                          <ListItemText primary='add admin' secondary=''/>
+                          <ListItemText primary='add admin' secondary='' />
                         </ListItem>
                       </List>
                     ) : (
@@ -142,7 +143,7 @@ const GroupPage = props => {
                           <ListItemAvatar>
                             <Avatar>?</Avatar>
                           </ListItemAvatar>
-                          <AddMember circle={circle.id} admin={true}/>
+                          <AddMember circle={circle.id} admin={true} />
                           <ListItemSecondaryAction>
                             <IconButton edge='end' onClick={() => setAddAdmin(false)}>
                               <DeleteIcon />
@@ -151,20 +152,16 @@ const GroupPage = props => {
                         </ListItem>
                       </List>
                     )}
-                  </Grid> : 
-                  <div/>
-                }
+                  </Grid>
+                ) : (
+                  <div />
+                )}
               </Grid>
             </Grid>
-            {!circle.public ? 
+            {!circle.public ? (
               <Grid item>
-
                 <Typography>Members</Typography>
-                <Grid 
-                  container
-                  direction='row'
-                  alignItems='center'
-                >
+                <Grid container direction='row' alignItems='center'>
                   {circle.members.map(member => (
                     <Grid item key={member}>
                       <List>
@@ -176,7 +173,7 @@ const GroupPage = props => {
                     </Grid>
                   ))}
 
-                  {adminPerms ? 
+                  {adminPerms ? (
                     <Grid item>
                       {!addMember ? (
                         <List>
@@ -188,7 +185,7 @@ const GroupPage = props => {
                                 </Button>
                               </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary='add member' secondary=''/>
+                            <ListItemText primary='add member' secondary='' />
                           </ListItem>
                         </List>
                       ) : (
@@ -206,13 +203,15 @@ const GroupPage = props => {
                           </ListItem>
                         </List>
                       )}
-                    </Grid> :
-                    <div/>
-                  }
+                    </Grid>
+                  ) : (
+                    <div />
+                  )}
                 </Grid>
-              </Grid> : 
-              <div/>
-            }
+              </Grid>
+            ) : (
+              <div />
+            )}
           </Grid>
         </Grid>
         <Grid item className={tabValue === 1 ? classes.feed : classes.tabPanel}>

@@ -8,7 +8,8 @@ import LandingAnimatedBackground from './LandingAnimatedBackground';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -66,9 +67,18 @@ export default () => {
           <LandingAnimatedBackground />
         </div>
         <div className={classes.title}>
-          <Typography align='center' variant='h1'>
-            Fun With Friends
-          </Typography>
+          <Grid container direction='column' justify='center' alignItems='center'>
+            <Grid item>
+              <Typography align='center' variant='h1'>
+                Fun With Friends
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button component={Link} to='/signup' variant='outlined' color='inherit'>
+                Signup
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       </Grid>
       <div className={classes.fakeTop} />
