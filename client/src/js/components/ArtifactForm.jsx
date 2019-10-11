@@ -114,13 +114,23 @@ const ArtifactForm = () => {
           <input readOnly className={classes.input} ref={register({ required: true })} name='src' value={pictureSrc || defaultImage} />
           <input readOnly className={classes.input} ref={register({ required: true })} name='id' value={artifact.id ? artifact.id : uuid.v4()} />
           <CardActionArea>
-            <CardMedia
-              component='img'
-              className={classes.cardMedia}
-              image={pictureSrc || defaultImage}
-              alt={pictureSrc || defaultImage}
-              src={pictureSrc || defaultImage}
-            />
+            <label htmlFor='contained-button-file'>
+              <input
+                accept='image/*'
+                name='src'
+                className={classes.input}
+                id='contained-button-file'
+                type='file'
+                onChange={e => dispatch(uploadImage(e.target.files[0]))}
+              />
+              <CardMedia
+                component='img'
+                className={classes.cardMedia}
+                image={pictureSrc || defaultImage}
+                alt={pictureSrc || defaultImage}
+                src={pictureSrc || defaultImage}
+              />
+            </label>
           </CardActionArea>
           <CardContent className={classes.cardContent}>
             <div className={classes.cardText}>
@@ -136,21 +146,7 @@ const ArtifactForm = () => {
                 </Grid>
                 <Grid item>
                   <Grid container direction='row-reverse' justify='flex-end'>
-                    <Grid item>
-                      <label htmlFor='contained-button-file'>
-                        <input
-                          accept='image/*'
-                          name='imageUpload'
-                          className={classes.input}
-                          id='contained-button-file'
-                          type='file'
-                          onChange={e => dispatch(uploadImage(e.target.files[0]))}
-                        />
-                        <Button variant='contained' component='span' className={classes.button}>
-                          Upload
-                        </Button>
-                      </label>
-                    </Grid>
+                    <Grid item></Grid>
                   </Grid>
                 </Grid>
               </Grid>
