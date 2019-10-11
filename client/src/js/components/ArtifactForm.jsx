@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import uuid from 'uuid';
-import { openArtifactForm, artifactSwitch } from '../actions/index';
+import { openArtifactForm } from '../actions/index';
 import { addCircleArtifact } from '../actions/circle';
 import { uploadImage, createArtifact, editArtifact } from '../actions/artifact';
 import SuggestInput from './SuggestInput';
@@ -104,7 +104,6 @@ const ArtifactForm = () => {
       dispatch(addCircleArtifact(circleID, artifactID, auth.token));
     }
     e.target.reset();
-    dispatch(artifactSwitch(data));
   };
 
   return (

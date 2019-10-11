@@ -3,7 +3,7 @@
  * requests made, according to the connection with the backend endpoints and subsequently the database.
  */
 import { UPLOAD_IMAGE } from '../constants/action-types';
-import { openArtifactForm } from './index';
+import { openArtifactForm, artifactSwitch } from './index';
 
 // imports from the aritfact constants defined and collated in the actifact file in the constants folder
 import {
@@ -239,7 +239,9 @@ export const editArtifact = (artifact, token) => {
       // 200 response signifies that the request was successful
       if (response.status === 200) {
         // updates redux state and sends snackbar response to the user
+        dispatch(artifactSwitch(artifact));
         dispatch(editSuccess(artifact));
+        dispatch(openArtifactForm({ artifact: false }));
         toast.success(`Edited Artifact ${artifact.title}`);
       } else {
         dispatch(editFailure());
