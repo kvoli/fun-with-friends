@@ -5,6 +5,13 @@ import ReactDOM from 'react-dom';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { IconButton } from '@material-ui/core';
+import Theme from './Theme';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '../store/index';
+import history from '../../history';
 
 // add a <div> child to body under which to mount the snackbars
 const mountPoint = document.createElement('div');
@@ -36,10 +43,13 @@ export default {
       return null;
     };
     ReactDOM.render(
-      // see https://github.com/iamhosseindhv/notistack#snackbarprovider
-      <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
-        <ShowSnackbar message={msg} variant={variant} />
-      </SnackbarProvider>,
+      <Provider store={store}>
+        <Theme>
+          <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
+            <ShowSnackbar message={msg} variant={variant} />
+          </SnackbarProvider>
+        </Theme>
+      </Provider>,
       mountPoint
     );
   },
