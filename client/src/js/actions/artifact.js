@@ -188,6 +188,7 @@ export const getArtifacts = token => {
         Authorization: `Bearer ${token}`,
       },
     };
+    dispatch(clearArtifacts());
     fetch(endpoint, parameters).then(response =>
       // ensures that the response is either a 200 response or a 304 response which would correctly signify getting an artifact.
       // 304 reponse indicates that the artifact was not modified
