@@ -10,9 +10,6 @@
   <a href="https://cloud.docker.com/repository/docker/kvoli/fun-with-friends/general">
     <img alt="Docker-Image" src="https://images.microbadger.com/badges/version/kvoli/fun-with-friends.svg">
   </a>
-  <a href="https://github.com/kvoli/fun-with-friends/blob/staging/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/kvoli/fun-with-friends" />
-  </a>
   <a href="https://microbadger.com/images/kvoli/fun-with-friends">
     <img alt="Docker-Layers" src="https://images.microbadger.com/badges/image/kvoli/fun-with-friends.svg">
   </a>
