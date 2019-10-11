@@ -25,6 +25,9 @@
   <a href="https://www.codacy.com/app/kvoli/fun-with-friends?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kvoli/fun-with-friends&amp;utm_campaign=Badge_Grade">
     <img alt="Codacy" src="https://api.codacy.com/project/badge/Grade/2c082bb69c6a4c6381168b46aa44b6d7" />
   </a>
+  <a href="https://www.codacy.com/manual/kvoli/fun-with-friends?utm_source=github.com&utm_medium=referral&utm_content=kvoli/fun-with-friends&utm_campaign=Badge_Coverage">
+    <img alt="Codacy Coverage" src="https://api.codacy.com/project/badge/Coverage/2c082bb69c6a4c6381168b46aa44b6d7" />
+  </a>
 </p>
 
  
