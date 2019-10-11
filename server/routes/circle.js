@@ -19,6 +19,9 @@ circleRouter.post('/:id/member', auth, circleController.addMember);
 // delete a member to a circle
 circleRouter.delete('/:id/member', auth, circleController.deleteMember);
 
+// delete an admin from the circle
+circleRouter.delete('/:id/admin', auth, circleController.deleteAdmin);
+
 // Adds an artifact to a circle
 circleRouter.post('/:id/artifact', auth, circleController.addArtifact);
 

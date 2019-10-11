@@ -128,22 +128,43 @@ const deleteMember = async (req, res) => {
     }, {
       useFindAndModify: false,
     });
-    await Circle.findOneAndUpdate({
-      _id: req.params.id,
-    }, {
-      $pull: {
-        admins: deletedMember,
-      },
-    }, {
-      useFindAndModify: false,
-    });
     res.status(200).send();
-  } catch (error) {
-    res.status(400).send({
-      error: 'unable to update circle',
-    });
-  }
-};
+    } catch (error) {
+      res.status(400).send({
+        error: 'unable to update circle',
+      });
+    }
+  };
+
+  const deleteAdmin = async (req, res) => {
+    try {
+      const deletedMember = req.body.id;
+      const circle = await Circle.findOne({
+        _id: req.params.id
+      });
+      const admins = circle.admins;
+      if (admins.length === 1) {
+        res.status(400).send({
+          error: "Unable to delete admin, since there is only one admin."
+        });
+      } else
+        await Circle.findOneAndUpdate({
+          _id: req.params.id,
+        }, {
+          $pull: {
+            admins: deletedMember,
+          },
+        }, {
+          useFindAndModify: false,
+        });
+      res.status(200).send();
+    } catch (error) {
+      res.status(400).send({
+        error: 'unable to update circle',
+      });
+    }
+  };
+
 
 const addArtifact = async (req, res) => {
   try {
@@ -210,6 +231,7 @@ module.exports = {
   deleteCircle,
   addMember,
   deleteMember,
+  deleteAdmin,
   deleteArtifact,
   addArtifact,
 };

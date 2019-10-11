@@ -306,7 +306,7 @@ export const deleteCircleAdmin = (userID, circleID, token) => {
   return dispatch => {
     dispatch(deleteCircleAdminRequest());
     // makes a DELETE request {userID, circleID} requesting that a user is removed as a member of the circle. The token needs to signify that the user correctly logged in and allowed to make the change. The backend circle controller ensures that the user making the change is an admin and therefore authorised to make the change. The user given by the userID param is the user being deleted as an admin. The user is still a member of the circle.
-    const endpoint = `/api/circle/${circleID}/member`;
+    const endpoint = `/api/circle/${circleID}/admin`;
     const parameters = {
       method: 'DELETE',
       headers: {
