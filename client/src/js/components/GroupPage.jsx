@@ -24,7 +24,7 @@ import AddMember from './AddMember';
 import RemoveMember from './RemoveMember';
 import DeleteCircle from './DeleteCircle';
 import CirclesArtifactsFeed from './CircleArtifactsFeed';
-import AdminAvatar from './CirclePage/AdminAvatar';
+import RemoveAdmin from './RemoveAdmin';
 // import Chat from "./Chat";
 
 const indexUser = userObject => {
@@ -115,7 +115,7 @@ const GroupPage = props => {
                   <Grid item key={admin}>
                     <List>
                       <ListItem key={admin}>
-                        <AdminAvatar props={{ circle: circle.id, member: getUser(admin, userList), adminPerms }} />
+                        <RemoveAdmin props={{ circle: circle.id, member: getUser(admin, userList), adminPerms }} />
                         <ListItemText primary={getUser(admin, userList).username} secondary={getUser(admin, userList).email} />
                       </ListItem>
                     </List>
