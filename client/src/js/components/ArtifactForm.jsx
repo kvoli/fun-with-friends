@@ -104,7 +104,6 @@ const ArtifactForm = () => {
       dispatch(addCircleArtifact(circleID, artifactID, auth.token));
     }
     e.target.reset();
-    dispatch(artifactSwitch(data));
   };
 
   return (
