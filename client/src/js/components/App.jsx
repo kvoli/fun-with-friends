@@ -27,8 +27,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     marginTop: 'auto',
   },
-  header: {
-    maxHeight: '100px',
+  phantom: {
+    flexGrow: 1,
+    display: 'flex',
   },
 }));
 
@@ -37,14 +38,15 @@ const App = () => {
   const classes = useStyles();
 
   return (
-    <MuiThemeProvider theme={dark ? THEME : null}>
-      <CssBaseline />
-      <NavBar />
-      <div className={classes.root}>
+    <div className={classes.root}>
+      <MuiThemeProvider theme={dark ? THEME : null}>
+        <CssBaseline />
+        <NavBar />
         <Main className={classes.main} />
+        <div className={classes.phantom} />
         <Footer className={classes.footer} />
-      </div>
-    </MuiThemeProvider>
+      </MuiThemeProvider>
+    </div>
   );
 };
 

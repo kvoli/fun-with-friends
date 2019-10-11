@@ -56,6 +56,9 @@ const useStyles = makeStyles(theme => ({
     margin: 4,
     color: '#3e4360',
   },
+  button: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default () => {
@@ -74,7 +77,7 @@ export default () => {
               </Typography>
             </Grid>
             <Grid item>
-              <Button component={Link} to='/signup' variant='outlined' color='inherit'>
+              <Button component={Link} to='/signup' variant='outlined' color='inherit' className={classes.button}>
                 Signup
               </Button>
             </Grid>
