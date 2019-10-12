@@ -10,9 +10,6 @@
   <a href="https://cloud.docker.com/repository/docker/kvoli/fun-with-friends/general">
     <img alt="Docker-Image" src="https://images.microbadger.com/badges/version/kvoli/fun-with-friends.svg">
   </a>
-  <a href="https://github.com/kvoli/fun-with-friends/blob/staging/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/kvoli/fun-with-friends" />
-  </a>
   <a href="https://microbadger.com/images/kvoli/fun-with-friends">
     <img alt="Docker-Layers" src="https://images.microbadger.com/badges/image/kvoli/fun-with-friends.svg">
   </a>
@@ -24,6 +21,9 @@
   </a>
   <a href="https://www.codacy.com/app/kvoli/fun-with-friends?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kvoli/fun-with-friends&amp;utm_campaign=Badge_Grade">
     <img alt="Codacy" src="https://api.codacy.com/project/badge/Grade/2c082bb69c6a4c6381168b46aa44b6d7" />
+  </a>
+  <a href="https://www.codacy.com/manual/kvoli/fun-with-friends?utm_source=github.com&utm_medium=referral&utm_content=kvoli/fun-with-friends&utm_campaign=Badge_Coverage">
+    <img alt="Codacy Coverage" src="https://api.codacy.com/project/badge/Coverage/2c082bb69c6a4c6381168b46aa44b6d7" />
   </a>
 </p>
 

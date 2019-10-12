@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import uuid from 'uuid';
-import { openArtifactForm, artifactSwitch } from '../actions/index';
+import { openArtifactForm } from '../actions/index';
 import { addCircleArtifact } from '../actions/circle';
 import { uploadImage, createArtifact, editArtifact } from '../actions/artifact';
 import SuggestInput from './SuggestInput';
@@ -78,7 +78,9 @@ const ArtifactForm = () => {
 
   const currentCircleIDs = cKeys.filter(key => allCircles[key].artifacts.includes(fillArtifact.id));
   const currentCircleNames = currentCircleIDs.map(key => allCircles[key].title);
-  const availableCircleIDs = cKeys.filter(key => (allCircles[key].members.includes(auth.user.id) || allCircles[key].admins.includes(auth.user.id)) || allCircles[key].public === true);
+  const availableCircleIDs = cKeys.filter(
+    key => allCircles[key].members.includes(auth.user.id) || allCircles[key].admins.includes(auth.user.id) || allCircles[key].public === true
+  );
   const availableCircleNames = availableCircleIDs.map(key => allCircles[key].title);
 
   function getCircleID(circleTitle) {
@@ -102,8 +104,6 @@ const ArtifactForm = () => {
       dispatch(addCircleArtifact(circleID, artifactID, auth.token));
     }
     e.target.reset();
-    dispatch(openArtifactForm(false));
-    dispatch(artifactSwitch(data));
   };
 
   return (
@@ -113,13 +113,23 @@ const ArtifactForm = () => {
           <input readOnly className={classes.input} ref={register({ required: true })} name='src' value={pictureSrc || defaultImage} />
           <input readOnly className={classes.input} ref={register({ required: true })} name='id' value={artifact.id ? artifact.id : uuid.v4()} />
           <CardActionArea>
-            <CardMedia
-              component='img'
-              className={classes.cardMedia}
-              image={pictureSrc || defaultImage}
-              alt={pictureSrc || defaultImage}
-              src={pictureSrc || defaultImage}
-            />
+            <label htmlFor='contained-button-file'>
+              <input
+                accept='image/*'
+                name='src'
+                className={classes.input}
+                id='contained-button-file'
+                type='file'
+                onChange={e => dispatch(uploadImage(e.target.files[0]))}
+              />
+              <CardMedia
+                component='img'
+                className={classes.cardMedia}
+                image={pictureSrc || defaultImage}
+                alt={pictureSrc || defaultImage}
+                src={pictureSrc || defaultImage}
+              />
+            </label>
           </CardActionArea>
           <CardContent className={classes.cardContent}>
             <div className={classes.cardText}>
@@ -135,21 +145,7 @@ const ArtifactForm = () => {
                 </Grid>
                 <Grid item>
                   <Grid container direction='row-reverse' justify='flex-end'>
-                    <Grid item>
-                      <label htmlFor='contained-button-file'>
-                        <input
-                          accept='image/*'
-                          name='imageUpload'
-                          className={classes.input}
-                          id='contained-button-file'
-                          type='file'
-                          onChange={e => dispatch(uploadImage(e.target.files[0]))}
-                        />
-                        <Button variant='contained' component='span' className={classes.button}>
-                          Upload
-                        </Button>
-                      </label>
-                    </Grid>
+                    <Grid item></Grid>
                   </Grid>
                 </Grid>
               </Grid>

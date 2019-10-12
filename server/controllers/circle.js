@@ -23,11 +23,17 @@ const getAllCircles = async (req, res) => {
   try {
     // get all the circles in the database that contain the user as a member, admin or that are public
     const circles = await Circle.find({
-      $or: [
-        { members: req.user.id }, 
-        { admins: req.user.id },
-        { public: true }],
-      });
+      $or: [{
+          members: req.user.id
+        },
+        {
+          admins: req.user.id
+        },
+        {
+          public: true
+        }
+      ],
+    });
     res.status(200).send(circles.map(circle => circle.toObject()));
   } catch (error) {
     res.status(400).send({
@@ -56,16 +62,27 @@ const deleteCircle = async (req, res) => {
 // This means that member IDs must be unique
 const addMember = async (req, res) => {
   try {
-
     // extract values from request parameters and body
     const circleId = req.params.id;
     const memberId = req.body.id;
     const adminFlag = req.body.admin;
 
     // mongoose find and update parameters
-    const query = {_id: req.params.id};
-    const update = adminFlag ? {$addToSet: {admins: memberId}} : {$addToSet: {members: memberId}};
-    const options = {useFindAndModify: false};
+    const query = {
+      _id: req.params.id
+    };
+    const update = adminFlag ? {
+      $addToSet: {
+        admins: memberId
+      }
+    } : {
+      $addToSet: {
+        members: memberId
+      }
+    };
+    const options = {
+      useFindAndModify: false
+    };
 
     // get the circle of interest
     const circle = await Circle.findOne(query);
@@ -75,11 +92,15 @@ const addMember = async (req, res) => {
     // check if the user being added is already a circle member or admin
     if (adminFlag) {
       if (circle.admins.includes(memberId)) {
-        res.status(400).send({ error: 'User is already an admin of this circle.' });
+        res.status(400).send({
+          error: 'User is already an admin of this circle.'
+        });
       };
     } else {
       if (circle.members.includes(memberId)) {
-        res.status(400).send({ error: 'User is already a member of this circle.' });
+        res.status(400).send({
+          error: 'User is already a member of this circle.'
+        });
       }
     }
 
@@ -98,76 +119,109 @@ const addMember = async (req, res) => {
 const deleteMember = async (req, res) => {
   try {
     const deletedMember = req.body.id;
-    await Circle.findOneAndUpdate(
-      {
-        _id: req.params.id,
+    await Circle.findOneAndUpdate({
+      _id: req.params.id,
+    }, {
+      $pull: {
+        members: deletedMember,
       },
-      {
-        $pull: {
-          members: deletedMember,
-        },
-      },
-      {
-        useFindAndModify: false,
-      }
-    );
-    await Circle.findOneAndUpdate(
-      {
-        _id: req.params.id,
-      },
-      {
-        $pull: {
-          admins: deletedMember,
-        },
-      },
-      {
-        useFindAndModify: false,
-      }
-    );
-    res.status(200).send();
-  } catch (error) {
-    res.status(400).send({
-      error: 'unable to update circle',
+    }, {
+      useFindAndModify: false,
     });
-  }
-};
+    res.status(200).send();
+    } catch (error) {
+      res.status(400).send({
+        error: 'unable to update circle',
+      });
+    }
+  };
+
+  const deleteAdmin = async (req, res) => {
+    try {
+      const deletedMember = req.body.id;
+      const circle = await Circle.findOne({
+        _id: req.params.id
+      });
+      const admins = circle.admins;
+      if (admins.length === 1) {
+        res.status(400).send({
+          error: "Unable to delete admin, since there is only one admin."
+        });
+      } else
+        await Circle.findOneAndUpdate({
+          _id: req.params.id,
+        }, {
+          $pull: {
+            admins: deletedMember,
+          },
+        }, {
+          useFindAndModify: false,
+        });
+      res.status(200).send();
+    } catch (error) {
+      res.status(400).send({
+        error: 'unable to update circle',
+      });
+    }
+  };
+
 
 const addArtifact = async (req, res) => {
   try {
     // Check if the user is member or an admin of the circle
-    const circle = await Circle.findOne({_id: req.params.id});
+    const circle = await Circle.findOne({
+      _id: req.params.id
+    });
     if (circle.public === false && !circle.members.includes(req.user.id) && !circle.admins.includes(req.user.id)) {
-      return res.status(400).send({error: 'You do not have permissions to add to this circle.'});
+      return res.status(400).send({
+        error: 'You do not have permissions to add to this circle.'
+      });
     };
     // Add the artifact to the circle (ignoring duplicates)
-    await Circle.findOneAndUpdate(
-      {_id:req.params.id},
-      {$addToSet: {artifacts: req.body.id}},
-      {useFindAndModify:false}
-    );
+    await Circle.findOneAndUpdate({
+      _id: req.params.id
+    }, {
+      $addToSet: {
+        artifacts: req.body.id
+      }
+    }, {
+      useFindAndModify: false
+    });
 
     return res.status(200).send();
   } catch (error) {
-    return res.status(400).send({error: 'Could not add artifact to circle.'});
+    return res.status(400).send({
+      error: 'Could not add artifact to circle.'
+    });
   };
 };
 
 const deleteArtifact = async (req, res) => {
   try {
     // Check if the user is a member of the circle
-    const circle = await Circle.findOne({_id: req.params.id});
+    const circle = await Circle.findOne({
+      _id: req.params.id
+    });
     if (!circle.members.includes(req.user.id)) {
-      return res.status(400).send({error: 'You do not have permissions to delete from this circle.'});
+      return res.status(400).send({
+        error: 'You do not have permissions to delete from this circle.'
+      });
     };
     // Remove the artifact from the circle
-    await Circle.updateOne(
-      {"_id": req.params.id}, 
-      {$pull: {artifacts: req.body.id}},
-      {useFindAndModify:false}
-    );
+    await Circle.updateOne({
+      "_id": req.params.id
+    }, {
+      $pull: {
+        artifacts: req.body.id
+      }
+    }, {
+      useFindAndModify: false
+    });
     return res.status(200).send();
   } catch (error) {
-    return res.status(400).send({error: 'Could not remove artifact from circle.'});
+    return res.status(400).send({
+      error: 'Could not remove artifact from circle.'
+    });
   };
 };
 
@@ -177,6 +231,7 @@ module.exports = {
   deleteCircle,
   addMember,
   deleteMember,
+  deleteAdmin,
   deleteArtifact,
   addArtifact,
 };

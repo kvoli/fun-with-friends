@@ -1,4 +1,4 @@
-import { ARTIFACT_SWITCH, OPEN_ARTIFACT_FORM, UPLOAD_IMAGE, TOGGLE_DARK_MODE } from '../constants/action-types';
+import { ARTIFACT_SWITCH, OPEN_ARTIFACT_FORM, UPLOAD_IMAGE, TOGGLE_DARK_MODE, OPEN_CIRCLE_FORM } from '../constants/action-types';
 
 const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
 
@@ -38,6 +38,13 @@ const focusView = (state = initialState, action) => {
         artifactFormView: state.artifactFormView,
         artifactImageUpload: state.artifactImageUpload,
         dark: !state.dark,
+      };
+    case OPEN_CIRCLE_FORM:
+      return {
+        artifactDetailView: state.artifactDetailView,
+        artifactFormView: state.artifactFormView,
+        artifactImageUpload: defaultImage,
+        dark: state.dark,
       };
     default:
       return state;
