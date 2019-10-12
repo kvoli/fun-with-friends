@@ -16,7 +16,7 @@ const RemoveMember = ({ props }) => {
   const token = useSelector(store => store.auth.token);
   const dispatch = useDispatch();
 
-  function handleClick(event) {
+  function handleMouseOver(event) {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   }
 
@@ -26,7 +26,7 @@ const RemoveMember = ({ props }) => {
   return (
     <div>
       <ListItemAvatar>
-        <Avatar onClick={handleClick}>{member.username.slice(0, 2)}</Avatar>
+        <Avatar onMouseOver={handleMouseOver}>{member.username.slice(0, 2)}</Avatar>
       </ListItemAvatar>
       <Popper id={id} open={open} anchorEl={anchorEl} transition>
         {({ TransitionProps }) => (
