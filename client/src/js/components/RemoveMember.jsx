@@ -20,13 +20,19 @@ const RemoveMember = ({ props }) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   }
 
+  function handleMouseOut(event) {
+    setTimeout(function () {
+      setAnchorEl(null);
+    }, 1000);
+  }
+
   const open = Boolean(anchorEl);
   const id = open ? 'options' : undefined;
 
   return (
     <div>
       <ListItemAvatar>
-        <Avatar onMouseOver={handleMouseOver}>{member.username.slice(0, 2)}</Avatar>
+        <Avatar onMouseOver={handleMouseOver} onMouseOut = {handleMouseOut}>{member.username.slice(0, 2)}</Avatar>
       </ListItemAvatar>
       <Popper id={id} open={open} anchorEl={anchorEl} transition>
         {({ TransitionProps }) => (
