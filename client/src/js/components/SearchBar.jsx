@@ -15,7 +15,7 @@ const SearchBar = () => {
     <TextField
       id='standard-textarea'
       label='Filter'
-      placeholder='enter a title to filter artifacts'
+      placeholder='Filter by artefact name or title'
       margin='normal'
       onChange={handleChange}
       value={artifactFilter}
