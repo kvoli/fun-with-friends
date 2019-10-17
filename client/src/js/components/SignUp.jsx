@@ -35,6 +35,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function validateUsername(name) {
+  return typeof name !== undefined && name.length > 0 && name.match(/^[a-zA-Z0-9]*$/);
+}
+
+function validatePassword(password) {
+  return typeof password !== undefined && password.length > 5;
+}
+
+function validateEmail(email) {
+  var pattern = new RegExp(
+    /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+  );
+  return email.match(pattern) && email.length > 3;
+}
+
 const SignUp = () => {
   const dispatch = useDispatch();
   const [firstname, setFirstname] = useState('');
@@ -42,6 +57,21 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({ firstname: true, lastname: true, email: true, username: true, password: true });
+
+  function submit() {
+    setErrors({
+      firstname: validateUsername(firstname),
+      lastname: validateUsername(lastname),
+      email: validateEmail(email),
+      username: validateUsername(username),
+      password: validatePassword(password),
+    });
+    console.log(errors);
+    if (validateEmail(email) && validatePassword(password) && validateUsername(firstname) && validateUsername(lastname) && validateUsername(username)) {
+      dispatch(signup(firstname, lastname, email, username, password));
+    }
+  }
 
   const classes = useStyles();
   return (
@@ -54,11 +84,19 @@ const SignUp = () => {
         <Typography component='h1' variant='h5'>
           Sign Up
         </Typography>
-        <form className={classes.form} noValidate onKeyDown={(e) => {
-          if (e.key === 'Enter') {dispatch(signup(firstname, lastname, email, username, password));}}}>
+        <form
+          className={classes.form}
+          noValidate
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              submit();
+            }
+          }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                error={!errors.firstname}
                 onChange={e => {
                   setFirstname(e.target.value);
                 }}
@@ -70,10 +108,12 @@ const SignUp = () => {
                 id='firstName'
                 label='First Name'
                 autoFocus
+                helperText={errors.firstname ? '' : 'Please enter your first name'}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                error={!errors.lastname}
                 onChange={e => {
                   setLastname(e.target.value);
                 }}
@@ -84,10 +124,12 @@ const SignUp = () => {
                 label='Last Name'
                 name='lastName'
                 autoComplete='lname'
+                helperText={errors.lastname ? '' : 'Please enter your last name'}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={!errors.email}
                 onChange={e => {
                   setEmail(e.target.value);
                 }}
@@ -98,10 +140,12 @@ const SignUp = () => {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                helperText={errors.email ? '' : 'Please enter a valid email address'}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={!errors.username}
                 onChange={e => {
                   setUsername(e.target.value);
                 }}
@@ -112,10 +156,12 @@ const SignUp = () => {
                 label='username'
                 name='username'
                 autoComplete='username'
+                helperText={errors.username ? '' : 'Please enter a valid username (a-z, A-z, 0-9) only'}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={!errors.password}
                 onChange={e => {
                   setPassword(e.target.value);
                 }}
@@ -127,12 +173,13 @@ const SignUp = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                helperText={errors.password ? '' : 'Please enter a strong and secure password'}
               />
             </Grid>
           </Grid>
           <Button
             onClick={() => {
-              dispatch(signup(firstname, lastname, email, username, password));
+              submit();
             }}
             fullWidth
             variant='contained'
