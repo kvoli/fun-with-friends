@@ -5,9 +5,6 @@ import ReactDOM from 'react-dom';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { IconButton } from '@material-ui/core';
-import Theme from './Theme';
-import { Provider } from 'react-redux';
-import { store } from '../store/index';
 
 // add a <div> child to body under which to mount the snackbars
 const mountPoint = document.createElement('div');
