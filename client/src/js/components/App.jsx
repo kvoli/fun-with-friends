@@ -7,7 +7,8 @@ import Main from './Main';
 import NavBar from './NavBar/NavBar';
 import Footer from './Footer';
 import { makeStyles } from '@material-ui/core/styles';
-
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 const THEME = createMuiTheme({
   palette: {
     type: 'dark',
@@ -44,11 +45,13 @@ const App = () => {
   return (
     <div className={classes.root}>
       <MuiThemeProvider theme={dark ? THEME : null}>
-        <CssBaseline />
-        <NavBar />
-        <Main className={classes.main} />
-        <div className={classes.phantom} />
-        <Footer className={classes.footer} />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <CssBaseline />
+          <NavBar />
+          <Main className={classes.main} />
+          <div className={classes.phantom} />
+          <Footer className={classes.footer} />
+        </MuiPickersUtilsProvider>
       </MuiThemeProvider>
     </div>
   );

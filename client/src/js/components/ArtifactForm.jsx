@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button, CardActionArea, CardActions, CardMedia, Card, CardContent } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import uuid from 'uuid';
@@ -88,6 +88,7 @@ const ArtifactForm = () => {
   }
 
   const [circles, setCircles] = React.useState(currentCircleNames || []);
+  const [date, setDate] = React.useState(artifact.date || new Date());
 
   const defaultImage = 'https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png';
 
@@ -112,6 +113,7 @@ const ArtifactForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <input readOnly className={classes.input} ref={register({ required: true })} name='src' value={pictureSrc || defaultImage} />
           <input readOnly className={classes.input} ref={register({ required: true })} name='id' value={artifact.id ? artifact.id : uuid.v4()} />
+          <input readOnly className={classes.input} ref={register({ required: true })} name='date' value={artifact.date || date} />
           <CardActionArea>
             <label htmlFor='contained-button-file'>
               <input
@@ -150,14 +152,15 @@ const ArtifactForm = () => {
                 </Grid>
               </Grid>
               <Grid item>
-                <Grid container direction='row' justify='space-between'>
+                <Grid container direction='row' justify='space-between' alignItems='flex-end'>
                   <Grid item>
-                    <TextField
-                      name='date'
-                      label='date'
-                      inputRef={register({ required: 'please enter a date' })}
-                      placeholder='3/9/1997'
-                      defaultValue={fillArtifact.date || ''}
+                    <KeyboardDatePicker
+                      clearable
+                      value={date}
+                      placeholder='03/09/1997'
+                      onChange={date => setDate(date)}
+                      minDate={new Date()}
+                      format='dd/MM/yyyy'
                     />
                   </Grid>
                   <Grid item>
