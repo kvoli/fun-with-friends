@@ -27,10 +27,15 @@ export const getVisibleArtifacts = createSelector(
     switch (allFilter) {
       case true:
         return allArtifacts.filter(artifact => 
-          artifact.title
+          (artifact.title
               .toLowerCase()
               .trim()
-              .includes(artifactFilter.toLowerCase().trim()) || '^\\s*$'.match(artifactFilter)
+              .includes(artifactFilter.toLowerCase().trim()) || '^\\s*$'.match(artifactFilter))
+          ||
+          (artifact.tags
+            .toLowerCase()
+            .trim()
+            .includes(artifactFilter.toLowerCase().trim()))
         );
       default:
         // this introduced duplicates so...
