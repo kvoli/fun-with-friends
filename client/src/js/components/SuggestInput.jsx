@@ -64,17 +64,15 @@ function getSuggestions(value, suggestionList) {
   const inputLength = inputValue.length;
   let count = 0;
 
-  return inputLength === 0
-    ? []
-    : suggestionList.filter(suggestion => {
-        const keep = count < 5 && suggestion.toLowerCase().slice(0, inputLength) === inputValue;
+  return suggestionList.filter(suggestion => {
+    const keep = (count < 5 && suggestion.toLowerCase().slice(0, inputLength) === inputValue) || inputValue.match('^\\s*$');
 
-        if (keep) {
-          count += 1;
-        }
+    if (keep) {
+      count += 1;
+    }
 
-        return keep;
-      });
+    return keep;
+  });
 }
 
 const useStyles = makeStyles(theme => ({
@@ -88,7 +86,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing.unit * 3,
     left: 0,
     right: 0,
-    zIndex: 1,
+    zIndex: 100000,
   },
   suggestion: {
     display: 'block',

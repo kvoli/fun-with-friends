@@ -11,6 +11,7 @@ import GroupPage from './GroupPage';
 import GroupIndex from './GroupIndex';
 import LandingPage from './LandingPage';
 import FourOFour from './FourOFour';
+import UserPage from './UserPage';
 
 // import action methods [api calls]
 import { getArtifacts } from '../actions/artifact';
@@ -36,6 +37,12 @@ function Main() {
           exact
           path='/circles'
           component={auth.token ? GroupIndex : LandingPage}
+          onEnterAction={auth.token ? dispatch(getAllCircles(auth.token), getAllUsers(auth.token)) : null}
+        />
+        <Route
+          exact
+          path='/admin'
+          component={auth.token ? UserPage : LandingPage}
           onEnterAction={auth.token ? dispatch(getAllCircles(auth.token), getAllUsers(auth.token)) : null}
         />
         <Route component={FourOFour} />

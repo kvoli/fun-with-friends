@@ -14,6 +14,7 @@ const tokenSchema = mongoose.Schema({
 // Define the acount schema
 const userSchema = mongoose.Schema(
   {
+    userimage: { type: String, required: false, trim: false },
     firstname: { type: String, required: true, trim: true },
     lastname: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
@@ -43,8 +44,8 @@ userSchema.pre('save', async function(next) {
 
 userSchema.methods.generateAuthToken = async function() {
   const user = this;
-  const token = jwt.sign({_id: user._id}, process.env.SECRET_KEY || 'testing');
-  user.tokens = user.tokens.concat({token});
+  const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY || 'testing');
+  user.tokens = user.tokens.concat({ token });
   await user.save();
   return token;
 };
