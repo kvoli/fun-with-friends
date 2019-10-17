@@ -39,13 +39,9 @@ export default {
       return null;
     };
     ReactDOM.render(
-      <Provider store={store}>
-        <Theme>
-          <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
-            <ShowSnackbar message={msg} variant={variant} />
-          </SnackbarProvider>
-        </Theme>
-      </Provider>,
+      <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
+        <ShowSnackbar message={msg} variant={variant} />
+      </SnackbarProvider>,
       mountPoint
     );
   },
