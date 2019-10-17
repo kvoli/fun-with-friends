@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function validateUsername(name) {
-  return typeof name !== undefined && name.length > 0 && name.match(/^[a-zA-Z]*$/);
+  return typeof name !== undefined && name.length > 0 && name.match(/^[a-zA-Z0-9]*$/);
 }
 
 function validatePassword(password) {
@@ -156,7 +156,7 @@ const SignUp = () => {
                 label='username'
                 name='username'
                 autoComplete='username'
-                helperText={errors.username ? '' : 'Please enter a valid username (a-z) only'}
+                helperText={errors.username ? '' : 'Please enter a valid username (a-z, A-z, 0-9) only'}
               />
             </Grid>
             <Grid item xs={12}>
