@@ -51,7 +51,7 @@ const Login = () => {
         <Typography component='h1' variant='h5'>
           Login
         </Typography>
-        <form className={classes.form} noValidate onKeyDown={(e) => {if(e.key==='Enter'){dispatch(login(username, password))}}} >
+        <form className={classes.form} noValidate onKeyDown={(e) => {if(e.key==='Enter'){dispatch(login(username, password));}}} >
           <TextField
             onChange={e => {
               setUsername(e.target.value);

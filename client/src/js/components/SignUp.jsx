@@ -55,7 +55,7 @@ const SignUp = () => {
           Sign Up
         </Typography>
         <form className={classes.form} noValidate onKeyDown={(e) => {
-          if (e.key === 'Enter') {dispatch(signup(firstname, lastname, email, username, password))}}}>
+          if (e.key === 'Enter') {dispatch(signup(firstname, lastname, email, username, password));}}}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
