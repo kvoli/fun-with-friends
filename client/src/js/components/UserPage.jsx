@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   image: {
-    maxWidth: '350px',
+    maxWidth: '350px'
     marginBottom: theme.spacing(3),
     marginRight: theme.spacing(6),
   },

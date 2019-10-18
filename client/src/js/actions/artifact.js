@@ -155,7 +155,7 @@ export const deleteArtifact = (artifact, token) => {
       } else {
         dispatch(deleteArtifactFailure());
         response.json().then(json => {
-          toast.error(json);
+          toast.error(json.error);
         });
       }
     });
