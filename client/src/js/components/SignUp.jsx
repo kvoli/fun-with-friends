@@ -173,7 +173,7 @@ const SignUp = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
-                helperText={errors.password ? '' : 'Please enter a strong and secure password'}
+                helperText={errors.password ? '' : 'Password must be longer than 5 characters'}
               />
             </Grid>
           </Grid>
