@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   image: {
-    maxWidth: '400px',
+    maxWidth: '350px'
     marginBottom: theme.spacing(3),
     marginRight: theme.spacing(6),
   },
@@ -76,20 +76,17 @@ const UserPage = () => {
             <Grid item>
               <Card className={classes.image}>
                 <CardActionArea>
-                  <label htmlFor='contained-button-file'>
-                    <input
-                      accept='image/*'
-                      name='src'
-                      className={classes.input}
-                      id='contained-button-file'
-                      type='file'
-                      onChange={e => dispatch(uploadImage(e.target.files[0]))}
-                    />
-                    <CardMedia
-                      src='https://www.spiritdental.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png'
-                      component='img'
-                    ></CardMedia>
-                  </label>
+                  {/* <label htmlFor='contained-button-file'> */}
+                  <input
+                    accept='image/*'
+                    name='src'
+                    className={classes.input}
+                    id='contained-button-file'
+                    type='file'
+                    onChange={e => dispatch(uploadImage(e.target.files[0]))}
+                  />
+                  <CardMedia src='https://avatars2.githubusercontent.com/u/12298202?v=3&s=400' component='img'></CardMedia>
+                  {/* </label> */}
                 </CardActionArea>
               </Card>
             </Grid>

@@ -25,6 +25,7 @@ import RemoveMember from './RemoveMember';
 import DeleteCircle from './DeleteCircle';
 import CirclesArtifactsFeed from './CircleArtifactsFeed';
 import RemoveAdmin from './RemoveAdmin';
+import ArtifactForm from './ArtifactForm';
 // import Chat from "./Chat";
 
 const indexUser = userObject => {
@@ -74,6 +75,7 @@ const GroupPage = props => {
 
   return (
     <Container maxWidth='lg' justify='space-between'>
+      <ArtifactForm />
       <Grid container direction='column'>
         <Grid item className={classes.container}>
           <Typography variant='h3' component='h3'>
