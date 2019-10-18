@@ -50,7 +50,7 @@ const deleteCircle = async (req, res) => {
     });
     const admins = circle.admins;
     const userId = req.user.id;
-    if(admins.includes(userId) && circle.public === false){    
+    if(admins.includes(userId)){    
       await Circle.deleteOne({
         _id: req.params.id,
       });
