@@ -45,10 +45,21 @@ const getAllCircles = async (req, res) => {
 const deleteCircle = async (req, res) => {
   try {
     // delete circle according to the id of the request
-    await Circle.deleteOne({
+    const circle = await Circle.findOne({
       _id: req.params.id,
     });
-    res.status(200).send();
+    const admins = circle.admins;
+    const userId = req.user.id;
+    if(admins.includes(userId) && circle.public === false){    
+      await Circle.deleteOne({
+        _id: req.params.id,
+      });
+      res.status(200).send();
+    } else {
+      res.status(400).send({
+        error: `You don't have permissions to update this circle.`
+      })
+    }
   } catch (error) {
     res.status(400).send({
       error: 'Unable to delete circle',
