@@ -62,6 +62,14 @@ userSchema.statics.findByCredentials = async (username, password) => {
   return user;
 };
 
+userSchema.methods.memberOf = async function(circle) {
+  return circle.members.includes(this.id);
+};
+
+userSchema.methods.adminOf = async function(circle) {
+  return circle.admins.includes(this.id);
+};
+
 // Bind the user schema to a Mongoose model
 const User = mongoose.model('User', userSchema);
 module.exports = User;
