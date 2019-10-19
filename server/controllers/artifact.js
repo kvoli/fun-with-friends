@@ -14,7 +14,7 @@ const createArtifact = async (req, res) => {
     // Wait for the artifact to be saved in the database
     await artifact.save();
     // Return the artifact back to the client
-    res.status(201).send(artifact);
+    res.status(201).send(artifact.toObject());
   } catch (error) {
     // Return an error message as the artfact was not able to be created
     res.status(400).send({
@@ -31,11 +31,11 @@ const updateArtifact = async (req, res) => {
     const updated = req.body;
     // Get the requested artifact from the database
     const artifact = await Artifact.findOne(query);
-    if (artifact.uploader = req.user.id && updated.title && updated.desc) {
+    if (artifact.uploader === req.user.id && updated.title && updated.desc) {
       // If the user is the uploader, update the artifact as requested
       await Artifact.updateOne(query, updated);
       const newArtifact = await Artifact.findOne(query);
-      res.status(200).send(newArtifact);
+      res.status(200).send(newArtifact.toObject());
     } else {
       // Otherwise don't and return an error response
       res.status(400).send({
