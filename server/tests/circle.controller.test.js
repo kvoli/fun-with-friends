@@ -25,7 +25,9 @@ beforeAll(async () => {
   const dbUri = await database.getConnectionString();
   // connect to the mock database
   await mongoose.connect(dbUri, options, error => {
-    if(error) console.error(error);
+    if (error) {
+      console.error(error);
+    };
   });
   // create a user and token to test circle actions that require authentication
   const req1 = httpMocks.createRequest({
