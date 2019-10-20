@@ -16,14 +16,14 @@ import {
   Card,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getVisibleArtifacts } from '../selectors/index';
+import { getPersonalArtifacts } from '../selectors/index';
 import LinkIcon from '@material-ui/icons/Link';
 import { Link } from 'react-router-dom';
 import { setPersonalFilter, setAllFilter } from '../actions';
 import ArtifactFormModal from './ArtifactFormModal';
 import ArtifactModal from './ArtifactModal';
 import { artifactSwitch } from '../actions/index';
-import { uploadImage, updateImage } from '../actions/artifact';
+import { uploadImage } from '../actions/artifact';
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -50,8 +50,6 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const user = useSelector(store => store.auth.user);
   const state = useSelector(store => store);
-  const artifacts = getVisibleArtifacts(state);
-
   const availableCircles = useSelector(store => store.circle.circles);
   const cKeys = Object.keys(availableCircles);
 
@@ -61,10 +59,10 @@ const UserPage = () => {
 
     return function cleanup() {
       dispatch(setAllFilter(true));
-      dispatch(setPersonalFilter(false));
-      dispatch(updateImage(false));
     };
   }, [dispatch, user.id]);
+
+  const artifacts = getPersonalArtifacts(state);
 
   return (
     <Container maxWidth='lg'>
