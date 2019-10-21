@@ -4,9 +4,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Typography, GridListTile, GridList, GridListTileBar, IconButton } from '@material-ui/core';
+import { Grid, Typography, GridListTile, GridList, GridListTileBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/Info';
 import { artifactSwitch } from '../actions/index';
 import ArtifactModal from './ArtifactModal';
 
