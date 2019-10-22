@@ -4,9 +4,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Typography, GridListTile, GridList, GridListTileBar, IconButton } from '@material-ui/core';
+import { Grid, Typography, GridListTile, GridList, GridListTileBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/Info';
 import { artifactSwitch } from '../actions/index';
 import ArtifactModal from './ArtifactModal';
 
@@ -37,22 +36,14 @@ const CirclesArtifactsFeed = ({ circle }) => {
       </Grid>
       <GridList cellHeight={250} cols={3}>
         {circleArtifacts.map(artifact => (
-          <GridListTile key={artifact.id} onMouse={() => setFocus(false)} onMouseEnter={() => setFocus(artifact)}>
+          <GridListTile
+            key={artifact.id}
+            onMouse={() => setFocus(false)}
+            onMouseEnter={() => setFocus(artifact)}
+            onClick={() => dispatch(artifactSwitch(artifact))}
+          >
             <img src={artifact.src} alt={artifact.title} />
-            {focus && focus === artifact ? (
-              <GridListTileBar
-                title={artifact.title}
-                subtitle={<span>desc: {artifact.desc}</span>}
-                actionIcon={
-                  <IconButton onClick={() => dispatch(artifactSwitch(artifact))}>
-                    <InfoIcon />
-                  </IconButton>
-                }
-              />
-            ) : (
-              ''
-            )}
-            ) }
+            {focus && focus === artifact ? <GridListTileBar title={artifact.title} subtitle={<span>{artifact.desc}</span>} /> : ''}) }
           </GridListTile>
         ))}
       </GridList>

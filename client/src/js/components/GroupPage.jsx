@@ -104,7 +104,6 @@ const GroupPage = props => {
             <Tabs value={tabValue} onChange={(event, newValue) => setTabValue(newValue)} centered>
               <Tab label={circle.public ? 'Admins' : 'Members & Admins'} value={0} />
               <Tab label='Artifact Feed' value={1} />
-              <Tab label='Circle Log' value={2} />
             </Tabs>
           </Paper>
         </Grid>
@@ -218,9 +217,6 @@ const GroupPage = props => {
         </Grid>
         <Grid item className={tabValue === 1 ? classes.feed : classes.tabPanel}>
           <CirclesArtifactsFeed circle={circle} />
-        </Grid>
-        <Grid item className={tabValue === 2 ? classes.feed : classes.tabPanel}>
-          nothing to see here!
         </Grid>
       </Grid>
       {/* <Chat /> */}
