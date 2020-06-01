@@ -4,7 +4,7 @@
   "description": "Fun With Friends",
   "main": "index.js",
   "dependencies": {
-    "clsx": "^1.0.4",
+    "clsx": "^1.1.1",
     "google-maps-react": "^2.0.2"
   },
   "devDependencies": {
